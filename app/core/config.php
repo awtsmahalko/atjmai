@@ -9,7 +9,7 @@ define("BASE_PATH", __DIR__ . "/../");
 define("HOST", "localhost");
 define("USER", "root");
 define("PASSWORD", "");
-define("DBNAME", "atjmai_db");
+define("DBNAME", "almai_db");
 
 session_start();
 

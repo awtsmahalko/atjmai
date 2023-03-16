@@ -10,65 +10,38 @@ class Authentication extends Connection
 
     public function signup()
     {
+        if(!Components::verify_csrf())
+            return -1;
+
         $user_fname = $this->clean($this->inputs['user_fname']);
         $user_mname = $this->clean($this->inputs['user_mname']);
         $user_lname = $this->clean($this->inputs['user_lname']);
         $user_category = $this->clean($this->inputs['user_category']);
         $email = $this->clean($this->inputs['user_email']);
-        $user_mobile = $this->clean($this->inputs['user_mobile']);
         $password = $this->clean($this->inputs['password']);
         $password2 = $this->clean($this->inputs['password2']);
 
         $fetch = $this->select($this->table, "user_id", "user_email = '$email'");
-        if ($fetch->num_rows > 0) {
-            $this->old = [
-                'user_fname'    => $user_fname,
-                'user_mname'    => $user_mname,
-                'user_lname'    => $user_lname,
-                'email'         => $email,
-                'user_category' => $user_category,
-                'user_mobile'   => $user_mobile
-            ];
+        if ($fetch->num_rows > 0)
             return 2;
-        } else {
-            if($password != $password2){
-                $this->old = [
-                    'user_fname'    => $user_fname,
-                    'user_mname'    => $user_mname,
-                    'user_lname'    => $user_lname,
-                    'email'         => $email,
-                    'user_category' => $user_category,
-                    'user_mobile'   => $user_mobile
-                ];
-                return -1;
-            }
-            $form = array(
-                'user_fname'    => $user_fname,
-                'user_mname'    => $user_mname,
-                'user_lname'    => $user_lname,
-                'password'      => md5($password),
-                'user_mobile'   => $user_mobile,
-                'user_email'    => $email,
-                'user_category' => $user_category
-            );
-            $user_id =  $this->insert($this->table, $form, 'Y');
-            if ($user_id > 0) {
-                if($user_category == 1)
-                    $this->insert('tbl_tutors',['user_id' => $user_id]);
 
-                $this->session = [
-                    'id'        => $user_id,
-                    'fname'     => $user_fname,
-                    'mname'     => $user_mname,
-                    'lname'     => $user_lname,
-                    'category'  => $user_category,
-                    'user_mobile'   => $user_mobile,
-                    'img'     => "default-user.png"
-                ];
-                return 1;
-            } else {
-                return 0;
-            }
+        if($password != $password2)
+            return -2;
+
+        $form = array(
+            'user_fullname' => $this->clean($user_fname.' '.$user_mname.' '.$user_lname),
+            'user_password' => md5($password),
+            'user_email'    => $email,
+            'user_category' => $user_category,
+            'user_status'   => 1
+        );
+        $user_id =  $this->insert($this->table, $form, 'Y');
+        if ($user_id > 0) {
+            // if($user_category == 'S')
+            //     $this->insert('tbl_tutors',['user_id' => $user_id]);
+            return 1;
+        } else {
+            return 0;
         }
     }
 
