@@ -37,8 +37,12 @@ class Authentication extends Connection
         );
         $user_id =  $this->insert($this->table, $form, 'Y');
         if ($user_id > 0) {
-            // if($user_category == 'S')
-            //     $this->insert('tbl_tutors',['user_id' => $user_id]);
+            $this->inputs['user_id'] = $user_id;
+            if($user_category == 'S'){
+                $Alumni = new Alumni();
+                $Alumni->inputs = $this->inputs;
+                return $Alumni->add();
+            }
             return 1;
         } else {
             return 0;

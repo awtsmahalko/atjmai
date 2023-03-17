@@ -25,16 +25,6 @@ class Courses extends Connection
 
     public function add()
     {
-        // $courses = [
-        //     'BSHM', 'BSAB', 'BSIT', 'BSCRIM', 'BSED Major in Mathematics', 'BSED Major in Biological Science', 'BSED Major in General Education'
-        // ];
-
-        // foreach ($courses as $course_name) {
-        //     $form = array(
-        //         'course_name'  => $this->clean($course_name),
-        //     );
-        //     $this->insert($this->table, $form);
-        // }
         $course_name = $this->inputs['course_name'];
         $form = array(
             'course_name'  => $this->clean($course_name),

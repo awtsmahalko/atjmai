@@ -6,7 +6,7 @@ class Components extends Connection
         $self = new static;
         $csrf = $self->generateRandomString(32);
         $_SESSION['csrf_token'] = $csrf;
-        $text = "<input type='text' value='$csrf' name='csrf'>";
+        $text = "<input type='hidden' value='$csrf' name='csrf'>";
         return $text;
     }
 

@@ -198,7 +198,7 @@ $csrf = Components::csrf();
                 <div class="tab-content" id="pills-tabContent">
                   <div class="tab-pane fade show active" id="candidate" role="tabpanel" aria-labelledby="candidate-tab">
                     <form action="#" id="frmRegister">
-                    	<input type='text' value='S' name='user_category'>
+                    	<input type='hidden' value='S' name='user_category'>
                     	<?=$csrf?>
                       <div class="row">
                       	<div class="col-4">
@@ -292,9 +292,10 @@ $csrf = Components::csrf();
                         </div>
                         <div class="col-12">
                           <div class="form-group">
-                            <button type="submit" class="btn-theme">Register Now</button>
+                            <button type="submit" class="btn-theme" id="btn_register">Register Now</button>
                           </div>
                         </div>
+                        <div class="col-12" id="response_register"></div>
                       </div>
                     </form>
                   </div>
@@ -402,9 +403,27 @@ $csrf = Components::csrf();
 
 			$("#frmRegister").submit(function(e){
 	      e.preventDefault();
+	      $("#btn_register").prop('disabled',true);
+	      $("#btn_register").html('Registering...');
 	      $.post("controller/ajax.php?q=Authentication&m=signup",$("#frmRegister").serialize(),function(data,status){
 	          var res = JSON.parse(data);
-	          console.log(res);
+	          if(res == 1){
+	          	// SUCCESS
+	          	$("#response_register").html('<div class="alert alert-primary" role="alert">Successfully registered!</div>');
+	          }else if(res == 2){
+	          	// EMAIL ALREADY TAKEN
+	          	$("#response_register").html('<div class="alert alert-danger" role="alert">Email is already taken!</div>');
+	          }else if(res == -2){
+	          	// PASSWORD DOES NOT MATCH
+	          	$("#response_register").html('<div class="alert alert-danger" role="alert">Password does not match!</div>');
+	          }else if(res == -1){
+	          	// EXPIRED CSRF TOKEN
+	          	$("#response_register").html('<div class="alert alert-danger" role="alert">Token already expired!</div>');
+	          }else{
+	          	// ERROR
+	          }
+						$("#btn_register").prop('disabled',false);
+	      		$("#btn_register").html('Register Now');
 	      });
 	    });
 	
