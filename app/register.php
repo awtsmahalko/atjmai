@@ -158,7 +158,7 @@ $csrf = Components::csrf();
 								<div class="nav-menus-wrapper">									
 									<ul class="nav-menu nav-menu-social align-to-right">
 										<li class="add-listing">
-											<a href="signin.html"><i class="ti-user mr-1"></i> Sigin</a>
+											<a href="signin.php"><i class="ti-user mr-1"></i> Sigin</a>
 										</li>
 									</ul>
 								</div>
@@ -337,7 +337,7 @@ $csrf = Components::csrf();
                   </div>
                 </div>
                 <div class="login-register-form-info">
-                  <p>Already have an account? <a href="login.html">Login</a></p>
+                  <p>Already have an account? <a href="signin.php">Login</a></p>
                 </div>
               </div>
             </div>
@@ -428,26 +428,17 @@ $csrf = Components::csrf();
 	      		$("#btn_register").html('Register Now');
 	      });
 	    });
-		function countDown()
-		{
-    	// Set the countdown timer duration in seconds
-			var countdownSeconds = 5;
-
-			// Get the label element
-			var countdownLabel = document.getElementById('countdown');
-
-			// Start the countdown timer
-			var countdownInterval = setInterval(function() {
-			  // Update the label with the remaining time
-			  countdownLabel.innerHTML = countdownSeconds--;
-
-			  // Check if the countdown timer has expired
-			  if (countdownSeconds < 0) {
-			    // Reload the page
-			    location.reload();
-			  }
-			}, 1000); // Update the label every second
-		}
+      function countDown()
+      {
+        var countdownSeconds = 5;
+        var countdownLabel = document.getElementById('countdown');
+        var countdownInterval = setInterval(function() {
+          countdownLabel.innerHTML = countdownSeconds--;
+          if (countdownSeconds < 0) {
+            location.reload();
+          }
+        }, 1000);
+      }
 		</script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->

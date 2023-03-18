@@ -1,3 +1,10 @@
+<?php
+include 'core/config.php';
+if (isset($_SESSION['user']['id'])) {
+  header("location:index.php");
+}
+$csrf = Components::csrf();
+?>
 <!DOCTYPE html>
 <html lang="zxx">
   <head>
@@ -149,16 +156,17 @@
                 <div class="form-title">
                   <h4 class="title">Sign In</h4>
                 </div>
-                <form action="#">
+                <form action="#" id="frmLogin">
+                  <?=$csrf?>
                   <div class="row">
                     <div class="col-12">
                       <div class="form-group">
-                        <input class="form-control" type="email" placeholder="Email">
+                        <input class="form-control" type="email" name="user_email" placeholder="Email" required>
                       </div>
                     </div>
                     <div class="col-12">
                       <div class="form-group">
-                        <input class="form-control" type="password" placeholder="Password">
+                        <input class="form-control" type="password" name="user_password" placeholder="Password" required>
                       </div>
                     </div>
                     <div class="col-12">
@@ -174,9 +182,10 @@
                         </div>
                       </div>
                     </div>
+                    <div class="col-12" id="response_login"></div>
                     <div class="col-12">
                       <div class="form-group">
-                        <button type="button" class="btn-theme">Sign In</button>
+                        <button type="submit" class="btn-theme" id="btn_login">Sign In</button>
                       </div>
                     </div>
                   </div>
@@ -225,7 +234,55 @@
     <script src="../assets/js/counterup.min.js"></script>
     <script src="../assets/js/materialize.min.js"></script>
     <script src="../assets/js/metisMenu.min.js"></script>
-    <script src="../assets/js/custom.js"></script>
+    <script>
+      //Loader  
+      $(window).on('load', function () {
+        $('.Loader').delay(350).fadeOut('slow');
+        $('body').delay(350).css({ 'overflow': 'visible' });
+      })
+      
+      // Count
+      $(window).on('load', function() {
+        $('.count').counterUp({
+          delay:20,
+          time: 800
+        });
+      });
+      $("#frmLogin").submit(function(e){
+        e.preventDefault();
+        $("#btn_login").prop('disabled',true);
+        $("#btn_login").html('Logging in...');
+        $.post("controller/ajax.php?q=Authentication&m=login",$("#frmLogin").serialize(),function(data,status){
+            // var res = JSON.parse(data);
+            if(data == 1){
+              // SUCCESS
+              $("#response_login").html('<div class="alert alert-primary" role="alert">Successfully login! <br> <b> Page will redirect in <span id="countdown">5</span> seconds!</div>');
+              countDown();
+            }else if(data == 2){
+              $("#response_login").html('<div class="alert alert-danger" role="alert">Credentials does not match to our records.</div>');
+            }else if(data == -1){
+              // EXPIRED CSRF TOKEN
+              $("#response_login").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will redirect in <span id="countdown">5</span> seconds!</div>');
+              countDown();
+            }else{
+              $("#response_login").html('<div class="alert alert-danger" role="alert">'+data+'</div>');
+            }
+            $("#btn_login").prop('disabled',false);
+            $("#btn_login").html('Sign In');
+        });
+      });
+      function countDown()
+      {
+        var countdownSeconds = 5;
+        var countdownLabel = document.getElementById('countdown');
+        var countdownInterval = setInterval(function() {
+          countdownLabel.innerHTML = countdownSeconds--;
+          if (countdownSeconds < 0) {
+            location.reload();
+          }
+        }, 1000);
+      }
+    </script>
     <!-- ============================================================== -->
     <!-- This page plugins -->
     <!-- ============================================================== -->

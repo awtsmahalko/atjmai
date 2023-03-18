@@ -1,101 +1,100 @@
-<?php
-$PostNotif = new Posts();
-$notif_counter = $PostNotif->notifCounter();
-$notif_message = $notif_counter > 0 ? "<span class='msg-notifc' style='top:0'>$notif_counter</span>":'';
-
-$Messages = new Messages();
-$count_unread = $Messages->getUnreadMessagesCounter($_SESSION['user']['id']);
-$message_counter = $count_unread > 0 ? "<span class='msg-notifc' style='top:0'>$count_unread</span>":'';
-?>
-<header>
-  <div class="container">
-    <div class="header-data">
-      <div class="logo">
-        <a href="index.php" title="">
-          <img src="../images/cpsu-logo-.png" alt="">
-        </a>
-      </div>
-      <div class="search-bar">
-        <form>
-          <label style="color: #fff;font-size: 28px;font-weight: bold;padding-top: 5px;">CPSU TUTOR FINDER</label>
-        </form>
-      </div>
-      <nav>
-        <ul>
-          <li>
-            <a href="index.php" title="">
-              <span>
-                <img src="../images/icon1.png" alt="">
-              </span> Home </a>
-          </li>
-        <?php if($_SESSION['user']['category'] == 1) { ?>
-          <li>
-            <a href="index.php?q=student" title="">
-              <span>
-                <img src="../images/icon4.png" alt="">
-              </span> Students </a>
-          </li>
-          <li>
-            <a href="index.php?q=tutorials" title="">
-              <span>
-                <img src="../images/icon5.png" alt="">
-              </span> Tutorials </a>
-          </li>
-        <?php }else{ ?>
-          <li>
-            <a href="index.php?q=tutor" title="">
-              <span>
-                <img src="../images/icon5.png" alt="">
-              </span> Tutors </a>
-          </li>
-          <li>
-            <a href="index.php?q=tutorials" title="">
-              <span>
-                <img src="../images/icon5.png" alt="">
-              </span> Tutorials </a>
-          </li>
-        <?php } ?>
-          <li>
-            <a href="index.php?q=messages" title="" class="not-box-openm">
-              <span>
-                <img src="../images/icon6.png" alt="">
-              </span> Messages <?=$message_counter?></a>
-          </li>
-          <li>
-            <a href="index.php?q=notification" title="">
-              <span>
-                <img src="../images/icon7.png" alt="">
-              </span> Notification <?=$notif_message?></a>
-          </li>
-          <li>
-            <a href="index.php?q=tnc" title="">
-              <span class="fa fa-gears"></span><br> Terms & Condition</a>
-          </li>
-        </ul>
-      </nav>
-      <div class="menu-btn">
-        <a href="#" title="">
-          <i class="fa fa-bars"></i>
-        </a>
-      </div>
-      <div class="user-account">
-        <div class="user-info">
-          <img src="../images/users/<?=$_SESSION['user']['img']?>" alt="" style="width: 30px;height: 30px;border-radius: 50%;">
-          <a href="#" title=""><?= $_SESSION['user']['fname']; ?></a>
-          <i class="la la-sort-down"></i>
+      <div class="header header-transparent dark-text">
+        <div class="container">
+          <div class="row">
+            <div class="col-lg-12 col-md-12 col-sm-12">
+              <nav id="navigation" class="navigation navigation-landscape">
+                <div class="nav-header">
+                  <a class="nav-brand" href="#">
+                    <img src="../assets/img/logo1.png" class="logo" alt="" />
+                  </a>
+                  <div class="nav-toggle"></div>
+                </div>
+                <div class="nav-menus-wrapper">
+                  <ul class="nav-menu">
+                  
+                    <li class="active"><a href="#">Home</a></li>
+                    
+                    <li><a href="#">Explore<span class="submenu-indicator"></span></a>
+                      <ul class="nav-dropdown nav-submenu">
+                        <li><a href="#">Search Job<span class="submenu-indicator"></span></a>
+                          <ul class="nav-dropdown nav-submenu">
+                            <li><a href="search-job-grid-1.html">Search Job 01</a></li>                                    
+                            <li><a href="search-job-grid-2.html">Search Job 02</a></li>  
+                            <li><a href="search-job-grid-3.html">Search Job 03</a></li>   
+                            <li><a href="search-job-list-1.html">Search Job List 01</a></li>
+                            <li><a href="search-job-list-2.html">Search Job List 02</a></li>
+                          </ul>
+                        </li>
+                        <li><a href="#">Services<span class="submenu-indicator"></span></a>
+                          <ul class="nav-dropdown nav-submenu">
+                            <li><a href="search-services.html">Search Services 01</a></li>                                    
+                            <li><a href="search-services-grid-2.html">Search Services 02</a></li>  
+                            <li><a href="search-services-list.html">Search Services List</a></li>                               
+                          </ul>
+                        </li>
+                        <li><a href="#">Freelancers<span class="submenu-indicator"></span></a>
+                          <ul class="nav-dropdown nav-submenu">
+                            <li><a href="search-freelancers.html">Search Freelancers</a></li>                                    
+                            <li><a href="search-freelancers-grid-2.html">Search Freelancers 02</a></li>  
+                            <li><a href="search-freelancers-list.html">Search Freelancers List</a></li>
+                            <li><a href="freelancer-detail.html">Freelancer Detail</a></li> 
+                          </ul>
+                        </li>
+                        <li><a href="#">Candidates<span class="submenu-indicator"></span></a>
+                          <ul class="nav-dropdown nav-submenu">
+                            <li><a href="search-candidates.html">Search Canddates</a></li>                                    
+                            <li><a href="search-candidates-list.html">Search Candidates List</a></li>
+                            <li><a href="candidate-detail.html">Candidate Detail</a></li> 
+                          </ul>
+                        </li>
+                        <li><a href="#">Employers<span class="submenu-indicator"></span></a>
+                          <ul class="nav-dropdown nav-submenu">
+                            <li><a href="search-employers.html">Search Employers</a></li>                                    
+                            <li><a href="search-employers-list.html">Search Employers List</a></li>
+                            <li><a href="employer-detail.html">Employer Detail</a></li> 
+                          </ul>
+                        </li>
+                        <li><a href="#">Detail Page<span class="submenu-indicator"></span></a>
+                          <ul class="nav-dropdown nav-submenu">
+                            <li><a href="job-detail-1.html">Job Detail 01</a></li>                                    
+                            <li><a href="job-detail-2.html">Job Detail 02</a></li> 
+                              <li><a href="job-detail-3.html">Job Detail 03</a></li> 
+                            <li><a href="service-detail.html">Service Detail</a></li> 
+                            <li><a href="project-detail.html">Project Detail</a></li>                             
+                          </ul>
+                        </li>
+                        <li><a href="advance-search-1.html">Advance Search 01</a></li>
+                        <li><a href="advance-search-2.html">Advance Search 02</a></li>
+                      </ul>
+                    </li>
+                    
+                    <li><a href="dashboard.html">Dashboard</a></li>
+                    
+                    <li><a href="#">Pages<span class="submenu-indicator"></span></a>
+                      <ul class="nav-dropdown nav-submenu">
+                        <li><a href="about-us.html">About Us</a></li> 
+                        <li><a href="blog.html">Blogs Page</a></li>                                    
+                        <li><a href="blog-detail.html">Blog Detail</a></li>                                     
+                        <li><a href="pricing.html">Pricing</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                        <li><a href="components.html">Components</a></li>                       
+                        <li><a href="faq.html">FAQ's</a></li>
+                        <li><a href="checkout.html">CheckOut</a></li>
+                      </ul>
+                    </li>
+                    
+                  </ul>
+                  
+                  <ul class="nav-menu nav-menu-social align-to-right">
+                    <li class="add-listing dark-bg">
+                      <a href="#" data-toggle="modal" data-target="#login">
+                         <i class="ti-user mr-1"></i> <?=$_SESSION['user']['fullname']?>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </nav>
+            </div>
+          </div>
         </div>
-        <div class="user-account-settingss" id="users">
-          <h3>Setting</h3>
-          <ul class="us-links">
-            <li>
-              <a href="index.php?q=account-settings" title="">Account Setting</a>
-            </li>
-          </ul>
-          <h3 class="tc">
-            <a href="auth/logout.php" title="">Logout</a>
-          </h3>
-        </div>
       </div>
-    </div>
-  </div>
-</header>

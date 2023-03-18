@@ -49,6 +49,13 @@ class Authentication extends Connection
                     $response       = $Alumni->add();
                     if($response == 1){
                         $this->commit();
+                        $_SESSION['user'] = [
+                            'id'            => $user_id,
+                            'fullname'      => $user_fullname,
+                            'category'      => $user_category,
+                            'user_email'    => $email,
+                            'img'           => "default.png",
+                        ];
                         return 1;
                     }else{
                         throw new Exception($response); 
@@ -67,28 +74,28 @@ class Authentication extends Connection
 
     public function login()
     {
-        $user_email = $this->clean($this->inputs['email']);
-        $password = md5($this->inputs['password']);
+        if(!Components::verify_csrf())
+            return -1;
 
-        $fetch = $this->select($this->table, "*", "user_email = '$user_email' AND password = '$password'");
-        if ($fetch->num_rows > 0) {
+        $email      = $this->post('user_email');
+        $password   = md5($this->post('user_password'));
+
+        try{
+            $fetch = $this->select($this->table, "*", "user_email = '$email' AND user_password = '$password'");
+            if ($fetch->num_rows < 1)
+                throw new Exception(2);
+
             $row = $fetch->fetch_assoc();
-            $this->session = [
-                'id'        => $row['user_id'],
-                'fname'     => $row['user_fname'],
-                'mname'     => $row['user_mname'],
-                'lname'     => $row['user_lname'],
-                'category'  => $row['user_category'],
+            $_SESSION['user'] = [
+                'id'            => $row['user_id'],
+                'fullname'      => $row['user_fullname'],
+                'category'      => $row['user_category'],
                 'user_email'    => $row['user_email'],
                 'img'           => $row['user_img'],
             ];
             return 1;
-        } else {
-            $this->old = [
-                'user_email'  => $user_email,
-                'password'  => $this->inputs['password'],
-            ];
-            return 0;
+        }catch(Exception $e){
+            return $e->getMessage();
         }
     }
 
