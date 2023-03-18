@@ -14,6 +14,33 @@ class Connection
         $this->mysqli = new mysqli($this->servername, $this->username, $this->password, $this->dbname);
     }
 
+    public function check()
+    {
+        if ($this->mysqli->connect_errno) {
+            throw new Exception('Failed to connect to MySQL: ' . $this->mysqli->connect_error);
+        }
+    }
+
+    public function begin_transaction()
+    {
+        $this->mysqli->begin_transaction();
+    }
+
+    public function commit()
+    {
+        $this->mysqli->commit();
+    }
+
+    public function rollback()
+    {
+        $this->mysqli->rollback();
+    }
+
+    public function post($key , $clean = true, $ret = '', $inputs = 'inputs')
+    {
+        return !isset($this->inputs[$key]) ? $ret : ($clean ? $this->clean($this->inputs[$key]) :$this->inputs[$key]);
+    }
+
     public function insert($table, $para = array(), $last_id = 'N')
     {
         $table_columns = implode(',', array_keys($para));
@@ -21,11 +48,19 @@ class Connection
 
         $sql = "INSERT INTO $table($table_columns) VALUES('$table_value')";
 
-        $result = $this->mysqli->query($sql) or die($this->mysqli->error);
-        $lastId = $this->mysqli->insert_id;
-        $ret_ = ($last_id == 'Y') ? $lastId : 1;
+        // $result = $this->mysqli->query($sql) or die($this->mysqli->error);
+        // $lastId = $this->mysqli->insert_id;
+        // $ret_ = ($last_id == 'Y') ? $lastId : 1;
 
-        return $result ? $ret_ : 0;
+        // return $result ? $ret_ : 0;
+
+        if($this->mysqli->query($sql) === TRUE){
+            $lastId = $this->mysqli->insert_id;
+            $ret_ = ($last_id == 'Y') ? $lastId : 1;
+            return $ret_;
+        }else{
+            return $this->mysqli->error;
+        }
     }
 
     public function insert_select($table, $table_select, $para, $where_clause = '')

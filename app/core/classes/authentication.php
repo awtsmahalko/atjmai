@@ -13,39 +13,55 @@ class Authentication extends Connection
         if(!Components::verify_csrf())
             return -1;
 
-        $user_fname = $this->clean($this->inputs['user_fname']);
-        $user_mname = $this->clean($this->inputs['user_mname']);
-        $user_lname = $this->clean($this->inputs['user_lname']);
-        $user_category = $this->clean($this->inputs['user_category']);
-        $email = $this->clean($this->inputs['user_email']);
-        $password = $this->clean($this->inputs['password']);
-        $password2 = $this->clean($this->inputs['password2']);
+        $user_fname     = $this->post('user_fname');
+        $user_mname     = $this->post('user_mname');
+        $user_lname     = $this->post('user_lname');
+        $user_fullname  = $user_fname.' '.$user_mname.' '.$user_lname;
+        $user_category  = $this->post('user_category');
+        $email          = $this->post('user_email');
+        $password       = $this->post('password');
+        $password2      = $this->post('password2');
 
-        $fetch = $this->select($this->table, "user_id", "user_email = '$email'");
-        if ($fetch->num_rows > 0)
-            return 2;
+        try{
+            $this->check();
+            $this->begin_transaction();
 
-        if($password != $password2)
-            return -2;
+            $fetch = $this->select($this->table, "user_id", "user_email = '$email'");
+            if ($fetch->num_rows > 0)
+                throw new Exception(2);
 
-        $form = array(
-            'user_fullname' => $this->clean($user_fname.' '.$user_mname.' '.$user_lname),
-            'user_password' => md5($password),
-            'user_email'    => $email,
-            'user_category' => $user_category,
-            'user_status'   => 1
-        );
-        $user_id =  $this->insert($this->table, $form, 'Y');
-        if ($user_id > 0) {
-            $this->inputs['user_id'] = $user_id;
-            if($user_category == 'S'){
-                $Alumni = new Alumni();
-                $Alumni->inputs = $this->inputs;
-                return $Alumni->add();
+            if($password != $password2)
+                throw new Exception(-2);
+
+            $user_id =  $this->insert($this->table, [
+                'user_fullname' => $user_fullname,
+                'user_password' => md5($password),
+                'user_email'    => $email,
+                'user_category' => $user_category,
+                'user_status'   => 1
+            ], 'Y');
+
+            if ($user_id > 0) {
+                $this->inputs['user_id'] = $user_id;
+                if($user_category == 'S'){
+                    $Alumni         = new Alumni();
+                    $Alumni->inputs = $this->inputs;
+                    $response       = $Alumni->add();
+                    if($response == 1){
+                        $this->commit();
+                        return 1;
+                    }else{
+                        throw new Exception($response); 
+                    }
+                }
+                return 1;
+            } else {
+                throw new Exception('Error occur please contact your support!');
             }
-            return 1;
-        } else {
-            return 0;
+
+        }catch(Exception $e){
+            $this->rollback();
+            return $e->getMessage();
         }
     }
 

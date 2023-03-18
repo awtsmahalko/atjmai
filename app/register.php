@@ -406,27 +406,48 @@ $csrf = Components::csrf();
 	      $("#btn_register").prop('disabled',true);
 	      $("#btn_register").html('Registering...');
 	      $.post("controller/ajax.php?q=Authentication&m=signup",$("#frmRegister").serialize(),function(data,status){
-	          var res = JSON.parse(data);
-	          if(res == 1){
+	          // var res = JSON.parse(data);
+	          if(data == 1){
 	          	// SUCCESS
-	          	$("#response_register").html('<div class="alert alert-primary" role="alert">Successfully registered!</div>');
-	          }else if(res == 2){
+	          	$("#response_register").html('<div class="alert alert-primary" role="alert">Successfully registered! <br> <b> Page will redirect in <span id="countdown">5</span> seconds!</div>');
+	          	countDown();
+	          }else if(data == 2){
 	          	// EMAIL ALREADY TAKEN
 	          	$("#response_register").html('<div class="alert alert-danger" role="alert">Email is already taken!</div>');
-	          }else if(res == -2){
+	          }else if(data == -2){
 	          	// PASSWORD DOES NOT MATCH
 	          	$("#response_register").html('<div class="alert alert-danger" role="alert">Password does not match!</div>');
-	          }else if(res == -1){
+	          }else if(data == -1){
 	          	// EXPIRED CSRF TOKEN
-	          	$("#response_register").html('<div class="alert alert-danger" role="alert">Token already expired!</div>');
+	          	$("#response_register").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will redirect in <span id="countdown">5</span> seconds!</div>');
+	          	countDown();
 	          }else{
-	          	// ERROR
+	          	$("#response_register").html('<div class="alert alert-danger" role="alert">'+data+'</div>');
 	          }
 						$("#btn_register").prop('disabled',false);
 	      		$("#btn_register").html('Register Now');
 	      });
 	    });
-	
+		function countDown()
+		{
+    	// Set the countdown timer duration in seconds
+			var countdownSeconds = 5;
+
+			// Get the label element
+			var countdownLabel = document.getElementById('countdown');
+
+			// Start the countdown timer
+			var countdownInterval = setInterval(function() {
+			  // Update the label with the remaining time
+			  countdownLabel.innerHTML = countdownSeconds--;
+
+			  // Check if the countdown timer has expired
+			  if (countdownSeconds < 0) {
+			    // Reload the page
+			    location.reload();
+			  }
+			}, 1000); // Update the label every second
+		}
 		</script>
 		<!-- ============================================================== -->
 		<!-- This page plugins -->
