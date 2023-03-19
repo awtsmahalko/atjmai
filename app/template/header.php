@@ -1,4 +1,4 @@
-      <div class="header header-transparent dark-text">
+      <div class="header <?=$route_settings[$views_file]['header']?>">
         <div class="container">
           <div class="row">
             <div class="col-lg-12 col-md-12 col-sm-12">
@@ -87,7 +87,7 @@
                   
                   <ul class="nav-menu nav-menu-social align-to-right">
                     <li class="add-listing dark-bg">
-                      <a href="#" data-toggle="modal" data-target="#login">
+                      <a href="index.php?q=profile">
                          <i class="ti-user mr-1"></i> <?=$_SESSION['user']['fullname']?>
                       </a>
                     </li>

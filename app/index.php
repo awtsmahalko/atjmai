@@ -4,6 +4,15 @@ if (!isset($_SESSION['user']['id'])) {
   header("location:signin.php");
 }
 $views_file = isset($_GET['q']) ?  $_GET['q'] : 'dashboard';
+
+$route_settings = array(
+  'profile' => array(
+    'header' => 'header-light',
+  ),
+  'dashboard' => array(
+    'header' => 'header-transparent dark-text',
+  ),
+);
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
