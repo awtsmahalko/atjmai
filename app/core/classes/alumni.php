@@ -24,4 +24,20 @@ class Alumni extends Connection
             'alumni_graduation' => $this->post('alumni_graduation'),
         ]);
     }
+
+    public function profile()
+    {
+        $user_id = $_SESSION['user']['id'];
+        $result = $this->select($this->table, "*", "user_id = '$user_id'");
+        $row = $result->fetch_assoc();
+        return json_encode($row);
+    }
+
+    public static function dataOf($primary_id, $field = '*')
+    {
+        $self = new self;
+        $result = $self->select($self->table, $field, "$self->pk = '$primary_id'");
+        $row = $result->fetch_assoc();
+        return $field == '*' ? $row : $row[$field];
+    }
 }
