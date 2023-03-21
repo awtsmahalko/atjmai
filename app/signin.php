@@ -1,7 +1,7 @@
 <?php
 include 'core/config.php';
 if (isset($_SESSION['user']['id'])) {
-  header("location:index.php");
+  header("location:/atjmai");
 }
 $csrf = Components::csrf();
 ?>

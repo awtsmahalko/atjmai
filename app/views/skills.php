@@ -14,27 +14,7 @@
 		<div class="row m-0">
 
 			<div class="col-xl-3 col-lg-4 col-md-12 col-sm-12">
-				<div class="dashboard-navbar overlio-top">
-
-					<div class="d-user-avater">
-						<img src="../assets/img/users/default_male.png" class="img-fluid rounded" alt="">
-						<h4 id="profile-fullname"></h4>
-						<span id="profile-email"></span>
-					</div>
-
-					<div class="d-navigation">
-						<ul id="metismenu">
-							<li><a href="index.php?q=profile"><i class="ti-user"></i>My Profile</a></li>
-							<li class="active"><a href="index.php?q=skills"><i class="fa fa-gears"></i>Skills</a></li>
-							<li><a href="messages.html"><i class="ti-email"></i>Messages</a></li>
-							<li>
-								<a href="javascript:void(0);" aria-expanded="false"><i class="fa fa-briefcase"></i>Jobs</a>
-							</li>
-							<li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="ti-power-off"></i>Log Out</a></li>
-						</ul>
-					</div>
-
-				</div>
+				<?php require 'template/sidebar.php';?>
 			</div>
 
 			<!-- Item Wrap Start -->
@@ -137,7 +117,6 @@
 <!-- End Modal -->
 
 <script>
-	profileText();
 	fetchProfile();
 
 	function fetchProfile() {
@@ -155,14 +134,6 @@
 		profileValueElements.forEach(element => {
 			const dataColumnValue = element.getAttribute('data-column');
 			element.value = res[dataColumnValue];
-		});
-	}
-
-	function profileText() {
-		$.post("controller/ajax.php?q=Users&m=profile", {}, function(data, status) {
-			var res = JSON.parse(data);
-			$("#profile-fullname").html(res.fullname);
-			$("#profile-email").html(res.email);
 		});
 	}
 

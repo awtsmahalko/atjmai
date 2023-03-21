@@ -90,7 +90,7 @@ class Authentication extends Connection
                 'id'            => $row['user_id'],
                 'fullname'      => $row['user_fullname'],
                 'category'      => $row['user_category'],
-                'user_email'    => $row['user_email'],
+                'email'         => $row['user_email'],
                 'img'           => "default.png",
             ];
             return 1;

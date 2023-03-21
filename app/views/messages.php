@@ -14,27 +14,7 @@
 		<div class="row m-0">
 
 			<div class="col-xl-3 col-lg-4 col-md-12 col-sm-12">
-				<div class="dashboard-navbar overlio-top">
-
-					<div class="d-user-avater">
-						<img src="../assets/img/users/default_male.png" class="img-fluid rounded" alt="">
-						<h4 id="profile-fullname"></h4>
-						<span id="profile-email"></span>
-					</div>
-
-					<div class="d-navigation">
-						<ul id="metismenu">
-							<li><a href="index.php?q=profile"><i class="ti-user"></i>My Profile</a></li>
-							<li class="active"><a href="index.php?q=skills"><i class="fa fa-gears"></i>Skills</a></li>
-							<li><a href="messages.html"><i class="ti-email"></i>Messages</a></li>
-							<li>
-								<a href="javascript:void(0);" aria-expanded="false"><i class="fa fa-briefcase"></i>Jobs</a>
-							</li>
-							<li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="ti-power-off"></i>Log Out</a></li>
-						</ul>
-					</div>
-
-				</div>
+				<?php require 'template/sidebar.php';?>
 			</div>
 
 			<!-- Item Wrap Start -->
@@ -52,56 +32,245 @@
 						</div>
 					</div>
 				</div>
-
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<form id="frmProfile">
-							<?=Components::csrf();?>
-							<!-- Single Wrap -->
-							<div class="_dashboard_content">
-								<div class="_dashboard_content_header">
-									<div class="_dashboard__header_flex">
-										<h4><i class="fa fa-user mr-1"></i>My Skills</h4>
-									</div>
-								</div>
-
-								<div class="_dashboard_content_body">
-									<div class="row">
-										<div class="col">
-											<div class="row">
-												<div class="pills_basic_tab">
-													<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-														<li class="nav-item" role="presentation">
-															<a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false">Tab 01</a>
-														</li>
-														<li class="nav-item" role="presentation">
-															<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tab 02</a>
-														</li>
-														<li class="nav-item" role="presentation">
-															<a class="nav-link active" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="true">Tab 03</a>
-														</li>
-													</ul>
-													<div class="tab-content" id="pills-tabContent">
-														<div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-															<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-														</div>
-														<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-															<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-														</div>
-														<div class="tab-pane fade active show" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-															<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-														</div>
-													</div>
-												</div>
-												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
-											</div>
-										</div>
-									</div>
-								</div>
+						
+						<!-- Convershion -->
+						<div class="messages-container margin-top-0">
+							<div class="messages-headline">
+								<h4>Connor Griffin</h4>
+								<a href="#" class="message-action"><i class="ti-trash"></i> Delete Conversation</a>
 							</div>
-							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update_profile"><span class="fa fa-edit"></span> Save Changes</button>
-						</form>
+
+							<div class="messages-container-inner">
+
+								<!-- Messages -->
+								<div class="dash-msg-inbox">
+									<ul>
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-1.jpg" alt=""><span class="_user_status online"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Tilly Bartlett</h5>
+														<span>36 min ago</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year.. </p>
+												</div>
+											</a>
+										</li>
+
+										<li class="active-message">
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-2.jpg" alt=""><span class="_user_status offline"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>George Howarth</h5>
+														<span>2 hours ago</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+										
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-3.jpg" alt=""><span class="_user_status busy"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Harriet Ball</h5>
+														<span>Yesterday</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-4.jpg" alt=""><span class="_user_status online"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Sienna Bruce</h5>
+														<span>02.01.2020</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-5.jpg" alt=""><span class="_user_status busy"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Leo Stewart</h5>
+														<span>03.01.2020</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-1.jpg" alt=""><span class="_user_status online"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Shaurya Preet</h5>
+														<span>05.01.2020</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-2.jpg" alt=""><span class="_user_status offline"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Dan Preet</h5>
+														<span>04.01.2020</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-3.jpg" alt=""><span class="_user_status online"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Maddison</h5>
+														<span>31.05.2019</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-4.jpg" alt=""><span class="_user_status busy"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Maddison</h5>
+														<span>27.05.2019</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-5.jpg" alt=""><span class="_user_status busy"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Eleanor Lloyd</h5>
+														<span>24.05.2019</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-1.jpg" alt=""><span class="_user_status offline"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Anna Curtis</h5>
+														<span>05.01.2020</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+
+										<li>
+											<a href="#">
+												<div class="dash-msg-avatar"><img src="assets/img/team-2.jpg" alt=""><span class="_user_status online"></span></div>
+
+												<div class="message-by">
+													<div class="message-by-headline">
+														<h5>Tyler Fraser</h5>
+														<span>07.01.2020</span>
+													</div>
+													<p>Hello, I am a web designer with 5 year..</p>
+												</div>
+											</a>
+										</li>
+
+									</ul>
+								</div>
+								<!-- Messages / End -->
+
+								<!-- Message Content -->
+								<div class="dash-msg-content">
+
+									<div class="message-plunch">
+										<div class="dash-msg-avatar"><img src="https://image.flaticon.com/icons/png/512/145/145849.png" alt=""></div>
+										<div class="dash-msg-text"><p>Hello, Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin</p></div>
+									</div>
+
+									<div class="message-plunch me">
+										<div class="dash-msg-avatar"><img src="https://via.placeholder.com/400x400" alt=""></div>
+										<div class="dash-msg-text"><p>looked up one of the more obscure Latin words, consectetur, from a Lorem</p></div>
+									</div>
+
+									<div class="message-plunch">
+										<div class="dash-msg-avatar"><img src="https://image.flaticon.com/icons/png/512/145/145849.png" alt=""></div>
+										<div class="dash-msg-text"><p>If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing</p></div>
+									</div>
+
+									<div class="message-plunch me">
+										<div class="dash-msg-avatar"><img src="https://via.placeholder.com/400x400" alt=""></div>
+										<div class="dash-msg-text"><p>please consider donating a small sum to help pay for the hosting and bandwidth bill.</p></div>
+									</div>
+
+									<div class="message-plunch">
+										<div class="dash-msg-avatar"><img src="https://image.flaticon.com/icons/png/512/145/145849.png" alt=""></div>
+										<div class="dash-msg-text"><p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p></div>
+									</div>
+
+									<div class="message-plunch me">
+										<div class="dash-msg-avatar"><img src="https://via.placeholder.com/400x400" alt=""></div>
+										<div class="dash-msg-text"><p>numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p></div>
+									</div>
+
+									<div class="message-plunch">
+										<div class="dash-msg-avatar"><img src="https://image.flaticon.com/icons/png/512/145/145849.png" alt=""></div>
+										<div class="dash-msg-text"><p>But I must explain to you how all this mistaken idea of denouncing pleasure</p></div>
+									</div>
+									
+									<!-- Reply Area -->
+									<div class="clearfix"></div>
+									<div class="message-reply">
+										<textarea cols="40" rows="3" class="form-control with-light" placeholder="Your Message"></textarea>
+										<button class="btn dark-2">Send Message</button>
+									</div>
+									
+								</div>
+								<!-- Message Content -->
+
+							</div>
+
+						</div>
+						
 					</div>
 				</div>
 			</div>
@@ -137,7 +306,6 @@
 <!-- End Modal -->
 
 <script>
-	profileText();
 	fetchProfile();
 
 	function fetchProfile() {
@@ -155,14 +323,6 @@
 		profileValueElements.forEach(element => {
 			const dataColumnValue = element.getAttribute('data-column');
 			element.value = res[dataColumnValue];
-		});
-	}
-
-	function profileText() {
-		$.post("controller/ajax.php?q=Users&m=profile", {}, function(data, status) {
-			var res = JSON.parse(data);
-			$("#profile-fullname").html(res.fullname);
-			$("#profile-email").html(res.email);
 		});
 	}
 
