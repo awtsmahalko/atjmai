@@ -48,11 +48,14 @@
 								<div class="_dashboard_content_body">
 									<div class="row">
 										<div class="col">
-											<div class="row">
-												<div class="pills_basic_tab">
-													<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"></ul>
-													<hr>
-													<div class="tab-content" id="pills-tabContent"></div>
+											<div class="pills_basic_tab">
+												<div class="row">
+													<div class="col-md-4">
+														<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"></ul>
+													</div>
+													<div class="col-md-8">
+														<div class="tab-content" id="pills-tabContent"></div>
+													</div>
 												</div>
 											</div>
 										</div>
@@ -96,12 +99,31 @@
 </div>
 <!-- End Modal -->
 <style type="text/css">
+#pills-tab {
+    display: -ms-flexbox;
+    display: flex;
+    flex-direction: column;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    padding-left: 0;
+    margin-bottom: 0;
+    list-style: none;
+}
 .pills_basic_tab .nav-link {
     padding: 0.5rem 1rem;
 }
 
 .pills_basic_tab .nav-link.active{
     padding: 0.5rem 1rem;
+}
+.pills_basic_tab .nav-link.active a:before {
+    content: "";
+    position: absolute;
+    border-left: 15px solid #0b8fe8;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    right: -6%;
+    top: 26%;
 }
 </style>
 <script>
@@ -159,18 +181,18 @@
 				'</div>';
 			}
 			pills_tabContent += '<div class="tab-pane fade '+is_active_tabContent+'" id="pills-'+catRow.id+'" role="tabpanel" aria-labelledby="pills-'+catRow.id+'-tab">'+
-			'<div class="col-md-8">'+
+			//'<div class="col-md-8">'+
 			'<h4>'+catRow.name+'</h4>'+
 			'<h6>Self Assessed Skill Rating</h6>'+
 			'<div class="accordion light_modal">'+skill_tab+
 			'</div>'+
-			'</div>'+
-			'<div class="col-xl-8 col-lg-8 mt-2">'+
+			//'</div>'+
+			//'<div class="col-xl-8 col-lg-8 mt-2">'+
 				'<div class="form-group">'+
 					'<label class="active">'+catRow.name+' Experience Details</label>'+
 					'<textarea type="text" class="form-control with-light profile-value" data-column="alumni_address" name="alumni_address" required="" style="height:85px;"></textarea>'+
 				'</div>'+
-			'</div>'+
+			//'</div>'+
 			'</div>';
 		}
 
