@@ -25,6 +25,38 @@ class Alumni extends Connection
         ]);
     }
 
+    public function update_profile()
+    {
+        if(!Components::verify_csrf())
+            return -1;
+
+        try{
+            $this->check();
+            $this->begin_transaction();
+
+            $update_success = $this->update($this->table,[
+                'alumni_fname'       => $this->post('alumni_fname'),
+                'alumni_mname'       => $this->post('alumni_mname'),
+                'alumni_lname'       => $this->post('alumni_lname'),
+                'course_id'          => $this->post('course_id'),
+                'alumni_graduation'  => $this->post('alumni_graduation'),
+                'alumni_gender'      => $this->post('alumni_gender'),
+                'alumni_contact'     => $this->post('alumni_contact'),
+                'alumni_address'     => $this->post('alumni_address'),
+            ],"user_id = '".$_SESSION['user']['id']."'");
+
+            if($update_success != 1)
+                throw new Exception($update_success);
+
+            $this->commit();
+            return 1;
+
+        }catch(Exception $e){
+            $this->rollback();
+            return $e->getMessage();
+        }
+    }
+
     public function profile()
     {
         $user_id = $_SESSION['user']['id'];

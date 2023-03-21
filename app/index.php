@@ -3,16 +3,9 @@ include 'core/config.php';
 if (!isset($_SESSION['user']['id'])) {
   header("location:signin.php");
 }
-$views_file = isset($_GET['q']) ?  $_GET['q'] : 'dashboard';
 
-$route_settings = array(
-  'profile' => array(
-    'header' => 'header-light',
-  ),
-  'dashboard' => array(
-    'header' => 'header-transparent dark-text',
-  ),
-);
+require 'routes/routes.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -51,7 +44,7 @@ $route_settings = array(
   <div id="main-wrapper">
     <?php include_once('template/header.php') ?>
     <div class="clearfix"></div>
-    <?php include_once('views/' . $views_file . '.php') ?>
+    <?php include_once('views/' . $router->route['path'] . '.php') ?>
     <?php include_once('template/footer.php') ?>
   </div>
   <!-- ============================================================== -->

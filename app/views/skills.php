@@ -24,8 +24,8 @@
 
 					<div class="d-navigation">
 						<ul id="metismenu">
-							<li class="active"><a href="index.php?q=profile"><i class="ti-user"></i>My Profile</a></li>
-							<li><a href="index.php?q=skills"><i class="fa fa-gears"></i>Skills</a></li>
+							<li><a href="index.php?q=profile"><i class="ti-user"></i>My Profile</a></li>
+							<li class="active"><a href="index.php?q=skills"><i class="fa fa-gears"></i>Skills</a></li>
 							<li><a href="messages.html"><i class="ti-email"></i>Messages</a></li>
 							<li>
 								<a href="javascript:void(0);" aria-expanded="false"><i class="fa fa-briefcase"></i>Jobs</a>
@@ -46,7 +46,7 @@
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">My Profile</li>
+									<li class="breadcrumb-item active" aria-current="page">My Skills</li>
 								</ol>
 							</nav>
 						</div>
@@ -61,72 +61,36 @@
 							<div class="_dashboard_content">
 								<div class="_dashboard_content_header">
 									<div class="_dashboard__header_flex">
-										<h4><i class="fa fa-user mr-1"></i>My Profile</h4>
+										<h4><i class="fa fa-user mr-1"></i>My Skills</h4>
 									</div>
 								</div>
 
 								<div class="_dashboard_content_body">
 									<div class="row">
-										<div class="col-auto">
-											<div class="custom-file avater_uploads">
-												<input type="file" class="custom-file-input" id="customFile">
-												<label class="custom-file-label" for="customFile"><i class="fa fa-user"></i></label>
-											</div>
-										</div>
-
 										<div class="col">
 											<div class="row">
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>First Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_fname' name='alumni_fname'>
-													</div>
-												</div>
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>Middle Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_mname' name='alumni_mname'>
-													</div>
-												</div>
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>Last Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_lname' name='alumni_lname'>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Course</label>
-														<select class="form-control with-light profile-value" data-column='course_id' name='course_id'>
-															<?= Courses::options() ?>
-														</select>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Graduation Date</label>
-														<input type="date" class="form-control with-light profile-value" data-column='alumni_graduation' name='alumni_graduation'>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Gender</label>
-														<select class="form-control with-light profile-value" data-column='alumni_gender' name='alumni_gender'>
-															<option value="Male">Male</option>
-															<option value="Female">Female</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Contact #</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_contact' name='alumni_contact'>
-													</div>
-												</div>
-												<div class="col-xl-12 col-lg-12">
-													<div class="form-group">
-														<label>Address</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_address' name='alumni_address' required>
+												<div class="pills_basic_tab">
+													<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+														<li class="nav-item" role="presentation">
+															<a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false">Tab 01</a>
+														</li>
+														<li class="nav-item" role="presentation">
+															<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tab 02</a>
+														</li>
+														<li class="nav-item" role="presentation">
+															<a class="nav-link active" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="true">Tab 03</a>
+														</li>
+													</ul>
+													<div class="tab-content" id="pills-tabContent">
+														<div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
+															<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+														</div>
+														<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+															<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+														</div>
+														<div class="tab-pane fade active show" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
+															<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
+														</div>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>

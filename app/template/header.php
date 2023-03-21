@@ -11,18 +11,18 @@
           </div>
           <div class="nav-menus-wrapper">
             <ul class="nav-menu">
-              <li class="active"><a href="#">Home</a></li>
-              <li><a href="#">Post</a></li>
+              <li class="active"><a href="/atjmai/app/">Home</a></li>
+              <li><a href="/atjmai/app/post">Post</a></li>
               <li><a href="#">Jobs<span class="submenu-indicator"></span></a>
                 <ul class="nav-dropdown nav-submenu">
-                  <li><a href="advance-search-1.html">Listing</a></li>
-                  <li><a href="advance-search-2.html">Matching</a></li>
+                  <li><a href="/atjmai/app/job-listing">Listing</a></li>
+                  <li><a href="/atjmai/app/job-match">Matching</a></li>
                 </ul>
               </li>
             </ul>
             <ul class="nav-menu nav-menu-social align-to-right">
               <li class="add-listing dark-bg">
-                <a href="index.php?q=profile">
+                <a href="/atjmai/app/profile">
                   <i class="ti-user mr-1"></i> <?= $_SESSION['user']['fullname'] ?>
                 </a>
               </li>

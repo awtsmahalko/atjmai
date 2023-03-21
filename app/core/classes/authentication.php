@@ -50,11 +50,11 @@ class Authentication extends Connection
                     if($response == 1){
                         $this->commit();
                         $_SESSION['user'] = [
-                            'id'            => $user_id,
-                            'fullname'      => $user_fullname,
-                            'category'      => $user_category,
-                            'user_email'    => $email,
-                            'img'           => "default.png",
+                            'id'        => $user_id,
+                            'fullname'  => $user_fullname,
+                            'category'  => $user_category,
+                            'email'     => $email,
+                            'img'       => "default.png",
                         ];
                         return 1;
                     }else{
@@ -91,7 +91,7 @@ class Authentication extends Connection
                 'fullname'      => $row['user_fullname'],
                 'category'      => $row['user_category'],
                 'user_email'    => $row['user_email'],
-                'img'           => $row['user_img'],
+                'img'           => "default.png",
             ];
             return 1;
         }catch(Exception $e){
