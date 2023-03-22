@@ -6,10 +6,10 @@
     </div>
     <div class="d-navigation">
         <ul id="metismenu">
-            <li class="active"><a href="<?=Router::uri('profile')?>"><i class="ti-user"></i>My Profile</a></li>
-            <li><a href="<?=Router::uri('skills')?>"><i class="fa fa-gears"></i>Skills</a></li>
-            <li><a href="<?=Router::uri('messages')?>"><i class="ti-email"></i>Messages</a></li>
-            <li><a href="<?=Router::uri('jobs')?>"><i class="fa fa-briefcase"></i>Jobs</a></li>
+            <?=Router::sidebar('profile','My Profile','ti-user',$router->route['path'])?>
+            <?=Router::sidebar('skills','Skills','fa fa-gears',$router->route['path'])?>
+            <?=Router::sidebar('messages','Messages','ti-email',$router->route['path'])?>
+            <?=Router::sidebar('jobs','Jobs','fa fa-briefcase',$router->route['path'])?>
             <li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="ti-power-off"></i>Log Out</a></li>
         </ul>
     </div>

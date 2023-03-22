@@ -12,6 +12,7 @@ class Components extends Connection
 
     public static function verify_csrf()
     {
-        return $_SESSION['csrf_token'] == $_POST['csrf'];
+        $self = new self;
+        return $_SESSION['csrf_token'] == $self->post('csrf');//$_POST['csrf'];
     }
 }

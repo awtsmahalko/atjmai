@@ -50,30 +50,10 @@
 										<div class="col">
 											<div class="row">
 												<div class="pills_basic_tab">
-													<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
-														<li class="nav-item" role="presentation">
-															<a class="nav-link" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="false">Tab 01</a>
-														</li>
-														<li class="nav-item" role="presentation">
-															<a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Tab 02</a>
-														</li>
-														<li class="nav-item" role="presentation">
-															<a class="nav-link active" id="pills-contact-tab" data-toggle="pill" href="#pills-contact" role="tab" aria-controls="pills-contact" aria-selected="true">Tab 03</a>
-														</li>
-													</ul>
-													<div class="tab-content" id="pills-tabContent">
-														<div class="tab-pane fade" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
-															<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-														</div>
-														<div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
-															<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-														</div>
-														<div class="tab-pane fade active show" id="pills-contact" role="tabpanel" aria-labelledby="pills-contact-tab">
-															<p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis praesentium voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi sint occaecati cupiditate non provident, similique sunt in culpa qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio.</p>
-														</div>
-													</div>
+													<ul class="nav nav-pills mb-3" id="pills-tab" role="tablist"></ul>
+													<hr>
+													<div class="tab-content" id="pills-tabContent"></div>
 												</div>
-												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
 											</div>
 										</div>
 									</div>
@@ -115,47 +95,88 @@
 	</div>
 </div>
 <!-- End Modal -->
+<style type="text/css">
+.pills_basic_tab .nav-link {
+    padding: 0.5rem 1rem;
+}
 
+.pills_basic_tab .nav-link.active{
+    padding: 0.5rem 1rem;
+}
+</style>
 <script>
-	fetchProfile();
+	fetchAlumniSkills();
 
-	function fetchProfile() {
-		$.post("controller/ajax.php?q=Alumni&m=profile", {}, function(data, status) {
+	function fetchAlumniSkills() {
+		$.post(base_controller+"alumni_skills", {}, function(data, status) {
 			var res = JSON.parse(data);
-			mapProfileValue(res);
+			console.log(res);
+			skillsPills(res);
 		});
 	}
 
-	function mapProfileValue(res) {
-		// Get all elements with the class name "profile-value"
-		const profileValueElements = document.querySelectorAll('.profile-value');
+	function skillsPills(res)
+	{
+		var pills_tab = '',pills_tabContent = '';
+		for (var catIndex = 0; catIndex < res.category.length; catIndex++) {
+			const catRow = res.category[catIndex];
+			var is_active_tab = catIndex == 0 ? "active" : "";
+			var is_active_tabContent = catIndex == 0 ? "show active" : "";
+			var area_selected = catIndex == 0 ? "true" : "false";
+			pills_tab += '<li class="nav-item" role="presentation">'+
+				'<a class="nav-link '+is_active_tab+'" id="pills-'+catRow.id+'-tab" data-toggle="pill" href="#pills-'+catRow.id+'" role="tab" aria-controls="pills-'+catRow.id+'" aria-selected="'+area_selected+'">'+catRow.name+'</a>'+
+			'</li>';
 
-		// Loop through each element and retrieve the value of the "data-column" attribute
-		profileValueElements.forEach(element => {
-			const dataColumnValue = element.getAttribute('data-column');
-			element.value = res[dataColumnValue];
-		});
-	}
-
-	$("#frmProfile").submit(function(e){
-		e.preventDefault();
-		$("#btn_update_profile").prop('disabled',true);
-		$("#btn_update_profile").html('Updating...');
-		$.post("controller/ajax.php?q=Alumni&m=update_profile",$("#frmProfile").serialize(),function(data,status){
-			if(data == 1){
-	          	// SUCCESS
-	          	$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
-			}else if(data == -1){
-				// EXPIRED CSRF TOKEN
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will reload in <span id="countdown">3</span> seconds!</div>');
-				countDown(3);
-			}else{
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">'+data+'</div>');
+			var skill_tab = '';
+			for (var skillIndex = 0; skillIndex < catRow.skills.length; skillIndex++) {
+				const skillRow = catRow.skills[skillIndex];
+				skill_tab += '<div class="card">'+
+					'<div class="card-header">'+
+					  '<h2 class="mb-0">'+
+						'<button class="btn btn-link btn-block text-left collapsed" type="button">'+skillRow.name+
+						  	'<div class="pull-right">'+
+								'<i class="fa fa-star"></i>'+
+								'<i class="fa fa-star"></i>'+
+								'<i class="fa fa-star"></i>'+
+								'<i class="fa fa-star"></i>'+
+								'<i class="fa fa-star"></i>'+
+							'</div>'+
+							// '<div class="rate-stars pull-right">'+
+							// 	'<input type="checkbox" value="1">'+
+							// 	'<label for="st1"></label>'+
+							// 	'<input type="checkbox" value="2">'+
+							// 	'<label for="st2"></label>'+
+							// 	'<input type="checkbox" value="3">'+
+							// 	'<label for="st3"></label>'+
+							// 	'<input type="checkbox" value="4">'+
+							// 	'<label for="st4"></label>'+
+							// 	'<input type="checkbox" value="5">'+
+							// 	'<label for="st5"></label>'+
+							// '</div>'+
+						'</button>'+
+					  '</h2>'+
+					'</div>'+
+				'</div>';
 			}
-			$("#btn_update_profile").prop('disabled',false);
-			$("#btn_update_profile").html('Save Changes');
-		});
-	});
+			pills_tabContent += '<div class="tab-pane fade '+is_active_tabContent+'" id="pills-'+catRow.id+'" role="tabpanel" aria-labelledby="pills-'+catRow.id+'-tab">'+
+			'<div class="col-md-8">'+
+			'<h4>'+catRow.name+'</h4>'+
+			'<h6>Self Assessed Skill Rating</h6>'+
+			'<div class="accordion light_modal">'+skill_tab+
+			'</div>'+
+			'</div>'+
+			'<div class="col-xl-8 col-lg-8 mt-2">'+
+				'<div class="form-group">'+
+					'<label class="active">'+catRow.name+' Experience Details</label>'+
+					'<textarea type="text" class="form-control with-light profile-value" data-column="alumni_address" name="alumni_address" required="" style="height:85px;"></textarea>'+
+				'</div>'+
+			'</div>'+
+			'</div>';
+		}
+
+		$("#pills-tab").html(pills_tab);
+		$("#pills-tabContent").html(pills_tabContent);
+	}
 
 	function countDown(sec = 5)
 	{

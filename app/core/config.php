@@ -3,6 +3,7 @@
 
 date_default_timezone_set("Asia/Manila");
 
+define('HTACCESS_APP', '/atjmai/app/');
 define('BASE_URL', 'http://localhost/atjmai/');
 define("BASE_PATH", __DIR__ . "/../");
 

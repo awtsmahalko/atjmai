@@ -156,7 +156,7 @@
 	fetchProfile();
 
 	function fetchProfile() {
-		$.post("controller/ajax.php?q=Alumni&m=profile", {}, function(data, status) {
+		$.post(base_controller+"profile", {}, function(data, status) {
 			var res = JSON.parse(data);
 			mapProfileValue(res);
 		});
@@ -177,7 +177,7 @@
 		e.preventDefault();
 		$("#btn_update_profile").prop('disabled',true);
 		$("#btn_update_profile").html('Updating...');
-		$.post("controller/ajax.php?q=Alumni&m=update_profile",$("#frmProfile").serialize(),function(data,status){
+		$.post(base_controller+"update_profile",$("#frmProfile").serialize(),function(data,status){
 			if(data == 1){
 	          	// SUCCESS
 	          	$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');

@@ -260,7 +260,7 @@ $csrf = Components::csrf();
       e.preventDefault();
       $("#btn_login").prop('disabled', true);
       $("#btn_login").html('Logging in...');
-      $.post("controller/ajax.php?q=Authentication&m=login", $("#frmLogin").serialize(), function(data, status) {
+      $.post("controller/web.php?uri=login", $("#frmLogin").serialize(), function(data, status) {
         // var res = JSON.parse(data);
         if (data == 1) {
           // SUCCESS

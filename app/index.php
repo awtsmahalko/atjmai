@@ -30,6 +30,9 @@ require 'routes/routes.php';
   <script src="../assets/js/materialize.min.js"></script>
   <script src="../assets/js/metisMenu.min.js"></script>
   <script src="../assets/js/custom.js"></script>
+  <script type="text/javascript">
+    var base_controller = "controller/web.php?uri=";
+  </script>
 </head>
 
 <body class="blue-skin">
@@ -44,7 +47,7 @@ require 'routes/routes.php';
   <div id="main-wrapper">
     <?php include_once('template/header.php') ?>
     <div class="clearfix"></div>
-    <?php include_once('views/' . $router->route['path'] . '.php') ?>
+    <?php include_once('views/' . $router->route['file']) ?>
     <?php include_once('template/footer.php') ?>
   </div>
   <!-- ============================================================== -->

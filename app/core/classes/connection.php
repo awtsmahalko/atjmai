@@ -36,9 +36,9 @@ class Connection
         $this->mysqli->rollback();
     }
 
-    public function post($key , $clean = true, $ret = '', $inputs = 'inputs')
+    public function post($key , $clean = true, $ret = '')
     {
-        return !isset($this->inputs[$key]) ? $ret : ($clean ? $this->clean($this->inputs[$key]) :$this->inputs[$key]);
+        return !isset($_POST[$key]) ? $ret : ($clean ? $this->clean($_POST[$key]) :$_POST[$key]);
     }
 
     public function insert($table, $para = array(), $last_id = 'N')

@@ -405,7 +405,7 @@ $csrf = Components::csrf();
 	      e.preventDefault();
 	      $("#btn_register").prop('disabled',true);
 	      $("#btn_register").html('Registering...');
-	      $.post("controller/ajax.php?q=Authentication&m=signup",$("#frmRegister").serialize(),function(data,status){
+	      $.post("controller/web.php?uri=signup",$("#frmRegister").serialize(),function(data,status){
 	          // var res = JSON.parse(data);
 	          if(data == 1){
 	          	// SUCCESS
