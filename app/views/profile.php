@@ -177,7 +177,7 @@
 		e.preventDefault();
 		$("#btn_update_profile").prop('disabled',true);
 		$("#btn_update_profile").html('Updating...');
-		$.post(base_controller+"update_profile",$("#frmProfile").serialize(),function(data,status){
+		$.post(base_controller+"update_alumni_profile",$("#frmProfile").serialize(),function(data,status){
 			if(data == 1){
 	          	// SUCCESS
 	          	$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');

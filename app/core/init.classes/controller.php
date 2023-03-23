@@ -10,17 +10,21 @@ class Controller {
         $class_name = 'Authentication';
         $method_name = 'login';
         break;
-      case 'update_profile':
-        $class_name = 'Alumni';
-        $method_name = 'update_profile';
-        break;
       case 'profile':
         $class_name = 'Alumni';
         $method_name = 'profile';
         break;
-      case 'alumni_skills':
+      case 'update_alumni_profile':
         $class_name = 'Alumni';
-        $method_name = 'skills';
+        $method_name = 'update_profile';
+        break;
+      case 'update_alumni_skills':
+        $class_name = 'AlumniSkills';
+        $method_name = 'edit';
+        break;
+      case 'alumni_skills':
+        $class_name = 'AlumniSkills';
+        $method_name = 'data';
         break;
       default:
         echo "Invalid URI";

@@ -17,8 +17,9 @@ session_start();
 spl_autoload_register(function ($class) {
 
     include __DIR__ . '/autoloader.php';
+    include __DIR__ . '/_autoloader.php';
 
-    if (array_key_exists($class, $classes)) {
-        require_once $classes[$class];
+    if (array_key_exists($class, $core_classes)) {
+        require_once $core_classes[$class];
     }
 });

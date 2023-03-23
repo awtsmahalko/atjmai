@@ -35,7 +35,7 @@
 
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<form id="frmProfile">
+						<form id="frmSkills">
 							<?=Components::csrf();?>
 							<!-- Single Wrap -->
 							<div class="_dashboard_content">
@@ -63,7 +63,7 @@
 								</div>
 							</div>
 							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update_profile"><span class="fa fa-edit"></span> Save Changes</button>
+							<button type="submit" class="btn btn-md btn-save" id="btn_update_skills"><span class="fa fa-edit"></span> Save Changes</button>
 						</form>
 					</div>
 				</div>
@@ -116,23 +116,42 @@
 .pills_basic_tab .nav-link.active{
     padding: 0.5rem 1rem;
 }
-.pills_basic_tab .nav-link.active a:before {
+.pills_basic_tab .nav-link.active:before {
     content: "";
     position: absolute;
-    border-left: 15px solid #0b8fe8;
+    border-left: 15px solid #2944c1;
     border-top: 15px solid transparent;
     border-bottom: 15px solid transparent;
-    right: -6%;
-    top: 26%;
+    right: 4%;
+/*    top: 26%;*/
+}
+.pills_basic_tab .nav-link {
+    background: rgb(41 68 193 / 0%);
+    margin-right: 10px;
+    padding: 0.8rem 2rem;
+    color: #2944c1;
+    border: 1px solid rgba(41,68,193,.2);
+    border-radius: 0;
+}
+.star-active{
+	color: #ff9800 !important;
+}
+
+.fa-star{
+    padding: 0 1.5px;
+    color: #c8c8c8;
+}
+.accordion.light_modal>.card>.card-header .btn.btn-link {
+    background: rgb(255 255 255);
 }
 </style>
 <script>
+	var skills = [],experiences = [];
 	fetchAlumniSkills();
 
 	function fetchAlumniSkills() {
 		$.post(base_controller+"alumni_skills", {}, function(data, status) {
 			var res = JSON.parse(data);
-			console.log(res);
 			skillsPills(res);
 		});
 	}
@@ -149,32 +168,22 @@
 				'<a class="nav-link '+is_active_tab+'" id="pills-'+catRow.id+'-tab" data-toggle="pill" href="#pills-'+catRow.id+'" role="tab" aria-controls="pills-'+catRow.id+'" aria-selected="'+area_selected+'">'+catRow.name+'</a>'+
 			'</li>';
 
+			var disabled_prev = catIndex == 0 ? "disabled" : "";
+			var disabled_next = catIndex == res.category.length - 1 ? "disabled" : "";
+			var click_prev = catIndex == 0 ? "" : res.category[catIndex - 1].id;
+			var click_next = catIndex == res.category.length - 1 ? "" : res.category[catIndex + 1].id;
+
+
 			var skill_tab = '';
 			for (var skillIndex = 0; skillIndex < catRow.skills.length; skillIndex++) {
 				const skillRow = catRow.skills[skillIndex];
+				const newSkill = { skill_id: skillRow.id, rate: skillRow.rate };
+				skills.push(newSkill);
 				skill_tab += '<div class="card">'+
 					'<div class="card-header">'+
 					  '<h2 class="mb-0">'+
 						'<button class="btn btn-link btn-block text-left collapsed" type="button">'+skillRow.name+
-						  	'<div class="pull-right">'+
-								'<i class="fa fa-star"></i>'+
-								'<i class="fa fa-star"></i>'+
-								'<i class="fa fa-star"></i>'+
-								'<i class="fa fa-star"></i>'+
-								'<i class="fa fa-star"></i>'+
-							'</div>'+
-							// '<div class="rate-stars pull-right">'+
-							// 	'<input type="checkbox" value="1">'+
-							// 	'<label for="st1"></label>'+
-							// 	'<input type="checkbox" value="2">'+
-							// 	'<label for="st2"></label>'+
-							// 	'<input type="checkbox" value="3">'+
-							// 	'<label for="st3"></label>'+
-							// 	'<input type="checkbox" value="4">'+
-							// 	'<label for="st4"></label>'+
-							// 	'<input type="checkbox" value="5">'+
-							// 	'<label for="st5"></label>'+
-							// '</div>'+
+						  	'<div class="pull-right">'+starGenerator(skillRow.id,skillRow.rate)+'</div>'+
 						'</button>'+
 					  '</h2>'+
 					'</div>'+
@@ -190,14 +199,46 @@
 			//'<div class="col-xl-8 col-lg-8 mt-2">'+
 				'<div class="form-group">'+
 					'<label class="active">'+catRow.name+' Experience Details</label>'+
-					'<textarea type="text" class="form-control with-light profile-value" data-column="alumni_address" name="alumni_address" required="" style="height:85px;"></textarea>'+
+					'<textarea type="text" class="form-control with-light profile-value" data-column="alumni_address" name="alumni_address" style="height:85px;" placeholder="I have 5 years experience of '+catRow.name+'"></textarea>'+
 				'</div>'+
 			//'</div>'+
+			'<button '+disabled_prev+' type="button" class="btn btn-sm btn-primary" onclick="clickOtherTabs('+click_prev+')"><span class="fa fa-arrow-left"></span> Back</button>'+
+			'<button '+disabled_next+' type="button" class="btn btn-sm btn-primary pull-right" onclick="clickOtherTabs('+click_next+')"><span class="fa fa-arrow-right"></span> Next</button>'+
 			'</div>';
 		}
 
 		$("#pills-tab").html(pills_tab);
 		$("#pills-tabContent").html(pills_tabContent);
+	}
+
+	function clickOtherTabs(click_prev){
+		$("#pills-"+click_prev+"-tab").click();
+	}
+
+	function rateSkill(id,rate) {
+		const skillToUpdate = skills.find(skill => skill.skill_id === id);
+		if (skillToUpdate) {
+		  skillToUpdate.rate = rate; // Update the rate to 5 (or whatever value you need)
+		}
+
+		const elements = document.querySelectorAll(".star-"+id);
+		// Loop through each element and remove the class
+		elements.forEach((element,index) => {
+			element.classList.remove("star-active");
+			if(index < rate){
+				element.classList.add("star-active");
+			}
+		});
+	}
+
+	function starGenerator(id,rate)
+	{
+		var stars = '';
+		for (var i = 1; i <= 5; i++) {
+			var star_selected = i <= rate ? "star-active" : "";
+			stars += '<i class="fa fa-star star-'+id+' '+star_selected+'" onclick="rateSkill('+id+','+i+')"></i>';
+		}
+		return stars;
 	}
 
 	function countDown(sec = 5)
@@ -211,4 +252,20 @@
 		  }
 		}, 1000);
 	}
+
+	$("#frmSkills").submit(function(e){
+		e.preventDefault();
+		$("#btn_update_skills").prop('disabled',true);
+		$("#btn_update_skills").html('Updating...');
+		$.post(base_controller+"update_alumni_skills",{
+			skills:JSON.stringify(skills),
+			csrf:$("#csrf").val()
+		},function(data,status){
+			var res = JSON.parse(data);
+			console.log(res);
+			$("#btn_update_skills").prop('disabled',false);
+			$("#btn_update_skills").html('Save Changes');
+		});
+	});
+
 </script>

@@ -68,33 +68,12 @@ class Alumni extends Connection
         return json_encode($row);
     }
 
-    public function skills()
+    public function id()
     {
-        $response['category'] = array();
-        $result = $this->select('tbl_skills_category', "*");
-        while($row = $result->fetch_assoc()){
-            $categories = array(
-                'id'        => $row['sc_id'],
-                'name'      => $row['sc_name'],
-                'skills'    => $this->category_skills($row['sc_id']),
-            );
-            array_push($response['category'],$categories);
-        }
-        return json_encode($response);
-    }
-
-    public function category_skills($sc_id)
-    {
-        $skills = [];
-        $result = $this->select('tbl_skills', "*","sc_id = '$sc_id'");
-        while($row = $result->fetch_assoc()){
-            $skills[] = array(
-                'id'    => $row['skill_id'],
-                'name'  => $row['skill_name'],
-                'rate'  => 0,
-            );
-        }
-        return $skills;
+        $user_id = $_SESSION['user']['id'];
+        $result = $this->select($this->table, "alumni_id", "user_id = '$user_id'");
+        $row = $result->fetch_assoc();
+        return $row['alumni_id'];
     }
 
     public static function dataOf($primary_id, $field = '*')
