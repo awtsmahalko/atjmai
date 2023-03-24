@@ -1,6 +1,8 @@
 <?php
-class Controller {
-  public function dispatch($uri) {
+class Controller
+{
+  public function dispatch($uri)
+  {
     switch ($uri) {
       case 'signup':
         $class_name = 'Authentication';

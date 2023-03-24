@@ -50,7 +50,8 @@
 										<div class="col-auto">
 											<div class="custom-file avater_uploads">
 												<input type="file" class="custom-file-input" id="customFile">
-												<label class="custom-file-label" for="customFile"><i class="fa fa-user"></i></label>
+												<label class="custom-file-label" for="customFile"><i
+														class="fa fa-user"></i></label>
 											</div>
 										</div>
 
@@ -59,25 +60,29 @@
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>First Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_fname' name='alumni_fname'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_fname' name='alumni_fname'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>Middle Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_mname' name='alumni_mname'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_mname' name='alumni_mname'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>Last Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_lname' name='alumni_lname'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_lname' name='alumni_lname'>
 													</div>
 												</div>
 												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Course</label>
-														<select class="form-control with-light profile-value" data-column='course_id' name='course_id'>
+														<select class="form-control with-light profile-value"
+															data-column='course_id' name='course_id'>
 															<?= Courses::options() ?>
 														</select>
 													</div>
@@ -85,13 +90,15 @@
 												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Graduation Date</label>
-														<input type="date" class="form-control with-light profile-value" data-column='alumni_graduation' name='alumni_graduation'>
+														<input type="date" class="form-control with-light profile-value"
+															data-column='alumni_graduation' name='alumni_graduation'>
 													</div>
 												</div>
 												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Gender</label>
-														<select class="form-control with-light profile-value" data-column='alumni_gender' name='alumni_gender'>
+														<select class="form-control with-light profile-value"
+															data-column='alumni_gender' name='alumni_gender'>
 															<option value="Male">Male</option>
 															<option value="Female">Female</option>
 														</select>
@@ -100,13 +107,15 @@
 												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Contact #</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_contact' name='alumni_contact'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_contact' name='alumni_contact'>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>Address</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_address' name='alumni_address' required>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_address' name='alumni_address' required>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
@@ -116,7 +125,8 @@
 								</div>
 							</div>
 							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update_profile"><span class="fa fa-edit"></span> Save Changes</button>
+							<button type="submit" class="btn btn-save" id="btn_update_profile"><span
+									class="fa fa-edit"></span> Save Changes</button>
 						</form>
 					</div>
 				</div>
@@ -131,7 +141,8 @@
 		<div class="modal-content" id="registermodal">
 			<div class="modal-header">
 				<h4>Sign Out</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ti-close"></i></span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
+							class="ti-close"></i></span></button>
 			</div>
 			<div class="modal-body">
 
@@ -156,7 +167,7 @@
 	fetchProfile();
 
 	function fetchProfile() {
-		$.post(base_controller+"profile", {}, function(data, status) {
+		$.post(base_controller + "profile", {}, function(data, status) {
 			var res = JSON.parse(data);
 			mapProfileValue(res);
 		});
@@ -173,35 +184,34 @@
 		});
 	}
 
-	$("#frmProfile").submit(function(e){
+	$("#frmProfile").submit(function(e) {
 		e.preventDefault();
-		$("#btn_update_profile").prop('disabled',true);
+		$("#btn_update_profile").prop('disabled', true);
 		$("#btn_update_profile").html('Updating...');
-		$.post(base_controller+"update_alumni_profile",$("#frmProfile").serialize(),function(data,status){
-			if(data == 1){
-	          	// SUCCESS
-	          	$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
-			}else if(data == -1){
+		$.post(base_controller + "update_alumni_profile", $("#frmProfile").serialize(), function(data, status) {
+			if (data == 1) {
+				// SUCCESS
+				$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
+			} else if (data == -1) {
 				// EXPIRED CSRF TOKEN
 				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will reload in <span id="countdown">3</span> seconds!</div>');
 				countDown(3);
-			}else{
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">'+data+'</div>');
+			} else {
+				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">' + data + '</div>');
 			}
-			$("#btn_update_profile").prop('disabled',false);
+			$("#btn_update_profile").prop('disabled', false);
 			$("#btn_update_profile").html('Save Changes');
 		});
 	});
 
-	function countDown(sec = 5)
-	{
+	function countDown(sec = 5) {
 		var countdownSeconds = sec;
 		var countdownLabel = document.getElementById('countdown');
 		var countdownInterval = setInterval(function() {
-		  countdownLabel.innerHTML = countdownSeconds--;
-		  if (countdownSeconds < 0) {
-		    location.reload();
-		  }
+			countdownLabel.innerHTML = countdownSeconds--;
+			if (countdownSeconds < 0) {
+				location.reload();
+			}
 		}, 1000);
 	}
 </script>

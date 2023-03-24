@@ -16,8 +16,8 @@ class Courses extends Connection
         $option = '';
 
         $result = $self->select($self->table, '*', "course_id > 0 ORDER BY course_name ASC");
-        while ($row = $result->fetch_assoc()){
-            $selected = $row['course_id'] == $values ? "selected":"";
+        while ($row = $result->fetch_assoc()) {
+            $selected = $row['course_id'] == $values ? "selected" : "";
             $option .= "<option value='$row[course_id]' $selected>$row[course_name]</option>";
         }
         return $option;
@@ -36,7 +36,7 @@ class Courses extends Connection
     {
         $self = new self;
         $result = $self->select($self->table, $self->name, "$self->pk = '$primary_id'");
-        if($result->num_rows < 1)
+        if ($result->num_rows < 1)
             return '';
         $row = $result->fetch_assoc();
         return $row[$self->name];

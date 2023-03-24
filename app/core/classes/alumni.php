@@ -8,10 +8,10 @@ class Alumni extends Connection
     public $inputs = array();
     public $old = array();
 
-    public function add()
+    public function add($user_id)
     {
         return $this->insert($this->table, [
-            'user_id'           => $this->post('user_id'),
+            'user_id'           => $user_id,
             'alumni_fname'      => $this->post('user_fname'),
             'alumni_mname'      => $this->post('user_mname'),
             'alumni_lname'      => $this->post('user_lname'),
@@ -27,14 +27,14 @@ class Alumni extends Connection
 
     public function update_profile()
     {
-        if(!Components::verify_csrf())
+        if (!Components::verify_csrf())
             return -1;
 
-        try{
+        try {
             $this->check();
             $this->begin_transaction();
 
-            $update_success = $this->update($this->table,[
+            $update_success = $this->update($this->table, [
                 'alumni_fname'       => $this->post('alumni_fname'),
                 'alumni_mname'       => $this->post('alumni_mname'),
                 'alumni_lname'       => $this->post('alumni_lname'),
@@ -43,15 +43,14 @@ class Alumni extends Connection
                 'alumni_gender'      => $this->post('alumni_gender'),
                 'alumni_contact'     => $this->post('alumni_contact'),
                 'alumni_address'     => $this->post('alumni_address'),
-            ],"user_id = '".$_SESSION['user']['id']."'");
+            ], "user_id = '" . $_SESSION['user']['id'] . "'");
 
-            if($update_success != 1)
+            if ($update_success != 1)
                 throw new Exception($update_success);
 
             $this->commit();
             return 1;
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             $this->rollback();
             return $e->getMessage();
         }
@@ -59,7 +58,7 @@ class Alumni extends Connection
 
     public function profile()
     {
-        if(!isset($_SESSION['user']['id']))
+        if (!isset($_SESSION['user']['id']))
             return json_encode(['user_id' => 0]);
 
         $user_id = $_SESSION['user']['id'];

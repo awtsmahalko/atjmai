@@ -10,19 +10,16 @@ class Authentication extends Connection
 
     public function signup()
     {
-        if(!Components::verify_csrf())
+        if (!Components::verify_csrf())
             return -1;
 
-        $user_fname     = $this->post('user_fname');
-        $user_mname     = $this->post('user_mname');
-        $user_lname     = $this->post('user_lname');
-        $user_fullname  = $user_fname.' '.$user_mname.' '.$user_lname;
         $user_category  = $this->post('user_category');
+        $user_fullname  = $user_category == 'S' ? $this->post('user_fname') . ' ' . $this->post('user_mname') . ' ' . $this->post('user_lname') : $this->post('employer_name');
         $email          = $this->post('user_email');
         $password       = $this->post('password');
         $password2      = $this->post('password2');
 
-        try{
+        try {
             $this->check();
             $this->begin_transaction();
 
@@ -30,7 +27,7 @@ class Authentication extends Connection
             if ($fetch->num_rows > 0)
                 throw new Exception(2);
 
-            if($password != $password2)
+            if ($password != $password2)
                 throw new Exception(-2);
 
             $user_id =  $this->insert($this->table, [
@@ -42,12 +39,10 @@ class Authentication extends Connection
             ], 'Y');
 
             if ($user_id > 0) {
-                $this->inputs['user_id'] = $user_id;
-                if($user_category == 'S'){
-                    $Alumni         = new Alumni();
-                    $Alumni->inputs = $this->inputs;
-                    $response       = $Alumni->add();
-                    if($response == 1){
+                if ($user_category == 'S') {
+                    $Alumni     = new Alumni();
+                    $response   = $Alumni->add($user_id);
+                    if ($response == 1) {
                         $this->commit();
                         $_SESSION['user'] = [
                             'id'        => $user_id,
@@ -57,16 +52,33 @@ class Authentication extends Connection
                             'img'       => "default.png",
                         ];
                         return 1;
-                    }else{
-                        throw new Exception($response); 
+                    } else {
+                        throw new Exception($response);
+                    }
+                }
+
+                if ($user_category == 'E') {
+                    $Employers  = new Employers();
+                    $response   = $Employers->add($user_id);
+                    if ($response == 1) {
+                        $this->commit();
+                        $_SESSION['user'] = [
+                            'id'        => $user_id,
+                            'fullname'  => $user_fullname,
+                            'category'  => $user_category,
+                            'email'     => $email,
+                            'img'       => "default.png",
+                        ];
+                        return 1;
+                    } else {
+                        throw new Exception($response);
                     }
                 }
                 return 1;
             } else {
                 throw new Exception('Error occur please contact your support!');
             }
-
-        }catch(Exception $e){
+        } catch (Exception $e) {
             $this->rollback();
             return $e->getMessage();
         }
@@ -74,13 +86,13 @@ class Authentication extends Connection
 
     public function login()
     {
-        if(!Components::verify_csrf())
+        if (!Components::verify_csrf())
             return -1;
 
         $email      = $this->post('user_email');
         $password   = md5($this->post('user_password'));
 
-        try{
+        try {
             $fetch = $this->select($this->table, "*", "user_email = '$email' AND user_password = '$password'");
             if ($fetch->num_rows < 1)
                 throw new Exception(2);
@@ -94,7 +106,7 @@ class Authentication extends Connection
                 'img'           => "default.png",
             ];
             return 1;
-        }catch(Exception $e){
+        } catch (Exception $e) {
             return $e->getMessage();
         }
     }

@@ -11,8 +11,11 @@
           </div>
           <div class="nav-menus-wrapper">
             <ul class="nav-menu">
-              <li class="active"><a href="/atjmai/app/">Home</a></li>
-              <li><a href="/atjmai/app/post">Post</a></li>
+              <?php
+              $Menus = new Menus;
+              $Menus->navbar('Home', 'dashboard', $router->route['path']);
+              $Menus->navbar('Post', 'post', $router->route['path']);
+              ?>
               <li><a href="#">Jobs<span class="submenu-indicator"></span></a>
                 <ul class="nav-dropdown nav-submenu">
                   <li><a href="/atjmai/app/job-listing">Listing</a></li>
@@ -23,7 +26,8 @@
             <ul class="nav-menu nav-menu-social align-to-right">
               <li class="add-listing dark-bg">
                 <a href="/atjmai/app/profile">
-                  <i class="ti-user mr-1"></i> <?= $_SESSION['user']['fullname'] ?>
+                  <i class="ti-user mr-1"></i>
+                  <?= $_SESSION['user']['fullname'] ?>
                 </a>
               </li>
             </ul>
