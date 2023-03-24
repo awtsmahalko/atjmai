@@ -15,22 +15,13 @@
               $Menus = new Menus;
               $Menus->navbar('Home', 'dashboard', $router->route['path']);
               $Menus->navbar('Post', 'post', $router->route['path']);
+              $Menus->navbar_parent("Jobs", array(
+                array('Listing', 'job-listing'),
+                array('Matching', 'job-matching'),
+              ));
               ?>
-              <li><a href="#">Jobs<span class="submenu-indicator"></span></a>
-                <ul class="nav-dropdown nav-submenu">
-                  <li><a href="/atjmai/app/job-listing">Listing</a></li>
-                  <li><a href="/atjmai/app/job-match">Matching</a></li>
-                </ul>
-              </li>
             </ul>
-            <ul class="nav-menu nav-menu-social align-to-right">
-              <li class="add-listing dark-bg">
-                <a href="/atjmai/app/profile">
-                  <i class="ti-user mr-1"></i>
-                  <?= $_SESSION['user']['fullname'] ?>
-                </a>
-              </li>
-            </ul>
+            <?php $Menus->profile() ?>
           </div>
         </nav>
       </div>
