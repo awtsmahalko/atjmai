@@ -41,7 +41,7 @@
 							<div class="_dashboard_content">
 								<div class="_dashboard_content_header">
 									<div class="_dashboard__header_flex">
-										<h4><i class="fa fa-user mr-1"></i>My Profile</h4>
+										<h4><i class="fa fa-user mr-1"></i>My Company Profile</h4>
 									</div>
 								</div>
 
@@ -56,57 +56,34 @@
 
 										<div class="col">
 											<div class="row">
-												<div class="col-xl-4 col-lg-4">
+												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
-														<label>First Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_fname' name='alumni_fname'>
+														<label>Company Name</label>
+														<input type="text" class="form-control with-light profile-value" data-column='employer_name' name='employer_name'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
-														<label>Middle Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_mname' name='alumni_mname'>
+														<label>Industry</label>
+														<input type="text" class="form-control with-light profile-value" data-column='employer_industry' name='employer_industry'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
-														<label>Last Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_lname' name='alumni_lname'>
+														<label>Foundation Date</label>
+														<input type="date" class="form-control with-light profile-value" data-column='employer_foundation' name='employer_foundation'>
 													</div>
 												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Course</label>
-														<select class="form-control with-light profile-value" data-column='course_id' name='course_id'>
-															<?= Courses::options() ?>
-														</select>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Graduation Date</label>
-														<input type="date" class="form-control with-light profile-value" data-column='alumni_graduation' name='alumni_graduation'>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Gender</label>
-														<select class="form-control with-light profile-value" data-column='alumni_gender' name='alumni_gender'>
-															<option value="Male">Male</option>
-															<option value="Female">Female</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
+												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>Contact #</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_contact' name='alumni_contact'>
+														<input type="text" class="form-control with-light profile-value" data-column='employer_contact' name='employer_contact'>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>Address</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_address' name='alumni_address' required>
+														<input type="text" class="form-control with-light profile-value" data-column='employer_address' name='employer_address' required>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
@@ -156,7 +133,7 @@
 	fetchProfile();
 
 	function fetchProfile() {
-		$.post(base_controller + "alumni_profile", {}, function(data, status) {
+		$.post(base_controller + "employer_profile", {}, function(data, status) {
 			var res = JSON.parse(data);
 			mapProfileValue(res);
 		});
@@ -177,7 +154,7 @@
 		e.preventDefault();
 		$("#btn_update_profile").prop('disabled', true);
 		$("#btn_update_profile").html('Updating...');
-		$.post(base_controller + "update_alumni_profile", $("#frmProfile").serialize(), function(data, status) {
+		$.post(base_controller + "update_employer_profile", $("#frmProfile").serialize(), function(data, status) {
 			if (data == 1) {
 				// SUCCESS
 				$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');

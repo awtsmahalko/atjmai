@@ -99,9 +99,23 @@ CREATE TABLE IF NOT EXISTS `tbl_employers` (
   PRIMARY KEY (`employer_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
--- Dumping data for table almai_db.tbl_employers: ~0 rows (approximately)
+-- Dumping data for table almai_db.tbl_employers: ~1 rows (approximately)
 INSERT INTO `tbl_employers` (`employer_id`, `user_id`, `employer_name`, `employer_foundation`, `employer_address`, `employer_contact`, `employer_industry`, `created_at`, `updated_at`) VALUES
-	(1, 2, 'BPFC&#39;s\\a', NULL, 'a', 'a', 'a', '2023-03-24 08:13:43', '0000-00-00 00:00:00');
+	(1, 2, 'Bacolod Prosperity Feedmill Corporation', '2023-04-01', 'Bacolod City', '09096836075', 'a', '2023-03-24 08:13:43', '2023-03-25 08:37:33');
+
+-- Dumping structure for table almai_db.tbl_jobs
+CREATE TABLE IF NOT EXISTS `tbl_jobs` (
+  `job_id` int(11) NOT NULL AUTO_INCREMENT,
+  `job_name` varchar(250) DEFAULT NULL,
+  `job_description` text,
+  `job_type` varchar(250) DEFAULT NULL,
+  `sc_id` int(11) NOT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`job_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table almai_db.tbl_jobs: ~0 rows (approximately)
 
 -- Dumping structure for table almai_db.tbl_skills
 CREATE TABLE IF NOT EXISTS `tbl_skills` (

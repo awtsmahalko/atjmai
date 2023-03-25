@@ -1,4 +1,8 @@
 <?php
+
+/**
+ * This is for router uri
+ */
 class Router
 {
   private $routes = [];
@@ -12,13 +16,21 @@ class Router
         $route = ['header' => 'header-transparent dark-text', 'file' => 'dashboard.php'];
         break;
       case 'profile':
-        $route = ['header' => 'header-light', 'file' => 'profile.php'];
+        if ($_SESSION['user']['category'] == 'S') {
+          $route = ['header' => 'header-light', 'file' => 'profile.php'];
+        }
+        if ($_SESSION['user']['category'] == 'E') {
+          $route = ['header' => 'header-light', 'file' => 'company_profile.php'];
+        }
         break;
       case 'skills':
         $route = ['header' => 'header-light', 'file' => 'skills.php'];
         break;
       case 'messages':
         $route = ['header' => 'header-light', 'file' => 'messages.php'];
+        break;
+      case 'create-post':
+        $route = ['header' => 'header-light', 'file' => 'create_post.php'];
         break;
       default:
         $route = ['header' => 'header-light', 'file' => '404.php'];

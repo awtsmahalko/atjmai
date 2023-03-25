@@ -12,6 +12,8 @@ define("USER", "root");
 define("PASSWORD", "");
 define("DBNAME", "almai_db");
 
+define("DEVELOPMENT", "true");
+
 session_start();
 
 spl_autoload_register(function ($class) {
