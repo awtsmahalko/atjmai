@@ -1,0 +1,27 @@
+Fernandez, M., & Saboia, A. (2021). A career counseling system based on intelligent matching algorithms. In Proceedings of the 2021 IEEE 23rd International Conference on Intelligent Engineering Systems (INES) (pp. 463-468). IEEE.
+Overview: This paper describes a career counseling system that uses intelligent matching algorithms to help individuals find suitable job opportunities based on their skills and interests.
+
+Wang, R., & Yao, L. (2019). A job matching system based on ontology and machine learning. IEEE Access, 7, 90323-90331.
+Overview: This article presents a job matching system that uses ontology and machine learning to match job seekers with suitable job opportunities based on their skills and qualifications.
+
+Zhu, B., Wu, Z., & Yu, G. (2018). A job recommendation system based on multi-criteria decision making. Journal of Intelligent & Fuzzy Systems, 35(4), 4427-4438.
+Overview: This paper proposes a job recommendation system that uses multi-criteria decision making to recommend job opportunities based on the preferences and qualifications of job seekers.
+
+Roush, M. J., & Johnstone, M. A. (2017). A method for using natural language processing to match job seekers with suitable job postings. Journal of Information Technology Management, 28(1), 11-22.
+Overview: This article describes a method for using natural language processing to match job seekers with suitable job postings based on their skills and qualifications.
+
+Zhang, S., Wang, G., & Zhang, Y. (2019). An intelligent job matching system based on deep learning. In Proceedings of the 2019 International Conference on Intelligent Transportation, Big Data & Smart City (ITBSC) (pp. 97-101). IEEE.
+Overview: This paper proposes an intelligent job matching system that uses deep learning algorithms to match job seekers with suitable job opportunities based on their skills and qualifications.
+
+Soltani, A., & Ghorbani, A. A. (2018). A hybrid approach for job recommendation using collaborative filtering and content-based filtering. Journal of Ambient Intelligence and Humanized Computing, 9(6), 2005-2014.
+Overview: This article presents a hybrid approach for job recommendation that combines collaborative filtering and content-based filtering to recommend job opportunities based on the preferences and qualifications of job seekers.
+
+Wang, W., Zhu, Y., & Xu, C. (2018). A job matching model based on artificial neural network. In Proceedings of the 2018 13th International Conference on Computer Science & Education (ICCSE) (pp. 271-275). IEEE.
+Overview: This paper proposes a job matching model that uses artificial neural networks to match job seekers with suitable job opportunities based on their skills and qualifications.
+
+Chen, X., Liu, B., & Lu, X. (2020). Job matching based on ontology and semantic matching. Journal of Ambient Intelligence and Humanized Computing, 11(3), 1233-1243.
+Overview: This article presents a job matching approach that uses ontology and semantic matching to match job seekers with suitable job opportunities based on their skills and qualifications.
+
+Purohit, P., & Kulkarni, P. (2019). Job matching system based on personality traits and skills. In Proceedings of the 2019 International Conference on Intelligent Computing and Control Systems (ICCS) (pp. 222-226). IEEE.
+Overview: This paper proposes a job matching system that uses personality traits and skills to match job seekers with suitable job opportunities.
+

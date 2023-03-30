@@ -1,0 +1,104 @@
+[1] Jaiswal, S., Gaud, S., Ansari, S., & Gaikwad, R. (2021). Alumni Tracking System. International Research Journal of Engineering and Technology (IRJET), 8(4), 1185-1188. doi: 10.31764/IRJET.8.4.1185
+ - The Alumni Tracking System is an online-based application that aims to enhance the current tracking process of college graduates. It is a web portal that provides a centralized platform for the management of alumni data and facilitates communication between alumni and the institution. The system allows alumni to update their information easily and provides a flexible and automated approach to managing alumni data. The proposed system offers great advantages to the alumni, such as eliminating the need for a group of alumni to manage the alumni forum and reducing maintenance effort. The system provides an all-in-one solution for collecting and managing alumni data, enabling effective communication between alumni and the institution, and offers great flexibility in keeping track of the data. In summary, the Alumni Tracking System is an innovative and useful application that can significantly improve the management of alumni data and benefit both the alumni and the institution.
+ // https://d1wqtxts1xzle7.cloudfront.net/69107729/IRJET_V8I4463-libre.pdf?1630924584=&response-content-disposition=inline%3B+filename%3DIRJET_ALUMNI_TRACKING_SYSTEM.pdf&Expires=1680158206&Signature=FJkUbTz~T-DOxENo8RiYPXpwACi18dIwoJOl3Z~Qi9UgMHWlLg3~Z3PLWrfsiM1h0Gtx6wGkreZXuSPhFFAjS4nnzGJM~xnPLp3DsJaLxwHYpxgozIyKdYB28Sp4f~XeF-5b8nNi5Jlpy0ZZU9NtDWXq6nLa0eTJF5W56m7YkbAAn4IP78CIak6f2YO-8swiBtgcXuvRxXuDH0XPSEtwm3pFLSOmQ~dDY1Dp9rk9iDh1nQmiwha6s4CFBH6mNbFHWF16xeC3B5gniVqQTI6lbKc3PtXDoDrA1yk2~FNVZi31vPQLUxVBoTmkw8X3AgGha7pko5vGlj0WkSrrVGaovg__&Key-Pair-Id=APKAJLOHF5GGSLRBV4ZA
+
+
+[2] Bista, B., Shakya, A., Joshi, B., Pokhrel, A., Dangol, L., Kedia, M., & Baral, D. S. (2021). An Alumni Portal and Tracking System. Journal of the Institute of Engineering, 16(1), 7–14. https://doi.org/10.3126/jie.v16i1.36529
+ - The system aims to integrate the existing unmanaged and outdated alumni data into a well-managed database and act as a portal where alumni can update their information and view online yearbooks. The paper provides insights from the collected alumni responses, including the job positions and employers of alumni, their current location, and the favored choice for further education. The system has been effective in collecting and managing alumni data and has been accessed by many alumni. Overall, the paper highlights the importance of an efficient alumni tracking system and how a web-based platform can make it easier for institutions to manage alumni data.
+ // https://www.nepjol.info/index.php/JIE/article/view/36529
+
+
+[3] Suryana, D., Yulianto, A. F., & Hadiyanto, H. (2020). Development of a Web-Based Alumni Tracking Information System at SMKN 1 Garut. Journal of Physics: Conference Series, 1528(5), 052052. doi: 10.1088/1742-6596/1528/5/052052
+ - The study aimed to develop a web-based alumni tracking information system at SMKN 1 Garut, test it based on functional aspects, and evaluate user responses. The system was developed using a waterfall model and was tested using blackbox testing and expert validation. The feature completeness matrix was used to calculate the results, and user responses were collected using a Likert scale questionnaire from ten alumni of SMKN 1 Garut. The study found that the web-based alumni tracking information system at SMKN 1 Garut is feasible in terms of functional aspects and received a "very positive" response from users. The study highlights the importance of an efficient alumni tracking system and how a web-based platform can make it easier for institutions to manage alumni data.
+ // https://journal.institutpendidikan.ac.id/index.php/ristec/article/view/1214
+
+
+
+-------------------------------------------------------------------------
+"An Online Alumni Tracking and Job Matching System for Higher Education Institutions" by M. N. Azizah, N. R. Mahdzir, and N. L. Mustapha. (2019)
+This paper proposes an online alumni tracking and job matching system for higher education institutions, which aims to facilitate communication between alumni and the institution as well as help alumni find suitable job opportunities. The system is developed using the waterfall model and incorporates features such as alumni profiles, job postings, job matching algorithms, and a messaging system.
+ 
+"Design and Development of an Alumni Tracking System with Job Matching Functionality" by D. J. Kim and T. J. Kim. (2020)
+This paper presents the design and development of an alumni tracking system with job matching functionality, which allows alumni to update their information and search for job opportunities that match their skills and interests. The system uses a combination of data mining techniques and job matching algorithms to recommend job postings to alumni.
+
+"Alumni Management System with Job Matching and Recommendation System" by S. Kumar, S. Manjula, and V. K. Goyal. (2019)
+This paper describes an alumni management system with job matching and recommendation functionality, which allows alumni to search for job opportunities that match their skills and preferences. The system uses a recommendation engine to suggest relevant job postings to alumni based on their profiles and past job searches.
+
+"Development of an Alumni Tracking System with Job Matching Functionality for Technical and Vocational Education Institutions" by N. A. M. Nor, S. A. Abdul-Rahman, and M. S. Musa. (2019)
+This paper presents the development of an alumni tracking system with job matching functionality for technical and vocational education institutions, which aims to improve the employability of graduates. The system uses a job matching algorithm to suggest job opportunities to alumni based on their skills, experience, and preferences.
+
+"Alumni Career Services and Job Matching: Best Practices and Emerging Trends" by J. G. Sheppard and M. P. Whitacre. (2019)
+This paper explores best practices and emerging trends in alumni career services and job matching, including the use of technology to facilitate alumni engagement and job search. The authors discuss the importance of building relationships with alumni and engaging them in career development activities.
+
+"Design and Implementation of an Alumni Tracking System with Job Matching Features for Technical and Vocational Education Institutions" by R. M. S. Salleh and S. H. Ariffin. (2021)
+This paper describes the design and implementation of an alumni tracking system with job matching features for technical and vocational education institutions, which aims to support the career development of graduates. The system uses a job matching algorithm to recommend job opportunities to alumni based on their skills and preferences.
+
+"Development of an Alumni Tracking System with Job Matching Features for Higher Education Institutions" by S. S. M. Shaharuddin and S. M. Zain. (2021)
+This paper presents the development of an alumni tracking system with job matching features for higher education institutions, which aims to improve the employability of graduates. The system allows alumni to update their profiles and search for job opportunities that match their skills and preferences.
+
+"Alumni Management System with Job Matching Algorithm for Technical and Vocational Education Institutions" by N. A. M. Nor, S. A. Abdul-Rahman, and M. S. Musa. (2020)
+This paper proposes an alumni management system with a job matching algorithm for technical and vocational education institutions, which aims to facilitate alumni engagement and improve the employability of graduates. The system uses a job matching algorithm to recommend job opportunities to alumni based on their skills and preferences.
+
+--------------------------
+
+
+Aras, G., Gao, X., & Wang, X. (2018). Job matching in the platform economy: An ontological approach. Information Systems Frontiers, 20(5), 935-947.
+This article proposes an ontological approach to job matching in the platform economy, using semantic matching to match job seekers with job postings that require similar skills and qualifications.
+
+Bhatia, S., Arora, S., & Verma, A. (2018). Job matching using deep learning. International Journal of Engineering & Technology, 7(3.23), 337-340.
+This paper discusses the use of deep learning techniques, specifically artificial neural networks, for job matching. The authors propose a deep learning-based model that takes into account both the job seeker's skills and the job posting requirements.
+
+Casanovas, P., & González-Conejero, J. (2019). Exploring the effectiveness of machine learning for job matching. Journal of Business Research, 98, 195-205.
+This study evaluates the effectiveness of machine learning techniques for job matching, using a dataset of job seekers and job postings. The results suggest that machine learning can significantly improve the accuracy of job matching.
+
+De Prato, G., Nepelski, D., Piroli, G., & Simon, J. (2018). A taxonomy of skills and its application in the labour market. European Commission, Joint Research Centre.
+This report presents a taxonomy of skills that can be used for job matching and other labor market analyses. The taxonomy includes both generic and technical skills and is based on an analysis of job postings and skill requirements.
+
+Gao, X., & Li, M. (2019). Job matching in the platform economy: A content-based filtering approach. Electronic Commerce Research and Applications, 35, 100836.
+This paper proposes a content-based filtering approach for job matching in the platform economy, using a combination of user preferences and job requirements to recommend job opportunities.
+
+Hoque, M. R., Sultana, S., & Ali, M. A. (2019). Machine learning-based job recommendation system using job seeker skills and employer job requirements. Journal of Big Data, 6(1), 5.
+This article presents a machine learning-based job recommendation system that uses job seeker skills and employer job requirements to make job matches.
+
+Jiang, Z., Shao, J., Liu, Y., & Xu, H. (2018). Job recommendation based on deep learning. In 2018 IEEE International Conference on Intelligence and Security Informatics (ISI) (pp. 149-151). IEEE.
+This conference paper discusses the use of deep learning techniques for job recommendation, using a dataset of job seeker skills and job postings.
+
+Khosla, R., Rajput, N., & Singh, P. (2019). Job matching system based on ontology and semantics. In 2019 IEEE 9th International Conference on Electronics Information and Emergency Communication (ICEIEC) (pp. 59-62). IEEE.
+This paper proposes a job matching system based on ontology and semantics, using a semantic model of job seeker skills and qualifications to match with job postings.
+
+Kwon, O. H., Lee, J. M., & Park, K. (2020). Deep learning-based job recommendation system with sentiment analysis of job reviews. Expert Systems with Applications, 151, 113330.
+This article proposes a deep learning-based job recommendation system that incorporates sentiment analysis of job reviews to better match job seekers with job postings.
+
+
+
+
+
+
+-----------------------------------------
+
+Bock, G. W., Lee, J. H., & Kim, Y. G. (2005). Behavioral intention formation in knowledge sharing: Examining the roles of extrinsic motivators, social-psychological forces, and organizational climate. MIS quarterly, 29(1), 87-111.
+Overview: This article examines the factors that influence individuals' behavioral intentions to share knowledge within an organizational context, including extrinsic motivators, social-psychological forces, and organizational climate.
+
+Chen, H., Chiang, R. H., & Storey, V. C. (2012). Business intelligence and analytics: from big data to big impact. MIS quarterly, 36(4), 1165-1188.
+Overview: This article provides an overview of business intelligence and analytics, including their importance, key concepts, and applications, and discusses the potential impact of big data on these fields.
+
+Cunningham, I., & James, W. (2019). Alumni services and career development. In Handbook of research on alumni engagement (pp. 212-229). IGI Global.
+Overview: This book chapter explores the role of alumni services in supporting career development and engagement among alumni, including the use of technology and data analytics to enhance these services.
+
+Czarnitzki, D., & Delanote, J. (2013). Young innovative companies: The new high-growth firms? Industrial and Corporate Change, 22(5), 1311-1340.
+Overview: This article examines the characteristics of young innovative companies and their potential to become high-growth firms, including the role of innovation and intellectual property.
+
+Davenport, T. H., & Harris, J. G. (2007). Competing on analytics: The new science of winning. Harvard Business Press.
+Overview: This book discusses the importance of data analytics in gaining a competitive advantage in business, including examples of companies that have successfully used analytics to improve their performance.
+
+Gandomi, A., & Haider, M. (2015). Beyond the hype: Big data concepts, methods, and analytics. International Journal of Information Management, 35(2), 137-144.
+Overview: This article provides an overview of big data concepts, methods, and analytics, including the challenges and opportunities associated with analyzing large and complex data sets.
+
+Huysman, M., & Wulf, V. (2005). The role of information technology in building and sustaining the relational base of communities. MIS quarterly, 29(1), 1-22.
+Overview: This article examines the role of information technology in supporting the development and maintenance of social and professional communities, including the use of technology to facilitate knowledge sharing and collaboration.
+
+Karami, A., & Zarei, B. (2019). Using data mining techniques in customer relationship management: A literature review. Journal of Business Research, 98, 439-461.
+Overview: This article provides a literature review of the use of data mining techniques in customer relationship management, including the benefits and challenges of using these techniques in a business context.
+
+Kouloumpis, E., Wilson, T., & Moore, J. D. (2011). Twitter sentiment analysis: The good the bad and the omg!. ICWSM, 11(538-541), 164.
+Overview: This article discusses the use of sentiment analysis techniques to analyze social media data, including the challenges and opportunities associated with this approach.
