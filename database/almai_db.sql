@@ -70,6 +70,20 @@ CREATE TABLE IF NOT EXISTS `tbl_alumni_skills_category` (
 
 -- Dumping data for table almai_db.tbl_alumni_skills_category: ~0 rows (approximately)
 
+-- Dumping structure for table almai_db.tbl_candidates
+CREATE TABLE IF NOT EXISTS `tbl_candidates` (
+  `candidate_id` int(11) NOT NULL AUTO_INCREMENT,
+  `alumni_id` int(11) NOT NULL DEFAULT '0',
+  `job_id` int(11) NOT NULL DEFAULT '0',
+  `employer_id` int(11) NOT NULL DEFAULT '0',
+  `candidate_status` int(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`candidate_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- Dumping data for table almai_db.tbl_candidates: ~0 rows (approximately)
+
 -- Dumping structure for table almai_db.tbl_courses
 CREATE TABLE IF NOT EXISTS `tbl_courses` (
   `course_id` int(11) NOT NULL AUTO_INCREMENT,
