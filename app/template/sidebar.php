@@ -9,17 +9,34 @@
             <?php
             $Menus = new Menus;
             $Menus->sidebar('My Profile', 'profile', 'ti-user', $router->route['path']);
+
+            // Alumni
+            $Menus->sidebar('Education', 'experience', 'fa fa-graduation-cap', $router->route['path'], 'S');
+            $Menus->sidebar('Work Experience', 'experience', 'fa fa-briefcase', $router->route['path'], 'S');
             $Menus->sidebar('Skills', 'skills', 'fa fa-gears', $router->route['path'], 'S');
-            $Menus->sidebar('Messages', 'messages', 'ti-email', $router->route['path']);
-            $Menus->sidebar('Notifications', 'notification', 'ti-bell', $router->route['path']);
             // $Menus->sidebar('Jobs', 'jobs', 'fa fa-briefcase', $router->route['path']);
 
-            // $Menus->sidebar_parent('Jobs', 'fa fa-briefcase', array(
-            //     array("Manage Jobs", "jobs"),
-            //     array("Post a Job", "create-job"),
-            // ));
+            // Employers
+            $Menus->sidebar_parent('Jobs', 'fa fa-briefcase', array(
+                array("Manage Jobs", "jobs"),
+                array("Post a Job", "create-job"),
+            ));
+
+            // Admin
+            $Menus->sidebar_parent('Master Data', 'fa fa-books', array(
+                array("Colleges", "jobs"),
+                array("Programs", "create-job"),
+            ));
+            $Menus->sidebar_parent('Report', 'fa fa-print', array(
+                array("Alumni Report", "report-alumni"),
+                array("Employer Report", "report-employer"),
+            ));
+
+            $Menus->sidebar('Messages', 'messages', 'ti-email', $router->route['path']);
+            $Menus->sidebar('Notifications', 'notification', 'ti-bell', $router->route['path']);
             ?>
-            <li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="ti-power-off"></i>Log Out</a></li>
+            <!-- 
+            <li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="ti-power-off"></i>Log Out</a></li> -->
         </ul>
     </div>
 </div>

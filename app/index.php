@@ -29,7 +29,6 @@ require 'routes/routes.php';
   <script src="../assets/js/counterup.min.js"></script>
   <script src="../assets/js/materialize.min.js"></script>
   <script src="../assets/js/metisMenu.min.js"></script>
-  <script src="../assets/js/custom.js"></script>
   <script type="text/javascript">
     var base_controller = "controller/web.php?uri=";
   </script>
@@ -53,6 +52,7 @@ require 'routes/routes.php';
   <!-- ============================================================== -->
   <!-- This page plugins -->
   <!-- ============================================================== -->
+  <script src="../assets/js/custom.js"></script>
 </body>
 
 </html>

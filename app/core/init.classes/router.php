@@ -32,6 +32,12 @@ class Router
       case 'create-post':
         $route = ['header' => 'header-light', 'file' => 'create_post.php'];
         break;
+      case 'create-job':
+        $route = ['header' => 'header-light', 'file' => 'create_job.php'];
+        break;
+      case 'job-matching':
+        $route = ['header' => 'header-light', 'file' => 'job_match.php'];
+        break;
       default:
         $route = ['header' => 'header-light', 'file' => '404.php'];
         break;
