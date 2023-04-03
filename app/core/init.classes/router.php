@@ -15,6 +15,9 @@ class Router
       case 'dashboard':
         $route = ['header' => 'header-transparent dark-text', 'file' => 'dashboard.php'];
         break;
+      case 'education':
+        $route = ['header' => 'header-light', 'file' => 'education.php'];
+        break;
       case 'profile':
         if ($_SESSION['user']['category'] == 'S') {
           $route = ['header' => 'header-light', 'file' => 'profile.php'];
@@ -37,6 +40,12 @@ class Router
         break;
       case 'job-matching':
         $route = ['header' => 'header-light', 'file' => 'job_match.php'];
+        break;
+      case 'job-preferences':
+        $route = ['header' => 'header-light', 'file' => 'job_preferences.php'];
+        break;
+      case 'work-experience':
+        $route = ['header' => 'header-light', 'file' => 'work_experience.php'];
         break;
       default:
         $route = ['header' => 'header-light', 'file' => '404.php'];

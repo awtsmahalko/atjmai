@@ -11,8 +11,9 @@
             $Menus->sidebar('My Profile', 'profile', 'ti-user', $router->route['path']);
 
             // Alumni
-            $Menus->sidebar('Education', 'experience', 'fa fa-graduation-cap', $router->route['path'], 'S');
-            $Menus->sidebar('Work Experience', 'experience', 'fa fa-briefcase', $router->route['path'], 'S');
+            $Menus->sidebar('Job Preferences', 'job-preferences', 'fa fa-briefcase', $router->route['path'], 'S');
+            $Menus->sidebar('Education', 'education', 'fa fa-graduation-cap', $router->route['path'], 'S');
+            $Menus->sidebar('Work Experience', 'work-experience', 'fa fa-briefcase', $router->route['path'], 'S');
             $Menus->sidebar('Skills', 'skills', 'fa fa-gears', $router->route['path'], 'S');
             // $Menus->sidebar('Jobs', 'jobs', 'fa fa-briefcase', $router->route['path']);
 
