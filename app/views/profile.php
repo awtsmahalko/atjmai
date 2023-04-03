@@ -1,3 +1,5 @@
+<script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_94DaLUWYhcxUnx1PtV9VtD"></script>
+
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background:url(../assets/img/front_bg.webp)no-repeat;" data-overlay="5">
 	<div class="container">
@@ -107,6 +109,37 @@
 													<div class="form-group">
 														<label>Address</label>
 														<input type="text" class="form-control with-light profile-value" data-column='alumni_address' name='alumni_address' required>
+													</div>
+												</div>
+												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="_dashboard_content">
+								<div class="_dashboard_content_header">
+									<div class="_dashboard__header_flex">
+										<h4><i class="fa fa-user mr-1"></i>My Job Preferences</h4>
+									</div>
+								</div>
+
+								<div class="_dashboard_content_body">
+									<div class="row">
+										<div class="col">
+											<div class="row">
+												<div class="col-xl-12 col-lg-12">
+													<div class="form-group">
+														<label>Job Title</label>
+														<input type="text" class="form-control with-light profile-value" data-column='alumni_job_title' name='alumni_job_title' required>
+													</div>
+												</div>
+												<div class="col-xl-12 col-lg-12">
+													<div class="form-group">
+														<label>Summary</label>
+														<grammarly-editor-plugin>
+															<textarea class="form-control with-light profile-value" data-column='alumni_summary' name='alumni_summary' required></textarea>
+														</grammarly-editor-plugin>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>

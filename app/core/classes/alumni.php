@@ -43,6 +43,8 @@ class Alumni extends Connection
                 'alumni_gender'      => $this->post('alumni_gender'),
                 'alumni_contact'     => $this->post('alumni_contact'),
                 'alumni_address'     => $this->post('alumni_address'),
+                'alumni_job_title'  => $this->post('alumni_job_title'),
+                'alumni_summary'     => $this->post('alumni_summary'),
             ], "user_id = '" . $_SESSION['user']['id'] . "'");
 
             if ($update_success != 1)
