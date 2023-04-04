@@ -2,31 +2,31 @@
 
 // Define job and candidate data
 $jobs = [
-    "Data Analyst, New York, NY",
-    "Software Engineer, San Francisco, CA",
-    "Marketing Manager, Chicago, IL",
-    "Project Manager, Boston, MA"
+	"Data Analyst, New York, NY",
+	"Software Engineer, San Francisco, CA",
+	"Marketing Manager, Chicago, IL",
+	"Project Manager, Boston, MA"
 ];
 
 $candidates = [
-    "Experienced data analyst with 3 years of experience in Python, SQL and Tableau",
-    "Full-stack software engineer with 5 years of experience in Java, React and Node.js",
-    "Marketing manager with 4 years of experience in digital marketing and lead generation",
-    "Project manager with 6 years of experience in Agile methodology and project management tools"
+	"Experienced data analyst with 3 years of experience in Python, SQL and Tableau",
+	"Full-stack software engineer with 5 years of experience in Java, React and Node.js",
+	"Marketing manager with 4 years of experience in digital marketing and lead generation",
+	"Project manager with 6 years of experience in Agile methodology and project management tools"
 ];
 
 // Iterate through jobs and find best matching candidates
 foreach ($jobs as $job) {
-    $best_match_score = 0;
-    $best_match_candidate = '';
-    foreach ($candidates as $candidate) {
-        $score = similar_text(strtolower($job), strtolower($candidate),$percennt);
-        if ($score > $best_match_score) {
-            $best_match_score = $score;
-            $best_match_candidate = $candidate;
-        }
-    }
-    echo "Job: $job, Best Candidate: $best_match_candidate, Score: $best_match_score\n<br>";
+	$best_match_score = 0;
+	$best_match_candidate = '';
+	foreach ($candidates as $candidate) {
+		$score = similar_text(strtolower($job), strtolower($candidate), $percennt);
+		if ($score > $best_match_score) {
+			$best_match_score = $score;
+			$best_match_candidate = $candidate;
+		}
+	}
+	echo "Job: $job, Best Candidate: $best_match_candidate, Score: $best_match_score\n<br>";
 }
 
 
@@ -35,17 +35,17 @@ foreach ($jobs as $job) {
 
 // Define job and candidate data
 $jobs = [
-    "Data Analyst, New York, NY",
-    "Software Engineer, San Francisco, CA",
-    "Marketing Manager, Chicago, IL",
-    "Project Manager, Boston, MA"
+	"Data Analyst, New York, NY",
+	"Software Engineer, San Francisco, CA",
+	"Marketing Manager, Chicago, IL",
+	"Project Manager, Boston, MA"
 ];
 
 $candidates = [
-    "Experienced data analyst with 3 years of experience in Python, SQL and Tableau",
-    "Full-stack software engineer with 5 years of experience in Java, React and Node.js",
-    "Marketing manager with 4 years of experience in digital marketing and lead generation",
-    "Project manager with 6 years of experience in Agile methodology and project management tools"
+	"Experienced data analyst with 3 years of experience in Python, SQL and Tableau",
+	"Full-stack software engineer with 5 years of experience in Java, React and Node.js",
+	"Marketing manager with 4 years of experience in digital marketing and lead generation",
+	"Project manager with 6 years of experience in Agile methodology and project management tools"
 ];
 
 // Define the job seeker's profile
@@ -54,8 +54,8 @@ $seeker = "Experienced data analyst with strong skills in SQL and Python";
 // Calculate similarity scores between seeker and jobs
 $job_scores = array();
 foreach ($jobs as $job) {
-    $score = similar_text(strtolower($seeker), strtolower($job),$percent);
-    $job_scores[$job] =  round($percent, 2);
+	$score = similar_text(strtolower($seeker), strtolower($job), $percent);
+	$job_scores[$job] =  round($percent, 2);
 }
 
 // Sort job scores in descending order
@@ -64,10 +64,10 @@ arsort($job_scores);
 // Print the top 3 job matches
 $i = 1;
 foreach ($job_scores as $job => $score) {
-    echo "$i. $job (Score: $score)\n<br>";
-    if (++$i > 3) {
-        break;
-    }
+	echo "$i. $job (Score: $score)\n<br>";
+	if (++$i > 3) {
+		break;
+	}
 }
 
 ?>
@@ -204,9 +204,9 @@ foreach ($job_scores as $job => $score) {
 									</div>
 									<div class="col-xl-12 col-lg-12">
 										<div class="form-group">
-	<grammarly-editor-plugin>
-  <textarea id="job-text" class="form-control"></textarea>
-</grammarly-editor-plugin>
+											<grammarly-editor-plugin>
+												<textarea id="job-text" class="form-control"></textarea>
+											</grammarly-editor-plugin>
 										</div>
 									</div>
 								</div>

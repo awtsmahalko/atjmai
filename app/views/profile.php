@@ -52,7 +52,8 @@
 										<div class="col-auto">
 											<div class="custom-file avater_uploads">
 												<input type="file" class="custom-file-input" id="customFile">
-												<label class="custom-file-label" for="customFile"><i class="fa fa-user"></i></label>
+												<label class="custom-file-label" for="customFile"><i
+														class="fa fa-user"></i></label>
 											</div>
 										</div>
 
@@ -61,25 +62,29 @@
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>First Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_fname' name='alumni_fname'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_fname' name='alumni_fname'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>Middle Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_mname' name='alumni_mname'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_mname' name='alumni_mname'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>Last Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_lname' name='alumni_lname'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_lname' name='alumni_lname'>
 													</div>
 												</div>
 												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Course</label>
-														<select class="form-control with-light profile-value" data-column='course_id' name='course_id'>
+														<select class="form-control with-light profile-value"
+															data-column='course_id' name='course_id'>
 															<?= Courses::options() ?>
 														</select>
 													</div>
@@ -87,13 +92,15 @@
 												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Graduation Date</label>
-														<input type="date" class="form-control with-light profile-value" data-column='alumni_graduation' name='alumni_graduation'>
+														<input type="date" class="form-control with-light profile-value"
+															data-column='alumni_graduation' name='alumni_graduation'>
 													</div>
 												</div>
 												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Gender</label>
-														<select class="form-control with-light profile-value" data-column='alumni_gender' name='alumni_gender'>
+														<select class="form-control with-light profile-value"
+															data-column='alumni_gender' name='alumni_gender'>
 															<option value="Male">Male</option>
 															<option value="Female">Female</option>
 														</select>
@@ -102,13 +109,15 @@
 												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Contact #</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_contact' name='alumni_contact'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_contact' name='alumni_contact'>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>Address</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_address' name='alumni_address' required>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_address' name='alumni_address' required>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
@@ -131,14 +140,18 @@
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>Job Title</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_job_title' name='alumni_job_title' required>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_job_title' name='alumni_job_title'
+															required>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>Summary</label>
 														<grammarly-editor-plugin>
-															<textarea class="form-control with-light profile-value" data-column='alumni_summary' name='alumni_summary' required></textarea>
+															<textarea class="form-control with-light profile-value"
+																data-column='alumni_summary' name='alumni_summary'
+																required></textarea>
 														</grammarly-editor-plugin>
 													</div>
 												</div>
@@ -149,7 +162,8 @@
 								</div>
 							</div>
 							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update_profile"><span class="fa fa-edit"></span> Save Changes</button>
+							<button type="submit" class="btn btn-save" id="btn_update_profile"><span
+									class="fa fa-edit"></span> Save Changes</button>
 						</form>
 					</div>
 				</div>
@@ -164,7 +178,8 @@
 		<div class="modal-content" id="registermodal">
 			<div class="modal-header">
 				<h4>Sign Out</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ti-close"></i></span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
+							class="ti-close"></i></span></button>
 			</div>
 			<div class="modal-body">
 

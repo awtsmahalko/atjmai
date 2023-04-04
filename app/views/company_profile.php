@@ -50,7 +50,8 @@
 										<div class="col-auto">
 											<div class="custom-file avater_uploads">
 												<input type="file" class="custom-file-input" id="customFile">
-												<label class="custom-file-label" for="customFile"><i class="fa fa-user"></i></label>
+												<label class="custom-file-label" for="customFile"><i
+														class="fa fa-user"></i></label>
 											</div>
 										</div>
 
@@ -59,31 +60,38 @@
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>Company Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='employer_name' name='employer_name'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='employer_name' name='employer_name'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>Industry</label>
-														<input type="text" class="form-control with-light profile-value" data-column='employer_industry' name='employer_industry'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='employer_industry' name='employer_industry'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>Foundation Date</label>
-														<input type="date" class="form-control with-light profile-value" data-column='employer_foundation' name='employer_foundation'>
+														<input type="date" class="form-control with-light profile-value"
+															data-column='employer_foundation'
+															name='employer_foundation'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>Contact #</label>
-														<input type="text" class="form-control with-light profile-value" data-column='employer_contact' name='employer_contact'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='employer_contact' name='employer_contact'>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>Address</label>
-														<input type="text" class="form-control with-light profile-value" data-column='employer_address' name='employer_address' required>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='employer_address' name='employer_address'
+															required>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
@@ -93,7 +101,8 @@
 								</div>
 							</div>
 							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update_profile"><span class="fa fa-edit"></span> Save Changes</button>
+							<button type="submit" class="btn btn-save" id="btn_update_profile"><span
+									class="fa fa-edit"></span> Save Changes</button>
 						</form>
 					</div>
 				</div>
@@ -108,7 +117,8 @@
 		<div class="modal-content" id="registermodal">
 			<div class="modal-header">
 				<h4>Sign Out</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ti-close"></i></span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
+							class="ti-close"></i></span></button>
 			</div>
 			<div class="modal-body">
 

@@ -52,31 +52,37 @@
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>First Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_fname' name='alumni_fname'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_fname' name='alumni_fname'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>Middle Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_mname' name='alumni_mname'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_mname' name='alumni_mname'>
 													</div>
 												</div>
 												<div class="col-xl-4 col-lg-4">
 													<div class="form-group">
 														<label>Last Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_lname' name='alumni_lname'>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_lname' name='alumni_lname'>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>Job Title</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_address' name='alumni_address' required>
+														<input type="text" class="form-control with-light profile-value"
+															data-column='alumni_address' name='alumni_address' required>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>About Me</label>
-														<textarea class="form-control with-light profile-value" data-column='alumni_address' name='alumni_address' required></textarea>
+														<textarea class="form-control with-light profile-value"
+															data-column='alumni_address' name='alumni_address'
+															required></textarea>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
@@ -86,7 +92,8 @@
 								</div>
 							</div>
 							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update_profile"><span class="fa fa-edit"></span> Save Changes</button>
+							<button type="submit" class="btn btn-save" id="btn_update_profile"><span
+									class="fa fa-edit"></span> Save Changes</button>
 						</form>
 					</div>
 				</div>
@@ -101,7 +108,8 @@
 		<div class="modal-content" id="registermodal">
 			<div class="modal-header">
 				<h4>Sign Out</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ti-close"></i></span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
+							class="ti-close"></i></span></button>
 			</div>
 			<div class="modal-body">
 

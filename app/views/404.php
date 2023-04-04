@@ -1,31 +1,47 @@
 <style>
   .header-promo.light {
-    background-color: #f4f9fd; 
-}
-.header-promo .label {
+    background-color: #f4f9fd;
+  }
+
+  .header-promo .label {
     font-size: 20px;
-}
-.page-not-found-wrap {
+  }
+
+  .page-not-found-wrap {
     padding: 120px 0 120px;
-}
-.page-not-found-wrap .page-not-found-thumb {
+  }
+
+  .page-not-found-wrap .page-not-found-thumb {
     text-align: center;
     margin-bottom: 54px;
-}
-.page-not-found-wrap .page-not-found-content .title {
+  }
+
+  .page-not-found-wrap .page-not-found-content .title {
     font-size: 40px;
     margin-bottom: 39px;
-}
-h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  .h1,
+  .h2,
+  .h3,
+  .h4,
+  .h5,
+  .h6 {
     color: #272a33;
     font-family: "Jost", sans-serif;
     font-weight: 600;
     line-height: 1.2;
     margin-bottom: 10px;
     margin-top: 0;
-}
-</style>      
-      
+  }
+</style>
+
 <!-- ============================ Hero Banner  Start================================== -->
 <section class="page-not-found-area">
   <div class="container pt--0 pb--0">

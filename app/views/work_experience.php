@@ -26,7 +26,7 @@
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Education</li>
+									<li class="breadcrumb-item active" aria-current="page">Work Experience</li>
 								</ol>
 							</nav>
 						</div>
@@ -41,7 +41,7 @@
 							<div class="_dashboard_content">
 								<div class="_dashboard_content_header">
 									<div class="_dashboard__header_flex">
-										<h4><i class="fa fa-graduation-cap mr-1"></i>Education</h4>
+										<h4><i class="fa fa-graduation-cap mr-1"></i>Work Experience</h4>
 									</div>
 								</div>
 
@@ -53,23 +53,34 @@
 													<thead class="thead-light">
 														<tr>
 															<th scope="col">#</th>
-															<th scope="col">Qualifications</th>
-															<th scope="col">Institution</th>
+															<th scope="col">Company</th>
+															<th scope="col">Job Title</th>
+															<th scope="col">Achievements</th>
 															<th scope="col">Years</th>
+															<th scope="col">Action</th>
+
 														</tr>
 													</thead>
 													<tbody>
 														<tr>
 															<th scope="row">1</th>
-															<td>Primary</td>
-															<td>MIS</td>
-															<td>@mdo</td>
-														</tr>
-														<tr>
-															<th scope="row">2</th>
-															<td>Jacob</td>
-															<td>Thornton</td>
-															<td>@fat</td>
+															<td>BPFC</td>
+															<td>Programmer</td>
+															<td>
+																<ul>
+																	<li style="list-style: initial;">A</li>
+																	<li style="list-style: initial;">B</li>
+																	<li style="list-style: initial;">C</li>
+																	<li style="list-style: initial;">D</li>
+																</ul>
+															</td>
+															<td>Jan 2018 - Current</td>
+															<td>
+																<button class='btn btn-xs btn-primary'><span
+																		class='fa fa-edit'></span></button> <button
+																	class='btn btn-xs btn-danger'><span
+																		class='fa fa-trash'></span></button>
+															</td>
 														</tr>
 													</tbody>
 												</table>
@@ -93,7 +104,8 @@
 		<div class="modal-content" id="registermodal">
 			<div class="modal-header">
 				<h4>Sign Out</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ti-close"></i></span></button>
+				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
+							class="ti-close"></i></span></button>
 			</div>
 			<div class="modal-body">
 

@@ -16,9 +16,17 @@ class Controller
         $class_name = 'Authentication';
         $method_name = 'login';
         break;
+      case 'add_alumni_education':
+        $class_name = 'AlumniEducations';
+        $method_name = 'add';
+        break;
       case 'alumni_profile':
         $class_name = 'Alumni';
         $method_name = 'profile';
+        break;
+      case 'get_alumni_data':
+        $class_name = 'AlumniEducations';
+        $method_name = 'data';
         break;
       case 'update_alumni_profile':
         $class_name = 'Alumni';

@@ -14,7 +14,8 @@
     <div class="row">
       <div class="col-lg-12 col-md-12">
         <h2 class="ipt-title">Job Matching</h2>
-        <span class="ipn-subtitle">Collect and analyze data on alumni's education, work experience, skills, and preferences to provide personalized job recommendations. </span>
+        <span class="ipn-subtitle">Collect and analyze data on alumni's education, work experience, skills, and
+          preferences to provide personalized job recommendations. </span>
       </div>
     </div>
   </div>
@@ -49,14 +50,16 @@
           <div class="_job_detail_single">
             <h4>Work Experience</h4>
             <grammarly-editor-plugin>
-            <textarea id="job-text" class="form-control">We are one of the leading manufacturers and exporters of finished leather goods from Calcutta, India for the last 20 years. We are a 100% EOU and manufacture leather goods for global brands worldwide. We maintain strict quality parameters and ensure total employee retention and satisfaction.</textarea>
-          </grammarly-editor-plugin>
+              <textarea id="job-text"
+                class="form-control">We are one of the leading manufacturers and exporters of finished leather goods from Calcutta, India for the last 20 years. We are a 100% EOU and manufacture leather goods for global brands worldwide. We maintain strict quality parameters and ensure total employee retention and satisfaction.</textarea>
+            </grammarly-editor-plugin>
           </div>
           <div class="_job_detail_single">
             <h4>Skill & Experience</h4>
             <grammarly-editor-plugin>
-            <textarea id="job-text" class="form-control">We are one of the leading manufacturers and exporters of finished leather goods from Calcutta, India for the last 20 years. We are a 100% EOU and manufacture leather goods for global brands worldwide. We maintain strict quality parameters and ensure total employee retention and satisfaction.</textarea>
-          </grammarly-editor-plugin>
+              <textarea id="job-text"
+                class="form-control">We are one of the leading manufacturers and exporters of finished leather goods from Calcutta, India for the last 20 years. We are a 100% EOU and manufacture leather goods for global brands worldwide. We maintain strict quality parameters and ensure total employee retention and satisfaction.</textarea>
+            </grammarly-editor-plugin>
           </div>
           <div class="_job_detail_single flexeo">
             <div class="_job_detail_single_flex"></div>

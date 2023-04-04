@@ -1,14 +1,20 @@
 <!-- CREATE TABLE `tbl_alumni_educations` (
- `educ_id` int(11) NOT NULL AUTO_INCREMENT,
- `alumni_id` int(11) NOT NULL,
- `educ_degree` varchar(255) DEFAULT NULL,
- `educ_school` varchar(255) DEFAULT NULL,
- `year_enrolled` year(4) NOT NULL,
- `year_graduated` year(4) NOT NULL,
- `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
- `updated_at` datetime DEFAULT NULL,
- PRIMARY KEY (`educ_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 -->
+`educ_id` INT(11) NOT NULL AUTO_INCREMENT,
+`alumni_id` INT(11) NOT NULL,
+`educ_degree` VARCHAR(255) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+`educ_school` VARCHAR(255) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+`year_enrolled` YEAR NOT NULL,
+`year_graduated` YEAR NOT NULL,
+`honor_received` VARCHAR(150) NULL DEFAULT NULL COLLATE 'latin1_swedish_ci',
+`created_at` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+`updated_at` DATETIME NULL DEFAULT NULL,
+PRIMARY KEY (`educ_id`) USING BTREE
+)
+COLLATE='latin1_swedish_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3
+;
+ -->
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background:url(../assets/img/front_bg.webp)no-repeat;" data-overlay="5">
 	<div class="container">
@@ -46,56 +52,45 @@
 
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<form id="frmEducation">
-							<?= Components::csrf(); ?>
-							<!-- Single Wrap -->
-							<div class="_dashboard_content">
-								<div class="_dashboard_content_header row">
-									<div class="col-md-6">
-										<h4><i class="fa fa-graduation-cap mr-1"></i>Education</h4>
-								
-									</div>
-									<div class="col-md-6">
-										<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile" style="float: right !important;" data-toggle="modal" data-target="#modalAddEduc"><span class="fa fa-plus"></span> Add Education</button>
-								
-									</div>
-								</div>
+						<!-- Single Wrap -->
+						<div class="_dashboard_content">
+							<div class="_dashboard_content_header row">
+								<div class="col-md-6">
+									<h4><i class="fa fa-graduation-cap mr-1"></i>Education</h4>
 
-								<div class="_dashboard_content_body">
-									<div class="row">
-										<div class="col">
-											<div class="row">
-												<table class="table">
-													<thead class="thead-light">
-														<tr>
-															<th scope="col">#</th>
-															<th scope="col">Qualifications</th>
-															<th scope="col">Institution</th>
-															<th scope="col">Years</th>
-														</tr>
-													</thead>
-													<tbody>
-														<tr>
-															<th scope="row">1</th>
-															<td>Primary</td>
-															<td>MIS</td>
-															<td>@mdo</td>
-														</tr>
-														<tr>
-															<th scope="row">2</th>
-															<td>Jacob</td>
-															<td>Thornton</td>
-															<td>@fat</td>
-														</tr>
-													</tbody>
-												</table>
-												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
-											</div>
+								</div>
+								<div class="col-md-6">
+									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile"
+										style="float: right !important;" data-toggle="modal"
+										data-target="#modalAddEduc"><span class="fa fa-plus"></span> Add
+										Education</button>
+
+								</div>
+							</div>
+
+							<div class="_dashboard_content_body">
+								<div class="row">
+									<div class="col">
+										<div class="row">
+											<table class="table" id="tbl_educ">
+												<thead class="thead-light">
+													<tr>
+														<th scope="col">#</th>
+														<th scope="col">Qualifications</th>
+														<th scope="col">Institution</th>
+														<th scope="col">Honors Received</th>
+														<th scope="col">Years</th>
+														<th scope="col">Action</th>
+													</tr>
+												</thead>
+												<tbody></tbody>
+											</table>
+											<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
 										</div>
 									</div>
 								</div>
 							</div>
-						</form>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -103,87 +98,96 @@
 	</div>
 </section>
 
-<!-- Log In Modal -->
-<div class="modal fade" id="modalAddEduc" tabindex="-1" role="dialog" aria-labelledby="modaladdeduc" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
-		<div class="modal-content" id="modaladdeduc">
-			<div class="modal-header">
-				<h4>Add Education</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i class="ti-close"></i></span></button>
-			</div>
-			<div class="modal-body">
-
-
-											<div class="row">
-												<div class="col-xl-12 col-lg-12">
-													<div class="form-group">
-														<label>Qualifications</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_fname' name='alumni_fname'>
-													</div>
-												</div>
-												<div class="col-xl-12 col-lg-12">
-													<div class="form-group">
-														<label>Institution</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_fname' name='alumni_fname'>
-													</div>
-												</div>
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>Middle Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_mname' name='alumni_mname'>
-													</div>
-												</div>
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>Last Name</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_lname' name='alumni_lname'>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Course</label>
-														<select class="form-control with-light profile-value" data-column='course_id' name='course_id'>
-															<?= Courses::options() ?>
-														</select>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Graduation Date</label>
-														<input type="date" class="form-control with-light profile-value" data-column='alumni_graduation' name='alumni_graduation'>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Gender</label>
-														<select class="form-control with-light profile-value" data-column='alumni_gender' name='alumni_gender'>
-															<option value="Male">Male</option>
-															<option value="Female">Female</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Contact #</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_contact' name='alumni_contact'>
-													</div>
-												</div>
-												<div class="col-xl-12 col-lg-12">
-													<div class="form-group">
-														<label>Address</label>
-														<input type="text" class="form-control with-light profile-value" data-column='alumni_address' name='alumni_address' required>
-													</div>
-												</div>
-												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
-											</div>
+<form id="frmEducation">
+	<!-- Log In Modal -->
+	<div class="modal fade" id="modalAddEduc" tabindex="-1" role="dialog" aria-labelledby="modaladdeduc"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+			<div class="modal-content" id="modaladdeduc">
+				<div class="modal-header">
+					<h4>Add Education</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span
+							aria-hidden="true"><i class="ti-close"></i></span></button>
+				</div>
+				<div class="modal-body">
+					<div class="row">
+						<div class="col-xl-12 col-lg-12">
+							<div class="form-group">
+								<label>Qualifications</label>
+								<input type="text" class="form-control" name='educ_degree'
+									placeholder="Bachelor of Science in ">
+							</div>
+						</div>
+						<div class="col-xl-12 col-lg-12">
+							<div class="form-group">
+								<label>Institution</label>
+								<input type="text" class="form-control" name='educ_school' placeholder="NONESCOST">
+							</div>
+						</div>
+						<div class="col-xl-12 col-lg-12">
+							<div class="form-group">
+								<label>Honors Received</label>
+								<input type="text" class="form-control" name='honor_received' placeholder="Cumlaude">
+							</div>
+						</div>
+						<div class="col-xl-6 col-lg-6">
+							<div class="form-group">
+								<label>Year Start</label>
+								<input type="text" class="form-control" name='year_enrolled'>
+							</div>
+						</div>
+						<div class="col-xl-6 col-lg-6">
+							<div class="form-group">
+								<label>Year End</label>
+								<input type="text" class="form-control" name='year_graduated'>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="form-group">
+						<button type="submit" class="btn dark-2 btn-md full-width pop-login"
+							id="btn_update_education">Add</button>
+					</div>
+				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- End Modal -->
+	<!-- End Modal -->
+</form>
 
 <script>
-	function addEduc(){
-		$("#modalAddEduc").modal('open');
+	get_educations();
+	$("#frmEducation").submit(function(e) {
+		e.preventDefault();
+		$("#btn_update_education").prop('disabled', true);
+		$("#btn_update_education").html('Updating...');
+		$.post(base_controller + "add_alumni_education", $("#frmEducation").serialize(), function(data, status) {
+			// if (data == 1) {
+			// 	// SUCCESS
+			// 	$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
+			// } else if (data == -1) {
+			// 	// EXPIRED CSRF TOKEN
+			// 	$("#response-profile-update").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will reload in <span id="countdown">3</span> seconds!</div>');
+			// 	countDown(3);
+			// } else {
+			// 	$("#response-profile-update").html('<div class="alert alert-danger" role="alert">' + data + '</div>');
+			// }
+			$("#btn_update_education").prop('disabled', false);
+			$("#btn_update_education").html('Save Changes');
+		});
+	});
+
+	function get_educations() {
+		$.ajax({
+			url: base_controller + "get_alumni_data",
+			dataType: "json",
+			success: function(data) {
+				$.each(data.alumni, function(index, element) {
+					$("#tbl_educ tbody").append("<tr><td>" + element.educ_id + "</td><td>" + element.educ_degree + "</td><td>" + element.educ_school + "</td><td>" + element.honor_received + "</td><td>" + element.year_enrolled + " - " + element.year_graduated + "</td><td><button class='btn btn-xs btn-primary'><span class='fa fa-edit'></span></button> <button class='btn btn-xs btn-danger'><span class='fa fa-trash'></span></button></td></tr>");
+				});
+			}
+		});
 	}
+
 </script>
