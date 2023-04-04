@@ -40,6 +40,10 @@ class Controller
         $class_name = 'AlumniSkills';
         $method_name = 'data';
         break;
+      case 'delete_alumni_education':
+        $class_name = 'AlumniEducations';
+        $method_name = 'destroy';
+        break;
       case 'employer_profile':
         $class_name = 'Employers';
         $method_name = 'profile';

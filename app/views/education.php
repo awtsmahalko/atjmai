@@ -15,6 +15,8 @@ ENGINE=InnoDB
 AUTO_INCREMENT=3
 ;
  -->
+ <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7/dist/sweetalert2.all.min.js"></script>
+ <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.7/dist/sweetalert2.min.css">
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background:url(../assets/img/front_bg.webp)no-repeat;" data-overlay="5">
 	<div class="container">
@@ -115,13 +117,13 @@ AUTO_INCREMENT=3
 							<div class="form-group">
 								<label>Qualifications</label>
 								<input type="text" class="form-control" name='educ_degree'
-									placeholder="Bachelor of Science in ">
+									placeholder="Bachelor of Science in " required>
 							</div>
 						</div>
 						<div class="col-xl-12 col-lg-12">
 							<div class="form-group">
 								<label>Institution</label>
-								<input type="text" class="form-control" name='educ_school' placeholder="NONESCOST">
+								<input type="text" class="form-control" name='educ_school' placeholder="NONESCOST" required>
 							</div>
 						</div>
 						<div class="col-xl-12 col-lg-12">
@@ -133,13 +135,13 @@ AUTO_INCREMENT=3
 						<div class="col-xl-6 col-lg-6">
 							<div class="form-group">
 								<label>Year Start</label>
-								<input type="text" class="form-control" name='year_enrolled'>
+								<input type="number" class="form-control" name='year_enrolled' required>
 							</div>
 						</div>
 						<div class="col-xl-6 col-lg-6">
 							<div class="form-group">
 								<label>Year End</label>
-								<input type="text" class="form-control" name='year_graduated'>
+								<input type="number" class="form-control" name='year_graduated' required>
 							</div>
 						</div>
 					</div>
@@ -157,6 +159,7 @@ AUTO_INCREMENT=3
 </form>
 
 <script>
+	var modal_educ = document.getElementById("modalAddEduc");
 	get_educations();
 	$("#frmEducation").submit(function(e) {
 		e.preventDefault();
@@ -173,21 +176,50 @@ AUTO_INCREMENT=3
 			// } else {
 			// 	$("#response-profile-update").html('<div class="alert alert-danger" role="alert">' + data + '</div>');
 			// }
+			get_educations();
 			$("#btn_update_education").prop('disabled', false);
-			$("#btn_update_education").html('Save Changes');
+			$("#btn_update_education").html('Add');
 		});
 	});
 
 	function get_educations() {
+		$("#tbl_educ tbody").html("<tr><td colspan='6'>Loading</td></tr>");
 		$.ajax({
 			url: base_controller + "get_alumni_data",
 			dataType: "json",
 			success: function(data) {
+				$("#tbl_educ tbody").html("");
 				$.each(data.alumni, function(index, element) {
-					$("#tbl_educ tbody").append("<tr><td>" + element.educ_id + "</td><td>" + element.educ_degree + "</td><td>" + element.educ_school + "</td><td>" + element.honor_received + "</td><td>" + element.year_enrolled + " - " + element.year_graduated + "</td><td><button class='btn btn-xs btn-primary'><span class='fa fa-edit'></span></button> <button class='btn btn-xs btn-danger'><span class='fa fa-trash'></span></button></td></tr>");
+					$("#tbl_educ tbody").append("<tr><td>" + element.educ_id + "</td><td>" + element.educ_degree + "</td><td>" + element.educ_school + "</td><td>" + element.honor_received + "</td><td>" + element.year_enrolled + " - " + element.year_graduated + "</td><td><button class='btn btn-xs btn-primary' onclick='editEduc()'><span class='fa fa-edit'></span></button> <button class='btn btn-xs btn-danger' onclick='deleteEduc("+element.educ_id+")'><span class='fa fa-trash'></span></button></td></tr>");
 				});
 			}
 		});
 	}
 
+	function editEduc(){
+		modal_educ.classList.toggle("show-modal");
+	}
+
+	function deleteEduc(educ_id){
+		Swal.fire({
+		  title: 'Are you sure?',
+		  text: "You won't be able to revert this!",
+		  icon: 'warning',
+		  showCancelButton: true,
+		  confirmButtonColor: '#3085d6',
+		  cancelButtonColor: '#d33',
+		  confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+		  if (result.isConfirmed) {
+			$.post(base_controller + "delete_alumni_education", {educ_id:educ_id}, function(data, status) {
+				get_educations();
+			    Swal.fire(
+			      'Deleted!',
+			      'Your file has been deleted.',
+			      'success'
+			    )
+			});
+		  }
+		});
+	}
 </script>

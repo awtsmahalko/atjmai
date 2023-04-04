@@ -20,6 +20,7 @@ class AlumniEducations extends Connection
             $educ_school = $this->post('educ_school');
             $year_enrolled = $this->post('year_enrolled');
             $year_graduated = $this->post('year_graduated');
+            $honor_received = $this->post('honor_received');
 
             $ret = $this->insert($this->table, [
                 'alumni_id' => $alumni_id,
@@ -27,6 +28,7 @@ class AlumniEducations extends Connection
                 'educ_school' => $educ_school,
                 'year_enrolled' => $year_enrolled,
                 'year_graduated' => $year_graduated,
+                'honor_received' => $honor_received,
             ]);
             if ($ret != 1)
                 throw new Exception($ret);
@@ -36,6 +38,12 @@ class AlumniEducations extends Connection
             $this->rollback();
             return $e->getMessage();
         }
+    }
+
+    public function destroy()
+    {
+        $educ_id = $this->post('educ_id');
+        return $this->delete($this->table,"educ_id = '$educ_id'");
     }
 
     public function data()
