@@ -12,6 +12,9 @@ class Router
   public function dispatch($path)
   {
     switch ($path) {
+      case 'colleges':
+        $route = ['header' => 'header-light', 'file' => 'colleges.php'];
+        break;
       case 'dashboard':
         $route = ['header' => 'header-transparent dark-text', 'file' => 'dashboard.php'];
         break;
@@ -43,6 +46,9 @@ class Router
         break;
       case 'job-preferences':
         $route = ['header' => 'header-light', 'file' => 'job_preferences.php'];
+        break;
+      case 'programs':
+        $route = ['header' => 'header-light', 'file' => 'course.php'];
         break;
       case 'work-experience':
         $route = ['header' => 'header-light', 'file' => 'work_experience.php'];

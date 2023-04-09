@@ -1,3 +1,6 @@
+<script src="../assets/dist/sweetalert2/sweetalert2.all.min.js"></script>
+<link rel="stylesheet" href="../assets/dist/sweetalert2/sweetalert2.min.css">
+
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background:url(../assets/img/front_bg.webp)no-repeat;" data-overlay="5">
 	<div class="container">
@@ -39,9 +42,16 @@
 							<?= Components::csrf(); ?>
 							<!-- Single Wrap -->
 							<div class="_dashboard_content">
-								<div class="_dashboard_content_header">
-									<div class="_dashboard__header_flex">
-										<h4><i class="fa fa-graduation-cap mr-1"></i>Work Experience</h4>
+								<div class="_dashboard_content_header row">
+									<div class="col-md-6">
+										<h4><i class="fa fa-briefcase mr-1"></i>Work Experience</h4>
+
+									</div>
+									<div class="col-md-6">
+										<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile"
+											style="float: right !important;" data-toggle="modal" data-target="#modalAddWorkExperience"
+											onclick="resetFields()"><span class="fa fa-plus"></span> Add Work Experience</button>
+
 									</div>
 								</div>
 
@@ -49,7 +59,7 @@
 									<div class="row">
 										<div class="col">
 											<div class="row">
-												<table class="table">
+												<table class="table" id="tbl_work">
 													<thead class="thead-light">
 														<tr>
 															<th scope="col">#</th>
@@ -61,28 +71,7 @@
 
 														</tr>
 													</thead>
-													<tbody>
-														<tr>
-															<th scope="row">1</th>
-															<td>BPFC</td>
-															<td>Programmer</td>
-															<td>
-																<ul>
-																	<li style="list-style: initial;">A</li>
-																	<li style="list-style: initial;">B</li>
-																	<li style="list-style: initial;">C</li>
-																	<li style="list-style: initial;">D</li>
-																</ul>
-															</td>
-															<td>Jan 2018 - Current</td>
-															<td>
-																<button class='btn btn-xs btn-primary'><span
-																		class='fa fa-edit'></span></button> <button
-																	class='btn btn-xs btn-danger'><span
-																		class='fa fa-trash'></span></button>
-															</td>
-														</tr>
-													</tbody>
+													<tbody></tbody>
 												</table>
 												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
 											</div>
@@ -98,83 +87,187 @@
 	</div>
 </section>
 
-<!-- Log In Modal -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="registermodal" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
-		<div class="modal-content" id="registermodal">
-			<div class="modal-header">
-				<h4>Sign Out</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
-							class="ti-close"></i></span></button>
-			</div>
-			<div class="modal-body">
-
-
-				<div class="form-group text-center">
-					<span>Are you sure you want to sign out?</span>
+<form id="frmWorkExperience">
+	<!-- Log In Modal -->
+	<div class="modal fade" id="modalAddWorkExperience" tabindex="-1" role="dialog" aria-labelledby="modalworkexperience"
+		aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+			<div class="modal-content" id="modalworkexperience">
+				<div class="modal-header">
+					<h4>Add Work Experience</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddWorkExpModal"><span
+							aria-hidden="true"><i class="ti-close"></i></span></button>
 				</div>
-
-				<div class="social_logs mb-4">
-					<ul class="shares_jobs text-center">
-						<li><a href="auth/logout.php" class="share fb">Sign out</a></li>
-						<li><a href="#" class="share gp">Cancel</a></li>
-					</ul>
+				<div class="modal-body">
+					<input type="hidden" class="work-exp-value" id="work_exp_id" name="work_exp_id" data-column="work_exp_id">
+					<div class="row">
+						<div class="col-xl-12 col-lg-12">
+							<div class="form-group">
+								<label>Company Name</label>
+								<input type="text" class="form-control work-exp-value" data-column="company_name"
+									name='company_name' placeholder="Meta" required>
+							</div>
+						</div>
+						<div class="col-xl-12 col-lg-12">
+							<div class="form-group">
+								<label>Job Title</label>
+								<input type="text" class="form-control work-exp-value" data-column="job_title"
+									name='job_title' placeholder="Web Developer" required>
+							</div>
+						</div>
+						<div class="col-lg-12 col-md-12">
+							<div class="form-group mb-1">
+								<input id="check_work" class="checkbox-custom" name="currently_worked" type="checkbox" onchange="currentlyWorked(this)">
+								<label for="check_work" class="checkbox-custom-label">I currently worked here</label>
+							</div>
+						</div>
+						<div class="col-xl-6 col-lg-6 year-start">
+							<div class="form-group">
+								<label>Year Started</label>
+								<input type="month" class="form-control work-exp-value" data-column="date_hired"
+									name='date_hired' required>
+							</div>
+						</div>
+						<div class="col-xl-6 col-lg-6 year-end">
+							<div class="form-group">
+								<label>Year Ended</label>
+								<input type="month" class="form-control work-exp-value" data-column="date_resigned"
+									name='date_resigned'>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<div class="form-group">
+						<button type="submit" class="btn dark-2 btn-md full-width pop-login"
+							id="btn_update_work">Submit</button>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-</div>
-<!-- End Modal -->
+	<!-- End Modal -->
+</form>
 
 <script>
-	fetchProfile();
+	get_work_experiences();
+	$("#frmWorkExperience").submit(function(e) {
+		e.preventDefault();
 
-	function fetchProfile() {
-		$.post(base_controller + "alumni_profile", {}, function(data, status) {
-			var res = JSON.parse(data);
-			mapProfileValue(res);
+		var form_type = $("#work_exp_id").val() * 1;
+		var text_before = form_type > 0 ? "Updating...":"Adding...";
+		var controller_post = form_type > 0 ? "update_alumni_work" :"add_alumni_work";
+		$("#btn_update_work").prop('disabled', true);
+		$("#btn_update_work").html(text_before);
+		$.post(base_controller + controller_post, $("#frmWorkExperience").serialize(), function(data, status) {
+			$("#closeAddWorkExpModal").click();
+			if(data == 1){
+				form_type > 0 ? success_update() :success_add();
+			}else{
+				error_response();
+			}
+			get_work_experiences();
+			$("#btn_update_work").prop('disabled', false);
+			$("#btn_update_work").html('Submit');
+		});
+	});
+
+	function get_work_experiences() {
+		$("#tbl_work tbody").html("<tr><td colspan='6'>Loading</td></tr>");
+		$.ajax({
+			url: base_controller + "get_work_experience_data",
+			dataType: "json",
+			success: function(data) {
+				$("#tbl_work tbody").html("");
+				if(data.alumni.length > 0){
+					$.each(data.alumni, function(index, element) {
+						$("#tbl_work tbody").append("<tr>"+
+						"<td>" + element.work_exp_id + "</td>"+
+						"<td>" + element.company_name + "</td>"+
+						"<td>" + element.job_title + "</td>"+
+						"<td>" +
+							"<ul>"+
+								'<li style="list-style: initial;">Aasdasdas asdasdas asd asd as as asd asa asd asd</li>'+
+								'<li style="list-style: initial;">Aasdasdas asdasdas asd asd as as asd asa asd asd</li>'+
+								'<li style="list-style: initial;">Aasdasdas asdasdas asd asd as as asd asa asd asd</li>'+
+								'<li style="list-style: initial;">Aasdasdas asdasdas asd asd as as asd asa asd asd</li>'+
+							"</ul>"+
+						"</td>"+
+						"<td>" + element.year_span + "</td>" +
+						"<td>"+
+						"<button type='button' class='btn btn-xs btn-primary' onclick='editWorkExperience(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddWorkExperience'><span class='fa fa-edit'></span></button>"+
+						"<button type='button' class='btn btn-xs btn-danger' onclick='deleteWork(" + element.work_exp_id + ")'><span class='fa fa-trash'></span></button>"+
+						"</td>"+
+						"</tr>");
+					});
+				}else{
+					$("#tbl_work tbody").append("<tr>"+
+						"<td colspan='6' align='center'>No records found</td>"+
+					"</tr>");
+				}
+			}
 		});
 	}
 
-	function mapProfileValue(res) {
-		// Get all elements with the class name "profile-value"
-		const profileValueElements = document.querySelectorAll('.profile-value');
+	function editWorkExperience(res) {
+		const profileValueElements = document.querySelectorAll('.work-exp-value');
 
 		// Loop through each element and retrieve the value of the "data-column" attribute
 		profileValueElements.forEach(element => {
 			const dataColumnValue = element.getAttribute('data-column');
 			element.value = res[dataColumnValue];
 		});
+
+		if(res.currently_worked == 1){
+			$("#check_work").attr("checked",true);
+			$(".year-start").removeClass("col-lg-6").removeClass("col-xl-6").addClass("col-lg-12").addClass("col-xl-12");
+			$(".year-end").hide();
+		}else{
+			$("#check_work").attr("checked",false);
+			$(".year-start").addClass("col-lg-6").addClass("col-xl-6").removeClass("col-lg-12").removeClass("col-xl-12");
+			$(".year-end").show();
+		}
 	}
 
-	$("#frmProfile").submit(function(e) {
-		e.preventDefault();
-		$("#btn_update_profile").prop('disabled', true);
-		$("#btn_update_profile").html('Updating...');
-		$.post(base_controller + "update_alumni_profile", $("#frmProfile").serialize(), function(data, status) {
-			if (data == 1) {
-				// SUCCESS
-				$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
-			} else if (data == -1) {
-				// EXPIRED CSRF TOKEN
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will reload in <span id="countdown">3</span> seconds!</div>');
-				countDown(3);
-			} else {
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">' + data + '</div>');
-			}
-			$("#btn_update_profile").prop('disabled', false);
-			$("#btn_update_profile").html('Save Changes');
-		});
-	});
+	function currentlyWorked(el){
+		if(el.checked){
+			$(".year-start").removeClass("col-lg-6").removeClass("col-xl-6").addClass("col-lg-12").addClass("col-xl-12");
+			$(".year-end").hide();
+		}else{
+			$(".year-start").addClass("col-lg-6").addClass("col-xl-6").removeClass("col-lg-12").removeClass("col-xl-12");
+			$(".year-end").show();
+		}
+	}
+	function resetFields() {
+		$("#check_work").attr("selected",false);
+		const profileValueElements = document.querySelectorAll('.work-exp-value');
 
-	function countDown(sec = 5) {
-		var countdownSeconds = sec;
-		var countdownLabel = document.getElementById('countdown');
-		var countdownInterval = setInterval(function() {
-			countdownLabel.innerHTML = countdownSeconds--;
-			if (countdownSeconds < 0) {
-				location.reload();
+		// Loop through each element and retrieve the value of the "data-column" attribute
+		profileValueElements.forEach(element => {
+			element.value = "";
+		});
+	}
+
+	function deleteWork(work_exp_id) {
+		Swal.fire({
+			title: 'Are you sure?',
+			text: "You won't be able to revert this!",
+			icon: 'warning',
+			showCancelButton: true,
+			confirmButtonColor: '#3085d6',
+			cancelButtonColor: '#d33',
+			confirmButtonText: 'Yes, delete it!'
+		}).then((result) => {
+			if (result.isConfirmed) {
+				$.post(base_controller + "delete_alumni_work", { work_exp_id: work_exp_id }, function(data, status) {
+					get_work_experiences();
+					Swal.fire(
+						'Deleted!',
+						'Your file has been deleted.',
+						'success'
+					)
+				});
 			}
-		}, 1000);
+		});
 	}
 </script>

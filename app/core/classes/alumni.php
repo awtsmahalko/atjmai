@@ -10,7 +10,8 @@ class Alumni extends Connection
 
     public function add($user_id)
     {
-        return $this->insert($this->table, [
+        $is_employed = $this->post('is_employed') == 'on' ? 1 : 0;
+        $alumni_id = $this->insert($this->table, [
             'user_id'           => $user_id,
             'alumni_fname'      => $this->post('user_fname'),
             'alumni_mname'      => $this->post('user_mname'),
@@ -18,11 +19,19 @@ class Alumni extends Connection
             'alumni_contact'    => $this->post('alumni_contact'),
             'alumni_address'    => $this->post('alumni_address'),
             'course_id'         => $this->post('course_id'),
-            'work_employer'     => $this->post('work_employer'),
-            'work_place'        => $this->post('work_place'),
-            'work_designation'  => $this->post('work_designation'),
             'alumni_graduation' => $this->post('alumni_graduation'),
-        ]);
+            'alumni_job_title'  => $this->post('job_title'),
+            'is_employed'       => $is_employed,
+        ],'Y');
+
+        if($is_employed == 1 && $alumni_id > 0){
+            $AlumniWork = new AlumniWorkExperiences();
+            $AlumniWork->add_from_register($alumni_id);
+        }
+        $AlumniEducation = new AlumniEducations();
+        $AlumniEducation->add_from_register($alumni_id);
+        return 1;
+
     }
 
     public function update_profile()
@@ -69,9 +78,9 @@ class Alumni extends Connection
         return json_encode($row);
     }
 
-    public function id()
+    public function id($id = 0)
     {
-        $user_id = $_SESSION['user']['id'];
+        $user_id = $id == 0 ? $_SESSION['user']['id'] : $id;
         $result = $this->select($this->table, "alumni_id", "user_id = '$user_id'");
         $row = $result->fetch_assoc();
         return $row['alumni_id'];

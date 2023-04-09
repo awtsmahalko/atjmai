@@ -45,7 +45,7 @@ AUTO_INCREMENT=3
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#">Home</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Education</li>
+									<li class="breadcrumb-item active" aria-current="page">Colleges</li>
 								</ol>
 							</nav>
 						</div>
@@ -58,13 +58,13 @@ AUTO_INCREMENT=3
 						<div class="_dashboard_content">
 							<div class="_dashboard_content_header row">
 								<div class="col-md-6">
-									<h4><i class="fa fa-graduation-cap mr-1"></i>Education</h4>
+									<h4><i class="fa fa-graduation-cap mr-1"></i>Colleges</h4>
 
 								</div>
 								<div class="col-md-6">
 									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile"
-										style="float: right !important;" data-toggle="modal" data-target="#modalAddEduc"
-										onclick="resetFields()"><span class="fa fa-plus"></span> Add Education</button>
+										style="float: right !important;" data-toggle="modal" data-target="#modalAddCollege"
+										onclick="resetFields()"><span class="fa fa-plus"></span> Add Colleges</button>
 
 								</div>
 							</div>
@@ -73,14 +73,11 @@ AUTO_INCREMENT=3
 								<div class="row">
 									<div class="col">
 										<div class="row">
-											<table class="table" id="tbl_educ">
+											<table class="table" id="tbl_colleges">
 												<thead class="thead-light">
 													<tr>
 														<th scope="col">#</th>
-														<th scope="col">Qualifications</th>
-														<th scope="col">Institution</th>
-														<th scope="col">Honors Received</th>
-														<th scope="col">Years</th>
+														<th scope="col">Colleges</th>
 														<th scope="col">Action</th>
 													</tr>
 												</thead>
@@ -99,53 +96,25 @@ AUTO_INCREMENT=3
 	</div>
 </section>
 
-<form id="frmEducation">
+<form id="frmColleges">
 	<!-- Log In Modal -->
-	<div class="modal fade" id="modalAddEduc" tabindex="-1" role="dialog" aria-labelledby="modaladdeduc"
+	<div class="modal fade" id="modalAddCollege" tabindex="-1" role="dialog" aria-labelledby="modaladdcollege"
 		aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
-			<div class="modal-content" id="modaladdeduc">
+			<div class="modal-content" id="modaladdcollege">
 				<div class="modal-header">
-					<h4>Add Education</h4>
+					<h4>Add College</h4>
 					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddEducModal"><span
 							aria-hidden="true"><i class="ti-close"></i></span></button>
 				</div>
 				<div class="modal-body">
-					<input type="hidden" class="educ-value" id="educ_id" name="educ_id" data-column="educ_id">
+					<input type="hidden" class="college-value" id="college_id" name="college_id" data-column="college_id">
 					<div class="row">
 						<div class="col-xl-12 col-lg-12">
 							<div class="form-group">
-								<label>Qualifications</label>
-								<input type="text" class="form-control educ-value" data-column="educ_degree"
-									name='educ_degree' placeholder="Bachelor of Science in " required>
-							</div>
-						</div>
-						<div class="col-xl-12 col-lg-12">
-							<div class="form-group">
-								<label>Institution</label>
-								<input type="text" class="form-control educ-value" data-column="educ_school"
-									name='educ_school' placeholder="NONESCOST" required>
-							</div>
-						</div>
-						<div class="col-xl-12 col-lg-12">
-							<div class="form-group">
-								<label>Honors Received</label>
-								<input type="text" class="form-control educ-value" data-column="honor_received"
-									name='honor_received' placeholder="Cumlaude">
-							</div>
-						</div>
-						<div class="col-xl-6 col-lg-6">
-							<div class="form-group">
-								<label>Year Start</label>
-								<input type="number" class="form-control educ-value" data-column="year_enrolled"
-									name='year_enrolled' required>
-							</div>
-						</div>
-						<div class="col-xl-6 col-lg-6">
-							<div class="form-group">
-								<label>Year End</label>
-								<input type="number" class="form-control educ-value" data-column="year_graduated"
-									name='year_graduated' required>
+								<label>College Name</label>
+								<input type="text" class="form-control college-value" data-column="college_name"
+									name='college_name' placeholder="College of Computer Studies" required>
 							</div>
 						</div>
 					</div>
@@ -153,7 +122,7 @@ AUTO_INCREMENT=3
 				<div class="modal-footer">
 					<div class="form-group">
 						<button type="submit" class="btn dark-2 btn-md full-width pop-login"
-							id="btn_update_education">Submit</button>
+							id="btn_update_college">Submit</button>
 					</div>
 				</div>
 			</div>
@@ -163,46 +132,58 @@ AUTO_INCREMENT=3
 </form>
 
 <script>
-	var modal_educ = document.getElementById("modalAddEduc");
-	get_educations();
-	$("#frmEducation").submit(function(e) {
+	var modal_educ = document.getElementById("modalAddCollege");
+	get_colleges();
+	$("#frmColleges").submit(function(e) {
 		e.preventDefault();
 
-		var form_type = $("#educ_id").val() * 1;
+		var form_type = $("#college_id").val() * 1;
 		var text_before = form_type > 0 ? "Updating...":"Adding...";
-		var controller_post = form_type > 0 ? "update_alumni_education" :"add_alumni_education";
-		$("#btn_update_education").prop('disabled', true);
-		$("#btn_update_education").html(text_before);
-		$.post(base_controller + controller_post, $("#frmEducation").serialize(), function(data, status) {
+		var controller_post = form_type > 0 ? "update_college" :"add_college";
+		$("#btn_update_college").prop('disabled', true);
+		$("#btn_update_college").html(text_before);
+		$.post(base_controller + controller_post, $("#frmColleges").serialize(), function(data, status) {
 			$("#closeAddEducModal").click();
 			if(data == 1){
 				form_type > 0 ? success_update() :success_add();
 			}else{
 				error_response();
 			}
-			get_educations();
-			$("#btn_update_education").prop('disabled', false);
-			$("#btn_update_education").html('Submit');
+			get_colleges();
+			$("#btn_update_college").prop('disabled', false);
+			$("#btn_update_college").html('Submit');
 		});
 	});
 
-	function get_educations() {
-		$("#tbl_educ tbody").html("<tr><td colspan='6'>Loading</td></tr>");
+	function get_colleges() {
+		$("#tbl_colleges tbody").html("<tr><td colspan='3'>Loading</td></tr>");
 		$.ajax({
-			url: base_controller + "get_alumni_data",
+			url: base_controller + "get_colleges_data",
 			dataType: "json",
 			success: function(data) {
-				$("#tbl_educ tbody").html("");
-				$.each(data.alumni, function(index, element) {
-					$("#tbl_educ tbody").append("<tr><td>" + element.educ_id + "</td><td>" + element.educ_degree + "</td><td>" + element.educ_school + "</td><td>" + element.honor_received + "</td><td>" + element.year_enrolled + " - " + element.year_graduated + "</td>" +
-						"<td><button class='btn btn-xs btn-primary' onclick='editEduc(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddEduc'><span class='fa fa-edit'></span></button> <button class='btn btn-xs btn-danger' onclick='deleteEduc(" + element.educ_id + ")'><span class='fa fa-trash'></span></button></td></tr>");
-				});
+				$("#tbl_colleges tbody").html("");
+				if(data.colleges.length > 0){
+					$.each(data.colleges, function(index, element) {
+						$("#tbl_colleges tbody").append("<tr>"+
+						"<td>" + element.college_id + "</td>"+
+						"<td>" + element.college_name + "</td>" +
+						"<td>"+
+						"<button type='button' class='btn btn-xs btn-primary' onclick='editColleges(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddCollege'><span class='fa fa-edit'></span></button>"+
+						"<button type='button' class='btn btn-xs btn-danger' onclick='deleteCollege(" + element.college_id + ")'><span class='fa fa-trash'></span></button>"+
+						"</td>"+
+						"</tr>");
+					});
+				}else{
+					$("#tbl_colleges tbody").append("<tr>"+
+						"<td colspan='3' align='center'>No records found</td>"+
+					"</tr>");
+				}
 			}
 		});
 	}
 
-	function editEduc(res) {
-		const profileValueElements = document.querySelectorAll('.educ-value');
+	function editColleges(res) {
+		const profileValueElements = document.querySelectorAll('.college-value');
 
 		// Loop through each element and retrieve the value of the "data-column" attribute
 		profileValueElements.forEach(element => {
@@ -211,7 +192,7 @@ AUTO_INCREMENT=3
 		});
 	}
 
-	function deleteEduc(educ_id) {
+	function deleteCollege(college_id) {
 		Swal.fire({
 			title: 'Are you sure?',
 			text: "You won't be able to revert this!",
@@ -222,8 +203,8 @@ AUTO_INCREMENT=3
 			confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
 			if (result.isConfirmed) {
-				$.post(base_controller + "delete_alumni_education", { educ_id: educ_id }, function(data, status) {
-					get_educations();
+				$.post(base_controller + "delete_college", { college_id: college_id }, function(data, status) {
+					get_colleges();
 					Swal.fire(
 						'Deleted!',
 						'Your file has been deleted.',
@@ -235,7 +216,7 @@ AUTO_INCREMENT=3
 	}
 
 	function resetFields() {
-		const profileValueElements = document.querySelectorAll('.educ-value');
+		const profileValueElements = document.querySelectorAll('.college-value');
 
 		// Loop through each element and retrieve the value of the "data-column" attribute
 		profileValueElements.forEach(element => {

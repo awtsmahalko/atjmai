@@ -25,8 +25,8 @@
 
             // Admin
             $Menus->sidebar_parent('Master Data', 'fa fa-books', array(
-                array("Colleges", "jobs"),
-                array("Programs", "create-job"),
+                array("Colleges", "colleges"),
+                array("Programs", "programs"),
             ));
             $Menus->sidebar_parent('Report', 'fa fa-print', array(
                 array("Alumni Report", "report-alumni"),

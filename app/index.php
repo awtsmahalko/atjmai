@@ -23,12 +23,12 @@ require 'routes/routes.php';
   <script src="../assets/js/jquery.min.js"></script>
   <script src="../assets/js/popper.min.js"></script>
   <script src="../assets/js/bootstrap.min.js"></script>
-  <script src="../assets/js/select2.min.js"></script>
   <script src="../assets/js/owl.carousel.min.js"></script>
   <script src="../assets/js/ion.rangeSlider.min.js"></script>
   <script src="../assets/js/counterup.min.js"></script>
   <script src="../assets/js/materialize.min.js"></script>
   <script src="../assets/js/metisMenu.min.js"></script>
+  <script src="../assets/js/select2.min.js"></script>
   <script type="text/javascript">
     var base_controller = "controller/web.php?uri=";
   </script>
@@ -52,7 +52,53 @@ require 'routes/routes.php';
   <!-- ============================================================== -->
   <!-- This page plugins -->
   <!-- ============================================================== -->
-  <script src="../assets/js/custom.js"></script>
+    <script>
+
+    //Loader  
+    $(window).on('load', function() {
+      $('.Loader').delay(350).fadeOut('slow');
+      $('body').delay(350).css({ 'overflow': 'visible' });
+    })
+
+    // Count
+    $(window).on('load', function() {
+      $('.count').counterUp({
+        delay: 20,
+        time: 800
+      });
+    });
+
+    // Tooltip
+    $('[data-toggle="tooltip"]').tooltip()
+    
+    // Metis Menu
+    $("#metismenu").metisMenu();
+</script>
+  <script>
+    function success_add(){
+      Swal.fire(
+        'Success!',
+        'Your data has been added.',
+        'success'
+      )
+    }
+
+    function success_update(){
+      Swal.fire(
+        'Success!',
+        'Your data has been updated.',
+        'success'
+      )
+    }
+
+    function error_response(){
+      Swal.fire(
+        'Error!',
+        'Please contact your support',
+        'error'
+      )
+    }
+  </script>
 </body>
 
 </html>

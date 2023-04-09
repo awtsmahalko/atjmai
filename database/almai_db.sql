@@ -2,14 +2,12 @@
 -- Host:                         127.0.0.1
 -- Server version:               10.1.21-MariaDB - mariadb.org binary distribution
 -- Server OS:                    Win32
--- HeidiSQL Version:             12.4.0.6659
+-- HeidiSQL Version:             11.3.0.6295
 -- --------------------------------------------------------
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET NAMES utf8 */;
 /*!50503 SET NAMES utf8mb4 */;
-/*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
-/*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
@@ -30,19 +28,44 @@ CREATE TABLE IF NOT EXISTS `tbl_alumni` (
   `alumni_contact` varchar(15) DEFAULT NULL,
   `alumni_address` varchar(255) DEFAULT NULL,
   `course_id` int(11) NOT NULL DEFAULT '0',
-  `work_employer` varchar(255) DEFAULT NULL,
-  `work_place` varchar(255) DEFAULT NULL,
-  `work_designation` varchar(255) DEFAULT NULL,
   `alumni_graduation` date NOT NULL DEFAULT '0000-00-00',
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  `alumni_job_title` varchar(50) DEFAULT NULL,
+  `alumni_summary` text,
+  `is_employed` int(1) NOT NULL,
   PRIMARY KEY (`alumni_id`),
   KEY `user_id` (`user_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table almai_db.tbl_alumni: ~0 rows (approximately)
-INSERT INTO `tbl_alumni` (`alumni_id`, `user_id`, `alumni_fname`, `alumni_mname`, `alumni_lname`, `alumni_gender`, `alumni_contact`, `alumni_address`, `course_id`, `work_employer`, `work_place`, `work_designation`, `alumni_graduation`, `created_at`, `updated_at`) VALUES
-	(1, 1, 'Eduard', 'Rino', 'Carton', NULL, '', '', 1, 'BPFC', 'Brgy. Alijis', 'IT Programmer', '2023-01-05', '2023-03-24 08:09:55', '0000-00-00 00:00:00');
+-- Dumping data for table almai_db.tbl_alumni: ~2 rows (approximately)
+/*!40000 ALTER TABLE `tbl_alumni` DISABLE KEYS */;
+INSERT INTO `tbl_alumni` (`alumni_id`, `user_id`, `alumni_fname`, `alumni_mname`, `alumni_lname`, `alumni_gender`, `alumni_contact`, `alumni_address`, `course_id`, `alumni_graduation`, `created_at`, `updated_at`, `alumni_job_title`, `alumni_summary`, `is_employed`) VALUES
+	(1, 1, 'Eduard Rino', 'Questo', 'Carton', NULL, '', '', 1, '2018-03-04', '2023-04-06 14:44:05', '0000-00-00 00:00:00', 'IT Programmer', NULL, 1),
+	(2, 2, 'Genesis', 'Carton', 'Francisco', NULL, '', '', 2, '2023-02-01', '2023-04-06 14:57:28', '0000-00-00 00:00:00', '', NULL, 0);
+/*!40000 ALTER TABLE `tbl_alumni` ENABLE KEYS */;
+
+-- Dumping structure for table almai_db.tbl_alumni_educations
+CREATE TABLE IF NOT EXISTS `tbl_alumni_educations` (
+  `educ_id` int(11) NOT NULL AUTO_INCREMENT,
+  `alumni_id` int(11) NOT NULL,
+  `educ_degree` varchar(255) DEFAULT NULL,
+  `educ_school` varchar(255) DEFAULT NULL,
+  `year_enrolled` year(4) NOT NULL,
+  `year_graduated` year(4) NOT NULL,
+  `honor_received` varchar(255) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime DEFAULT NULL,
+  PRIMARY KEY (`educ_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table almai_db.tbl_alumni_educations: ~4 rows (approximately)
+/*!40000 ALTER TABLE `tbl_alumni_educations` DISABLE KEYS */;
+INSERT INTO `tbl_alumni_educations` (`educ_id`, `alumni_id`, `educ_degree`, `educ_school`, `year_enrolled`, `year_graduated`, `honor_received`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'BSIS', 'Northern Negros State College of Science and Technology', '2014', '2018', '', '2023-04-06 14:44:05', NULL),
+	(2, 2, 'BSIT', 'Northern Negros State College of Science and Technology', '2019', '2023', '', '2023-04-06 14:57:28', NULL),
+	(3, 1, 'sdfsdfsd', 'fsdfsd', '0000', '0000', 'ffsdfsdfsdf', '2023-04-07 10:44:07', NULL);
+/*!40000 ALTER TABLE `tbl_alumni_educations` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_alumni_skills
 CREATE TABLE IF NOT EXISTS `tbl_alumni_skills` (
@@ -53,9 +76,13 @@ CREATE TABLE IF NOT EXISTS `tbl_alumni_skills` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`as_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_alumni_skills: ~0 rows (approximately)
+/*!40000 ALTER TABLE `tbl_alumni_skills` DISABLE KEYS */;
+INSERT INTO `tbl_alumni_skills` (`as_id`, `alumni_id`, `skill_id`, `skill_rate`, `created_at`, `updated_at`) VALUES
+	(1, 1, 1, 2, '2023-04-06 14:53:28', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `tbl_alumni_skills` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_alumni_skills_category
 CREATE TABLE IF NOT EXISTS `tbl_alumni_skills_category` (
@@ -69,6 +96,8 @@ CREATE TABLE IF NOT EXISTS `tbl_alumni_skills_category` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_alumni_skills_category: ~0 rows (approximately)
+/*!40000 ALTER TABLE `tbl_alumni_skills_category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_alumni_skills_category` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_candidates
 CREATE TABLE IF NOT EXISTS `tbl_candidates` (
@@ -83,6 +112,25 @@ CREATE TABLE IF NOT EXISTS `tbl_candidates` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_candidates: ~0 rows (approximately)
+/*!40000 ALTER TABLE `tbl_candidates` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_candidates` ENABLE KEYS */;
+
+-- Dumping structure for table almai_db.tbl_colleges
+CREATE TABLE IF NOT EXISTS `tbl_colleges` (
+  `college_id` int(11) NOT NULL AUTO_INCREMENT,
+  `college_name` varchar(150) NOT NULL DEFAULT '0',
+  `college_status` int(1) NOT NULL DEFAULT '0',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`college_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table almai_db.tbl_colleges: ~3 rows (approximately)
+/*!40000 ALTER TABLE `tbl_colleges` DISABLE KEYS */;
+INSERT INTO `tbl_colleges` (`college_id`, `college_name`, `college_status`, `created_at`, `updated_at`) VALUES
+	(1, 'College of Computer Studies', 0, '2023-04-07 10:58:07', '0000-00-00 00:00:00'),
+	(3, 'College of Education', 0, '2023-04-07 11:11:31', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `tbl_colleges` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_courses
 CREATE TABLE IF NOT EXISTS `tbl_courses` (
@@ -95,9 +143,11 @@ CREATE TABLE IF NOT EXISTS `tbl_courses` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_courses: ~2 rows (approximately)
+/*!40000 ALTER TABLE `tbl_courses` DISABLE KEYS */;
 INSERT INTO `tbl_courses` (`course_id`, `course_name`, `course_status`, `created_at`, `updated_at`) VALUES
 	(1, 'BSIS', 1, '2023-03-16 23:16:33', '0000-00-00 00:00:00'),
 	(2, 'BSIT', 1, '2023-03-16 23:16:33', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `tbl_courses` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_employers
 CREATE TABLE IF NOT EXISTS `tbl_employers` (
@@ -114,11 +164,11 @@ CREATE TABLE IF NOT EXISTS `tbl_employers` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`employer_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
--- Dumping data for table almai_db.tbl_employers: ~1 rows (approximately)
-INSERT INTO `tbl_employers` (`employer_id`, `user_id`, `industry_id`, `sub_industry_id`, `employer_name`, `company_name`, `company_contact`, `company_address`, `company_description`, `employees_number`, `created_at`, `updated_at`) VALUES
-	(1, 2, 0, 0, 'Bacolod Prosperity Feedmill Corporation', NULL, '09096836075', 'Bacolod City', NULL, NULL, '2023-03-24 08:13:43', '2023-03-31 09:04:26');
+-- Dumping data for table almai_db.tbl_employers: ~0 rows (approximately)
+/*!40000 ALTER TABLE `tbl_employers` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_employers` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_industries
 CREATE TABLE IF NOT EXISTS `tbl_industries` (
@@ -130,6 +180,8 @@ CREATE TABLE IF NOT EXISTS `tbl_industries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_industries: ~0 rows (approximately)
+/*!40000 ALTER TABLE `tbl_industries` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_industries` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_jobs
 CREATE TABLE IF NOT EXISTS `tbl_jobs` (
@@ -148,6 +200,8 @@ CREATE TABLE IF NOT EXISTS `tbl_jobs` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_jobs: ~0 rows (approximately)
+/*!40000 ALTER TABLE `tbl_jobs` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_jobs` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_job_schedules
 CREATE TABLE IF NOT EXISTS `tbl_job_schedules` (
@@ -159,6 +213,7 @@ CREATE TABLE IF NOT EXISTS `tbl_job_schedules` (
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_job_schedules: ~8 rows (approximately)
+/*!40000 ALTER TABLE `tbl_job_schedules` DISABLE KEYS */;
 INSERT INTO `tbl_job_schedules` (`job_sched_id`, `sched_name`, `created_at`, `updated_at`) VALUES
 	(1, 'Flextime', '2023-03-31 08:14:31', '0000-00-00 00:00:00'),
 	(2, '8 hour shift', '2023-03-31 08:14:43', '0000-00-00 00:00:00'),
@@ -168,6 +223,7 @@ INSERT INTO `tbl_job_schedules` (`job_sched_id`, `sched_name`, `created_at`, `up
 	(6, 'Early shift', '2023-03-31 08:15:39', '0000-00-00 00:00:00'),
 	(7, 'Day Shift', '2023-03-31 08:15:48', '0000-00-00 00:00:00'),
 	(8, 'Afternoon Shift', '2023-03-31 08:16:04', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `tbl_job_schedules` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_job_skills
 CREATE TABLE IF NOT EXISTS `tbl_job_skills` (
@@ -181,6 +237,8 @@ CREATE TABLE IF NOT EXISTS `tbl_job_skills` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_job_skills: ~0 rows (approximately)
+/*!40000 ALTER TABLE `tbl_job_skills` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_job_skills` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_job_types
 CREATE TABLE IF NOT EXISTS `tbl_job_types` (
@@ -193,6 +251,7 @@ CREATE TABLE IF NOT EXISTS `tbl_job_types` (
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_job_types: ~6 rows (approximately)
+/*!40000 ALTER TABLE `tbl_job_types` DISABLE KEYS */;
 INSERT INTO `tbl_job_types` (`job_type_id`, `job_type_name`, `job_type_status`, `created_at`, `updated_at`) VALUES
 	(1, 'Full-time', 1, '2023-03-31 08:08:55', '0000-00-00 00:00:00'),
 	(2, 'Part-time', 1, '2023-03-31 08:09:09', '0000-00-00 00:00:00'),
@@ -200,6 +259,7 @@ INSERT INTO `tbl_job_types` (`job_type_id`, `job_type_name`, `job_type_status`, 
 	(4, 'Fixed Term', 1, '2023-03-31 08:09:42', '0000-00-00 00:00:00'),
 	(5, 'Temporary', 1, '2023-03-31 08:09:54', '0000-00-00 00:00:00'),
 	(6, 'OJT (On the job training)', 1, '2023-03-31 08:10:16', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `tbl_job_types` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_skills
 CREATE TABLE IF NOT EXISTS `tbl_skills` (
@@ -213,6 +273,7 @@ CREATE TABLE IF NOT EXISTS `tbl_skills` (
 ) ENGINE=InnoDB AUTO_INCREMENT=137 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_skills: ~136 rows (approximately)
+/*!40000 ALTER TABLE `tbl_skills` DISABLE KEYS */;
 INSERT INTO `tbl_skills` (`skill_id`, `sub_industry_id`, `sc_id`, `skill_name`, `created_at`, `updated_at`) VALUES
 	(1, NULL, 1, 'Admin Assistant', '2023-03-22 14:29:06', '2023-03-22 15:19:11'),
 	(2, NULL, 1, 'Appointment Setter', '2023-03-22 14:29:06', '2023-03-22 15:19:21'),
@@ -350,6 +411,7 @@ INSERT INTO `tbl_skills` (`skill_id`, `sub_industry_id`, `sc_id`, `skill_name`, 
 	(134, NULL, 13, 'Software Development Project Management', '2023-03-22 16:07:45', '2023-03-22 16:26:11'),
 	(135, NULL, 13, 'Web Development Project Management', '2023-03-22 16:07:45', '2023-03-22 16:26:30'),
 	(136, NULL, 13, 'Writing Development Project Management', '2023-03-22 16:07:45', '2023-03-22 16:26:59');
+/*!40000 ALTER TABLE `tbl_skills` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_skills_category
 CREATE TABLE IF NOT EXISTS `tbl_skills_category` (
@@ -361,7 +423,8 @@ CREATE TABLE IF NOT EXISTS `tbl_skills_category` (
   PRIMARY KEY (`sc_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=14 DEFAULT CHARSET=latin1;
 
--- Dumping data for table almai_db.tbl_skills_category: ~12 rows (approximately)
+-- Dumping data for table almai_db.tbl_skills_category: ~13 rows (approximately)
+/*!40000 ALTER TABLE `tbl_skills_category` DISABLE KEYS */;
 INSERT INTO `tbl_skills_category` (`sc_id`, `sc_name`, `sc_description`, `created_at`, `updated_at`) VALUES
 	(1, 'Office & Admin (Virtual Assistant)', 'S', '2023-03-22 13:39:05', '2023-03-22 15:15:03'),
 	(2, 'English', 'S', '2023-03-22 13:39:05', '2023-03-22 15:15:08'),
@@ -376,6 +439,7 @@ INSERT INTO `tbl_skills_category` (`sc_id`, `sc_name`, `sc_description`, `create
 	(11, 'Customer Service & Admin Support', NULL, '2023-03-22 15:17:31', '0000-00-00 00:00:00'),
 	(12, 'Proffessional Services', NULL, '2023-03-22 15:17:45', '0000-00-00 00:00:00'),
 	(13, 'Project Management', NULL, '2023-03-22 15:17:54', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `tbl_skills_category` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_sub_industries
 CREATE TABLE IF NOT EXISTS `tbl_sub_industries` (
@@ -388,6 +452,8 @@ CREATE TABLE IF NOT EXISTS `tbl_sub_industries` (
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_sub_industries: ~0 rows (approximately)
+/*!40000 ALTER TABLE `tbl_sub_industries` DISABLE KEYS */;
+/*!40000 ALTER TABLE `tbl_sub_industries` ENABLE KEYS */;
 
 -- Dumping structure for table almai_db.tbl_users
 CREATE TABLE IF NOT EXISTS `tbl_users` (
@@ -403,11 +469,33 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_users: ~2 rows (approximately)
+/*!40000 ALTER TABLE `tbl_users` DISABLE KEYS */;
 INSERT INTO `tbl_users` (`user_id`, `user_fullname`, `user_email`, `user_password`, `user_category`, `user_status`, `created_at`, `update_at`) VALUES
-	(1, 'Eduard Rino Carton', 'eduard16carton@gmail.com', '0cc175b9c0f1b6a831c399e269772661', 'S', 1, '2023-03-24 08:09:55', '0000-00-00 00:00:00'),
-	(2, 'BPFC&#39;s\\a', 'a@bpfc.com', '0cc175b9c0f1b6a831c399e269772661', 'E', 1, '2023-03-24 08:13:43', '0000-00-00 00:00:00');
+	(1, 'Eduard Rino Questo Carton', 'eduard16carton@gmail.com', '0cc175b9c0f1b6a831c399e269772661', 'S', 1, '2023-04-06 14:44:05', '0000-00-00 00:00:00'),
+	(2, 'Genesis Carton Francisco', 'student1@gmail.com', '0cc175b9c0f1b6a831c399e269772661', 'S', 1, '2023-04-06 14:57:28', '0000-00-00 00:00:00');
+/*!40000 ALTER TABLE `tbl_users` ENABLE KEYS */;
 
-/*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
+-- Dumping structure for table almai_db.tbl_work_experiences
+CREATE TABLE IF NOT EXISTS `tbl_work_experiences` (
+  `work_exp_id` int(11) NOT NULL AUTO_INCREMENT,
+  `company_name` varchar(255) NOT NULL,
+  `company_address` varchar(150) DEFAULT NULL,
+  `job_title` varchar(255) NOT NULL,
+  `date_hired` varchar(7) NOT NULL,
+  `date_resigned` varchar(7) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL,
+  `currently_worked` int(1) NOT NULL,
+  `alumni_id` int(11) NOT NULL,
+  PRIMARY KEY (`work_exp_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table almai_db.tbl_work_experiences: ~1 rows (approximately)
+/*!40000 ALTER TABLE `tbl_work_experiences` DISABLE KEYS */;
+INSERT INTO `tbl_work_experiences` (`work_exp_id`, `company_name`, `company_address`, `job_title`, `date_hired`, `date_resigned`, `created_at`, `updated_at`, `currently_worked`, `alumni_id`) VALUES
+	(1, 'Bacolod Prosperity Feedmill Corp', NULL, 'IT Programmer', '2018-02', NULL, '2023-04-06 14:44:05', '0000-00-00 00:00:00', 1, 1);
+/*!40000 ALTER TABLE `tbl_work_experiences` ENABLE KEYS */;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

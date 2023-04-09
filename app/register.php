@@ -250,29 +250,6 @@ $csrf = Components::csrf();
 												</div>
 											</div>
 											<div class="row">
-												<div class="col-6">
-													<div class="form-group">
-														<label>Employer</label>
-														<input class="form-control" type="text" placeholder="Employer" name="work_employer"
-															required>
-													</div>
-												</div>
-												<div class="col-6">
-													<div class="form-group">
-														<label>Position</label>
-														<input class="form-control" type="text" placeholder="Position" name="work_designation"
-															required>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-12">
-													<div class="form-group">
-														<label>Company Address</label>
-														<input class="form-control" type="text" placeholder="Company Address" name="work_place"
-															required>
-													</div>
-												</div>
 												<div class="col-12">
 													<div class="form-group">
 														<label>Email Address</label>
@@ -292,6 +269,45 @@ $csrf = Components::csrf();
 														<label>Confirm Password</label>
 														<input class="form-control" type="password" placeholder="Confirm Password" name="password2"
 															required>
+													</div>
+												</div>
+											</div>
+											<div class="row">
+												<div class="col-12">
+													<div class="form-group mb-1">
+														<input id="check_work" class="checkbox-custom" name="is_employed" type="checkbox" onchange="currentlyWorked(this)">
+														<label for="check_work" class="checkbox-custom-label">I am currently employed</label>
+													</div>
+												</div>
+											</div>
+											<hr>
+											<div class="row row-work">
+												<div class="col-12">
+													<div class="form-group">
+														<label>Employer</label>
+														<input class="form-control work-value" type="text" placeholder="Employer" name="company_name">
+													</div>
+												</div>
+											</div>
+											<div class="row row-work">
+												<div class="col-6">
+													<div class="form-group">
+														<label>Position</label>
+														<input class="form-control work-value" type="text" placeholder="Position" name="job_title">
+													</div>
+												</div>
+												<div class="col-6">
+													<div class="form-group">
+														<label>Date Hired</label>
+														<input class="form-control work-value" type="date" placeholder="Employer" name="date_hired">
+													</div>
+												</div>
+											</div>
+											<div class="row row-work">
+												<div class="col-12">
+													<div class="form-group">
+														<label>Company Address</label>
+														<input class="form-control work-value" type="text" placeholder="Company Address" name="company_address">
 													</div>
 												</div>
 											</div>
@@ -463,6 +479,8 @@ $csrf = Components::csrf();
 			placeholder: "Please Select"
 		});
 
+		$(".row-work").hide();
+
 		$("#frmRegister").submit(function(e) {
 			e.preventDefault();
 			$("#btn_register").prop('disabled', true);
@@ -526,6 +544,21 @@ $csrf = Components::csrf();
 					location.reload();
 				}
 			}, 1000);
+		}
+		function currentlyWorked(el){
+			if(el.checked){
+				$(".row-work").show();
+				var required = true;
+			}else{
+				$(".row-work").hide();
+				var required = false;
+			}
+			const profileValueElements = document.querySelectorAll('.work-value');
+
+			// Loop through each element and retrieve the value of the "data-column" attribute
+			profileValueElements.forEach(element => {
+				$(element).prop("required",required);
+			});
 		}
 	</script>
 	<!-- ============================================================== -->
