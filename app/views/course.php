@@ -62,9 +62,7 @@ AUTO_INCREMENT=3
 
 								</div>
 								<div class="col-md-6">
-									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile"
-										style="float: right !important;" data-toggle="modal" data-target="#modalAddCollege"
-										onclick="resetFields()"><span class="fa fa-plus"></span> Add Programs</button>
+									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile" style="float: right !important;" data-toggle="modal" data-target="#modalAddCollege" onclick="resetFields()"><span class="fa fa-plus"></span> Add Programs</button>
 
 								</div>
 							</div>
@@ -99,14 +97,12 @@ AUTO_INCREMENT=3
 
 <form id="frmCourses">
 	<!-- Log In Modal -->
-	<div class="modal fade" id="modalAddCollege" aria-labelledby="modaladdcollege"
-		aria-hidden="true">
+	<div class="modal fade" id="modalAddCollege" aria-labelledby="modaladdcollege" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
 			<div class="modal-content" id="modaladdcollege">
 				<div class="modal-header">
-					<h4>Add College</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddEducModal"><span
-							aria-hidden="true"><i class="ti-close"></i></span></button>
+					<h4>Add Course</h4>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddCourseModal"><span aria-hidden="true"><i class="ti-close"></i></span></button>
 				</div>
 				<div class="modal-body">
 					<input type="hidden" class="course-value" id="course_id" name="course_id" data-column="course_id">
@@ -114,9 +110,9 @@ AUTO_INCREMENT=3
 						<div class="col-xl-12 col-lg-12">
 							<div class="form-group">
 								<label>College Name</label>
-								<select class="form-control select2" id="college_id" name="college_id" data-column="college_id" style="width: 100% !important;" required>
+								<select class="form-control select2 course-value" id="college_id" name="college_id" data-column="college_id" style="width: 100% !important;" required>
 									<option value="">Please Select</option>
-									<?=Courses::options()?>
+									<?= Colleges::options() ?>
 								</select>
 							</div>
 						</div>
@@ -125,16 +121,14 @@ AUTO_INCREMENT=3
 						<div class="col-xl-12 col-lg-12">
 							<div class="form-group">
 								<label>Program Name</label>
-								<input type="text" class="form-control course-value" data-column="college_name"
-									name='college_name' placeholder="College of Computer Studies" required>
+								<input type="text" class="form-control course-value" data-column="course_name" name='course_name' placeholder="Bachelor of Science in .." required>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<div class="form-group">
-						<button type="submit" class="btn dark-2 btn-md full-width pop-login"
-							id="btn_update_college">Submit</button>
+						<button type="submit" class="btn dark-2 btn-md full-width pop-login" id="btn_update_course">Submit</button>
 					</div>
 				</div>
 			</div>
@@ -152,20 +146,20 @@ AUTO_INCREMENT=3
 		e.preventDefault();
 
 		var form_type = $("#course_id").val() * 1;
-		var text_before = form_type > 0 ? "Updating...":"Adding...";
-		var controller_post = form_type > 0 ? "update_college" :"add_college";
-		$("#btn_update_college").prop('disabled', true);
-		$("#btn_update_college").html(text_before);
+		var text_before = form_type > 0 ? "Updating..." : "Adding...";
+		var controller_post = form_type > 0 ? "update_course" : "add_course";
+		$("#btn_update_course").prop('disabled', true);
+		$("#btn_update_course").html(text_before);
 		$.post(base_controller + controller_post, $("#frmCourses").serialize(), function(data, status) {
-			$("#closeAddEducModal").click();
-			if(data == 1){
-				form_type > 0 ? success_update() :success_add();
-			}else{
+			$("#closeAddCourseModal").click();
+			if (data == 1) {
+				form_type > 0 ? success_update() : success_add();
+			} else {
 				error_response();
 			}
 			get_courses();
-			$("#btn_update_college").prop('disabled', false);
-			$("#btn_update_college").html('Submit');
+			$("#btn_update_course").prop('disabled', false);
+			$("#btn_update_course").html('Submit');
 		});
 	});
 
@@ -176,27 +170,28 @@ AUTO_INCREMENT=3
 			dataType: "json",
 			success: function(data) {
 				$("#tbl_colleges tbody").html("");
-				if(data.colleges.length > 0){
-					$.each(data.colleges, function(index, element) {
-						$("#tbl_colleges tbody").append("<tr>"+
-						"<td>" + element.course_id + "</td>"+
-						"<td>" + element.college_name + "</td>" +
-						"<td>"+
-						"<button type='button' class='btn btn-xs btn-primary' onclick='editColleges(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddCollege'><span class='fa fa-edit'></span></button>"+
-						"<button type='button' class='btn btn-xs btn-danger' onclick='deleteCollege(" + element.course_id + ")'><span class='fa fa-trash'></span></button>"+
-						"</td>"+
-						"</tr>");
+				if (data.courses.length > 0) {
+					$.each(data.courses, function(index, element) {
+						$("#tbl_colleges tbody").append("<tr>" +
+							"<td>" + element.course_id + "</td>" +
+							"<td>" + element.course_name + "</td>" +
+							"<td>" + element.colleges.college_name + "</td>" +
+							"<td>" +
+							"<button type='button' class='btn btn-xs btn-primary' onclick='editCourses(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddCollege'><span class='fa fa-edit'></span></button>" +
+							"<button type='button' class='btn btn-xs btn-danger' onclick='deleteCourses(" + element.course_id + ")'><span class='fa fa-trash'></span></button>" +
+							"</td>" +
+							"</tr>");
 					});
-				}else{
-					$("#tbl_colleges tbody").append("<tr>"+
-						"<td colspan='3' align='center'>No records found</td>"+
-					"</tr>");
+				} else {
+					$("#tbl_colleges tbody").append("<tr>" +
+						"<td colspan='3' align='center'>No records found</td>" +
+						"</tr>");
 				}
 			}
 		});
 	}
 
-	function editColleges(res) {
+	function editCourses(res) {
 		const profileValueElements = document.querySelectorAll('.course-value');
 
 		// Loop through each element and retrieve the value of the "data-column" attribute
@@ -206,7 +201,7 @@ AUTO_INCREMENT=3
 		});
 	}
 
-	function deleteCollege(course_id) {
+	function deleteCourses(course_id) {
 		Swal.fire({
 			title: 'Are you sure?',
 			text: "You won't be able to revert this!",
@@ -217,13 +212,11 @@ AUTO_INCREMENT=3
 			confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
 			if (result.isConfirmed) {
-				$.post(base_controller + "delete_college", { course_id: course_id }, function(data, status) {
+				$.post(base_controller + "delete_course", {
+					course_id: course_id
+				}, function(data, status) {
 					get_courses();
-					Swal.fire(
-						'Deleted!',
-						'Your file has been deleted.',
-						'success'
-					)
+					success_delete();
 				});
 			}
 		});

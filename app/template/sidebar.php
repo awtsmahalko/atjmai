@@ -24,7 +24,7 @@
             ));
 
             // Admin
-            $Menus->sidebar_parent('Master Data', 'fa fa-books', array(
+            $Menus->sidebar_parent('Master Data', 'fa fa-file-o', array(
                 array("Colleges", "colleges"),
                 array("Programs", "programs"),
             ));

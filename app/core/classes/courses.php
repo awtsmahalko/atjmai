@@ -25,11 +25,23 @@ class Courses extends Connection
 
     public function add()
     {
-        $course_name = $this->inputs['course_name'];
-        $form = array(
-            'course_name'  => $this->clean($course_name),
-        );
-        $this->insert($this->table, $form);
+        return $this->insert($this->table, [$this->name  => $this->post($this->name), 'college_id' => $this->post('college_id')]);
+    }
+
+    public function edit()
+    {
+        return $this->update($this->table, [$this->name  => $this->post($this->name), 'college_id' => $this->post('college_id')], "$this->pk = '" . $this->post($this->pk) . "'");
+    }
+
+    public function data()
+    {
+        $response['courses'] = array();
+        $result = $this->select($this->table);
+        while ($row = $result->fetch_assoc()) {
+            $row['colleges'] = Colleges::dataOf($row['college_id']);
+            array_push($response['courses'], $row);
+        }
+        return json_encode($response);
     }
 
     public static function name($primary_id)
@@ -40,5 +52,11 @@ class Courses extends Connection
             return '';
         $row = $result->fetch_assoc();
         return $row[$self->name];
+    }
+
+    public function destroy()
+    {
+        $id = $this->post($this->pk);
+        return $this->delete($this->table, "$this->pk = '$id'");
     }
 }

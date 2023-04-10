@@ -15,10 +15,10 @@ class Colleges extends Connection
 
         $option = '';
 
-        $result = $self->select($self->table, '*', "course_id > 0 ORDER BY course_name ASC");
+        $result = $self->select($self->table, '*', "college_id > 0 ORDER BY college_name ASC");
         while ($row = $result->fetch_assoc()) {
-            $selected = $row['course_id'] == $values ? "selected" : "";
-            $option .= "<option value='$row[course_id]' $selected>$row[course_name]</option>";
+            $selected = $row['college_id'] == $values ? "selected" : "";
+            $option .= "<option value='$row[college_id]' $selected>$row[college_name]</option>";
         }
         return $option;
     }
@@ -30,7 +30,7 @@ class Colleges extends Connection
 
     public function edit()
     {
-        return $this->update($this->table, [$this->name  => $this->post($this->name)],"$this->pk = '".$this->post($this->pk)."'");
+        return $this->update($this->table, [$this->name  => $this->post($this->name)], "$this->pk = '" . $this->post($this->pk) . "'");
     }
 
     public function data()
@@ -56,6 +56,14 @@ class Colleges extends Connection
     public function destroy()
     {
         $id = $this->post($this->pk);
-        return $this->delete($this->table,"$this->pk = '$id'");
+        return $this->delete($this->table, "$this->pk = '$id'");
+    }
+
+    public static function dataOf($primary_id, $field = '*')
+    {
+        $self = new self;
+        $result = $self->select($self->table, $field, "$self->pk = '$primary_id'");
+        $row = $result->fetch_assoc();
+        return $field == '*' ? $row : $row[$field];
     }
 }

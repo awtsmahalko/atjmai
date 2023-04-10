@@ -52,12 +52,13 @@ require 'routes/routes.php';
   <!-- ============================================================== -->
   <!-- This page plugins -->
   <!-- ============================================================== -->
-    <script>
-
+  <script>
     //Loader  
     $(window).on('load', function() {
       $('.Loader').delay(350).fadeOut('slow');
-      $('body').delay(350).css({ 'overflow': 'visible' });
+      $('body').delay(350).css({
+        'overflow': 'visible'
+      });
     })
 
     // Count
@@ -70,12 +71,12 @@ require 'routes/routes.php';
 
     // Tooltip
     $('[data-toggle="tooltip"]').tooltip()
-    
+
     // Metis Menu
     $("#metismenu").metisMenu();
-</script>
+  </script>
   <script>
-    function success_add(){
+    function success_add() {
       Swal.fire(
         'Success!',
         'Your data has been added.',
@@ -83,7 +84,7 @@ require 'routes/routes.php';
       )
     }
 
-    function success_update(){
+    function success_update() {
       Swal.fire(
         'Success!',
         'Your data has been updated.',
@@ -91,7 +92,15 @@ require 'routes/routes.php';
       )
     }
 
-    function error_response(){
+    function success_delete() {
+      Swal.fire(
+        'Deleted!',
+        'Your data has been deleted.',
+        'success'
+      )
+    }
+
+    function error_response() {
       Swal.fire(
         'Error!',
         'Please contact your support',
