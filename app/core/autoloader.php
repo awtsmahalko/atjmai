@@ -10,5 +10,9 @@ $classes = array(
     'Colleges'          => $pre_class . 'colleges.php',
     'Courses'           => $pre_class . 'courses.php',
     'Employers'         => $pre_class . 'employer.php',
+    'Industries'        => $pre_class . 'industries.php',
+    'Jobs'              => $pre_class . 'jobs.php',
+    'JobSchedules'      => $pre_class . 'job_schedule.php',
+    'JobTypes'          => $pre_class . 'job_type.php',
     'Users'             => $pre_class . 'user.php',
 );

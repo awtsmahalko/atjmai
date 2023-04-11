@@ -24,6 +24,10 @@ class Controller
         $class_name = 'Courses';
         $method_name = 'add';
         break;
+      case 'add_job':
+        $class_name = 'Jobs';
+        $method_name = 'add';
+        break;
       case 'alumni_profile':
         $class_name = 'Alumni';
         $method_name = 'profile';

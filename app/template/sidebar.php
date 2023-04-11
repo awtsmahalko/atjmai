@@ -15,6 +15,7 @@
             $Menus->sidebar('Education', 'education', 'fa fa-graduation-cap', $router->route['path'], 'S');
             $Menus->sidebar('Work Experience', 'work-experience', 'fa fa-briefcase', $router->route['path'], 'S');
             $Menus->sidebar('Skills', 'skills', 'fa fa-gears', $router->route['path'], 'S');
+            $Menus->sidebar('Resume', 'resume', 'fa fa-file', $router->route['path'], 'S');
             // $Menus->sidebar('Jobs', 'jobs', 'fa fa-briefcase', $router->route['path']);
 
             // Employers
@@ -27,12 +28,16 @@
             $Menus->sidebar_parent('Master Data', 'fa fa-file-o', array(
                 array("Colleges", "colleges"),
                 array("Programs", "programs"),
+                array("Industries", "industries"),
+                array("Sub Industries", "sub-industries"),
+                array("Skills", "skills"),
             ));
             $Menus->sidebar_parent('Report', 'fa fa-print', array(
                 array("Alumni Report", "report-alumni"),
                 array("Employer Report", "report-employer"),
             ));
 
+            // ALL USERS
             $Menus->sidebar('Messages', 'messages', 'ti-email', $router->route['path']);
             $Menus->sidebar('Notifications', 'notification', 'ti-bell', $router->route['path']);
             ?>

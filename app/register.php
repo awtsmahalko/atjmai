@@ -1,7 +1,7 @@
 <?php
 include 'core/config.php';
 if (isset($_SESSION['user']['id'])) {
-  header("location:index.php");
+	header("location:index.php");
 }
 $csrf = Components::csrf();
 ?>
@@ -211,7 +211,7 @@ $csrf = Components::csrf();
 									<div class="tab-pane fade show active" id="candidate" role="tabpanel" aria-labelledby="candidate-tab">
 										<form action="#" id="frmRegister">
 											<input type='hidden' value='S' name='user_category'>
-											<?=$csrf?>
+											<?= $csrf ?>
 											<div class="row">
 												<div class="col-4">
 													<div class="form-group">
@@ -236,9 +236,9 @@ $csrf = Components::csrf();
 												<div class="col-6">
 													<div class="form-group">
 														<label>Course</label>
-														<select class="form-control" id="course" name="course_id" required>
+														<select class="form-control select2" id="course" name="course_id" required>
 															<option value="">Please Select</option>
-															<?=Courses::options()?>
+															<?= Courses::options() ?>
 														</select>
 													</div>
 												</div>
@@ -275,7 +275,8 @@ $csrf = Components::csrf();
 											<div class="row">
 												<div class="col-12">
 													<div class="form-group mb-1">
-														<input id="check_work" class="checkbox-custom" name="is_employed" type="checkbox" onchange="currentlyWorked(this)">
+														<input id="check_work" class="checkbox-custom" name="is_employed" type="checkbox"
+															onchange="currentlyWorked(this)">
 														<label for="check_work" class="checkbox-custom-label">I am currently employed</label>
 													</div>
 												</div>
@@ -285,7 +286,8 @@ $csrf = Components::csrf();
 												<div class="col-12">
 													<div class="form-group">
 														<label>Employer</label>
-														<input class="form-control work-value" type="text" placeholder="Employer" name="company_name">
+														<input class="form-control work-value" type="text" placeholder="Employer"
+															name="company_name">
 													</div>
 												</div>
 											</div>
@@ -307,7 +309,8 @@ $csrf = Components::csrf();
 												<div class="col-12">
 													<div class="form-group">
 														<label>Company Address</label>
-														<input class="form-control work-value" type="text" placeholder="Company Address" name="company_address">
+														<input class="form-control work-value" type="text" placeholder="Company Address"
+															name="company_address">
 													</div>
 												</div>
 											</div>
@@ -335,12 +338,28 @@ $csrf = Components::csrf();
 									<div class="tab-pane fade" id="employer" role="tabpanel" aria-labelledby="employer-tab">
 										<form action="#" id="frmRegisterEmployee">
 											<input type='hidden' value='E' name='user_category'>
-											<?=$csrf?>
+											<?= $csrf ?>
+											<div class="row">
+												<div class="col-6">
+													<div class="form-group">
+														<label>Employer Name</label>
+														<input class="form-control" type="text" placeholder="Employer Name" name="employer_name"
+															required>
+													</div>
+												</div>
+												<div class="col-6">
+													<div class="form-group">
+														<label>Contact #</label>
+														<input class="form-control" type="text" placeholder="Contact Number" name="company_contact"
+															required>
+													</div>
+												</div>
+											</div>
 											<div class="row">
 												<div class="col-12">
 													<div class="form-group">
 														<label>Company Name</label>
-														<input class="form-control" type="text" placeholder="Company Address" name="employer_name"
+														<input class="form-control" type="text" placeholder="Company Name" name="company_name"
 															required>
 													</div>
 												</div>
@@ -349,15 +368,20 @@ $csrf = Components::csrf();
 												<div class="col-6">
 													<div class="form-group">
 														<label>Industry</label>
-														<input class="form-control" type="text" placeholder="Industry" name="employer_industry"
-															required>
+														<select class="form-control select2" id="industry_id" name="industry_id"
+															style="width: 100%;" required>
+															<option value="">Please Select</option>
+															<?= Industries::options() ?>
+														</select>
 													</div>
 												</div>
 												<div class="col-6">
 													<div class="form-group">
-														<label>Contact #</label>
-														<input class="form-control" type="text" placeholder="Contact Number" name="employer_contact"
-															required>
+														<label>Sub Industry</label>
+														<select class="form-control select2" id="sub_industry_id" name="sub_industry_id"
+															style="width: 100%;">
+															<option value="">Please Select</option>
+														</select>
 													</div>
 												</div>
 											</div>
@@ -365,8 +389,8 @@ $csrf = Components::csrf();
 												<div class="col-12">
 													<div class="form-group">
 														<label>Address</label>
-														<input class="form-control" type="text" placeholder="Company Address"
-															name="employer_address" required>
+														<input class="form-control" type="text" placeholder="Company Address" name="company_address"
+															required>
 													</div>
 												</div>
 											</div>
@@ -458,11 +482,12 @@ $csrf = Components::csrf();
 	<script src="../assets/js/materialize.min.js"></script>
 	<script src="../assets/js/metisMenu.min.js"></script>
 	<script>
-
 		//Loader	
 		$(window).on('load', function() {
 			$('.Loader').delay(350).fadeOut('slow');
-			$('body').delay(350).css({ 'overflow': 'visible' });
+			$('body').delay(350).css({
+				'overflow': 'visible'
+			});
 		})
 
 		// Count
@@ -475,7 +500,7 @@ $csrf = Components::csrf();
 
 
 		// Specialisms 
-		$("#course").select2({
+		$(".select2").select2({
 			placeholder: "Please Select"
 		});
 
@@ -535,6 +560,7 @@ $csrf = Components::csrf();
 				$("#btn_register_employer").html('Register Now');
 			});
 		});
+
 		function countDown() {
 			var countdownSeconds = 5;
 			var countdownLabel = document.getElementById('countdown');
@@ -545,11 +571,12 @@ $csrf = Components::csrf();
 				}
 			}, 1000);
 		}
-		function currentlyWorked(el){
-			if(el.checked){
+
+		function currentlyWorked(el) {
+			if (el.checked) {
 				$(".row-work").show();
 				var required = true;
-			}else{
+			} else {
 				$(".row-work").hide();
 				var required = false;
 			}
@@ -557,7 +584,7 @@ $csrf = Components::csrf();
 
 			// Loop through each element and retrieve the value of the "data-column" attribute
 			profileValueElements.forEach(element => {
-				$(element).prop("required",required);
+				$(element).prop("required", required);
 			});
 		}
 	</script>
