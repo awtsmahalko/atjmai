@@ -20,13 +20,15 @@ class Alumni extends Connection
             'alumni_address'    => $this->post('alumni_address'),
             'course_id'         => $this->post('course_id'),
             'alumni_graduation' => $this->post('alumni_graduation'),
-            'alumni_job_title'  => $this->post('job_title'),
             'is_employed'       => $is_employed,
         ],'Y');
 
         if($is_employed == 1 && $alumni_id > 0){
             $AlumniWork = new AlumniWorkExperiences();
             $AlumniWork->add_from_register($alumni_id);
+
+            $AlumniJobPreferences = new AlumniJobPreferences();
+            $AlumniJobPreferences->add_from_register($alumni_id);
         }
         $AlumniEducation = new AlumniEducations();
         $AlumniEducation->add_from_register($alumni_id);
@@ -52,19 +54,60 @@ class Alumni extends Connection
                 'alumni_gender'      => $this->post('alumni_gender'),
                 'alumni_contact'     => $this->post('alumni_contact'),
                 'alumni_address'     => $this->post('alumni_address'),
-                'alumni_job_title'  => $this->post('alumni_job_title'),
-                'alumni_summary'     => $this->post('alumni_summary'),
             ], "user_id = '" . $_SESSION['user']['id'] . "'");
 
             if ($update_success != 1)
                 throw new Exception($update_success);
-
+            $res = $this->update_profile_picture();
             $this->commit();
-            return 1;
+            return $res;
         } catch (Exception $e) {
             $this->rollback();
             return $e->getMessage();
         }
+    }
+
+    public function update_profile_picture()
+    {
+
+        $file = $this->files('file');
+
+        // Get file properties
+        $fileName = $file['name'];
+        $fileTempName = $file['tmp_name'];
+        $fileSize = $file['size'];
+        $fileError = $file['error'];
+        $fileType = $file['type'];
+
+        if($fileName == '')
+            return 1;
+
+        // Get the file extension
+        $fileExtension = strtolower(end(explode('.', $fileName)));
+
+        // Allowed file extensions
+        $allowedExtensions = array("jpeg", "jpg", "png");
+
+        if(!in_array($fileExtension, $allowedExtensions))
+            return 'NO-FILE-EXTENSION';
+
+        if($fileError != 0)
+            return 'FILE-UPLOAD-ERROR';
+
+        if($fileSize >= 1000000)
+            return 'FILE-TOO-BIG';
+
+        $newFileName = uniqid('', true) . "." . $fileExtension;
+        $fileDestination = __DIR__ . "../../../../assets/img/users/" . $newFileName;
+
+        // Move the file to the destination
+        move_uploaded_file($fileTempName, $fileDestination);
+
+        $this->update("tbl_users",['user_img' => $newFileName],"user_id = '".$_SESSION['user']['id']."'");
+        $_SESSION['user']['img'] = $newFileName;
+
+        return "IMG-SUCCESS";
+
     }
 
     public function profile()

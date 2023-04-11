@@ -1,3 +1,4 @@
+<script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_94DaLUWYhcxUnx1PtV9VtD"></script>
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background:url(../assets/img/front_bg.webp)no-repeat;" data-overlay="5">
 	<div class="container">
@@ -35,64 +36,69 @@
 
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<form id="frmProfile">
+						<form id="frmJobPreferences">
 							<?= Components::csrf(); ?>
 							<!-- Single Wrap -->
 							<div class="_dashboard_content">
 								<div class="_dashboard_content_header">
 									<div class="_dashboard__header_flex">
-										<h4><i class="fa fa-user mr-1"></i>My Job Preferences</h4>
+										<h4><i class="fa fa-briefcase mr-1"></i>My Job Preferences</h4>
 									</div>
 								</div>
 
 								<div class="_dashboard_content_body">
 									<div class="row">
-										<div class="col">
-											<div class="row">
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>First Name</label>
-														<input type="text" class="form-control with-light profile-value"
-															data-column='alumni_fname' name='alumni_fname'>
-													</div>
-												</div>
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>Middle Name</label>
-														<input type="text" class="form-control with-light profile-value"
-															data-column='alumni_mname' name='alumni_mname'>
-													</div>
-												</div>
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>Last Name</label>
-														<input type="text" class="form-control with-light profile-value"
-															data-column='alumni_lname' name='alumni_lname'>
-													</div>
-												</div>
-												<div class="col-xl-12 col-lg-12">
-													<div class="form-group">
-														<label>Job Title</label>
-														<input type="text" class="form-control with-light profile-value"
-															data-column='alumni_address' name='alumni_address' required>
-													</div>
-												</div>
-												<div class="col-xl-12 col-lg-12">
-													<div class="form-group">
-														<label>About Me</label>
-														<textarea class="form-control with-light profile-value"
-															data-column='alumni_address' name='alumni_address'
-															required></textarea>
-													</div>
-												</div>
-												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
+
+										<div class="col-xl-6 col-lg-6">
+											<div class="form-group">
+												<label class="">Job Title</label>
+												<input type="text" class="form-control preference-value" placeholder="Who do you need?" data-column="job_title" 
+													name="job_title" required>
+											</div>
+										</div>
+
+										<div class="col-xl-6 col-lg-6">
+											<div class="form-group">
+												<label class="">Wage/Salary</label>
+												<input type="text" class="form-control preference-value" data-column="salary_details" 
+													placeholder="Indicate currency (e.g. Php 20,000/mo)"
+													name="salary_details">
+											</div>
+										</div>
+
+										<div class="col-xl-6 col-lg-6">
+											<div class="form-group">
+												<label>Type of Employment</label>
+												<select class="form-control select2 preference-value" name="job_type_id" data-column="job_type_id" required>
+													<option value="0">Any</option>
+													<?= JobTypes::options() ?>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-xl-6 col-lg-6">
+											<div class="form-group">
+												<label>Schedule</label>
+												<select class="form-control select2 preference-value" data-column="job_sched_id" id="job_sched_id" required>
+													<option value="0">Any</option>
+													<?= JobSchedules::options() ?>
+												</select>
+											</div>
+										</div>
+
+										<div class="col-xl-12 col-lg-12">
+											<div class="form-group">
+												<label class="">Job Description</label>
+												<grammarly-editor-plugin>
+													<textarea id="job-text" class="form-control preference-value" data-column="job_description" name="job_description"></textarea>
+												</grammarly-editor-plugin>
 											</div>
 										</div>
 									</div>
 								</div>
 							</div>
 							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update_profile"><span
+							<button type="submit" class="btn btn-save" id="btn_update"><span
 									class="fa fa-edit"></span> Save Changes</button>
 						</form>
 					</div>
@@ -102,39 +108,11 @@
 	</div>
 </section>
 
-<!-- Log In Modal -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="registermodal" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
-		<div class="modal-content" id="registermodal">
-			<div class="modal-header">
-				<h4>Sign Out</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
-							class="ti-close"></i></span></button>
-			</div>
-			<div class="modal-body">
-
-
-				<div class="form-group text-center">
-					<span>Are you sure you want to sign out?</span>
-				</div>
-
-				<div class="social_logs mb-4">
-					<ul class="shares_jobs text-center">
-						<li><a href="auth/logout.php" class="share fb">Sign out</a></li>
-						<li><a href="#" class="share gp">Cancel</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- End Modal -->
-
 <script>
-	fetchProfile();
+	fetchAlumniPreferences();
 
-	function fetchProfile() {
-		$.post(base_controller + "alumni_profile", {}, function(data, status) {
+	function fetchAlumniPreferences() {
+		$.post(base_controller + "get_alumni_job_preferences", {}, function(data, status) {
 			var res = JSON.parse(data);
 			mapProfileValue(res);
 		});
@@ -142,7 +120,7 @@
 
 	function mapProfileValue(res) {
 		// Get all elements with the class name "profile-value"
-		const profileValueElements = document.querySelectorAll('.profile-value');
+		const profileValueElements = document.querySelectorAll('.preference-value');
 
 		// Loop through each element and retrieve the value of the "data-column" attribute
 		profileValueElements.forEach(element => {
@@ -151,23 +129,16 @@
 		});
 	}
 
-	$("#frmProfile").submit(function(e) {
+	$("#frmJobPreferences").submit(function(e) {
 		e.preventDefault();
-		$("#btn_update_profile").prop('disabled', true);
-		$("#btn_update_profile").html('Updating...');
-		$.post(base_controller + "update_alumni_profile", $("#frmProfile").serialize(), function(data, status) {
-			if (data == 1) {
-				// SUCCESS
-				$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
-			} else if (data == -1) {
-				// EXPIRED CSRF TOKEN
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will reload in <span id="countdown">3</span> seconds!</div>');
-				countDown(3);
-			} else {
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">' + data + '</div>');
+		$("#btn_update").prop('disabled', true);
+		$("#btn_update").html('Updating...');
+		$.post(base_controller + "update_alumni_job_preferences", $("#frmJobPreferences").serialize(), function(data, status) {
+			if(data == 1){
+				success_update();
 			}
-			$("#btn_update_profile").prop('disabled', false);
-			$("#btn_update_profile").html('Save Changes');
+			$("#btn_update").prop('disabled', false);
+			$("#btn_update").html('<span class="fa fa-edit"></span> Save Changes');
 		});
 	});
 

@@ -59,6 +59,9 @@ class Controller
       case 'get_alumni_data':
         $class_name = 'AlumniEducations';
         $method_name = 'data';
+      case 'get_alumni_job_preferences':
+        $class_name = 'AlumniJobPreferences';
+        $method_name = 'data';
         break;
       case 'get_colleges_data':
         $class_name = 'Colleges';
@@ -71,6 +74,10 @@ class Controller
       case 'get_work_experience_data':
         $class_name = 'AlumniWorkExperiences';
         $method_name = 'data';
+        break;
+      case 'update_alumni_job_preferences':
+        $class_name = 'AlumniJobPreferences';
+        $method_name = 'update_preferences';
         break;
       case 'update_alumni_profile':
         $class_name = 'Alumni';

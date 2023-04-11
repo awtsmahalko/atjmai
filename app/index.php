@@ -32,6 +32,8 @@ require 'routes/routes.php';
   <script type="text/javascript">
     var base_controller = "controller/web.php?uri=";
   </script>
+  <script src="../assets/dist/sweetalert2/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" href="../assets/dist/sweetalert2/sweetalert2.min.css">
 </head>
 
 <body class="blue-skin">
@@ -74,6 +76,9 @@ require 'routes/routes.php';
 
     // Metis Menu
     $("#metismenu").metisMenu();
+
+    // Select2
+    $(".select2").select2();
   </script>
   <script>
     function success_add() {

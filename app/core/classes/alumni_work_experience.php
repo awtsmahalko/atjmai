@@ -3,10 +3,6 @@ class AlumniWorkExperiences extends Connection
 {
     private $table = 'tbl_work_experiences';
     public $pk = 'work_exp_id';
-    public $session = array();
-
-    public $inputs = array();
-    public $old = array();
 
     public function add()
     {
@@ -22,16 +18,20 @@ class AlumniWorkExperiences extends Connection
             $date_resigned = $this->post('date_resigned');
             $currently_worked = $this->post('currently_worked') == 'on' ? 1 : 0;
 
-            $ret = $this->insert($this->table, [
+            $work_exp_id = $this->insert($this->table, [
                 'alumni_id' => $alumni_id,
                 'company_name' => $company_name,
                 'job_title' => $job_title,
                 'date_hired' => $date_hired,
                 'date_resigned' => $date_resigned,
                 'currently_worked' => $currently_worked,
-            ]);
-            if ($ret != 1)
-                throw new Exception($ret);
+            ],'Y');
+            if ($work_exp_id < 1)
+                throw new Exception($work_exp_id);
+
+            $AlumniWorkAchievements = new AlumniWorkAchievements;
+            $AlumniWorkAchievements->add($work_exp_id);
+
             $this->commit();
             return 1;
         } catch (Exception $e) {
@@ -75,6 +75,9 @@ class AlumniWorkExperiences extends Connection
             ],"work_exp_id = '$work_exp_id'");
             if ($ret != 1)
                 throw new Exception($ret);
+
+            $AlumniWorkAchievements = new AlumniWorkAchievements;
+            $AlumniWorkAchievements->edit($work_exp_id);
             $this->commit();
             return 1;
         } catch (Exception $e) {
@@ -85,11 +88,17 @@ class AlumniWorkExperiences extends Connection
     public function destroy()
     {
         $id = $this->post($this->pk);
+
+        $AlumniWorkAchievements = new AlumniWorkAchievements;
+        $AlumniWorkAchievements->destroy_by_work($id);
+
         return $this->delete($this->table,"$this->pk = '$id'");
     }
 
     public function data()
     {
+        $AlumniWorkAchievements = new AlumniWorkAchievements;
+
         $Alumni = new Alumni();
         $alumni_id = $Alumni->id();
 
@@ -98,6 +107,7 @@ class AlumniWorkExperiences extends Connection
         while ($row = $result->fetch_assoc()) {
             $year_end = $row['currently_worked'] == 1 ? "Current" : date("M Y",strtotime($row['date_resigned']));
             $row['year_span'] = date("M Y",strtotime($row['date_hired'])) . " - " . $year_end;
+            $row['achievements'] = $AlumniWorkAchievements->data_by_work($row['work_exp_id']);
             array_push($response['alumni'], $row);
         }
         return json_encode($response);

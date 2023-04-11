@@ -1,6 +1,6 @@
 <div class="dashboard-navbar overlio-top">
     <div class="d-user-avater">
-        <img src="../assets/img/users/default_male.png" class="img-fluid rounded" alt="">
+        <img src="../assets/img/users/<?= $_SESSION['user']['img'] ?>" class="img-fluid rounded" alt="">
         <h4 id="profile-fullname"><?= $_SESSION['user']['fullname'] ?></h4>
         <span id="profile-email"><?= $_SESSION['user']['email'] ?></span>
     </div>

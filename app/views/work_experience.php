@@ -1,6 +1,4 @@
-<script src="../assets/dist/sweetalert2/sweetalert2.all.min.js"></script>
-<link rel="stylesheet" href="../assets/dist/sweetalert2/sweetalert2.min.css">
-
+<script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_94DaLUWYhcxUnx1PtV9VtD"></script>
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background:url(../assets/img/front_bg.webp)no-repeat;" data-overlay="5">
 	<div class="container">
@@ -38,8 +36,6 @@
 
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<form id="frmEducation">
-							<?= Components::csrf(); ?>
 							<!-- Single Wrap -->
 							<div class="_dashboard_content">
 								<div class="_dashboard_content_header row">
@@ -79,7 +75,6 @@
 									</div>
 								</div>
 							</div>
-						</form>
 					</div>
 				</div>
 			</div>
@@ -91,7 +86,7 @@
 	<!-- Log In Modal -->
 	<div class="modal fade" id="modalAddWorkExperience" tabindex="-1" role="dialog" aria-labelledby="modalworkexperience"
 		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
+		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document" style="max-width: 60% !important;">
 			<div class="modal-content" id="modalworkexperience">
 				<div class="modal-header">
 					<h4>Add Work Experience</h4>
@@ -101,14 +96,14 @@
 				<div class="modal-body">
 					<input type="hidden" class="work-exp-value" id="work_exp_id" name="work_exp_id" data-column="work_exp_id">
 					<div class="row">
-						<div class="col-xl-12 col-lg-12">
+						<div class="col-xl-6 col-lg-12">
 							<div class="form-group">
 								<label>Company Name</label>
 								<input type="text" class="form-control work-exp-value" data-column="company_name"
 									name='company_name' placeholder="Meta" required>
 							</div>
 						</div>
-						<div class="col-xl-12 col-lg-12">
+						<div class="col-xl-6 col-lg-12">
 							<div class="form-group">
 								<label>Job Title</label>
 								<input type="text" class="form-control work-exp-value" data-column="job_title"
@@ -135,6 +130,18 @@
 									name='date_resigned'>
 							</div>
 						</div>
+						<div class="col-lg-12 col-md-12">
+							<div class="form-group">
+								<label>Achievements<span></span></label>
+								<div class="tg_grouping">
+									<grammarly-editor-plugin>
+									 <input type="text" id="lg-input" class="form-control with-light" placeholder="e.g. job title, career">
+									</grammarly-editor-plugin>
+									<a id="cmd-ChipsAjout" class="btn_groupin_tag"><i class="fa fa-plus"></i></a>
+								</div>
+								<div id="lg-Chips"></div>
+							</div>
+						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
@@ -148,28 +155,106 @@
 	</div>
 	<!-- End Modal -->
 </form>
+<script>
+	var chipsAchievements = [];
 
+	function fDisplayChips() {
+		// FILLS THE CHIPS ZONE FROM THE LIST
+		$('#lg-Chips').material_chip({
+			data: chipsAchievements
+		});
+	}
+		// ADDING A NEW CHIP
+	function fChipAdd(lChipName){
+		// lChipName = lChipName.toLowerCase();
+		// test1 : minimum word size
+		if (!(lChipName.length > 2)){
+			return 0;
+		}
+		// test2 :  no duplicates
+		for(i=0;i<chipsAchievements.length;i++) {
+			if(lChipName == chipsAchievements[i].tag){
+				return 0;
+			}
+		}
+		// tests Okay => add the chip and refresh the view
+		appendAchievements(lChipName);
+		fDisplayChips();
+		return 1;
+	};
+	function appendAchievements(lChipName,id=0){
+		chipsAchievements.push({"tag":lChipName,"id" : id});
+	}
+	$(function() {
+	// delete chip command
+	$('#lg-Chips').on('chip.delete', function(e, chip){
+		chipsAchievements = $("#lg-Chips").material_chip('data');
+	});
+
+	$("#lg-Chips").focusin(function () {
+		$("#lg-input").focus();
+	});
+	fDisplayChips();
+
+// NEW CHIP COMMAND
+	$("#cmd-ChipsAjout").click(function () {
+		fChipAdd($("#lg-input").val()) ;
+		$("#lg-input").val("");
+	});
+});
+</script>
 <script>
 	get_work_experiences();
 	$("#frmWorkExperience").submit(function(e) {
 		e.preventDefault();
 
+		var formData = new FormData(this);
+		formData.append('achievements', JSON.stringify(chipsAchievements));
+
 		var form_type = $("#work_exp_id").val() * 1;
 		var text_before = form_type > 0 ? "Updating...":"Adding...";
 		var controller_post = form_type > 0 ? "update_alumni_work" :"add_alumni_work";
+
 		$("#btn_update_work").prop('disabled', true);
 		$("#btn_update_work").html(text_before);
-		$.post(base_controller + controller_post, $("#frmWorkExperience").serialize(), function(data, status) {
+		$.ajax({
+	      url: base_controller + controller_post,
+	      type: 'POST',
+	      data: formData,
+	      processData: false,
+	      contentType: false,
+	      success: function(response) {
+
 			$("#closeAddWorkExpModal").click();
-			if(data == 1){
+			if(response == 1){
 				form_type > 0 ? success_update() :success_add();
 			}else{
 				error_response();
 			}
 			get_work_experiences();
+
 			$("#btn_update_work").prop('disabled', false);
 			$("#btn_update_work").html('Submit');
-		});
+	        // handle successful response
+	      },
+	      error: function(xhr, status, error) {
+	        // handle error
+	      }
+	    });
+
+		// $("#btn_update_work").prop('disabled', true);
+		// $("#btn_update_work").html(text_before);
+		// $.post(base_controller + controller_post, $("#frmWorkExperience").serialize(), function(data, status) {
+		// 	$("#closeAddWorkExpModal").click();
+		// 	if(data == 1){
+		// 		form_type > 0 ? success_update() :success_add();
+		// 	}else{
+		// 		error_response();
+		// 	}
+		// 	get_work_experiences();
+		// 	$("#btn_update_work").prop('disabled', false);
+		// 	$("#btn_update_work").html('Submit');
+		// });
 	});
 
 	function get_work_experiences() {
@@ -181,18 +266,21 @@
 				$("#tbl_work tbody").html("");
 				if(data.alumni.length > 0){
 					$.each(data.alumni, function(index, element) {
+						if(element.achievements.length > 0){
+							var achieve_li = '';
+							for (var i = 0; i < element.achievements.length; i++) {
+								const liRow = element.achievements[i];
+								achieve_li += '<li style="list-style: initial;">'+liRow.achievement_name+'</li>';
+							}
+							var achieve_data = "<ul>"+achieve_li+"</ul>";
+						}else{
+							var achieve_data = "";
+						}
 						$("#tbl_work tbody").append("<tr>"+
 						"<td>" + element.work_exp_id + "</td>"+
 						"<td>" + element.company_name + "</td>"+
 						"<td>" + element.job_title + "</td>"+
-						"<td>" +
-							"<ul>"+
-								'<li style="list-style: initial;">Aasdasdas asdasdas asd asd as as asd asa asd asd</li>'+
-								'<li style="list-style: initial;">Aasdasdas asdasdas asd asd as as asd asa asd asd</li>'+
-								'<li style="list-style: initial;">Aasdasdas asdasdas asd asd as as asd asa asd asd</li>'+
-								'<li style="list-style: initial;">Aasdasdas asdasdas asd asd as as asd asa asd asd</li>'+
-							"</ul>"+
-						"</td>"+
+						"<td>" +achieve_data+"</td>"+
 						"<td>" + element.year_span + "</td>" +
 						"<td>"+
 						"<button type='button' class='btn btn-xs btn-primary' onclick='editWorkExperience(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddWorkExperience'><span class='fa fa-edit'></span></button>"+
@@ -220,21 +308,27 @@
 
 		if(res.currently_worked == 1){
 			$("#check_work").attr("checked",true);
-			$(".year-start").removeClass("col-lg-6").removeClass("col-xl-6").addClass("col-lg-12").addClass("col-xl-12");
+			// $(".year-start").removeClass("col-lg-6").removeClass("col-xl-6").addClass("col-lg-12").addClass("col-xl-12");
 			$(".year-end").hide();
 		}else{
 			$("#check_work").attr("checked",false);
-			$(".year-start").addClass("col-lg-6").addClass("col-xl-6").removeClass("col-lg-12").removeClass("col-xl-12");
+			// $(".year-start").addClass("col-lg-6").addClass("col-xl-6").removeClass("col-lg-12").removeClass("col-xl-12");
 			$(".year-end").show();
 		}
+		chipsAchievements = [];
+		for (var i = 0; i < res.achievements.length; i++) {
+			const liRow = res.achievements[i];
+			appendAchievements(liRow.achievement_name,liRow.achievements_id);
+		}
+		fDisplayChips();
 	}
 
 	function currentlyWorked(el){
 		if(el.checked){
-			$(".year-start").removeClass("col-lg-6").removeClass("col-xl-6").addClass("col-lg-12").addClass("col-xl-12");
+			// $(".year-start").removeClass("col-lg-6").removeClass("col-xl-6").addClass("col-lg-12").addClass("col-xl-12");
 			$(".year-end").hide();
 		}else{
-			$(".year-start").addClass("col-lg-6").addClass("col-xl-6").removeClass("col-lg-12").removeClass("col-xl-12");
+			// $(".year-start").addClass("col-lg-6").addClass("col-xl-6").removeClass("col-lg-12").removeClass("col-xl-12");
 			$(".year-end").show();
 		}
 	}
@@ -245,6 +339,10 @@
 		// Loop through each element and retrieve the value of the "data-column" attribute
 		profileValueElements.forEach(element => {
 			element.value = "";
+		});
+
+		$('#lg-Chips').material_chip({
+			data: []
 		});
 	}
 

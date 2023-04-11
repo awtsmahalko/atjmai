@@ -41,6 +41,11 @@ class Connection
         return !isset($_POST[$key]) ? $ret : ($clean ? $this->clean($_POST[$key]) :$_POST[$key]);
     }
 
+    public function files($key , $ret = '')
+    {
+        return !isset($_FILES[$key]) ? $ret :$_FILES[$key];
+    }
+
     public function insert($table, $para = array(), $last_id = 'N')
     {
         $table_columns = implode(',', array_keys($para));

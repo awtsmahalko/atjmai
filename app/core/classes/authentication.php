@@ -18,6 +18,7 @@ class Authentication extends Connection
         $email          = $this->post('user_email');
         $password       = $this->post('password');
         $password2      = $this->post('password2');
+        $user_img       = $user_category == 'S' ? 'default_male.png' : 'default_company.png';
 
         try {
             $this->check();
@@ -35,6 +36,7 @@ class Authentication extends Connection
                 'user_password' => md5($password),
                 'user_email'    => $email,
                 'user_category' => $user_category,
+                'user_img'      => $user_img,
                 'user_status'   => 1
             ], 'Y');
 
@@ -49,7 +51,7 @@ class Authentication extends Connection
                             'fullname'  => $user_fullname,
                             'category'  => $user_category,
                             'email'     => $email,
-                            'img'       => "default.png",
+                            'img'       => $user_img,
                         ];
                         return 1;
                     } else {
@@ -67,7 +69,7 @@ class Authentication extends Connection
                             'fullname'  => $user_fullname,
                             'category'  => $user_category,
                             'email'     => $email,
-                            'img'       => "default.png",
+                            'img'       => $user_img,
                         ];
                         return 1;
                     } else {
@@ -103,7 +105,7 @@ class Authentication extends Connection
                 'fullname'      => $row['user_fullname'],
                 'category'      => $row['user_category'],
                 'email'         => $row['user_email'],
-                'img'           => "default.png",
+                'img'           => $row['user_img'],
             ];
             return 1;
         } catch (Exception $e) {

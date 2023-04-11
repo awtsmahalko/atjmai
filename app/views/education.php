@@ -15,8 +15,6 @@ ENGINE=InnoDB
 AUTO_INCREMENT=3
 ;
  -->
-<script src="../assets/dist/sweetalert2/sweetalert2.all.min.js"></script>
-<link rel="stylesheet" href="../assets/dist/sweetalert2/sweetalert2.min.css">
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background:url(../assets/img/front_bg.webp)no-repeat;" data-overlay="5">
 	<div class="container">
