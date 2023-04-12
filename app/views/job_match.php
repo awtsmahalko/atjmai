@@ -9,19 +9,87 @@
 </style>
 
 <script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_94DaLUWYhcxUnx1PtV9VtD"></script>
-<div class="page-title">
-  <div class="container">
-    <div class="row">
-      <div class="col-lg-12 col-md-12">
-        <h2 class="ipt-title">Job Matching</h2>
-        <span class="ipn-subtitle">Collect and analyze data on alumni's education, work experience, skills, and
-          preferences to provide personalized job recommendations. </span>
-      </div>
-    </div>
-  </div>
-</div>
 <section>
   <div class="container">
+    <div class="row">
+      <div class="col-lg-12 col-md-12 col-sm-12">
+        <form id="frmJobPreferences">
+          <?= Components::csrf(); ?>
+          <!-- Single Wrap -->
+          <div class="_dashboard_content">
+            <div class="_dashboard_content_header">
+              <div class="_dashboard__header_flex">
+                <h4><i class="fa fa-briefcase mr-1"></i>My Job Preferences</h4>
+              </div>
+            </div>
+
+            <div class="_dashboard_content_body">
+              <div class="row">
+
+                <div class="col-xl-6 col-lg-6">
+                  <div class="form-group">
+                    <label class="">Job Title</label>
+                    <input type="text" class="form-control preference-value" placeholder="Who do you need?"
+                      data-column="job_title" name="job_title" required>
+                  </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <div class="form-group">
+                    <label class="">Wage/Salary</label>
+                    <input type="text" class="form-control preference-value" data-column="salary_details"
+                      placeholder="Indicate currency (e.g. Php 20,000/mo)" name="salary_details">
+                  </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Type of Employment</label>
+                    <select class="form-control select2 preference-value" name="job_type_id" data-column="job_type_id"
+                      required>
+                      <option value="0">Any</option>
+                      <?= JobTypes::options() ?>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-xl-6 col-lg-6">
+                  <div class="form-group">
+                    <label>Schedule</label>
+                    <select class="form-control select2 preference-value" data-column="job_sched_id" id="job_sched_id"
+                      required>
+                      <option value="0">Any</option>
+                      <?= JobSchedules::options() ?>
+                    </select>
+                  </div>
+                </div>
+
+                <div class="col-xl-12 col-lg-12">
+                  <div class="form-group">
+                    <label class="">Job Description</label>
+                    <grammarly-editor-plugin>
+                      <textarea id="job-text" class="form-control preference-value" data-column="job_description"
+                        name="job_description"></textarea>
+                    </grammarly-editor-plugin>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="_job_detail_single flexeo">
+            <div class="_job_detail_single_flex"></div>
+            <div class="_exlio_buttons">
+              <ul class="bottoms_applies">
+                <li>
+                  <a href="#" class="_applied_jb">Match Job</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </form>
+      </div>
+    </div>
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12">
         <div class="_job_detail_box">

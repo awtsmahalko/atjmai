@@ -59,6 +59,7 @@ class Controller
       case 'get_alumni_data':
         $class_name = 'AlumniEducations';
         $method_name = 'data';
+        break;
       case 'get_alumni_job_preferences':
         $class_name = 'AlumniJobPreferences';
         $method_name = 'data';

@@ -9,9 +9,16 @@ class Router
   public $request_path = '';
   public $route;
 
-  public function dispatch($path)
+  public function dispatch($path, $param)
   {
     switch ($path) {
+      case 'candidate-detail':
+        if (count($param) > 1 && $param[1] > 0) {
+          $route = ['header' => 'header-light', 'file' => 'candidate_detail.php', 'id' => $param[1]];
+        } else {
+          $route = ['header' => 'header-light', 'file' => '404.php'];
+        }
+        break;
       case 'colleges':
         $route = ['header' => 'header-light', 'file' => 'colleges.php'];
         break;
@@ -20,6 +27,16 @@ class Router
         break;
       case 'education':
         $route = ['header' => 'header-light', 'file' => 'education.php'];
+        break;
+      case 'posts':
+        $route = ['header' => 'header-light', 'file' => 'posts.php'];
+        break;
+      case 'post-detail':
+        if (count($param) > 1 && $param[1] > 0) {
+          $route = ['header' => 'header-light', 'file' => 'post_detail.php', 'id' => $param[1]];
+        } else {
+          $route = ['header' => 'header-light', 'file' => '404.php'];
+        }
         break;
       case 'profile':
         if ($_SESSION['user']['category'] == 'S') {
@@ -42,13 +59,23 @@ class Router
         $route = ['header' => 'header-light', 'file' => 'create_job.php'];
         break;
       case 'job-matching':
-        $route = ['header' => 'header-light', 'file' => 'job_match.php'];
+        $route = ['header' => 'header-light header-fixed', 'file' => 'job_match.php'];
         break;
       case 'job-preferences':
         $route = ['header' => 'header-light', 'file' => 'job_preferences.php'];
         break;
+      case 'job-detail':
+        if (count($param) > 1 && $param[1] > 0) {
+          $route = ['header' => 'header-light', 'file' => 'job_detail.php', 'id' => $param[1]];
+        } else {
+          $route = ['header' => 'header-light', 'file' => '404.php'];
+        }
+        break;
       case 'programs':
         $route = ['header' => 'header-light', 'file' => 'course.php'];
+        break;
+      case 'report-alumni':
+        $route = ['header' => 'header-light', 'file' => 'report_alumni.php'];
         break;
       case 'work-experience':
         $route = ['header' => 'header-light', 'file' => 'work_experience.php'];

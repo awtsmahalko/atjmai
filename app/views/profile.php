@@ -1,7 +1,8 @@
 <script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_94DaLUWYhcxUnx1PtV9VtD"></script>
 
 <!-- ============================ Page Title Start================================== -->
-<div class="page-title bg-cover" style="background:url(../assets/img/front_bg.webp)no-repeat;" data-overlay="5">
+<div class="page-title bg-cover" style="background:url(<?=BASE_URL?>assets/img/front_bg.webp)no-repeat;"
+	data-overlay="5">
 	<div class="container">
 		<div class="row">
 			<div class="col-lg-12 col-md-12"></div>
@@ -51,8 +52,11 @@
 									<div class="row">
 										<div class="col-auto">
 											<div class="custom-file avater_uploads">
-												<input type="file" name="file" class="custom-file-input" id="customFile" onchange="previewImage(this)">
-												<label class="custom-file-label" for="customFile"><img src="../assets/img/users/<?=$_SESSION['user']['img']?>" id="preview" class="img-fluid rounded" alt=""></label>
+												<input type="file" name="file" class="custom-file-input" id="customFile"
+													onchange="previewImage(this)">
+												<label class="custom-file-label" for="customFile"><img
+														src="../assets/img/users/<?=$_SESSION['user']['img']?>"
+														id="preview" class="img-fluid rounded" alt=""></label>
 											</div>
 										</div>
 
@@ -161,36 +165,36 @@
 		e.preventDefault();
 
 		var formData = new FormData(this);
-    
-    
+
+
 		$("#btn_update_profile").prop('disabled', true);
 		$("#btn_update_profile").html('Updating...');
-	    // send AJAX request
-	    $.ajax({
-	      url: base_controller + "update_alumni_profile",
-	      type: 'POST',
-	      data: formData,
-	      processData: false,
-	      contentType: false,
-	      success: function(response) {
-			if (response == 1) {
-				// SUCCESS
-				$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
-			} else if (response == -1) {
-				// EXPIRED CSRF TOKEN
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will reload in <span id="countdown">3</span> seconds!</div>');
-				countDown(3);
-			} else {
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">' + response + '</div>');
+		// send AJAX request
+		$.ajax({
+			url: base_controller + "update_alumni_profile",
+			type: 'POST',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(response) {
+				if (response == 1) {
+					// SUCCESS
+					$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
+				} else if (response == -1) {
+					// EXPIRED CSRF TOKEN
+					$("#response-profile-update").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will reload in <span id="countdown">3</span> seconds!</div>');
+					countDown(3);
+				} else {
+					$("#response-profile-update").html('<div class="alert alert-danger" role="alert">' + response + '</div>');
+				}
+				$("#btn_update_profile").prop('disabled', false);
+				$("#btn_update_profile").html('Save Changes');
+				// handle successful response
+			},
+			error: function(xhr, status, error) {
+				// handle error
 			}
-			$("#btn_update_profile").prop('disabled', false);
-			$("#btn_update_profile").html('Save Changes');
-	        // handle successful response
-	      },
-	      error: function(xhr, status, error) {
-	        // handle error
-	      }
-	    });
+		});
 	});
 
 	function countDown(sec = 5) {
@@ -204,13 +208,13 @@
 		}, 1000);
 	}
 
-	  function previewImage(input) {
-	    if (input.files && input.files[0]) {
-	      var reader = new FileReader();
-	      reader.onload = function (e) {
-	        document.getElementById("preview").src = e.target.result;
-	      }
-	      reader.readAsDataURL(input.files[0]);
-	    }
-	  }
+	function previewImage(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				document.getElementById("preview").src = e.target.result;
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
+	}
 </script>

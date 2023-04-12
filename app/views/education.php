@@ -105,8 +105,8 @@ AUTO_INCREMENT=3
 			<div class="modal-content" id="modaladdeduc">
 				<div class="modal-header">
 					<h4>Add Education</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddEducModal"><span
-							aria-hidden="true"><i class="ti-close"></i></span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+						id="closeAddEducModal"><span aria-hidden="true"><i class="ti-close"></i></span></button>
 				</div>
 				<div class="modal-body">
 					<input type="hidden" class="educ-value" id="educ_id" name="educ_id" data-column="educ_id">
@@ -167,15 +167,15 @@ AUTO_INCREMENT=3
 		e.preventDefault();
 
 		var form_type = $("#educ_id").val() * 1;
-		var text_before = form_type > 0 ? "Updating...":"Adding...";
-		var controller_post = form_type > 0 ? "update_alumni_education" :"add_alumni_education";
+		var text_before = form_type > 0 ? "Updating..." : "Adding...";
+		var controller_post = form_type > 0 ? "update_alumni_education" : "add_alumni_education";
 		$("#btn_update_education").prop('disabled', true);
 		$("#btn_update_education").html(text_before);
 		$.post(base_controller + controller_post, $("#frmEducation").serialize(), function(data, status) {
 			$("#closeAddEducModal").click();
-			if(data == 1){
-				form_type > 0 ? success_update() :success_add();
-			}else{
+			if (data == 1) {
+				form_type > 0 ? success_update() : success_add();
+			} else {
 				error_response();
 			}
 			get_educations();

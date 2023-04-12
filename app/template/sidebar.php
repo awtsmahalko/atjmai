@@ -1,8 +1,12 @@
 <div class="dashboard-navbar overlio-top">
     <div class="d-user-avater">
-        <img src="../assets/img/users/<?= $_SESSION['user']['img'] ?>" class="img-fluid rounded" alt="">
-        <h4 id="profile-fullname"><?= $_SESSION['user']['fullname'] ?></h4>
-        <span id="profile-email"><?= $_SESSION['user']['email'] ?></span>
+        <img src="<?=BASE_URL?>/assets/img/users/<?= $_SESSION['user']['img'] ?>" class="img-fluid rounded" alt="">
+        <h4 id="profile-fullname">
+            <?= $_SESSION['user']['fullname'] ?>
+        </h4>
+        <span id="profile-email">
+            <?= $_SESSION['user']['email'] ?>
+        </span>
     </div>
     <div class="d-navigation">
         <ul id="metismenu">

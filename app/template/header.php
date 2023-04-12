@@ -5,7 +5,7 @@
         <nav id="navigation" class="navigation navigation-landscape">
           <div class="nav-header">
             <a class="nav-brand" href="#">
-              <img src="../assets/img/logo1.png" class="logo" alt="" />
+              <img src="<?= BASE_URL ?>/assets/img/logo1.png" class="logo" alt="" />
             </a>
             <div class="nav-toggle"></div>
           </div>
@@ -14,7 +14,10 @@
               <?php
               $Menus = new Menus;
               $Menus->navbar('Home', 'dashboard', $router->route['path']);
-              $Menus->navbar('Post', 'post', $router->route['path']);
+              $Menus->navbar_parent("Posts", array(
+                array('Create Post', 'create-post'),
+                array('View Post', 'posts'),
+              ));
               $Menus->navbar_parent("Jobs", array(
                 array('Listing', 'job-listing'),
                 array('Matching', 'job-matching'),
