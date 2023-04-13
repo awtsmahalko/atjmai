@@ -48,8 +48,7 @@
             $Menus->sidebar('Messages', 'messages', 'ti-email', $router->route['path']);
             $Menus->sidebar('Notifications', 'notification', 'ti-bell', $router->route['path']);
             ?>
-            <!-- 
-            <li><a href="#" data-toggle="modal" data-target="#logoutModal"><i class="ti-power-off"></i>Log Out</a></li> -->
+            <li><a href="<?=$Menus->uri("auth/logout.php");?>"><i class="ti-power-off"></i>Log Out</a></li>
         </ul>
     </div>
 </div>

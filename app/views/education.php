@@ -192,7 +192,7 @@ AUTO_INCREMENT=3
 			success: function(data) {
 				$("#tbl_educ tbody").html("");
 				$.each(data.alumni, function(index, element) {
-					$("#tbl_educ tbody").append("<tr><td>" + element.educ_id + "</td><td>" + element.educ_degree + "</td><td>" + element.educ_school + "</td><td>" + element.honor_received + "</td><td>" + element.year_enrolled + " - " + element.year_graduated + "</td>" +
+					$("#tbl_educ tbody").append("<tr><td>" + element.count + "</td><td>" + element.educ_degree + "</td><td>" + element.educ_school + "</td><td>" + element.honor_received + "</td><td>" + element.year_enrolled + " - " + element.year_graduated + "</td>" +
 						"<td><button class='btn btn-xs btn-primary' onclick='editEduc(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddEduc'><span class='fa fa-edit'></span></button> <button class='btn btn-xs btn-danger' onclick='deleteEduc(" + element.educ_id + ")'><span class='fa fa-trash'></span></button></td></tr>");
 				});
 			}

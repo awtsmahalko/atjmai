@@ -102,12 +102,14 @@ class AlumniWorkExperiences extends Connection
         $Alumni = new Alumni();
         $alumni_id = $Alumni->id();
 
+        $count = 1;
         $response['alumni'] = array();
-        $result = $this->select($this->table, "*", "alumni_id = '$alumni_id'");
+        $result = $this->select($this->table, "*", "alumni_id = '$alumni_id' ORDER BY date_hired ASC");
         while ($row = $result->fetch_assoc()) {
             $year_end = $row['currently_worked'] == 1 ? "Current" : date("M Y",strtotime($row['date_resigned']));
             $row['year_span'] = date("M Y",strtotime($row['date_hired'])) . " - " . $year_end;
             $row['achievements'] = $AlumniWorkAchievements->data_by_work($row['work_exp_id']);
+            $row['count'] = $count++;
             array_push($response['alumni'], $row);
         }
         return json_encode($response);

@@ -99,9 +99,11 @@ class AlumniEducations extends Connection
         $Alumni = new Alumni();
         $alumni_id = $Alumni->id();
 
+        $count = 1;
         $response['alumni'] = array();
         $result = $this->select($this->table, "*", "alumni_id = '$alumni_id'");
         while ($row = $result->fetch_assoc()) {
+            $row['count'] = $count++;
             array_push($response['alumni'], $row);
         }
         return json_encode($response);

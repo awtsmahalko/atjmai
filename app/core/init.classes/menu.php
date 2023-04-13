@@ -44,25 +44,10 @@ class Menus
     public function profile()
     {
         echo '<ul class="nav-menu nav-menu-social align-to-right">
-         <li>
-           <a href="' . $this->uri('notifications') . '">
-             <i class="ti-bell mr-1"></i>
-           </a>
-         </li>
-         <li>
-           <a href="' . $this->uri('messages') . '">
-             <i class="ti-email mr-1"></i>
-           </a>
-         </li>
         <li class="add-listing dark-bg">
            <a href="' . $this->uri('profile') . '">
              <i class="ti-user mr-1"></i>
              ' . $_SESSION['user']['fullname'] . '
-           </a>
-         </li>
-         <li>
-           <a href="' . $this->uri('auth/logout.php') . '">
-             <i class="ti-switch-off mr-1"></i>
            </a>
          </li>
        </ul>';

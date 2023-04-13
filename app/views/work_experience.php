@@ -277,7 +277,7 @@
 							var achieve_data = "";
 						}
 						$("#tbl_work tbody").append("<tr>"+
-						"<td>" + element.work_exp_id + "</td>"+
+						"<td>" + element.count + "</td>"+
 						"<td>" + element.company_name + "</td>"+
 						"<td>" + element.job_title + "</td>"+
 						"<td>" +achieve_data+"</td>"+

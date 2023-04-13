@@ -88,7 +88,7 @@
 
 										<div class="col-xl-12 col-lg-12">
 											<div class="form-group">
-												<label class="">Job Description</label>
+												<label class="">Summary</label>
 												<grammarly-editor-plugin>
 													<textarea id="job-text" class="form-control preference-value" data-column="job_description" name="job_description"></textarea>
 												</grammarly-editor-plugin>
