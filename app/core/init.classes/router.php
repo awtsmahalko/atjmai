@@ -42,6 +42,9 @@ class Router
         if ($_SESSION['user']['category'] == 'S') {
           $route = ['header' => 'header-light', 'file' => 'profile.php'];
         }
+        if ($_SESSION['user']['category'] == 'A') {
+          $route = ['header' => 'header-light', 'file' => 'admin_profile.php'];
+        }
         if ($_SESSION['user']['category'] == 'E') {
           $route = ['header' => 'header-light', 'file' => 'company_profile.php'];
         }
@@ -76,6 +79,9 @@ class Router
         break;
       case 'report-alumni':
         $route = ['header' => 'header-light', 'file' => 'report_alumni.php'];
+        break;
+      case 'report-employer':
+        $route = ['header' => 'header-light', 'file' => 'report_employer.php'];
         break;
       case 'work-experience':
         $route = ['header' => 'header-light', 'file' => 'work_experience.php'];

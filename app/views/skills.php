@@ -240,9 +240,10 @@
 
 	function starGenerator(id, rate) {
 		var stars = '';
+		var tooltips = ['Good', 'Average', 'Very Good', 'Excellent', 'Superior'];
 		for (var i = 1; i <= 5; i++) {
 			var star_selected = i <= rate ? "star-active" : "";
-			stars += '<i class="fa fa-star star-' + id + ' ' + star_selected + '" onclick="rateSkill(' + id + ',' + i + ')"></i>';
+			stars += '<i class="fa fa-star star-' + id + ' ' + star_selected + '" onclick="rateSkill(' + id + ',' + i + ')" data-toggle="tooltip" title="' + tooltips[i - 1] + '"></i>';
 		}
 		return stars;
 	}

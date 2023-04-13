@@ -1,6 +1,6 @@
 <div class="dashboard-navbar overlio-top">
     <div class="d-user-avater">
-        <img src="<?=BASE_URL?>/assets/img/users/<?= $_SESSION['user']['img'] ?>" class="img-fluid rounded" alt="">
+        <img src="<?= BASE_URL ?>/assets/img/users/<?= $_SESSION['user']['img'] ?>" class="img-fluid rounded" alt="">
         <h4 id="profile-fullname">
             <?= $_SESSION['user']['fullname'] ?>
         </h4>
@@ -22,7 +22,7 @@
             $Menus->sidebar('Resume', 'resume', 'fa fa-file', $router->route['path'], 'S');
             // $Menus->sidebar('Jobs', 'jobs', 'fa fa-briefcase', $router->route['path']);
 
-            if($_SESSION['user']['category'] == 'E'){
+            if ($_SESSION['user']['category'] == 'E') {
                 // Employers
                 $Menus->sidebar_parent('Jobs', 'fa fa-briefcase', array(
                     array("Manage Jobs", "jobs"),
@@ -30,7 +30,7 @@
                 ));
             }
 
-            if($_SESSION['user']['category'] == 'E'){
+            if ($_SESSION['user']['category'] == 'A') {
                 // Admin
                 $Menus->sidebar_parent('Master Data', 'fa fa-file-o', array(
                     array("Colleges", "colleges"),

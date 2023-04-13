@@ -4,10 +4,6 @@ class Courses extends Connection
     private $table = 'tbl_courses';
     public $pk = 'course_id';
     public $name = 'course_name';
-    public $session = array();
-
-    public $inputs = array();
-    public $old = array();
 
     public static function options($values = 0)
     {
@@ -37,7 +33,9 @@ class Courses extends Connection
     {
         $response['courses'] = array();
         $result = $this->select($this->table);
+        $count = 1;
         while ($row = $result->fetch_assoc()) {
+            $row['count'] = $count++;
             $row['colleges'] = Colleges::dataOf($row['college_id']);
             array_push($response['courses'], $row);
         }

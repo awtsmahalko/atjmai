@@ -186,7 +186,8 @@ $csrf = Components::csrf();
 
 		<!-- ============================ Main Section Start ================================== -->
 		<!--== Start Login Area Wrapper ==-->
-		<section class="account-login-area bg-cover" style="background:#191f2b url(../assets/img/front_bg.webp) no-repeat;">
+		<section class="account-login-area bg-cover"
+			style="background:#191f2b url(../assets/img/front_bg.webp) no-repeat;">
 			<div class="container">
 				<div class="row justify-content-center">
 					<div class="col-md-8 col-lg-8 col-xl-8">
@@ -197,18 +198,21 @@ $csrf = Components::csrf();
 								</div>
 								<ul class="nav nav-pills" id="pills-tab" role="tablist">
 									<li class="nav-item" role="presentation">
-										<button class="nav-link active" id="candidate-tab" data-bs-toggle="pill" data-bs-target="#candidate"
-											type="button" role="tab" aria-controls="candidate" aria-selected="true"><i
+										<button class="nav-link active" id="candidate-tab" data-bs-toggle="pill"
+											data-bs-target="#candidate" type="button" role="tab"
+											aria-controls="candidate" aria-selected="true"><i
 												class="fa fa-graduation-cap"></i> Alumni</button>
 									</li>
 									<li class="nav-item" role="presentation">
-										<button class="nav-link" id="employer-tab" data-bs-toggle="pill" data-bs-target="#employer"
-											type="button" role="tab" aria-controls="employer" aria-selected="false" tabindex="-1"><i
-												class="fa fa-briefcase"></i> Employer</button>
+										<button class="nav-link" id="employer-tab" data-bs-toggle="pill"
+											data-bs-target="#employer" type="button" role="tab" aria-controls="employer"
+											aria-selected="false" tabindex="-1"><i class="fa fa-briefcase"></i>
+											Employer</button>
 									</li>
 								</ul>
 								<div class="tab-content" id="pills-tabContent">
-									<div class="tab-pane fade show active" id="candidate" role="tabpanel" aria-labelledby="candidate-tab">
+									<div class="tab-pane fade show active" id="candidate" role="tabpanel"
+										aria-labelledby="candidate-tab">
 										<form action="#" id="frmRegister">
 											<input type='hidden' value='S' name='user_category'>
 											<?= $csrf ?>
@@ -216,19 +220,22 @@ $csrf = Components::csrf();
 												<div class="col-4">
 													<div class="form-group">
 														<label>Firstname</label>
-														<input class="form-control" type="text" placeholder="Firstname" name="user_fname" required>
+														<input class="form-control" type="text" placeholder="Firstname"
+															name="user_fname" required>
 													</div>
 												</div>
 												<div class="col-4">
 													<div class="form-group">
 														<label>Middlename</label>
-														<input class="form-control" type="text" placeholder="Middlename" name="user_mname">
+														<input class="form-control" type="text" placeholder="Middlename"
+															name="user_mname">
 													</div>
 												</div>
 												<div class="col-4">
 													<div class="form-group">
 														<label>Lastname</label>
-														<input class="form-control" type="text" placeholder="Lastname" name="user_lname" required>
+														<input class="form-control" type="text" placeholder="Lastname"
+															name="user_lname" required>
 													</div>
 												</div>
 											</div>
@@ -236,7 +243,8 @@ $csrf = Components::csrf();
 												<div class="col-6">
 													<div class="form-group">
 														<label>Course</label>
-														<select class="form-control select2" id="course" name="course_id" required>
+														<select class="form-control select2" id="course"
+															name="course_id" required>
 															<option value="">Please Select</option>
 															<?= Courses::options() ?>
 														</select>
@@ -245,7 +253,8 @@ $csrf = Components::csrf();
 												<div class="col-6">
 													<div class="form-group">
 														<label>Date of Graduation</label>
-														<input class="form-control" type="date" name="alumni_graduation" required>
+														<input class="form-control" type="date" name="alumni_graduation"
+															required>
 													</div>
 												</div>
 											</div>
@@ -253,7 +262,8 @@ $csrf = Components::csrf();
 												<div class="col-12">
 													<div class="form-group">
 														<label>Email Address</label>
-														<input class="form-control" type="email" placeholder="Email" name="user_email" required>
+														<input class="form-control" type="email" placeholder="Email"
+															name="user_email" required>
 													</div>
 												</div>
 											</div>
@@ -261,33 +271,36 @@ $csrf = Components::csrf();
 												<div class="col-6">
 													<div class="form-group">
 														<label>Password</label>
-														<input class="form-control" type="password" placeholder="Password" name="password" required>
+														<input class="form-control" type="password"
+															placeholder="Password" name="password" required>
 													</div>
 												</div>
 												<div class="col-6">
 													<div class="form-group">
 														<label>Confirm Password</label>
-														<input class="form-control" type="password" placeholder="Confirm Password" name="password2"
-															required>
+														<input class="form-control" type="password"
+															placeholder="Confirm Password" name="password2" required>
 													</div>
 												</div>
 											</div>
 											<div class="row">
 												<div class="col-12">
 													<div class="form-group mb-1">
-														<input id="check_work" class="checkbox-custom" name="is_employed" type="checkbox"
+														<input id="check_work" class="checkbox-custom"
+															name="is_employed" type="checkbox"
 															onchange="currentlyWorked(this)">
-														<label for="check_work" class="checkbox-custom-label">I am currently employed</label>
+														<label for="check_work" class="checkbox-custom-label">I am
+															currently employed</label>
 													</div>
 												</div>
 											</div>
 											<hr>
-											<div class="row row-work">
+											<div class="row row-work mb-3">
 												<div class="col-12">
 													<div class="form-group">
 														<label>Employer</label>
-														<input class="form-control work-value" type="text" placeholder="Employer"
-															name="company_name">
+														<input id="employer_id" class="form-control work-value"
+															type="text" placeholder="Employer" name="company_name">
 													</div>
 												</div>
 											</div>
@@ -295,13 +308,15 @@ $csrf = Components::csrf();
 												<div class="col-6">
 													<div class="form-group">
 														<label>Position</label>
-														<input class="form-control work-value" type="text" placeholder="Position" name="job_title">
+														<input class="form-control work-value" type="text"
+															placeholder="Position" name="job_title">
 													</div>
 												</div>
 												<div class="col-6">
 													<div class="form-group">
 														<label>Date Hired</label>
-														<input class="form-control work-value" type="date" placeholder="Employer" name="date_hired">
+														<input class="form-control work-value" type="date"
+															placeholder="Employer" name="date_hired">
 													</div>
 												</div>
 											</div>
@@ -309,8 +324,8 @@ $csrf = Components::csrf();
 												<div class="col-12">
 													<div class="form-group">
 														<label>Company Address</label>
-														<input class="form-control work-value" type="text" placeholder="Company Address"
-															name="company_address">
+														<input class="form-control work-value" type="text"
+															placeholder="Company Address" name="company_address">
 													</div>
 												</div>
 											</div>
@@ -319,8 +334,10 @@ $csrf = Components::csrf();
 													<div class="form-group">
 														<div class="remember-forgot-info">
 															<div class="remember">
-																<input class="form-check-input" type="checkbox" value="" id="defaultCheck1" required>
-																<label class="form-check-label" for="defaultCheck1">I accept our terms and conditions
+																<input class="form-check-input" type="checkbox" value=""
+																	id="defaultCheck1" required>
+																<label class="form-check-label" for="defaultCheck1">I
+																	accept our terms and conditions
 																	and privacy policy.</label>
 															</div>
 														</div>
@@ -328,14 +345,16 @@ $csrf = Components::csrf();
 												</div>
 												<div class="col-12">
 													<div class="form-group">
-														<button type="submit" class="btn-theme" id="btn_register">Register Now</button>
+														<button type="submit" class="btn-theme"
+															id="btn_register">Register Now</button>
 													</div>
 												</div>
 												<div class="col-12" id="response_register"></div>
 											</div>
 										</form>
 									</div>
-									<div class="tab-pane fade" id="employer" role="tabpanel" aria-labelledby="employer-tab">
+									<div class="tab-pane fade" id="employer" role="tabpanel"
+										aria-labelledby="employer-tab">
 										<form action="#" id="frmRegisterEmployee">
 											<input type='hidden' value='E' name='user_category'>
 											<?= $csrf ?>
@@ -343,14 +362,15 @@ $csrf = Components::csrf();
 												<div class="col-6">
 													<div class="form-group">
 														<label>Employer Name</label>
-														<input class="form-control" type="text" placeholder="Employer Name" name="employer_name"
-															required>
+														<input class="form-control" type="text"
+															placeholder="Employer Name" name="employer_name" required>
 													</div>
 												</div>
 												<div class="col-6">
 													<div class="form-group">
 														<label>Contact #</label>
-														<input class="form-control" type="text" placeholder="Contact Number" name="company_contact"
+														<input class="form-control" type="text"
+															placeholder="Contact Number" name="company_contact"
 															required>
 													</div>
 												</div>
@@ -359,8 +379,8 @@ $csrf = Components::csrf();
 												<div class="col-12">
 													<div class="form-group">
 														<label>Company Name</label>
-														<input class="form-control" type="text" placeholder="Company Name" name="company_name"
-															required>
+														<input class="form-control" type="text"
+															placeholder="Company Name" name="company_name" required>
 													</div>
 												</div>
 											</div>
@@ -368,8 +388,8 @@ $csrf = Components::csrf();
 												<div class="col-6">
 													<div class="form-group">
 														<label>Industry</label>
-														<select class="form-control select2" id="industry_id" name="industry_id"
-															style="width: 100%;" required>
+														<select class="form-control select2" id="industry_id"
+															name="industry_id" style="width: 100%;" required>
 															<option value="">Please Select</option>
 															<?= Industries::options() ?>
 														</select>
@@ -378,8 +398,8 @@ $csrf = Components::csrf();
 												<div class="col-6">
 													<div class="form-group">
 														<label>Sub Industry</label>
-														<select class="form-control select2" id="sub_industry_id" name="sub_industry_id"
-															style="width: 100%;">
+														<select class="form-control select2" id="sub_industry_id"
+															name="sub_industry_id" style="width: 100%;">
 															<option value="">Please Select</option>
 														</select>
 													</div>
@@ -389,7 +409,8 @@ $csrf = Components::csrf();
 												<div class="col-12">
 													<div class="form-group">
 														<label>Address</label>
-														<input class="form-control" type="text" placeholder="Company Address" name="company_address"
+														<input class="form-control" type="text"
+															placeholder="Company Address" name="company_address"
 															required>
 													</div>
 												</div>
@@ -398,8 +419,9 @@ $csrf = Components::csrf();
 												<div class="col-12">
 													<div class="form-group">
 														<label>Email Address</label>
-														<input class="form-control" type="email" placeholder="recruitment@company.com"
-															name="user_email" required>
+														<input class="form-control" type="email"
+															placeholder="recruitment@company.com" name="user_email"
+															required>
 													</div>
 												</div>
 											</div>
@@ -407,14 +429,15 @@ $csrf = Components::csrf();
 												<div class="col-6">
 													<div class="form-group">
 														<label>Password</label>
-														<input class="form-control" type="password" placeholder="Password" name="password" required>
+														<input class="form-control" type="password"
+															placeholder="Password" name="password" required>
 													</div>
 												</div>
 												<div class="col-6">
 													<div class="form-group">
 														<label>Confirm Password</label>
-														<input class="form-control" type="password" placeholder="Confirm Password" name="password2"
-															required>
+														<input class="form-control" type="password"
+															placeholder="Confirm Password" name="password2" required>
 													</div>
 												</div>
 											</div>
@@ -423,8 +446,10 @@ $csrf = Components::csrf();
 													<div class="form-group">
 														<div class="remember-forgot-info">
 															<div class="remember">
-																<input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
-																<label class="form-check-label" for="defaultCheck2">I accept our terms and conditions
+																<input class="form-check-input" type="checkbox" value=""
+																	id="defaultCheck2">
+																<label class="form-check-label" for="defaultCheck2">I
+																	accept our terms and conditions
 																	and privacy policy.</label>
 															</div>
 														</div>
@@ -432,7 +457,8 @@ $csrf = Components::csrf();
 												</div>
 												<div class="col-12">
 													<div class="form-group">
-														<button type="submit" class="btn-theme" id="btn_register_employer">Register Now</button>
+														<button type="submit" class="btn-theme"
+															id="btn_register_employer">Register Now</button>
 													</div>
 												</div>
 												<div class="col-12" id="response_register_employer"></div>
@@ -481,6 +507,26 @@ $csrf = Components::csrf();
 	<script src="../assets/js/counterup.min.js"></script>
 	<script src="../assets/js/materialize.min.js"></script>
 	<script src="../assets/js/metisMenu.min.js"></script>
+	<script>
+		var vTagList = {
+			design: null,
+			html: null,
+			css: null,
+			magento: null,
+			drupal: null,
+			business: null,
+			java: null,
+			joomla: null,
+			css3: null,
+			bootstrap: null
+		};
+
+		$(function() {
+			// $("#employer_id").autocomplete({
+			// 	data: vTagList
+			// });
+		});
+	</script>
 	<script>
 		//Loader	
 		$(window).on('load', function() {
