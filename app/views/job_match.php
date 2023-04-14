@@ -1,16 +1,31 @@
-<style>
-  .header-promo.light {
-    background-color: #f4f9fd;
-  }
+<div class="search-form" style="padding: 2rem;">
+    <div class="container">
+      <div class="row m-0 justify-content-center">
+        <div class="col-lg-10 col-md-10">
+        </div>
+      </div>
+    </div>
+  </div>
+<div class="clearfix"></div>
 
-  .header-promo .label {
-    font-size: 20px;
-  }
-</style>
-
-<script src="https://cdn.jsdelivr.net/npm/@grammarly/editor-sdk?clientId=client_94DaLUWYhcxUnx1PtV9VtD"></script>
-<section>
-  <div class="container">
+<section class="gray-bg">
+        <div class="container" style="
+    max-width: 100%;
+">
+          <div class="row">
+<div class="col-lg-12 col-md-12">
+              <div class="pills_basic_tab">
+                <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
+                  <li class="nav-item" role="presentation" style="width: 50%;">
+                    <a class="nav-link active" id="pills-home-tab" data-toggle="pill" href="#pills-home" role="tab" aria-controls="pills-home" aria-selected="true">Job Preferences</a>
+                  </li>
+                  <li class="nav-item" role="presentation" style="width: 50%;">
+                    <a class="nav-link" id="pills-profile-tab" data-toggle="pill" href="#pills-profile" role="tab" aria-controls="pills-profile" aria-selected="false">Match Jobs</a>
+                  </li>
+                </ul>
+                
+                <div class="tab-content" id="pills-tabContent">
+                  <div class="tab-pane fade show active" id="pills-home" role="tabpanel" aria-labelledby="pills-home-tab">
     <div class="row">
       <div class="col-lg-12 col-md-12 col-sm-12">
         <form id="frmJobPreferences">
@@ -90,96 +105,239 @@
         </form>
       </div>
     </div>
-    <div class="row">
-      <div class="col-lg-12 col-md-12 col-sm-12">
-        <div class="_job_detail_box">
-          <div class="_job_detail_single">
-            <div class="row">
-              <div class="col-md-6">
-                <div class="form-group">
-                  <h4>Course</h4>
-                  <select class="form-control with-light profile-value" data-column="course_id" name="course_id">
-                    <option value="1">BSIS</option>
-                    <option value="2">BSIT</option>
-                  </select>
-                </div>
-              </div>
-              <div class="col-md-6">
-                <div class="form-group">
-                  <h4>Course</h4>
-                  <select class="form-control with-light profile-value" data-column="course_id" name="course_id">
-                    <option value="1">BSIS</option>
-                    <option value="2">BSIT</option>
-                  </select>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="_job_detail_single">
-            <h4>Work Experience</h4>
-            <grammarly-editor-plugin>
-              <textarea id="job-text"
-                class="form-control">We are one of the leading manufacturers and exporters of finished leather goods from Calcutta, India for the last 20 years. We are a 100% EOU and manufacture leather goods for global brands worldwide. We maintain strict quality parameters and ensure total employee retention and satisfaction.</textarea>
-            </grammarly-editor-plugin>
-          </div>
-          <div class="_job_detail_single">
-            <h4>Skill & Experience</h4>
-            <grammarly-editor-plugin>
-              <textarea id="job-text"
-                class="form-control">We are one of the leading manufacturers and exporters of finished leather goods from Calcutta, India for the last 20 years. We are a 100% EOU and manufacture leather goods for global brands worldwide. We maintain strict quality parameters and ensure total employee retention and satisfaction.</textarea>
-            </grammarly-editor-plugin>
-          </div>
-          <div class="_job_detail_single flexeo">
-            <div class="_job_detail_single_flex"></div>
-            <div class="_exlio_buttons">
-              <ul class="bottoms_applies">
-                <li>
-                  <a href="#" class="_applied_jb">Match Job</a>
-                </li>
-              </ul>
-            </div>
-          </div>
-          <div class="_job_detail_single">
-            <h4>Maching Jobs</h4>
-            <div class="row">
-              <div class="col-lg-12 col-md-12 col-sm-12">
-                <!-- Single Item -->
-                <div class="_list_jobs_wraps shadow_0 border">
-                  <div class="_list_jobs_f1ex" style="width:10% !important;flex: 0 0 10% !important;">
-                    <a href="#">
-                      <span class="label bg-success" style="font-size: 100% !important;">99 %</span>
-                    </a>
                   </div>
-                  <div class="_list_jobs_f1ex first">
-                    <div class="_list_110">
-                      <div class="_list_110_thumb">
-                        <a href="employer-detail.html">
-                          <img src="../assets/img/nonescost_logo.png" class="img-fluid" alt="">
-                        </a>
-                      </div>
-                      <div class="_list_110_caption">
-                        <h4 class="_jb_title">
-                          <a href="job-detail.html">Web Developer</a>
-                        </h4>
-                        <div class="_emp_jb">Instagram Inc.</div>
+                  <div class="tab-pane fade" id="pills-profile" role="tabpanel" aria-labelledby="pills-profile-tab">
+
+          <div class="row">
+            <div class="col-lg-4 col-md-12 col-sm-12">
+              <div class="_searches_lists_jobs">
+                <!-- Single Job -->
+                <div class="_jb_list72 shadow_0 selectd">
+                  <div class="jobs-like bookmark">
+                    <label class="label bg-success">98 %</label>
+                  </div>
+                  <div class="_jb_list72_flex">
+                    <div class="_jb_list72_first">
+                      <div class="_jb_list72_yhumb">
+                        <img src="../assets/img/c-1.png" class="img-fluid" alt=""> 
                       </div>
                     </div>
-                  </div>
-                  <div class="_list_jobs_f1ex" style="width:30% !important;flex: 0 0 30% !important;">
-                    <div class="_list_110_caption">
-                      <h4 class="_jb_title">Bacolod Philippines</h4>
-                      <div class="_emp_jb">Location</div>
+                    <div class="_jb_list72_last">
+                      <h4 class="_jb_title"><a href="job-detail.html">Application Designer</a></h4>
+                      <div class="_times_jb">$70k - 80k</div>
+                      <div class="_jb_types fulltime_lite">Full Time</div>
                     </div>
                   </div>
-                  <div class="_list_jobs_f1ex">
-                    <a href="job-detail.html" class="_jb_apply">View Job</a>
+                  <div class="_jb_list72_foot">
+                    <div class="_times_jb">Just now</div>
+                  </div>
+                </div>
+                
+                <!-- Single Job -->
+                <div class="_jb_list72 shadow_0">
+                  <div class="jobs-like bookmark">
+                    <label class="label bg-success">95 %</label>
+                  </div>
+                  <div class="_jb_list72_flex">
+                    <div class="_jb_list72_first">
+                      <div class="_jb_list72_yhumb">
+                        <img src="../assets/img/c-2.png" class="img-fluid" alt=""> 
+                      </div>
+                    </div>
+                    <div class="_jb_list72_last">
+                      <h4 class="_jb_title"><a href="job-detail.html">IOS Developer</a></h4>
+                      <div class="_times_jb">$55k - 80k</div>
+                      <div class="_jb_types parttime_lite">Part Time</div>
+                    </div>
+                  </div>
+                  <div class="_jb_list72_foot">
+                    <div class="_times_jb">10 min ago</div>
+                  </div>
+                </div>
+                
+                <!-- Single Job -->
+                <div class="_jb_list72 shadow_0">
+                  <div class="jobs-like bookmark">
+                    <label class="label bg-success">94 %</label>
+                  </div>
+                  <div class="_jb_list72_flex">
+                    <div class="_jb_list72_first">
+                      <div class="_jb_list72_yhumb">
+                        <img src="../assets/img/c-3.png" class="img-fluid" alt=""> 
+                      </div>
+                    </div>
+                    <div class="_jb_list72_last">
+                      <h4 class="_jb_title"><a href="job-detail.html">Web Developer</a></h4>
+                      <div class="_times_jb">$50k - 60k</div>
+                      <div class="_jb_types internship_lite">Internship</div>
+                    </div>
+                  </div>
+                  <div class="_jb_list72_foot">
+                    <div class="_times_jb">02 min ago</div>
+                  </div>
+                </div>
+                
+                <!-- Single Job -->
+                <div class="_jb_list72 shadow_0">
+                  <div class="jobs-like bookmark">
+                    <label class="label bg-warning">89 %</label>
+                  </div>
+                  <div class="_jb_list72_flex">
+                    <div class="_jb_list72_first">
+                      <div class="_jb_list72_yhumb">
+                        <img src="../assets/img/c-4.png" class="img-fluid" alt=""> 
+                      </div>
+                    </div>
+                    <div class="_jb_list72_last">
+                      <h4 class="_jb_title"><a href="job-detail.html">Product Designer</a></h4>
+                      <div class="_times_jb">$40k - 60k</div>
+                      <div class="_jb_types parttime_lite">Part Time</div>
+                    </div>
+                  </div>
+                  <div class="_jb_list72_foot">
+                    <div class="_times_jb">05 min ago</div>
+                  </div>
+                </div>
+                
+                <!-- Single Job -->
+                <div class="_jb_list72 shadow_0">
+                  <div class="jobs-like bookmark">
+                    <label class="label bg-warning">88 %</label>
+                  </div>
+                  <div class="_jb_list72_flex">
+                    <div class="_jb_list72_first">
+                      <div class="_jb_list72_yhumb">
+                        <img src="../assets/img/c-8.png" class="img-fluid" alt=""> 
+                      </div>
+                    </div>
+                    <div class="_jb_list72_last">
+                      <h4 class="_jb_title"><a href="job-detail.html">WordPress Developer</a></h4>
+                      <div class="_times_jb">$40k - 60k</div>
+                      <div class="_jb_types fulltime_lite">Full Time</div>
+                    </div>
+                  </div>
+                  <div class="_jb_list72_foot">
+                    <div class="_times_jb">6 hour ago</div>
+                  </div>
+                </div>
+                
+                <!-- Single Job -->
+                <div class="_jb_list72 shadow_0">
+                  <div class="jobs-like bookmark">
+                    <label class="label bg-warning">85 %</label>
+                  </div>
+                  <div class="_jb_list72_flex">
+                    <div class="_jb_list72_first">
+                      <div class="_jb_list72_yhumb">
+                        <img src="../assets/img/c-9.png" class="img-fluid" alt=""> 
+                      </div>
+                    </div>
+                    <div class="_jb_list72_last">
+                      <h4 class="_jb_title"><a href="job-detail.html">PHP Developer</a></h4>
+                      <div class="_times_jb">$25k - 40k</div>
+                      <div class="_jb_types remote">Remote</div>
+                    </div>
+                  </div>
+                  <div class="_jb_list72_foot">
+                    <div class="_times_jb">3 hour ago</div>
                   </div>
                 </div>
               </div>
             </div>
+          
+            <div class="col-lg-8 col-md-12 col-sm-12">
+              
+              <div class="_job_detail_box light">
+              
+                <div class="_job_details_single">
+                  <div class="_jb_details01">
+                
+                    <div class="_jb_details01_flex">
+                      <div class="_jb_details01_authors">
+                        <img src="../assets/img/c-7.png" class="img-fluid" alt="">
+                      </div>
+                      <div class="_jb_details01_authors_caption">
+                        <h4 class="jbs_title">Full-Stack Web Designer<img src="../assets/img/verify.svg" class="ml-1" width="12" alt=""></h4>
+                        <ul class="jbx_info_list">
+                          <li><span><i class="ti-briefcase"></i>InVision</span></li>
+                          <li><span><i class="ti-credit-card"></i>$35k-50k PA</span></li>
+                          <li><span><i class="ti-location-pin"></i>Canada, USA</span></li>
+                        </ul>
+                        <ul class="jbx_info_list">
+                          <li><div class="jb_types fulltime">Full Time</div></li>
+                          <li><div class="jb_types urgent">Sponsored</div></li>
+                          <li><div class="jb_types remote">Remote</div></li>
+                        </ul>
+                      </div>
+                    </div>
+                    
+                    <div class="_jb_details01_last">
+                      <ul class="_flex_btn">
+                        <li><a href="#" class="_saveed_jb"><i class="fa fa-heart"></i></a></li>
+                        <li><a href="#" class="_applied_jb dark-btn">Apply Job</a></li>
+                      </ul>
+                    </div>
+                    
+                  </div>
+                </div>
+                
+                <div class="_job_detail_box_body">
+                
+                  <div class="_job_detail_single">
+                    <h4>Job Summary</h4>
+                    <p>We are one of the leading manufacturers and exporters of finished leather goods from Calcutta, India for the last 20 years. We are a 100% EOU and manufacture leather goods for global brands worldwide. We maintain strict quality parameters and ensure total employee retention and satisfaction.</p>
+                  </div>
+                  
+                  <div class="_job_detail_single">
+                    <h4>Job Duties:</h4>
+                    <p>We're looking for someone with the creative spark, eye for illustration and design, passion for graphics and ability to produce high quality design collaterals end-to-end.</p>
+                    <ul>
+                      <li>Draft mockups of website designs, brochures, iconography, and any other marketing materials required</li> 
+                      <li>Collaborate with marketing teams and management to discuss which mockups are effective, and use their feedback to develop final drafts</li> 
+                      <li>Revise the work of previous designers to create a unified aesthetic for our brand materials</li>  
+                      <li>Work on multiple projects at once, and consistently meet draft deadlines</li> 
+                      <li>Communicate frequently with clients to update them on the progress of the project and to answer any questions they might have</li>  
+                      <li>Work on multiple projects at once, and consistently meet draft deadlines</li>
+                      <li>can start the part time job/internship between 4th Mar'21 and 8th Apr'21</li>
+                      <li>have already graduated or are currently in any year of study</li>
+                      <li>Revise the work of previous designers to create a unified aesthetic for our brand materials</li>  
+                      <li>Other duties as requested</li>  
+                    </ul>
+                  </div>
+                  
+                  <div class="_job_detail_single">
+                    <h4>Skill &amp; Experience</h4>
+                    <ul>
+                      <li>Need 3+ EXPERIENCE IN Web Designing</li>
+                      <li>Understanding of key Design Principal</li>
+                      <li>Proficiency With HTML, CSS, Bootstrap</li>
+                      <li>Experience With Responsive &amp; Adaptive Design</li>
+                      <li>Wordpress: 1 year (Required)</li>
+                      <li>web designing: 1 year (Preferred)</li>
+                      <li>total work: 2 years (Required)</li>
+                    </ul>
+                  </div>
+                  
+                  <div class="_job_detail_single flexeo">
+                    <div class="_job_detail_single_flex">
+                    </div>
+                    
+                    <div class="_exlio_buttons">
+                      <ul class="bottoms_applies">
+                        <li><a href="#" class="_saveed_jb">Save Job</a></li>
+                        <li><a href="#" class="_applied_jb">Apply Job</a></li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
           </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            </div>
         </div>
-      </div>
-    </div>
-  </div>
-</section>
+      </section>

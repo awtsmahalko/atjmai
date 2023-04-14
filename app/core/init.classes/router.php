@@ -64,6 +64,13 @@ class Router
       case 'job-matching':
         $route = ['header' => 'header-light header-fixed', 'file' => 'job_match.php'];
         break;
+      case 'job-match-candidate':
+        if (count($param) > 1 && $param[1] > 0) {
+          $route = ['header' => 'header-light', 'file' => 'job_match_candidate.php', 'id' => $param[1]];
+        } else {
+          $route = ['header' => 'header-light', 'file' => '404.php'];
+        }
+        break;
       case 'job-preferences':
         $route = ['header' => 'header-light', 'file' => 'job_preferences.php'];
         break;
