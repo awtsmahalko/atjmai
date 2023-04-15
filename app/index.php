@@ -262,6 +262,12 @@ require 'routes/routes.php';
       )
     }
   </script>
+  <script>
+    function btn_processor(el_id, is_disabled = true, text = 'Loading') {
+      $("#" + el_id).prop('disabled', is_disabled);
+      $("#" + el_id).html(text);
+    }
+  </script>
 </body>
 
 </html>

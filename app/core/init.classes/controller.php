@@ -56,6 +56,14 @@ class Controller
         $class_name = 'Employers';
         $method_name = 'profile';
         break;
+      case 'generate_alumni_per_batch':
+        $class_name = 'AlumniReport';
+        $method_name = 'per_batch';
+        break;
+      case 'generate_alumni_per_college':
+        $class_name = 'AlumniReport';
+        $method_name = 'per_college';
+        break;
       case 'get_alumni_data':
         $class_name = 'AlumniEducations';
         $method_name = 'data';
