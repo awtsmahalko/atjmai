@@ -26,7 +26,7 @@
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#">Report</a></li>
-									<li class="breadcrumb-item active" aria-current="page">Alumni</li>
+									<li class="breadcrumb-item active" aria-current="page">Employer</li>
 								</ol>
 							</nav>
 						</div>
@@ -39,11 +39,11 @@
 						<div class="pills_basic_tab">
 							<div class="_dashboard_content">
 								<ul class="nav nav-tabs" id="myTab" role="tablist">
-									<li class="nav-item" role="presentation">
+									<li class="nav-item" style="width: 50%;" role="presentation">
 										<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
 											role="tab" aria-controls="home" aria-selected="true">All</a>
 									</li>
-									<li class="nav-item" role="presentation">
+									<li class="nav-item" style="width: 50%;" role="presentation">
 										<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
 											role="tab" aria-controls="contact" aria-selected="false">Per Industry</a>
 									</li>
@@ -69,12 +69,14 @@
 													</div>
 													<hr>
 													<div class="row">
+														<div class="col-lg-12 col-md-12 text-center">
+															<h3>Employer Report</h3>
+														</div>
 														<table class="table table-bordered table-striped">
 															<thead class="thead-light">
 																<tr>
 																	<th scope="col">#</th>
 																	<th scope="col">Company Name</th>
-																	<th scope="col">Employer</th>
 																	<th scope="col">Contact #</th>
 																	<th scope="col">Industry</th>
 																	<th scope="col">Location</th>
@@ -84,10 +86,10 @@
 															<tbody>
 																<tr>
 																	<td>1</td>
-																	<td>Carton, Eduard Rino</td>
-																	<td>0909009909</td>
-																	<td>MIT</td>
-																	<td>IT Programmer</td>
+																	<td>Bacolod Four Leaf Clover Corp.</td>
+																	<td>090909090</td>
+																	<td>Information Technology</td>
+																	<td>Bacolod, Philippines</td>
 																</tr>
 																<tr>
 																	<td>1</td>
@@ -153,51 +155,61 @@
 													<hr>
 													<div class="row">
 														<div class="col-lg-12 col-md-12 text-center">
-															<h3>Alumni Report</h3>
-															<h4>Master in Information Technology</h4>
+															<h3>Employer Report</h3>
+															<h4>Information Technology</h4>
 														</div>
 														<table class="table table-bordered table-striped">
 															<thead class="thead-light">
 																<tr>
 																	<th scope="col">#</th>
-																	<th scope="col">Alumni</th>
+																	<th scope="col">Employer</th>
 																	<th scope="col">Contact #</th>
-																	<th scope="col">Occupation</th>
+																	<th scope="col">Email</th>
+																	<th scope="col">Location</th>
 
 																</tr>
 															</thead>
 															<tbody>
 																<tr>
-																	<td colspan="5">Batch 1998</td>
-																</tr>
-																<tr>
 																	<td>1</td>
-																	<td>Carton, Eduard Rino</td>
+																	<td>Juancoder IT Solutions</td>
 																	<td>0909009909</td>
+																	<td>info@juancoder</td>
 																	<td>IT Programmer</td>
 																</tr>
 																<tr>
 																	<td>1</td>
-																	<td>Carton, Eduard Rino</td>
+																	<td>Juancoder IT Solutions</td>
 																	<td>0909009909</td>
+																	<td>info@juancoder</td>
 																	<td>IT Programmer</td>
 																</tr>
 																<tr>
 																	<td>1</td>
-																	<td>Carton, Eduard Rino</td>
+																	<td>Juancoder IT Solutions</td>
 																	<td>0909009909</td>
+																	<td>info@juancoder</td>
 																	<td>IT Programmer</td>
 																</tr>
 																<tr>
 																	<td>1</td>
-																	<td>Carton, Eduard Rino</td>
+																	<td>Juancoder IT Solutions</td>
 																	<td>0909009909</td>
+																	<td>info@juancoder</td>
 																	<td>IT Programmer</td>
 																</tr>
 																<tr>
 																	<td>1</td>
-																	<td>Carton, Eduard Rino</td>
+																	<td>Juancoder IT Solutions</td>
 																	<td>0909009909</td>
+																	<td>info@juancoder</td>
+																	<td>IT Programmer</td>
+																</tr>
+																<tr>
+																	<td>1</td>
+																	<td>Juancoder IT Solutions</td>
+																	<td>0909009909</td>
+																	<td>info@juancoder</td>
 																	<td>IT Programmer</td>
 																</tr>
 															</tbody>

@@ -12,6 +12,7 @@
         <ul id="metismenu">
             <?php
             $Menus = new Menus;
+            $Menus->sidebar('Dashboard', 'dashboard', 'ti-dashboard', $router->route['path']);
             $Menus->sidebar('My Profile', 'profile', 'ti-user', $router->route['path']);
 
             // Alumni
@@ -42,9 +43,11 @@
                 $Menus->sidebar_parent('Report', 'fa fa-print', array(
                     array("Alumni Report", "report-alumni"),
                     array("Employer Report", "report-employer"),
+                    array("Job Posting Report", "report-job-post"),
                 ));
             }
             // ALL USERS
+            $Menus->sidebar('Posts', 'post', 'ti-announcement', $router->route['path']);
             $Menus->sidebar('Messages', 'messages', 'ti-email', $router->route['path']);
             $Menus->sidebar('Notifications', 'notification', 'ti-bell', $router->route['path']);
             ?>

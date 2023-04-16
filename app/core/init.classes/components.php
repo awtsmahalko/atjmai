@@ -16,13 +16,13 @@ class Components extends Connection
         return $_SESSION['csrf_token'] == $self->post('csrf'); //$_POST['csrf'];
     }
 
-    public static function option_years()
+    public static function option_years($pre_text = 'Batch ')
     {
         $year_now = date("Y");
         $year_start = 1998;
         $option = '';
         for ($i = $year_now; $i >= $year_start; $i--) {
-            $option .= "<option value='$i'>Batch $i</option>";
+            $option .= "<option value='$i'>$pre_text $i</option>";
         }
         return $option;
     }

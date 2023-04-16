@@ -46,7 +46,7 @@ require 'routes/routes.php';
   <!-- Main wrapper - style you can find in pages.scss -->
   <!-- ============================================================== -->
   <div id="main-wrapper">
-    <?php include_once('template/header.php') ?>
+    <?php// include_once('template/header.php') ?>
     <div class="clearfix"></div>
     <?php include_once('views/' . $router->route['file']) ?>
     <?php include_once('template/footer.php') ?>

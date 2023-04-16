@@ -23,7 +23,15 @@ class Router
         $route = ['header' => 'header-light', 'file' => 'colleges.php'];
         break;
       case 'dashboard':
-        $route = ['header' => 'header-transparent dark-text', 'file' => 'dashboard.php'];
+        if ($_SESSION['user']['category'] == 'S') {
+          $route = ['header' => 'header-light', 'file' => 'dashboard_alumni.php'];
+        }
+        if ($_SESSION['user']['category'] == 'A') {
+          $route = ['header' => 'header-light', 'file' => 'dashboard_admin.php'];
+        }
+        if ($_SESSION['user']['category'] == 'E') {
+          $route = ['header' => 'header-light', 'file' => 'dashboard_employer.php'];
+        }
         break;
       case 'education':
         $route = ['header' => 'header-light', 'file' => 'education.php'];
@@ -89,6 +97,9 @@ class Router
         break;
       case 'report-employer':
         $route = ['header' => 'header-light', 'file' => 'report_employer.php'];
+        break;
+      case 'report-job-post':
+        $route = ['header' => 'header-light', 'file' => 'report_job_post.php'];
         break;
       case 'work-experience':
         $route = ['header' => 'header-light', 'file' => 'work_experience.php'];
