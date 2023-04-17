@@ -3,16 +3,13 @@ class Jobs extends Connection
 {
     private $table = 'tbl_jobs';
     public $pk = 'job_id';
-    public $session = array();
-
-    public $inputs = array();
-    public $old = array();
 
     public function add()
     {
-        $Employer = new Employers();
         if (!Components::verify_csrf())
             return -1;
+
+        $Employer = new Employers();
 
         try {
             $this->check();
@@ -31,6 +28,10 @@ class Jobs extends Connection
             if ($job_id < 1)
                 throw new Exception($job_id);
 
+            $JobSkillls = new JobSkills();
+            $res = $JobSkillls->add($job_id);
+            if ($job_id < 1)
+                throw new Exception($res);
             $this->commit();
             return 1;
         } catch (Exception $e) {
@@ -39,43 +40,15 @@ class Jobs extends Connection
         }
     }
 
-    public function update_profile()
+    public static function countPosted($employer_id = 0)
     {
-        if (!Components::verify_csrf())
-            return -1;
-
-        try {
-            $this->check();
-            $this->begin_transaction();
-
-            $update_success = $this->update($this->table, [
-                'employer_name'         => $this->post('employer_name'),
-                'employer_foundation'   => $this->post('employer_foundation'),
-                'employer_address'      => $this->post('employer_address'),
-                'employer_contact'      => $this->post('employer_contact'),
-                'employer_address'      => $this->post('employer_address'),
-            ], "user_id = '" . $_SESSION['user']['id'] . "'");
-
-            if ($update_success != 1)
-                throw new Exception($update_success);
-
-            $this->commit();
-            return 1;
-        } catch (Exception $e) {
-            $this->rollback();
-            return $e->getMessage();
-        }
-    }
-
-    public function profile()
-    {
-        if (!isset($_SESSION['user']['id']))
-            return json_encode(['user_id' => 0]);
-
-        $user_id = $_SESSION['user']['id'];
-        $result = $this->select($this->table, "*", "user_id = '$user_id'");
+        $self = new self;
+        $inject = $employer_id > 0 ? "employer_id = '$employer_id'" : "";
+        $result = $self->select($self->table, "COUNT(job_id) AS count",$inject);
+        if($result->num_rows < 1)
+            return 0;
         $row = $result->fetch_assoc();
-        return json_encode($row);
+        return $row['count'];
     }
 
     public static function dataOf($primary_id, $field = '*')

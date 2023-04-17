@@ -14,7 +14,11 @@ class Menus
     {
         $child = "";
         foreach ($childs as $row) {
-            $child .= '<li><a href="' . $this->uri($row[1]) . '">' . $row[0] . '</a></li>';
+            $icons2 = '';
+            if(isset($row[2])){
+                $icons2 = "&nbsp;&nbsp; <i class='$row[2]'></i> ";
+            }
+            $child .= '<li><a href="' . $this->uri($row[1]) . '">'. $icons2 . $row[0] . '</a></li>';
         }
         echo '<li><a href="javascript:void(0);" class="has-arrow"><i class="' . $icons . '"></i>' . $name . '</a>
           <ul>' . $child . '</ul>

@@ -1,3 +1,7 @@
+<?php
+$Employer = new Employers();
+$employer_id = $Employer->id();
+?>
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background:url(../assets/img/front_bg.webp)no-repeat;" data-overlay="5">
   <div class="container">
@@ -37,7 +41,7 @@
                 <div class="col-xl-3 col-lg-6 col-md-6 col-sm-12">
                   <div class="dashboard-stat">
                     <div class="dashboard-stat-icon widget-1"><i class="ti-location-pin"></i></div>
-                    <div class="dashboard-stat-content"><h4><span class="cto">72</span></h4> <p>Job Posted</p></div>
+                    <div class="dashboard-stat-content"><h4><span class="cto"><?=Jobs::countPosted($employer_id)?></span></h4> <p>Job Posted</p></div>
                   </div>  
                 </div>
                 

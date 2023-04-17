@@ -16,13 +16,27 @@
             $Menus->sidebar('My Profile', 'profile', 'ti-user', $router->route['path']);
 
             // Alumni
-            $Menus->sidebar('Education', 'education', 'fa fa-graduation-cap', $router->route['path'], 'S');
-            $Menus->sidebar('Work Experience', 'work-experience', 'fa fa-briefcase', $router->route['path'], 'S');
-            $Menus->sidebar('Skills', 'skills', 'fa fa-gears', $router->route['path'], 'S');
-            $Menus->sidebar('Job Preferences', 'job-preferences', 'fa fa-briefcase', $router->route['path'], 'S');
-            $Menus->sidebar('Resume', 'resume', 'fa fa-file', $router->route['path'], 'S');
+            // $Menus->sidebar('Education', 'education', 'fa fa-graduation-cap', $router->route['path'], 'S');
+            // $Menus->sidebar('Work Experience', 'work-experience', 'fa fa-briefcase', $router->route['path'], 'S');
+            // $Menus->sidebar('Skills', 'skills', 'fa fa-gears', $router->route['path'], 'S');
+            // $Menus->sidebar('Job Preferences', 'job-preferences', 'fa fa-briefcase', $router->route['path'], 'S');
+            // $Menus->sidebar('Resume', 'resume', 'fa fa-file', $router->route['path'], 'S');
             // $Menus->sidebar('Jobs', 'jobs', 'fa fa-briefcase', $router->route['path']);
 
+            if ($_SESSION['user']['category'] == 'S') {
+                // Alumni
+                $Menus->sidebar_parent('Master Data', 'fa fa-file-o', array(
+                    array("Education", "education",'fa fa-graduation-cap'),
+                    array("Work Experience", "work-experience", 'fa fa-briefcase'),
+                    array("Skills", "skills", 'fa fa-gears'),
+                    array("Job Preferences", "job-preferences", 'fa fa-file'),
+                ));
+
+                $Menus->sidebar_parent('Jobs', 'ti-briefcase', array(
+                    array("Job Status", "jobs" ,'fa fa-info-circle'),
+                    array("Job Matching", "job-matching", 'fa fa-search'),
+                ));
+            }
             if ($_SESSION['user']['category'] == 'E') {
                 // Employers
                 $Menus->sidebar_parent('Jobs', 'fa fa-briefcase', array(
@@ -51,7 +65,7 @@
             $Menus->sidebar('Messages', 'messages', 'ti-email', $router->route['path']);
             $Menus->sidebar('Notifications', 'notification', 'ti-bell', $router->route['path']);
             ?>
-            <li><a href="<?=$Menus->uri("auth/logout.php");?>"><i class="ti-power-off"></i>Log Out</a></li>
+            <li onclick="log_out()"><a href="#"><i class="ti-power-off"></i>Log Out</a></li>
         </ul>
     </div>
 </div>

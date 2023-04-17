@@ -61,11 +61,17 @@
 											</div>
 										</div>
 									</div>
+									<hr>
+									<div class="row">
+										<div class="col-md-12">
+											<div class="form-group-btn pull-right">
+												<button style="border-radius: 50px;" type="submit" class="btn btn-md btn-save" id="btn_update_skills"><span class="fa fa-edit"></span> Save Changes</button>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-md btn-save" id="btn_update_skills"><span
-									class="fa fa-edit"></span> Save Changes</button>
 						</form>
 					</div>
 				</div>
@@ -268,9 +274,13 @@
 			csrf: $("#csrf").val()
 		}, function(data, status) {
 			var res = JSON.parse(data);
-			console.log(res);
+			if(res == 1){
+				success_update();
+			}else{
+				error_response();
+			}
 			$("#btn_update_skills").prop('disabled', false);
-			$("#btn_update_skills").html('Save Changes');
+			$("#btn_update_skills").html('<span class="fa fa-edit"></span> Save Changes');
 		});
 	});
 

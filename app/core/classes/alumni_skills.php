@@ -88,6 +88,21 @@ class AlumniSkills extends Connection
         return (int) $row['skill_rate'];
     }
 
+    public static function preferences()
+    {
+        $self = new self;
+
+        $Alumni = new Alumni();
+        $alumni_id = $Alumni->id();
+
+        $skills = [];
+        $result = $self->select($self->table, 'skill_id', "alumni_id = '$alumni_id' AND skill_rate > 0");
+        while ($row = $result->fetch_assoc()) {
+            $skills[] = $row['skill_id'];
+        }
+        return $skills;
+    } 
+
     public static function dataOf($primary_id, $field = '*')
     {
         $self = new self;

@@ -37,7 +37,7 @@
 
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<form id="frmPostJob">
+						<form id="frmPostJob" autocomplete="off">
 							<?= Components::csrf(); ?>
 							<!-- Single Wrap -->
 							<div class="_dashboard_content">
@@ -71,7 +71,7 @@
 											<div class="form-group">
 												<label>Type of Employment</label>
 												<select class="form-control select2" name="job_type_id" required>
-													<option value="0">Any</option>
+													<option value="">Select</option>
 													<?= JobTypes::options() ?>
 												</select>
 											</div>
@@ -80,7 +80,7 @@
 										<div class="col-xl-4 col-lg-6">
 											<div class="form-group">
 												<label>Schedule</label>
-												<select class="form-control" id="job_sched_id" required>
+												<select class="form-control select2" id="job_sched_id" required>
 													<option value="0">Any</option>
 													<?= JobSchedules::options() ?>
 												</select>
@@ -105,7 +105,16 @@
 										</div>
 									</div>
 									<hr>
-									<div class="row"></div>
+									<div class="row">
+										<div class="col-xl-12 col-lg-12">
+											<div class="form-group">
+												<label>Skills</label>
+												<select class="form-control select2" id="skills" multiple="true" style="width: 100%;" name="skills[]" required>
+													<?= Skills::options() ?>
+												</select>
+											</div>
+										</div>
+									</div>
 								</div>
 							</div>
 							<!-- Single Wrap End -->
@@ -130,8 +139,20 @@
 		e.preventDefault();
 		$("#btn-post").prop('disabled', true);
 		$("#btn-post").html('Posting Job...');
-		$.post(base_controller + "add_job", $("#frmPostJob").serialize(), function(data, status) {
-			alert(data);
+		$.post(base_controller + "add_job", $("#frmPostJob").serialize(), function(response, status) {
+			if (response == 1) {
+				success_add();
+				setTimeout(function() {
+					window.location = base_url + "app/jobs";
+				}, 1500);
+			} else if (response == -1) {
+				token_expired();
+				setTimeout(function() {
+					location.reload();
+				}, 1000);
+			} else {
+				error_response();
+			}
 			$("#btn-post").prop('disabled', false);
 			$("#btn-post").html('Submit');
 		});

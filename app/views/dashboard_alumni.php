@@ -37,13 +37,13 @@
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                   <div class="dashboard-stat">
                     <div class="dashboard-stat-icon widget-3"><i class="ti-user"></i></div>
-                    <div class="dashboard-stat-content"><h4><span class="cto">72</span></h4> <p>Employers</p></div>
+                    <div class="dashboard-stat-content"><h4><span class="cto"><?=Employers::count()?></span></h4> <p>Employers</p></div>
                   </div>  
                 </div>
                 <div class="col-xl-6 col-lg-6 col-md-6 col-sm-12">
                   <div class="dashboard-stat">
                     <div class="dashboard-stat-icon widget-1"><i class="ti-briefcase"></i></div>
-                    <div class="dashboard-stat-content"><h4><span class="cto">1023</span></h4> <p>Jobs</p></div>
+                    <div class="dashboard-stat-content"><h4><span class="cto"><?=Jobs::countPosted()?></span></h4> <p>Jobs</p></div>
                   </div>  
                 </div>
               </div>

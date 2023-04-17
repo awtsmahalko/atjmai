@@ -84,6 +84,10 @@ class Controller
         $class_name = 'AlumniWorkExperiences';
         $method_name = 'data';
         break;
+      case 'match_best_jobs':
+        $class_name = 'AlumniJobs';
+        $method_name = 'best_job';
+        break;
       case 'update_alumni_job_preferences':
         $class_name = 'AlumniJobPreferences';
         $method_name = 'update_preferences';

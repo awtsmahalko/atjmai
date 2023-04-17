@@ -6,6 +6,7 @@ $classes = array(
     'Alumni'            => $pre_class . 'alumni.php',
     'AlumniEducations'  => $pre_class . 'alumni_education.php',
     'AlumniJobPreferences'      => $pre_class . 'alumni_job_preferences.php',
+    'AlumniJobs'                => $pre_class . 'alumni_jobs.php',
     'AlumniReport'              => $pre_class . 'alumni_report.php',
     'AlumniSkills'              => $pre_class . 'alumni_skills.php',
     'AlumniWorkAchievements'    => $pre_class . 'alumni_work_achievements.php',
@@ -16,6 +17,8 @@ $classes = array(
     'Industries'        => $pre_class . 'industries.php',
     'Jobs'              => $pre_class . 'jobs.php',
     'JobSchedules'      => $pre_class . 'job_schedule.php',
+    'JobSkills'         => $pre_class . 'job_skills.php',
     'JobTypes'          => $pre_class . 'job_type.php',
+    'Skills'            => $pre_class . 'skills.php',
     'Users'             => $pre_class . 'user.php',
 );

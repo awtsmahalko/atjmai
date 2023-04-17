@@ -31,6 +31,7 @@ require 'routes/routes.php';
   <script src="<?=BASE_URL?>/assets/js/select2.min.js"></script>
   <script type="text/javascript">
     var base_controller = "controller/web.php?uri=";
+    var base_url = "<?=BASE_URL?>";
   </script>
   <script src="<?=BASE_URL?>/assets/dist/sweetalert2/sweetalert2.all.min.js"></script>
   <link rel="stylesheet" href="<?=BASE_URL?>/assets/dist/sweetalert2/sweetalert2.min.css">
@@ -261,6 +262,44 @@ require 'routes/routes.php';
         'error'
       )
     }
+
+    function error_code(data) {
+      Swal.fire(
+        'Error!',
+        data,
+        'error'
+      )
+    }
+
+    function token_expired() {
+      Swal.fire(
+        'Oops!',
+        'Token already expired',
+        'warning'
+      );
+    }
+
+    function log_out() {
+      Swal.fire({
+        title: 'Are you sure?',
+        text: "Your session will expired!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, logout!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          Swal.fire(
+            'Logout!',
+            'Successfully logout.',
+            'success'
+          )
+          window.location = base_url + "app/auth/logout.php";
+        }
+      })
+    }
+
   </script>
   <script>
     function btn_processor(el_id, is_disabled = true, text = 'Loading') {

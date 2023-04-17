@@ -68,6 +68,14 @@ class Employers extends Connection
         return $field == '*' ? $row : $row[$field];
     }
 
+    public static function count()
+    {
+        $self = new self;
+        $result = $self->select($self->table, "COUNT(employer_id) AS count");
+        $row = $result->fetch_assoc();
+        return (int) $row['count'];
+    }
+
     public function id($id = 0)
     {
         $user_id = $id == 0 ? $_SESSION['user']['id'] : $id;
