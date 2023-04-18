@@ -22,6 +22,12 @@ class Router
       case 'colleges':
         $route = ['header' => 'header-light', 'file' => 'colleges.php'];
         break;
+      case 'create-post':
+        $route = ['header' => 'header-light', 'file' => 'create_post.php'];
+        break;
+      case 'create-job':
+        $route = ['header' => 'header-light', 'file' => 'create_job.php'];
+        break;
       case 'dashboard':
         if ($_SESSION['user']['category'] == 'S') {
           $route = ['header' => 'header-light', 'file' => 'dashboard_alumni.php'];
@@ -35,6 +41,37 @@ class Router
         break;
       case 'education':
         $route = ['header' => 'header-light', 'file' => 'education.php'];
+        break;
+      case 'job-detail':
+        if (count($param) > 1 && $param[1] > 0) {
+          $route = ['header' => 'header-light', 'file' => 'job_detail.php', 'id' => $param[1]];
+        } else {
+          $route = ['header' => 'header-light', 'file' => '404.php'];
+        }
+        break;
+      case 'job-matching':
+        $route = ['header' => 'header-light header-fixed', 'file' => 'job_match.php'];
+        break;
+      case 'job-match-candidate':
+        if (count($param) > 1 && $param[1] > 0) {
+          $route = ['header' => 'header-light', 'file' => 'job_match_candidate.php', 'id' => $param[1]];
+        } else {
+          $route = ['header' => 'header-light', 'file' => '404.php'];
+        }
+        break;
+      case 'job-preferences':
+        $route = ['header' => 'header-light', 'file' => 'job_preferences.php'];
+        break;
+      case 'jobs':
+        if ($_SESSION['user']['category'] == 'S') {
+          $route = ['header' => 'header-light', 'file' => 'jobs_alumni.php'];
+        }
+        if ($_SESSION['user']['category'] == 'E') {
+          $route = ['header' => 'header-light', 'file' => 'jobs_employer.php'];
+        }
+        break;
+      case 'messages':
+        $route = ['header' => 'header-light', 'file' => 'messages.php'];
         break;
       case 'posts':
         $route = ['header' => 'header-light', 'file' => 'posts.php'];
@@ -57,38 +94,6 @@ class Router
           $route = ['header' => 'header-light', 'file' => 'company_profile.php'];
         }
         break;
-      case 'skills':
-        $route = ['header' => 'header-light', 'file' => 'skills.php'];
-        break;
-      case 'messages':
-        $route = ['header' => 'header-light', 'file' => 'messages.php'];
-        break;
-      case 'create-post':
-        $route = ['header' => 'header-light', 'file' => 'create_post.php'];
-        break;
-      case 'create-job':
-        $route = ['header' => 'header-light', 'file' => 'create_job.php'];
-        break;
-      case 'job-matching':
-        $route = ['header' => 'header-light header-fixed', 'file' => 'job_match.php'];
-        break;
-      case 'job-match-candidate':
-        if (count($param) > 1 && $param[1] > 0) {
-          $route = ['header' => 'header-light', 'file' => 'job_match_candidate.php', 'id' => $param[1]];
-        } else {
-          $route = ['header' => 'header-light', 'file' => '404.php'];
-        }
-        break;
-      case 'job-preferences':
-        $route = ['header' => 'header-light', 'file' => 'job_preferences.php'];
-        break;
-      case 'job-detail':
-        if (count($param) > 1 && $param[1] > 0) {
-          $route = ['header' => 'header-light', 'file' => 'job_detail.php', 'id' => $param[1]];
-        } else {
-          $route = ['header' => 'header-light', 'file' => '404.php'];
-        }
-        break;
       case 'programs':
         $route = ['header' => 'header-light', 'file' => 'course.php'];
         break;
@@ -100,6 +105,9 @@ class Router
         break;
       case 'report-job-post':
         $route = ['header' => 'header-light', 'file' => 'report_job_post.php'];
+        break;
+      case 'skills':
+        $route = ['header' => 'header-light', 'file' => 'skills.php'];
         break;
       case 'work-experience':
         $route = ['header' => 'header-light', 'file' => 'work_experience.php'];

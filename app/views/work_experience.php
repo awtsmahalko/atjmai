@@ -36,45 +36,46 @@
 
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-							<!-- Single Wrap -->
-							<div class="_dashboard_content">
-								<div class="_dashboard_content_header row">
-									<div class="col-md-6">
-										<h4><i class="fa fa-briefcase mr-1"></i>Work Experience</h4>
+						<!-- Single Wrap -->
+						<div class="_dashboard_content">
+							<div class="_dashboard_content_header row">
+								<div class="col-md-6">
+									<h4><i class="fa fa-briefcase mr-1"></i>Work Experience</h4>
 
-									</div>
-									<div class="col-md-6">
-										<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile"
-											style="float: right !important;" data-toggle="modal" data-target="#modalAddWorkExperience"
-											onclick="resetFields()"><span class="fa fa-plus"></span> Add Work Experience</button>
-
-									</div>
 								</div>
+								<div class="col-md-6">
+									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile"
+										style="float: right !important;" data-toggle="modal"
+										data-target="#modalAddWorkExperience" onclick="resetFields()"><span
+											class="fa fa-plus"></span> Add Work Experience</button>
 
-								<div class="_dashboard_content_body">
-									<div class="row">
-										<div class="col">
-											<div class="row">
-												<table class="table" id="tbl_work">
-													<thead class="thead-light">
-														<tr>
-															<th scope="col">#</th>
-															<th scope="col">Company</th>
-															<th scope="col">Job Title</th>
-															<th scope="col">Achievements</th>
-															<th scope="col">Years</th>
-															<th scope="col">Action</th>
+								</div>
+							</div>
 
-														</tr>
-													</thead>
-													<tbody></tbody>
-												</table>
-												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
-											</div>
+							<div class="_dashboard_content_body">
+								<div class="row">
+									<div class="col">
+										<div class="row">
+											<table class="table" id="tbl_work">
+												<thead class="thead-light">
+													<tr>
+														<th scope="col">#</th>
+														<th scope="col">Company</th>
+														<th scope="col">Job Title</th>
+														<th scope="col">Achievements</th>
+														<th scope="col">Years</th>
+														<th scope="col">Action</th>
+
+													</tr>
+												</thead>
+												<tbody></tbody>
+											</table>
+											<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
 										</div>
 									</div>
 								</div>
 							</div>
+						</div>
 					</div>
 				</div>
 			</div>
@@ -84,17 +85,19 @@
 
 <form id="frmWorkExperience">
 	<!-- Log In Modal -->
-	<div class="modal fade" id="modalAddWorkExperience" tabindex="-1" role="dialog" aria-labelledby="modalworkexperience"
-		aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document" style="max-width: 60% !important;">
+	<div class="modal fade" id="modalAddWorkExperience" tabindex="-1" role="dialog"
+		aria-labelledby="modalworkexperience" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document"
+			style="max-width: 60% !important;">
 			<div class="modal-content" id="modalworkexperience">
 				<div class="modal-header">
 					<h4>Add Work Experience</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddWorkExpModal"><span
-							aria-hidden="true"><i class="ti-close"></i></span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+						id="closeAddWorkExpModal"><span aria-hidden="true"><i class="ti-close"></i></span></button>
 				</div>
 				<div class="modal-body">
-					<input type="hidden" class="work-exp-value" id="work_exp_id" name="work_exp_id" data-column="work_exp_id">
+					<input type="hidden" class="work-exp-value" id="work_exp_id" name="work_exp_id"
+						data-column="work_exp_id">
 					<div class="row">
 						<div class="col-xl-6 col-lg-12">
 							<div class="form-group">
@@ -112,7 +115,8 @@
 						</div>
 						<div class="col-lg-12 col-md-12">
 							<div class="form-group mb-1">
-								<input id="check_work" class="checkbox-custom" name="currently_worked" type="checkbox" onchange="currentlyWorked(this)">
+								<input id="check_work" class="checkbox-custom" name="currently_worked" type="checkbox"
+									onchange="currentlyWorked(this)">
 								<label for="check_work" class="checkbox-custom-label">I currently worked here</label>
 							</div>
 						</div>
@@ -135,7 +139,8 @@
 								<label>Achievements<span></span></label>
 								<div class="tg_grouping">
 									<grammarly-editor-plugin>
-									 <input type="text" id="lg-input" class="form-control with-light" placeholder="e.g. job title, career">
+										<input type="text" id="lg-input" class="form-control with-light"
+											placeholder="e.g. job title, career">
 									</grammarly-editor-plugin>
 									<a id="cmd-ChipsAjout" class="btn_groupin_tag"><i class="fa fa-plus"></i></a>
 								</div>
@@ -164,16 +169,16 @@
 			data: chipsAchievements
 		});
 	}
-		// ADDING A NEW CHIP
-	function fChipAdd(lChipName){
+	// ADDING A NEW CHIP
+	function fChipAdd(lChipName) {
 		// lChipName = lChipName.toLowerCase();
 		// test1 : minimum word size
-		if (!(lChipName.length > 2)){
+		if (!(lChipName.length > 2)) {
 			return 0;
 		}
 		// test2 :  no duplicates
-		for(i=0;i<chipsAchievements.length;i++) {
-			if(lChipName == chipsAchievements[i].tag){
+		for (i = 0; i < chipsAchievements.length; i++) {
+			if (lChipName == chipsAchievements[i].tag) {
 				return 0;
 			}
 		}
@@ -182,26 +187,26 @@
 		fDisplayChips();
 		return 1;
 	};
-	function appendAchievements(lChipName,id=0){
-		chipsAchievements.push({"tag":lChipName,"id" : id});
+	function appendAchievements(lChipName, id = 0) {
+		chipsAchievements.push({ "tag": lChipName, "id": id });
 	}
 	$(function() {
-	// delete chip command
-	$('#lg-Chips').on('chip.delete', function(e, chip){
-		chipsAchievements = $("#lg-Chips").material_chip('data');
-	});
+		// delete chip command
+		$('#lg-Chips').on('chip.delete', function(e, chip) {
+			chipsAchievements = $("#lg-Chips").material_chip('data');
+		});
 
-	$("#lg-Chips").focusin(function () {
-		$("#lg-input").focus();
-	});
-	fDisplayChips();
+		$("#lg-Chips").focusin(function() {
+			$("#lg-input").focus();
+		});
+		fDisplayChips();
 
-// NEW CHIP COMMAND
-	$("#cmd-ChipsAjout").click(function () {
-		fChipAdd($("#lg-input").val()) ;
-		$("#lg-input").val("");
+		// NEW CHIP COMMAND
+		$("#cmd-ChipsAjout").click(function() {
+			fChipAdd($("#lg-input").val());
+			$("#lg-input").val("");
+		});
 	});
-});
 </script>
 <script>
 	get_work_experiences();
@@ -212,35 +217,35 @@
 		formData.append('achievements', JSON.stringify(chipsAchievements));
 
 		var form_type = $("#work_exp_id").val() * 1;
-		var text_before = form_type > 0 ? "Updating...":"Adding...";
-		var controller_post = form_type > 0 ? "update_alumni_work" :"add_alumni_work";
+		var text_before = form_type > 0 ? "Updating..." : "Adding...";
+		var controller_post = form_type > 0 ? "update_alumni_work" : "add_alumni_work";
 
 		$("#btn_update_work").prop('disabled', true);
 		$("#btn_update_work").html(text_before);
 		$.ajax({
-	      url: base_controller + controller_post,
-	      type: 'POST',
-	      data: formData,
-	      processData: false,
-	      contentType: false,
-	      success: function(response) {
+			url: base_controller + controller_post,
+			type: 'POST',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(response) {
 
-			$("#closeAddWorkExpModal").click();
-			if(response == 1){
-				form_type > 0 ? success_update() :success_add();
-			}else{
-				error_response();
+				$("#closeAddWorkExpModal").click();
+				if (response == 1) {
+					form_type > 0 ? success_update() : success_add();
+				} else {
+					error_response();
+				}
+				get_work_experiences();
+
+				$("#btn_update_work").prop('disabled', false);
+				$("#btn_update_work").html('Submit');
+				// handle successful response
+			},
+			error: function(xhr, status, error) {
+				// handle error
 			}
-			get_work_experiences();
-
-			$("#btn_update_work").prop('disabled', false);
-			$("#btn_update_work").html('Submit');
-	        // handle successful response
-	      },
-	      error: function(xhr, status, error) {
-	        // handle error
-	      }
-	    });
+		});
 
 		// $("#btn_update_work").prop('disabled', true);
 		// $("#btn_update_work").html(text_before);
@@ -264,34 +269,34 @@
 			dataType: "json",
 			success: function(data) {
 				$("#tbl_work tbody").html("");
-				if(data.alumni.length > 0){
+				if (data.alumni.length > 0) {
 					$.each(data.alumni, function(index, element) {
-						if(element.achievements.length > 0){
+						if (element.achievements.length > 0) {
 							var achieve_li = '';
 							for (var i = 0; i < element.achievements.length; i++) {
 								const liRow = element.achievements[i];
-								achieve_li += '<li style="list-style: initial;">'+liRow.achievement_name+'</li>';
+								achieve_li += '<li style="list-style: initial;">' + liRow.achievement_name + '</li>';
 							}
-							var achieve_data = "<ul>"+achieve_li+"</ul>";
-						}else{
+							var achieve_data = "<ul>" + achieve_li + "</ul>";
+						} else {
 							var achieve_data = "";
 						}
-						$("#tbl_work tbody").append("<tr>"+
-						"<td>" + element.count + "</td>"+
-						"<td>" + element.company_name + "</td>"+
-						"<td>" + element.job_title + "</td>"+
-						"<td>" +achieve_data+"</td>"+
-						"<td>" + element.year_span + "</td>" +
-						"<td>"+
-						"<button type='button' class='btn btn-xs btn-primary' onclick='editWorkExperience(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddWorkExperience'><span class='fa fa-edit'></span></button>"+
-						"<button type='button' class='btn btn-xs btn-danger' onclick='deleteWork(" + element.work_exp_id + ")'><span class='fa fa-trash'></span></button>"+
-						"</td>"+
-						"</tr>");
+						$("#tbl_work tbody").append("<tr>" +
+							"<td>" + element.count + "</td>" +
+							"<td>" + element.company_name + "</td>" +
+							"<td>" + element.job_title + "</td>" +
+							"<td>" + achieve_data + "</td>" +
+							"<td>" + element.year_span + "</td>" +
+							"<td>" +
+							"<button type='button' class='btn btn-xs btn-primary' onclick='editWorkExperience(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddWorkExperience'><span class='fa fa-edit'></span></button>" +
+							"<button type='button' class='btn btn-xs btn-danger' onclick='deleteWork(" + element.work_exp_id + ")'><span class='fa fa-trash'></span></button>" +
+							"</td>" +
+							"</tr>");
 					});
-				}else{
-					$("#tbl_work tbody").append("<tr>"+
-						"<td colspan='6' align='center'>No records found</td>"+
-					"</tr>");
+				} else {
+					$("#tbl_work tbody").append("<tr>" +
+						"<td colspan='6' align='center'>No records found</td>" +
+						"</tr>");
 				}
 			}
 		});
@@ -306,34 +311,34 @@
 			element.value = res[dataColumnValue];
 		});
 
-		if(res.currently_worked == 1){
-			$("#check_work").attr("checked",true);
+		if (res.currently_worked == 1) {
+			$("#check_work").attr("checked", true);
 			// $(".year-start").removeClass("col-lg-6").removeClass("col-xl-6").addClass("col-lg-12").addClass("col-xl-12");
 			$(".year-end").hide();
-		}else{
-			$("#check_work").attr("checked",false);
+		} else {
+			$("#check_work").attr("checked", false);
 			// $(".year-start").addClass("col-lg-6").addClass("col-xl-6").removeClass("col-lg-12").removeClass("col-xl-12");
 			$(".year-end").show();
 		}
 		chipsAchievements = [];
 		for (var i = 0; i < res.achievements.length; i++) {
 			const liRow = res.achievements[i];
-			appendAchievements(liRow.achievement_name,liRow.achievements_id);
+			appendAchievements(liRow.achievement_name, liRow.achievements_id);
 		}
 		fDisplayChips();
 	}
 
-	function currentlyWorked(el){
-		if(el.checked){
+	function currentlyWorked(el) {
+		if (el.checked) {
 			// $(".year-start").removeClass("col-lg-6").removeClass("col-xl-6").addClass("col-lg-12").addClass("col-xl-12");
 			$(".year-end").hide();
-		}else{
+		} else {
 			// $(".year-start").addClass("col-lg-6").addClass("col-xl-6").removeClass("col-lg-12").removeClass("col-xl-12");
 			$(".year-end").show();
 		}
 	}
 	function resetFields() {
-		$("#check_work").attr("selected",false);
+		$("#check_work").attr("selected", false);
 		const profileValueElements = document.querySelectorAll('.work-exp-value');
 
 		// Loop through each element and retrieve the value of the "data-column" attribute

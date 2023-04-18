@@ -26,22 +26,22 @@
             if ($_SESSION['user']['category'] == 'S') {
                 // Alumni
                 $Menus->sidebar_parent('Master Data', 'fa fa-file-o', array(
-                    array("Education", "education",'fa fa-graduation-cap'),
+                    array("Education", "education", 'fa fa-graduation-cap'),
                     array("Work Experience", "work-experience", 'fa fa-briefcase'),
                     array("Skills", "skills", 'fa fa-gears'),
                     array("Job Preferences", "job-preferences", 'fa fa-file'),
                 ));
 
                 $Menus->sidebar_parent('Jobs', 'ti-briefcase', array(
-                    array("Job Status", "jobs" ,'fa fa-info-circle'),
+                    array("Job Status", "jobs", 'fa fa-info-circle'),
                     array("Job Matching", "job-matching", 'fa fa-search'),
                 ));
             }
             if ($_SESSION['user']['category'] == 'E') {
                 // Employers
                 $Menus->sidebar_parent('Jobs', 'fa fa-briefcase', array(
-                    array("Manage Jobs", "jobs"),
-                    array("Post a Job", "create-job"),
+                    array("Manage Jobs", "jobs", 'fa fa-tasks'),
+                    array("Post a Job", "create-job", 'fa fa-check-circle'),
                 ));
             }
 
@@ -51,7 +51,6 @@
                     array("Colleges", "colleges"),
                     array("Programs", "programs"),
                     array("Industries", "industries"),
-                    array("Sub Industries", "sub-industries"),
                     array("Skills", "skills"),
                 ));
                 $Menus->sidebar_parent('Report', 'fa fa-print', array(
@@ -61,7 +60,7 @@
                 ));
             }
             // ALL USERS
-            $Menus->sidebar('Posts', 'post', 'ti-announcement', $router->route['path']);
+            $Menus->sidebar('Posts', 'posts', 'ti-announcement', $router->route['path']);
             $Menus->sidebar('Messages', 'messages', 'ti-email', $router->route['path']);
             $Menus->sidebar('Notifications', 'notification', 'ti-bell', $router->route['path']);
             ?>

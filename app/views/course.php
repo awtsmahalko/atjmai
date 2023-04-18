@@ -62,7 +62,10 @@ AUTO_INCREMENT=3
 
 								</div>
 								<div class="col-md-6">
-									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile" style="float: right !important;" data-toggle="modal" data-target="#modalAddCollege" onclick="resetFields()"><span class="fa fa-plus"></span> Add Programs</button>
+									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile"
+										style="float: right !important;" data-toggle="modal"
+										data-target="#modalAddCollege" onclick="resetFields()"><span
+											class="fa fa-plus"></span> Add Programs</button>
 
 								</div>
 							</div>
@@ -102,7 +105,8 @@ AUTO_INCREMENT=3
 			<div class="modal-content" id="modaladdcollege">
 				<div class="modal-header">
 					<h4>Add Course</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddCourseModal"><span aria-hidden="true"><i class="ti-close"></i></span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+						id="closeAddCourseModal"><span aria-hidden="true"><i class="ti-close"></i></span></button>
 				</div>
 				<div class="modal-body">
 					<input type="hidden" class="course-value" id="course_id" name="course_id" data-column="course_id">
@@ -110,7 +114,8 @@ AUTO_INCREMENT=3
 						<div class="col-xl-12 col-lg-12">
 							<div class="form-group">
 								<label>College Name</label>
-								<select class="form-control select2 course-value" id="college_id" name="college_id" data-column="college_id" style="width: 100% !important;" required>
+								<select class="form-control select2 course-value" id="college_id" name="college_id"
+									data-column="college_id" style="width: 100% !important;" required>
 									<option value="">Please Select</option>
 									<?= Colleges::options() ?>
 								</select>
@@ -121,14 +126,16 @@ AUTO_INCREMENT=3
 						<div class="col-xl-12 col-lg-12">
 							<div class="form-group">
 								<label>Program Name</label>
-								<input type="text" class="form-control course-value" data-column="course_name" name='course_name' placeholder="Bachelor of Science in .." required>
+								<input type="text" class="form-control course-value" data-column="course_name"
+									name='course_name' placeholder="Bachelor of Science in .." required>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<div class="form-group">
-						<button type="submit" class="btn dark-2 btn-md full-width pop-login" id="btn_update_course">Submit</button>
+						<button type="submit" class="btn dark-2 btn-md full-width pop-login"
+							id="btn_update_course">Submit</button>
 					</div>
 				</div>
 			</div>

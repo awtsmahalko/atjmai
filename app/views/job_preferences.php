@@ -52,7 +52,8 @@
 										<div class="col-xl-6 col-lg-6">
 											<div class="form-group">
 												<label class="">Job Title</label>
-												<input type="text" class="form-control preference-value" placeholder="Who do you need?" data-column="job_title" 
+												<input type="text" class="form-control preference-value"
+													placeholder="Who do you need?" data-column="job_title"
 													name="job_title" required>
 											</div>
 										</div>
@@ -60,7 +61,8 @@
 										<div class="col-xl-6 col-lg-6">
 											<div class="form-group">
 												<label class="">Wage/Salary</label>
-												<input type="text" class="form-control preference-value" data-column="salary_details" 
+												<input type="text" class="form-control preference-value"
+													data-column="salary_details"
 													placeholder="Indicate currency (e.g. Php 20,000/mo)"
 													name="salary_details">
 											</div>
@@ -69,7 +71,8 @@
 										<div class="col-xl-6 col-lg-6">
 											<div class="form-group">
 												<label>Type of Employment</label>
-												<select class="form-control select2 preference-value" name="job_type_id" data-column="job_type_id" required>
+												<select class="form-control select2 preference-value" name="job_type_id"
+													data-column="job_type_id" required>
 													<option value="0">Any</option>
 													<?= JobTypes::options() ?>
 												</select>
@@ -79,7 +82,8 @@
 										<div class="col-xl-6 col-lg-6">
 											<div class="form-group">
 												<label>Schedule</label>
-												<select class="form-control select2 preference-value" data-column="job_sched_id" id="job_sched_id" required>
+												<select class="form-control select2 preference-value"
+													data-column="job_sched_id" id="job_sched_id" required>
 													<option value="0">Any</option>
 													<?= JobSchedules::options() ?>
 												</select>
@@ -90,7 +94,8 @@
 											<div class="form-group">
 												<label class="">Summary</label>
 												<grammarly-editor-plugin>
-													<textarea id="job-text" class="form-control preference-value" data-column="job_description" name="job_description"></textarea>
+													<textarea id="job-text" class="form-control preference-value"
+														data-column="job_description" name="job_description"></textarea>
 												</grammarly-editor-plugin>
 											</div>
 										</div>
@@ -98,8 +103,8 @@
 								</div>
 							</div>
 							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update"><span
-									class="fa fa-edit"></span> Save Changes</button>
+							<button type="submit" class="btn btn-save" id="btn_update"><span class="fa fa-edit"></span>
+								Save Changes</button>
 						</form>
 					</div>
 				</div>
@@ -136,7 +141,7 @@
 		$("#btn_update").prop('disabled', true);
 		$("#btn_update").html('Updating...');
 		$.post(base_controller + "update_alumni_job_preferences", $("#frmJobPreferences").serialize(), function(data, status) {
-			if(data == 1){
+			if (data == 1) {
 				success_update();
 			}
 			$("#btn_update").prop('disabled', false);

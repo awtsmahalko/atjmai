@@ -63,8 +63,9 @@ AUTO_INCREMENT=3
 								</div>
 								<div class="col-md-6">
 									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile"
-										style="float: right !important;" data-toggle="modal" data-target="#modalAddCollege"
-										onclick="resetFields()"><span class="fa fa-plus"></span> Add Colleges</button>
+										style="float: right !important;" data-toggle="modal"
+										data-target="#modalAddCollege" onclick="resetFields()"><span
+											class="fa fa-plus"></span> Add Colleges</button>
 
 								</div>
 							</div>
@@ -104,11 +105,12 @@ AUTO_INCREMENT=3
 			<div class="modal-content" id="modaladdcollege">
 				<div class="modal-header">
 					<h4>Add College</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddEducModal"><span
-							aria-hidden="true"><i class="ti-close"></i></span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
+						id="closeAddEducModal"><span aria-hidden="true"><i class="ti-close"></i></span></button>
 				</div>
 				<div class="modal-body">
-					<input type="hidden" class="college-value" id="college_id" name="college_id" data-column="college_id">
+					<input type="hidden" class="college-value" id="college_id" name="college_id"
+						data-column="college_id">
 					<div class="row">
 						<div class="col-xl-12 col-lg-12">
 							<div class="form-group">
@@ -138,15 +140,15 @@ AUTO_INCREMENT=3
 		e.preventDefault();
 
 		var form_type = $("#college_id").val() * 1;
-		var text_before = form_type > 0 ? "Updating...":"Adding...";
-		var controller_post = form_type > 0 ? "update_college" :"add_college";
+		var text_before = form_type > 0 ? "Updating..." : "Adding...";
+		var controller_post = form_type > 0 ? "update_college" : "add_college";
 		$("#btn_update_college").prop('disabled', true);
 		$("#btn_update_college").html(text_before);
 		$.post(base_controller + controller_post, $("#frmColleges").serialize(), function(data, status) {
 			$("#closeAddEducModal").click();
-			if(data == 1){
-				form_type > 0 ? success_update() :success_add();
-			}else{
+			if (data == 1) {
+				form_type > 0 ? success_update() : success_add();
+			} else {
 				error_response();
 			}
 			get_colleges();
@@ -162,21 +164,21 @@ AUTO_INCREMENT=3
 			dataType: "json",
 			success: function(data) {
 				$("#tbl_colleges tbody").html("");
-				if(data.colleges.length > 0){
+				if (data.colleges.length > 0) {
 					$.each(data.colleges, function(index, element) {
-						$("#tbl_colleges tbody").append("<tr>"+
-						"<td>" + element.college_id + "</td>"+
-						"<td>" + element.college_name + "</td>" +
-						"<td>"+
-						"<button type='button' class='btn btn-xs btn-primary' onclick='editColleges(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddCollege'><span class='fa fa-edit'></span></button>"+
-						"<button type='button' class='btn btn-xs btn-danger' onclick='deleteCollege(" + element.college_id + ")'><span class='fa fa-trash'></span></button>"+
-						"</td>"+
-						"</tr>");
+						$("#tbl_colleges tbody").append("<tr>" +
+							"<td>" + element.college_id + "</td>" +
+							"<td>" + element.college_name + "</td>" +
+							"<td>" +
+							"<button type='button' class='btn btn-xs btn-primary' onclick='editColleges(" + JSON.stringify(element) + ")'  data-toggle='modal' data-target='#modalAddCollege'><span class='fa fa-edit'></span></button>" +
+							"<button type='button' class='btn btn-xs btn-danger' onclick='deleteCollege(" + element.college_id + ")'><span class='fa fa-trash'></span></button>" +
+							"</td>" +
+							"</tr>");
 					});
-				}else{
-					$("#tbl_colleges tbody").append("<tr>"+
-						"<td colspan='3' align='center'>No records found</td>"+
-					"</tr>");
+				} else {
+					$("#tbl_colleges tbody").append("<tr>" +
+						"<td colspan='3' align='center'>No records found</td>" +
+						"</tr>");
 				}
 			}
 		});

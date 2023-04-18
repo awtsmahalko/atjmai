@@ -302,7 +302,7 @@ require 'routes/routes.php';
 
   </script>
   <script>
-    function btn_processor(el_id, is_disabled = true, text = 'Loading') {
+    function btn_processor(el_id, is_disabled = true, text = '<span class="fa fa-spin fa-spinner"></span> Processing...') {
       $("#" + el_id).prop('disabled', is_disabled);
       $("#" + el_id).html(text);
     }
