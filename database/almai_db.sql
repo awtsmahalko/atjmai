@@ -40,9 +40,9 @@ CREATE TABLE IF NOT EXISTS `tbl_alumni` (
 
 -- Dumping data for table almai_db.tbl_alumni: ~3 rows (approximately)
 INSERT INTO `tbl_alumni` (`alumni_id`, `user_id`, `alumni_fname`, `alumni_mname`, `alumni_lname`, `alumni_gender`, `alumni_contact`, `alumni_address`, `course_id`, `alumni_graduation`, `created_at`, `updated_at`, `is_employed`) VALUES
-	(1, 1, 'Eduard Rino', 'Questo', 'Carton', 'Male', '', 'de', 1, '2018-03-04', '2023-04-06 14:44:05', '2023-04-11 18:01:49', 1),
-	(2, 2, 'Genesis', 'Carton', 'Francisco', NULL, '', '', 2, '2023-02-01', '2023-04-06 14:57:28', '0000-00-00 00:00:00', 0),
-	(3, 4, 'Meralynn', 'Flores', 'Carton', '', '', 'a', 1, '2022-06-08', '2023-04-11 18:40:24', '2023-04-11 18:43:51', 1);
+	(1, 1, 'Eduard Rino', 'Questo', 'Carton', 'Male', '00909090', 'de', 35, '2022-03-04', '2023-04-06 14:44:05', '2023-04-15 10:57:36', 1),
+	(2, 2, 'Genesis', 'Carton', 'Francisco', NULL, '09090', '', 2, '2021-02-01', '2023-04-06 14:57:28', '2023-04-15 10:57:38', 0),
+	(3, 4, 'Meralynn', '', 'Carton', '', '0909', 'a', 6, '2023-06-08', '2023-04-11 18:40:24', '2023-04-15 10:10:14', 1);
 
 -- Dumping structure for table almai_db.tbl_alumni_educations
 CREATE TABLE IF NOT EXISTS `tbl_alumni_educations` (
@@ -93,11 +93,13 @@ CREATE TABLE IF NOT EXISTS `tbl_alumni_skills` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`as_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table almai_db.tbl_alumni_skills: ~0 rows (approximately)
+-- Dumping data for table almai_db.tbl_alumni_skills: ~3 rows (approximately)
 INSERT INTO `tbl_alumni_skills` (`as_id`, `alumni_id`, `skill_id`, `skill_rate`, `created_at`, `updated_at`) VALUES
-	(1, 1, 1, 2, '2023-04-06 14:53:28', '0000-00-00 00:00:00');
+	(1, 1, 1, 2, '2023-04-06 14:53:28', '0000-00-00 00:00:00'),
+	(2, 1, 62, 3, '2023-04-18 10:05:57', '0000-00-00 00:00:00'),
+	(3, 1, 67, 5, '2023-04-18 10:05:57', '0000-00-00 00:00:00');
 
 -- Dumping structure for table almai_db.tbl_alumni_skills_category
 CREATE TABLE IF NOT EXISTS `tbl_alumni_skills_category` (
@@ -136,7 +138,7 @@ CREATE TABLE IF NOT EXISTS `tbl_colleges` (
   PRIMARY KEY (`college_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
--- Dumping data for table almai_db.tbl_colleges: ~8 rows (approximately)
+-- Dumping data for table almai_db.tbl_colleges: ~7 rows (approximately)
 INSERT INTO `tbl_colleges` (`college_id`, `college_name`, `college_status`, `created_at`, `updated_at`) VALUES
 	(1, 'College Of Agriculture, Fisheries, And Allied Sciences', 1, '2023-04-07 10:58:07', '2023-04-13 11:27:08'),
 	(2, 'College Of Arts and Sciences', 1, '2023-04-07 11:11:31', '2023-04-13 11:27:02'),
@@ -275,11 +277,12 @@ CREATE TABLE IF NOT EXISTS `tbl_jobs` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`job_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_jobs: ~0 rows (approximately)
 INSERT INTO `tbl_jobs` (`job_id`, `employer_id`, `job_title`, `job_description`, `job_type_id`, `job_sched_id`, `hire_needed`, `expected_hire_date`, `salary_details`, `created_at`, `updated_at`) VALUES
-	(1, 3, 'Web Developer', '', 1, 0, 5, NULL, '1000', '2023-04-11 14:27:41', '2023-04-11 14:29:02');
+	(1, 1, 'Web Developer', '', 1, 0, 5, NULL, '1000', '2023-04-11 14:27:41', '2023-04-18 10:12:28'),
+	(2, 1, 'Graphic Designer', '', 1, 0, 5, NULL, '10k - 20k per month', '2023-04-18 11:46:21', '0000-00-00 00:00:00');
 
 -- Dumping structure for table almai_db.tbl_job_schedules
 CREATE TABLE IF NOT EXISTS `tbl_job_schedules` (
@@ -310,9 +313,14 @@ CREATE TABLE IF NOT EXISTS `tbl_job_skills` (
   `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`job_skill_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 -- Dumping data for table almai_db.tbl_job_skills: ~0 rows (approximately)
+INSERT INTO `tbl_job_skills` (`job_skill_id`, `skill_id`, `skill_rating`, `job_id`, `created_at`, `updated_at`) VALUES
+	(1, 107, 0, 2, '2023-04-18 11:46:21', '0000-00-00 00:00:00'),
+	(2, 101, 0, 2, '2023-04-18 11:46:21', '0000-00-00 00:00:00'),
+	(3, 28, 0, 2, '2023-04-18 11:46:21', '0000-00-00 00:00:00'),
+	(4, 57, 0, 2, '2023-04-18 11:46:21', '0000-00-00 00:00:00');
 
 -- Dumping structure for table almai_db.tbl_job_types
 CREATE TABLE IF NOT EXISTS `tbl_job_types` (
@@ -332,6 +340,25 @@ INSERT INTO `tbl_job_types` (`job_type_id`, `job_type_name`, `job_type_status`, 
 	(4, 'Fixed Term', 1, '2023-03-31 08:09:42', '0000-00-00 00:00:00'),
 	(5, 'Temporary', 1, '2023-03-31 08:09:54', '0000-00-00 00:00:00'),
 	(6, 'OJT (On the job training)', 1, '2023-03-31 08:10:16', '0000-00-00 00:00:00');
+
+-- Dumping structure for table almai_db.tbl_posts
+CREATE TABLE IF NOT EXISTS `tbl_posts` (
+  `post_id` int(11) NOT NULL AUTO_INCREMENT,
+  `user_id` int(11) NOT NULL DEFAULT '0',
+  `post_type` varchar(255) DEFAULT NULL,
+  `post_message` text,
+  `college_id` int(1) DEFAULT NULL,
+  `show_to_employer` int(1) DEFAULT NULL,
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`post_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table almai_db.tbl_posts: ~1 rows (approximately)
+INSERT INTO `tbl_posts` (`post_id`, `user_id`, `post_type`, `post_message`, `college_id`, `show_to_employer`, `created_at`, `updated_at`) VALUES
+	(1, 1, 'Announcement', 'asdasdasdasdasdas asd as dsad asd s ', 5, 0, '2023-04-18 10:57:11', '0000-00-00 00:00:00'),
+	(2, 1, 'News', 'asdasdsada sdas\r\ndas\r\ndas\r\nd\r\nasd\r\nasd\r\nasd\r\na\r\ndas\r\nd\r\nasd\r\nasd\r\nas\r\ndasd', 6, 1, '2023-04-18 11:33:34', '0000-00-00 00:00:00'),
+	(3, 3, 'Announcement', 's', 5, 1, '2023-04-18 11:54:24', '0000-00-00 00:00:00');
 
 -- Dumping structure for table almai_db.tbl_skills
 CREATE TABLE IF NOT EXISTS `tbl_skills` (
