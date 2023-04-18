@@ -40,6 +40,22 @@ class Jobs extends Connection
         }
     }
 
+    public function data_employer(){
+        
+        $JobSkills = new JobSkills;
+        $Employer = new Employers();
+        $id = $Employer->id();
+        $response['jobs'] = array();
+        $result = $this->select($this->table,"*","employer_id = '$id'");
+        while ($row = $result->fetch_assoc()) {
+            $row['job_type_name'] = JobTypes::name($row['job_type_id']);
+            $row['employers'] = Employers::dataOf($row['employer_id']);
+            $row['skills'] = json_decode($JobSkills->data($row['job_id']))->skills;
+            array_push($response['jobs'], $row);
+        }
+        return json_encode($response);
+    }
+
     public static function countPosted($employer_id = 0)
     {
         $self = new self;

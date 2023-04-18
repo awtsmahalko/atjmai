@@ -97,7 +97,7 @@
 
 										<div class="col-xl-12 col-lg-12">
 											<div class="form-group">
-												<label class="">Job Description</label>
+												<label class="">Job Summary</label>
 												<grammarly-editor-plugin>
 													<textarea id="job-text" class="form-control"></textarea>
 												</grammarly-editor-plugin>

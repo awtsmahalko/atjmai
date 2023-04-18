@@ -1,7 +1,7 @@
 <?php
 include 'core/config.php';
 if (isset($_SESSION['user']['id'])) {
-	header("location:index.php");
+	header("location:".BASE_URL);
 }
 $csrf = Components::csrf();
 ?>
@@ -359,28 +359,11 @@ $csrf = Components::csrf();
 											<input type='hidden' value='E' name='user_category'>
 											<?= $csrf ?>
 											<div class="row">
-												<div class="col-6">
+												<div class="col-12">
 													<div class="form-group">
 														<label>Employer Name</label>
 														<input class="form-control" type="text"
 															placeholder="Employer Name" name="employer_name" required>
-													</div>
-												</div>
-												<div class="col-6">
-													<div class="form-group">
-														<label>Contact #</label>
-														<input class="form-control" type="text"
-															placeholder="Contact Number" name="company_contact"
-															required>
-													</div>
-												</div>
-											</div>
-											<div class="row">
-												<div class="col-12">
-													<div class="form-group">
-														<label>Company Name</label>
-														<input class="form-control" type="text"
-															placeholder="Company Name" name="company_name" required>
 													</div>
 												</div>
 											</div>
@@ -397,11 +380,10 @@ $csrf = Components::csrf();
 												</div>
 												<div class="col-6">
 													<div class="form-group">
-														<label>Sub Industry</label>
-														<select class="form-control select2" id="sub_industry_id"
-															name="sub_industry_id" style="width: 100%;">
-															<option value="">Please Select</option>
-														</select>
+														<label>Contact #</label>
+														<input class="form-control" type="text"
+															placeholder="Contact Number" name="company_contact"
+															required>
 													</div>
 												</div>
 											</div>

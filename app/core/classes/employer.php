@@ -13,11 +13,11 @@ class Employers extends Connection
         return $this->insert($this->table, [
             'user_id'           => $user_id,
             'employer_name'     => $this->post('employer_name'),
-            'company_name'      => $this->post('company_name'),
+            // 'company_name'      => $this->post('company_name'),
             'company_contact'   => $this->post('company_contact'),
             'company_address'   => $this->post('company_address'),
             'industry_id'       => $this->post('industry_id'),
-            'sub_industry_id'   => $this->post('sub_industry_id'),
+            // 'sub_industry_id'   => $this->post('sub_industry_id'),
         ]);
     }
 

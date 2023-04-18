@@ -84,6 +84,10 @@ class Controller
         $class_name = 'Courses';
         $method_name = 'data';
         break;
+      case 'get_employer_jobs':
+        $class_name = 'Jobs';
+        $method_name = 'data_employer';
+        break;
       case 'get_posts_timeline':
         $class_name = 'Posts';
         $method_name = 'timeline';

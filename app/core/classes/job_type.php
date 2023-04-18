@@ -23,6 +23,14 @@ class JobTypes extends Connection
         return $option;
     }
 
+    public static function name($primary_id)
+    {
+        $self = new self;
+        $result = $self->select($self->table, $self->name, "$self->pk = '$primary_id'");
+        $row = $result->fetch_assoc();
+        return $row[$self->name];
+    }
+
     public static function dataOf($primary_id, $field = '*')
     {
         $self = new self;
