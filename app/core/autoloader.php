@@ -16,6 +16,7 @@ $classes = array(
     'Employers'                 => $pre_class . 'employer.php',
     'Industries'                => $pre_class . 'industries.php',
     'Jobs'                      => $pre_class . 'jobs.php',
+    'JobCandidates'             => $pre_class . 'job_candidates.php',
     'JobSchedules'              => $pre_class . 'job_schedule.php',
     'JobSkills'                 => $pre_class . 'job_skills.php',
     'JobTypes'                  => $pre_class . 'job_type.php',

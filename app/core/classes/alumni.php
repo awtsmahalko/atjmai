@@ -21,9 +21,9 @@ class Alumni extends Connection
             'course_id'         => $this->post('course_id'),
             'alumni_graduation' => $this->post('alumni_graduation'),
             'is_employed'       => $is_employed,
-        ],'Y');
+        ], 'Y');
 
-        if($is_employed == 1 && $alumni_id > 0){
+        if ($is_employed == 1 && $alumni_id > 0) {
             $AlumniWork = new AlumniWorkExperiences();
             $AlumniWork->add_from_register($alumni_id);
 
@@ -33,7 +33,6 @@ class Alumni extends Connection
         $AlumniEducation = new AlumniEducations();
         $AlumniEducation->add_from_register($alumni_id);
         return 1;
-
     }
 
     public function update_profile()
@@ -79,7 +78,7 @@ class Alumni extends Connection
         $fileError = $file['error'];
         $fileType = $file['type'];
 
-        if($fileName == '')
+        if ($fileName == '')
             return 1;
 
         // Get the file extension
@@ -88,13 +87,13 @@ class Alumni extends Connection
         // Allowed file extensions
         $allowedExtensions = array("jpeg", "jpg", "png");
 
-        if(!in_array($fileExtension, $allowedExtensions))
+        if (!in_array($fileExtension, $allowedExtensions))
             return 'NO-FILE-EXTENSION';
 
-        if($fileError != 0)
+        if ($fileError != 0)
             return 'FILE-UPLOAD-ERROR';
 
-        if($fileSize >= 1000000)
+        if ($fileSize >= 1000000)
             return 'FILE-TOO-BIG';
 
         $newFileName = uniqid('', true) . "." . $fileExtension;
@@ -103,11 +102,10 @@ class Alumni extends Connection
         // Move the file to the destination
         move_uploaded_file($fileTempName, $fileDestination);
 
-        $this->update("tbl_users",['user_img' => $newFileName],"user_id = '".$_SESSION['user']['id']."'");
+        $this->update("tbl_users", ['user_img' => $newFileName], "user_id = '" . $_SESSION['user']['id'] . "'");
         $_SESSION['user']['img'] = $newFileName;
 
         return "IMG-SUCCESS";
-
     }
 
     public function profile()
@@ -119,6 +117,18 @@ class Alumni extends Connection
         $result = $this->select($this->table, "*", "user_id = '$user_id'");
         $row = $result->fetch_assoc();
         return json_encode($row);
+    }
+
+    public function pds()
+    {
+        $alumni_id = $this->post('alumni_id');
+        // if (!isset($_SESSION['user']['id']))
+        //     return json_encode(['user_id' => 0]);
+
+        // $user_id = $_SESSION['user']['id'];
+        // $result = $this->select($this->table, "*", "user_id = '$user_id'");
+        // $row = $result->fetch_assoc();
+        // return json_encode($row);
     }
 
     public function id($id = 0)

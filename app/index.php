@@ -30,8 +30,9 @@ require 'routes/routes.php';
   <script src="<?=BASE_URL?>/assets/js/metisMenu.min.js"></script>
   <script src="<?=BASE_URL?>/assets/js/select2.min.js"></script>
   <script type="text/javascript">
-    var base_controller = "controller/web.php?uri=";
     var base_url = "<?=BASE_URL?>";
+    var base_controller = "controller/web.php?uri=";
+    var base_url_img = base_url + "assets/img/users/";
   </script>
   <script src="<?=BASE_URL?>/assets/dist/sweetalert2/sweetalert2.all.min.js"></script>
   <link rel="stylesheet" href="<?=BASE_URL?>/assets/dist/sweetalert2/sweetalert2.min.css">

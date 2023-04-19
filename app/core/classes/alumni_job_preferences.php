@@ -54,7 +54,7 @@ class AlumniJobPreferences extends Connection
         $alumni_id = $Alumni->id();
 
         $result = $this->select($this->table, "*", "alumni_id = '$alumni_id'");
-        if($result->num_rows < 1)
+        if ($result->num_rows < 1)
             return json_encode([
                 'job_title' => '',
                 'job_description' => '',
@@ -72,6 +72,14 @@ class AlumniJobPreferences extends Connection
         $result = $this->select($this->table, "preference_id", "alumni_id = '$alumni_id'");
         $row = $result->fetch_assoc();
         return $row['preference_id'];
+    }
+
+    public static function AlumniJobTitle($alumni_id)
+    {
+        $self = new self;
+        $result = $self->select($self->table, "job_title", "alumni_id = '$alumni_id'");
+        $row = $result->fetch_assoc();
+        return $row['job_title'];
     }
 
     public static function dataOf($primary_id, $field = '*')

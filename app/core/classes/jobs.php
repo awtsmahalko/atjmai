@@ -40,17 +40,19 @@ class Jobs extends Connection
         }
     }
 
-    public function data_employer(){
-        
+    public function data_employer()
+    {
         $JobSkills = new JobSkills;
         $Employer = new Employers();
+        $JobCandidates = new JobCandidates();
         $id = $Employer->id();
         $response['jobs'] = array();
-        $result = $this->select($this->table,"*","employer_id = '$id'");
+        $result = $this->select($this->table, "*", "employer_id = '$id'");
         while ($row = $result->fetch_assoc()) {
             $row['job_type_name'] = JobTypes::name($row['job_type_id']);
             $row['employers'] = Employers::dataOf($row['employer_id']);
             $row['skills'] = json_decode($JobSkills->data($row['job_id']))->skills;
+            $row['candidates'] = json_decode($JobCandidates->data($row['job_id']))->candidates;
             array_push($response['jobs'], $row);
         }
         return json_encode($response);
@@ -60,8 +62,8 @@ class Jobs extends Connection
     {
         $self = new self;
         $inject = $employer_id > 0 ? "employer_id = '$employer_id'" : "";
-        $result = $self->select($self->table, "COUNT(job_id) AS count",$inject);
-        if($result->num_rows < 1)
+        $result = $self->select($self->table, "COUNT(job_id) AS count", $inject);
+        if ($result->num_rows < 1)
             return 0;
         $row = $result->fetch_assoc();
         return $row['count'];

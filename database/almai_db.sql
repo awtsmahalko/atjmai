@@ -114,20 +114,6 @@ CREATE TABLE IF NOT EXISTS `tbl_alumni_skills_category` (
 
 -- Dumping data for table almai_db.tbl_alumni_skills_category: ~0 rows (approximately)
 
--- Dumping structure for table almai_db.tbl_candidates
-CREATE TABLE IF NOT EXISTS `tbl_candidates` (
-  `candidate_id` int(11) NOT NULL AUTO_INCREMENT,
-  `alumni_id` int(11) NOT NULL DEFAULT '0',
-  `job_id` int(11) NOT NULL DEFAULT '0',
-  `employer_id` int(11) NOT NULL DEFAULT '0',
-  `candidate_status` int(1) NOT NULL DEFAULT '0',
-  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
-  PRIMARY KEY (`candidate_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
-
--- Dumping data for table almai_db.tbl_candidates: ~0 rows (approximately)
-
 -- Dumping structure for table almai_db.tbl_colleges
 CREATE TABLE IF NOT EXISTS `tbl_colleges` (
   `college_id` int(11) NOT NULL AUTO_INCREMENT,
@@ -279,10 +265,28 @@ CREATE TABLE IF NOT EXISTS `tbl_jobs` (
   PRIMARY KEY (`job_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
--- Dumping data for table almai_db.tbl_jobs: ~0 rows (approximately)
+-- Dumping data for table almai_db.tbl_jobs: ~2 rows (approximately)
 INSERT INTO `tbl_jobs` (`job_id`, `employer_id`, `job_title`, `job_description`, `job_type_id`, `job_sched_id`, `hire_needed`, `expected_hire_date`, `salary_details`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Web Developer', '', 1, 0, 5, NULL, '1000', '2023-04-11 14:27:41', '2023-04-18 10:12:28'),
 	(2, 1, 'Graphic Designer', '', 1, 0, 5, NULL, '10k - 20k per month', '2023-04-18 11:46:21', '0000-00-00 00:00:00');
+
+-- Dumping structure for table almai_db.tbl_job_candidates
+CREATE TABLE IF NOT EXISTS `tbl_job_candidates` (
+  `candidate_id` int(11) NOT NULL AUTO_INCREMENT,
+  `alumni_id` int(11) NOT NULL DEFAULT '0',
+  `job_id` int(11) NOT NULL DEFAULT '0',
+  `employer_id` int(11) NOT NULL DEFAULT '0',
+  `candidate_status` int(1) NOT NULL DEFAULT '0',
+  `rating` decimal(12,2) NOT NULL DEFAULT '0.00',
+  `created_at` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `updated_at` datetime NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
+  PRIMARY KEY (`candidate_id`)
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+
+-- Dumping data for table almai_db.tbl_job_candidates: ~1 rows (approximately)
+INSERT INTO `tbl_job_candidates` (`candidate_id`, `alumni_id`, `job_id`, `employer_id`, `candidate_status`, `rating`, `created_at`, `updated_at`) VALUES
+	(1, 1, 1, 0, 0, 0.00, '2023-04-19 09:04:22', '0000-00-00 00:00:00'),
+	(2, 2, 1, 0, 0, 0.00, '2023-04-19 09:04:22', '0000-00-00 00:00:00');
 
 -- Dumping structure for table almai_db.tbl_job_schedules
 CREATE TABLE IF NOT EXISTS `tbl_job_schedules` (
@@ -315,7 +319,7 @@ CREATE TABLE IF NOT EXISTS `tbl_job_skills` (
   PRIMARY KEY (`job_skill_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
--- Dumping data for table almai_db.tbl_job_skills: ~0 rows (approximately)
+-- Dumping data for table almai_db.tbl_job_skills: ~4 rows (approximately)
 INSERT INTO `tbl_job_skills` (`job_skill_id`, `skill_id`, `skill_rating`, `job_id`, `created_at`, `updated_at`) VALUES
 	(1, 107, 0, 2, '2023-04-18 11:46:21', '0000-00-00 00:00:00'),
 	(2, 101, 0, 2, '2023-04-18 11:46:21', '0000-00-00 00:00:00'),
@@ -354,7 +358,7 @@ CREATE TABLE IF NOT EXISTS `tbl_posts` (
   PRIMARY KEY (`post_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
--- Dumping data for table almai_db.tbl_posts: ~1 rows (approximately)
+-- Dumping data for table almai_db.tbl_posts: ~2 rows (approximately)
 INSERT INTO `tbl_posts` (`post_id`, `user_id`, `post_type`, `post_message`, `college_id`, `show_to_employer`, `created_at`, `updated_at`) VALUES
 	(1, 1, 'Announcement', 'asdasdasdasdasdas asd as dsad asd s ', 5, 0, '2023-04-18 10:57:11', '0000-00-00 00:00:00'),
 	(2, 1, 'News', 'asdasdsada sdas\r\ndas\r\ndas\r\nd\r\nasd\r\nasd\r\nasd\r\na\r\ndas\r\nd\r\nasd\r\nasd\r\nas\r\ndasd', 6, 1, '2023-04-18 11:33:34', '0000-00-00 00:00:00'),
@@ -676,7 +680,7 @@ CREATE TABLE IF NOT EXISTS `tbl_users` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
--- Dumping data for table almai_db.tbl_users: ~5 rows (approximately)
+-- Dumping data for table almai_db.tbl_users: ~4 rows (approximately)
 INSERT INTO `tbl_users` (`user_id`, `user_fullname`, `user_email`, `user_password`, `user_category`, `user_status`, `user_img`, `created_at`, `update_at`) VALUES
 	(1, 'Eduard Rino Questo Carton', 'eduard16carton@gmail.com', '0cc175b9c0f1b6a831c399e269772661', 'S', 1, '6435fc6ab78272.02073841.jpg', '2023-04-06 14:44:05', '0000-00-00 00:00:00'),
 	(2, 'Genesis Carton Francisco', 'student1@gmail.com', '0cc175b9c0f1b6a831c399e269772661', 'S', 1, 'default_male.png', '2023-04-06 14:57:28', '0000-00-00 00:00:00'),
