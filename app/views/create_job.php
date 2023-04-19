@@ -109,7 +109,8 @@
 										<div class="col-xl-12 col-lg-12">
 											<div class="form-group">
 												<label>Skills</label>
-												<select class="form-control select2" id="skills" multiple="true" style="width: 100%;" name="skills[]" required>
+												<select class="form-control select2" id="skills" multiple="true"
+													style="width: 100%;" name="skills[]" required>
 													<?= Skills::options() ?>
 												</select>
 											</div>

@@ -65,7 +65,9 @@
 									<div class="row">
 										<div class="col-md-12">
 											<div class="form-group-btn pull-right">
-												<button style="border-radius: 50px;" type="submit" class="btn btn-md btn-save" id="btn_update_skills"><span class="fa fa-edit"></span> Save Changes</button>
+												<button style="border-radius: 50px;" type="submit"
+													class="btn btn-md btn-save" id="btn_update_skills"><span
+														class="fa fa-edit"></span> Save Changes</button>
 											</div>
 										</div>
 									</div>
@@ -274,9 +276,9 @@
 			csrf: $("#csrf").val()
 		}, function(data, status) {
 			var res = JSON.parse(data);
-			if(res == 1){
+			if (res == 1) {
 				success_update();
-			}else{
+			} else {
 				error_response();
 			}
 			$("#btn_update_skills").prop('disabled', false);

@@ -58,6 +58,24 @@ class Jobs extends Connection
         return json_encode($response);
     }
 
+    public function data_alumni()
+    {
+        $JobSkills = new JobSkills;
+        $Alumni = new Alumni();
+        $JobCandidates = new JobCandidates();
+        $id = $Alumni->id();
+        $response['jobs'] = array();
+        $result = $this->select($this->table, "*", "alumni = '$id'");
+        while ($row = $result->fetch_assoc()) {
+            // $row['job_type_name'] = JobTypes::name($row['job_type_id']);
+            // $row['employers'] = Employers::dataOf($row['employer_id']);
+            // $row['skills'] = json_decode($JobSkills->data($row['job_id']))->skills;
+            // $row['candidates'] = json_decode($JobCandidates->data($row['job_id']))->candidates;
+            array_push($response['jobs'], $row);
+        }
+        return json_encode($response);
+    }
+
     public static function countPosted($employer_id = 0)
     {
         $self = new self;

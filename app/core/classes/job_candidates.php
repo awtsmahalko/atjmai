@@ -5,6 +5,22 @@ class JobCandidates extends Connection
     public $pk = 'candidate_id';
     public $name = 'alumni_id';
 
+    // ----- STATUS ----
+    // -1 = Apply
+
+    public function apply()
+    {
+        $Alumni = new Alumni();
+        $alumni_id = $Alumni->id();
+        $job_id = $this->post('job_id');
+        return $this->insert($this->table, [
+            'job_id'        => $job_id,
+            'employer_id'   => Jobs::dataOf($job_id, 'employer_id'),
+            'alumni_id'     => $alumni_id,
+            'candidate_status' => -1,
+        ]);
+    }
+
     public function data($job_id)
     {
         $response['candidates'] = array();

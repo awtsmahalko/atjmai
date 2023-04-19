@@ -28,6 +28,10 @@ class Controller
         $class_name = 'Jobs';
         $method_name = 'add';
         break;
+      case 'add_job_apply':
+        $class_name = 'JobCandidates';
+        $method_name = 'apply';
+        break;
       case 'add_post':
         $class_name = 'Posts';
         $method_name = 'add';
@@ -75,6 +79,10 @@ class Controller
       case 'get_alumni_job_preferences':
         $class_name = 'AlumniJobPreferences';
         $method_name = 'data';
+        break;
+      case 'get_alumni_jobs':
+        $class_name = 'Jobs';
+        $method_name = 'data_alumni';
         break;
       case 'get_colleges_data':
         $class_name = 'Colleges';

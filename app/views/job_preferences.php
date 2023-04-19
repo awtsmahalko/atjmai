@@ -133,7 +133,7 @@
 			element.value = res[dataColumnValue];
 		});
 
-      	$(".select2").select2().trigger('change');
+		$(".select2").select2().trigger('change');
 	}
 
 	$("#frmJobPreferences").submit(function(e) {

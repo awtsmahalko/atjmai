@@ -133,14 +133,30 @@ foreach ($job_scores as $job => $score) {
 									<div class="col-xl-4 col-lg-6">
 										<div class="form-group with-light" data-select2-id="4">
 											<label>Category</label>
-											<select id="jb-category" class="form-control  select2-hidden-accessible" data-select2-id="jb-category" tabindex="-1" aria-hidden="true">
+											<select id="jb-category" class="form-control  select2-hidden-accessible"
+												data-select2-id="jb-category" tabindex="-1" aria-hidden="true">
 												<option value="" data-select2-id="2"></option>
 												<option value="1" data-select2-id="5">Finance &amp; Accounting</option>
 												<option value="2" data-select2-id="6">Banking</option>
 												<option value="3" data-select2-id="7">Medical &amp; Health</option>
 												<option value="4" data-select2-id="8">Human Resources</option>
 												<option value="5" data-select2-id="9">IT &amp; Computor</option>
-											</select><span class="select2 select2-container select2-container--default select2-container--below" dir="ltr" data-select2-id="1" style="width: 284px;"><span class="selection"><span class="select2-selection select2-selection--single" role="combobox" aria-haspopup="true" aria-expanded="false" tabindex="0" aria-labelledby="select2-jb-category-container"><span class="select2-selection__rendered" id="select2-jb-category-container" role="textbox" aria-readonly="true"><span class="select2-selection__placeholder">Select Category</span></span><span class="select2-selection__arrow" role="presentation"><b role="presentation"></b></span></span></span><span class="dropdown-wrapper" aria-hidden="true"></span></span>
+											</select><span
+												class="select2 select2-container select2-container--default select2-container--below"
+												dir="ltr" data-select2-id="1" style="width: 284px;"><span
+													class="selection"><span
+														class="select2-selection select2-selection--single"
+														role="combobox" aria-haspopup="true" aria-expanded="false"
+														tabindex="0"
+														aria-labelledby="select2-jb-category-container"><span
+															class="select2-selection__rendered"
+															id="select2-jb-category-container" role="textbox"
+															aria-readonly="true"><span
+																class="select2-selection__placeholder">Select
+																Category</span></span><span
+															class="select2-selection__arrow" role="presentation"><b
+																role="presentation"></b></span></span></span><span
+													class="dropdown-wrapper" aria-hidden="true"></span></span>
 										</div>
 									</div>
 
@@ -156,7 +172,8 @@ foreach ($job_scores as $job => $score) {
 										<div class="form-row">
 											<div class="col-xl-6 col-lg-6 col-md-6">
 												<div class="input-group mb-3">
-													<input type="text" class="form-control with-light br-0" placeholder="min">
+													<input type="text" class="form-control with-light br-0"
+														placeholder="min">
 													<div class="input-group-append">
 														<span class="input-group-text light">USD</span>
 													</div>
@@ -164,7 +181,8 @@ foreach ($job_scores as $job => $score) {
 											</div>
 											<div class="col-xl-6 col-lg-6 col-md-6">
 												<div class="input-group mb-3">
-													<input type="text" class="form-control with-light br-0" placeholder="Max">
+													<input type="text" class="form-control with-light br-0"
+														placeholder="Max">
 													<div class="input-group-append">
 														<span class="input-group-text light">USD</span>
 													</div>
@@ -177,7 +195,8 @@ foreach ($job_scores as $job => $score) {
 										<label>Choose Your Option</label>
 										<div class="yn_feedback">
 											<div class="radio">
-												<input id="hourly" class="radio-custom" name="feedback" type="radio" checked="">
+												<input id="hourly" class="radio-custom" name="feedback" type="radio"
+													checked="">
 												<label for="hourly" class="radio-custom-label">Hourly Project</label>
 											</div>
 											<div class="radio">
@@ -191,14 +210,20 @@ foreach ($job_scores as $job => $score) {
 										<div class="form-group with-light">
 											<label>Required Skills <span>(optional)</span></label>
 											<div class="tg_grouping">
-												<input type="text" id="lg-input" class="form-control with-light" placeholder="e.g. job title, career">
+												<input type="text" id="lg-input" class="form-control with-light"
+													placeholder="e.g. job title, career">
 												<ul class="autocomplete-content dropdown-content"></ul>
-												<a id="cmd-ChipsAjout" class="btn_groupin_tag"><i class="fa fa-plus"></i></a>
+												<a id="cmd-ChipsAjout" class="btn_groupin_tag"><i
+														class="fa fa-plus"></i></a>
 											</div>
 											<div id="lg-Chips" data-index="0" data-initialized="true" class="chips">
-												<div class="chip">Photoshop<i class="material-icons close">close</i></div>
-												<div class="chip">WordPress<i class="material-icons close">close</i></div>
-												<div class="chip">Jquery<i class="material-icons close">close</i></div><input id="afd126af-fd8b-a79d-6c84-7acddf20e0d2" class="input" placeholder="">
+												<div class="chip">Photoshop<i class="material-icons close">close</i>
+												</div>
+												<div class="chip">WordPress<i class="material-icons close">close</i>
+												</div>
+												<div class="chip">Jquery<i class="material-icons close">close</i></div>
+												<input id="afd126af-fd8b-a79d-6c84-7acddf20e0d2" class="input"
+													placeholder="">
 											</div>
 										</div>
 									</div>
