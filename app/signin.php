@@ -1,8 +1,8 @@
 <?php
-// include 'core/config.php';
-// if (isset($_SESSION['user']['id'])) {
-//   header("location:/atjmai");
-// }
+include 'core/config.php';
+if (isset($_SESSION['user']['id'])) {
+  header("location:/atjmai");
+}
 // $csrf = Components::csrf();
 ?>
 <!DOCTYPE html>
