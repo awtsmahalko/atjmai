@@ -2,4 +2,4 @@ RewriteEngine On
 RewriteBase /app/
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
-RewriteRule ^(.+)$ index.php [QSA,L]
+RewriteRule ^(.+)$ https://alumnitracker.tech/index.php [QSA,L]
