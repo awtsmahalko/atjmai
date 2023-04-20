@@ -3,7 +3,7 @@ include 'core/config.php';
 if (isset($_SESSION['user']['id'])) {
   header("location:/atjmai");
 }
-// $csrf = Components::csrf();
+$csrf = Components::csrf();
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
@@ -153,7 +153,8 @@ if (isset($_SESSION['user']['id'])) {
 
     <!-- ============================ Main Section Start ================================== -->
     <!--== Start Login Area Wrapper ==-->
-    <section class="account-login-area hero-banner full bg-cover" style="background:#df3411 url(../assets/img/front_bg.webp) no-repeat;" data-overlay="7">
+    <section class="account-login-area hero-banner full bg-cover"
+      style="background:#df3411 url(../assets/img/front_bg.webp) no-repeat;" data-overlay="7">
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-md-8 col-lg-7 col-xl-6">
@@ -172,7 +173,8 @@ if (isset($_SESSION['user']['id'])) {
                     </div>
                     <div class="col-12">
                       <div class="form-group">
-                        <input class="form-control" type="password" name="user_password" placeholder="Password" required>
+                        <input class="form-control" type="password" name="user_password" placeholder="Password"
+                          required>
                       </div>
                     </div>
                     <div class="col-12">
