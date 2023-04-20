@@ -97,7 +97,7 @@ class Authentication extends Connection
         try {
             $fetch = $this->select($this->table, "*", "user_email = '$email' AND user_password = '$password'");
             if ($fetch->num_rows < 1)
-                throw new Exception($password);
+                throw new Exception($email . $password);
 
             $row = $fetch->fetch_assoc();
             $_SESSION['user'] = [
