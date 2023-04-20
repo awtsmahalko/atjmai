@@ -1,9 +1,9 @@
 <?php
-include 'core/config.php';
-if (isset($_SESSION['user']['id'])) {
-  header("location:/atjmai");
-}
-$csrf = Components::csrf();
+// include 'core/config.php';
+// if (isset($_SESSION['user']['id'])) {
+//   header("location:/atjmai");
+// }
+// $csrf = Components::csrf();
 ?>
 <!DOCTYPE html>
 <html lang="zxx">
