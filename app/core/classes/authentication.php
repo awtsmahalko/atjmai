@@ -89,7 +89,7 @@ class Authentication extends Connection
     public function login()
     {
         if (!Components::verify_csrf())
-            return -1;
+            return $_SESSION['csrf_token'] . "-1";
 
         $email      = $this->post('user_email');
         $password   = md5($this->post('user_password'));
