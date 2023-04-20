@@ -59,7 +59,9 @@
 														<div class="col-md-12">
 															<div class="form-group-btn pull-right">
 																<button class="btn btn-success"
-																	style="padding: 5px !important;"><span
+																	style="padding: 5px !important;"
+																	onclick="generate_all()"
+																	id="btn_all"><span
 																		class="fa fa-refresh"></span> Generate</button>
 																<button class="btn btn-primary"
 																	style="padding: 5px !important;"><span
@@ -68,60 +70,7 @@
 														</div>
 													</div>
 													<hr>
-													<div class="row">
-														<div class="col-lg-12 col-md-12 text-center">
-															<h3>Employer Report</h3>
-														</div>
-														<table class="table table-bordered table-striped">
-															<thead class="thead-light">
-																<tr>
-																	<th scope="col">#</th>
-																	<th scope="col">Company Name</th>
-																	<th scope="col">Contact #</th>
-																	<th scope="col">Industry</th>
-																	<th scope="col">Location</th>
-
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td>1</td>
-																	<td>Bacolod Four Leaf Clover Corp.</td>
-																	<td>090909090</td>
-																	<td>Information Technology</td>
-																	<td>Bacolod, Philippines</td>
-																</tr>
-																<tr>
-																	<td>1</td>
-																	<td>Carton, Eduard Rino</td>
-																	<td>0909009909</td>
-																	<td>MIT</td>
-																	<td>IT Programmer</td>
-																</tr>
-																<tr>
-																	<td>1</td>
-																	<td>Carton, Eduard Rino</td>
-																	<td>0909009909</td>
-																	<td>MIT</td>
-																	<td>IT Programmer</td>
-																</tr>
-																<tr>
-																	<td>1</td>
-																	<td>Carton, Eduard Rino</td>
-																	<td>0909009909</td>
-																	<td>MIT</td>
-																	<td>IT Programmer</td>
-																</tr>
-																<tr>
-																	<td>1</td>
-																	<td>Carton, Eduard Rino</td>
-																	<td>0909009909</td>
-																	<td>MIT</td>
-																	<td>IT Programmer</td>
-																</tr>
-															</tbody>
-														</table>
-													</div>
+													<div class="row" id="content_per_all"></div>
 												</div>
 											</div>
 										</div>
@@ -136,14 +85,15 @@
 														<div class="col-md-6">
 															<div class="form-group">
 																<select class="form-control profile-value select2"
-																	name='course_id' style="width: 100%;">
-																	<?= Courses::options() ?>
+																	id='industry_id' style="width: 100%;">
+																	<?= Industries::options() ?>
 																</select>
 															</div>
 														</div>
 														<div class="col-md-6">
-															<div class="form-group-btn">
-																<button class="btn btn-success"
+															<div class="form-group-btn pull-right">
+																<button id="btn_per_industry" class="btn btn-success"
+																onclick="generate_per_industry()"
 																	style="padding: 5px !important;"><span
 																		class="fa fa-refresh"></span> Generate</button>
 																<button class="btn btn-primary"
@@ -153,72 +103,8 @@
 														</div>
 													</div>
 													<hr>
-													<div class="row">
-														<div class="col-lg-12 col-md-12 text-center">
-															<h3>Employer Report</h3>
-															<h4>Information Technology</h4>
-														</div>
-														<table class="table table-bordered table-striped">
-															<thead class="thead-light">
-																<tr>
-																	<th scope="col">#</th>
-																	<th scope="col">Employer</th>
-																	<th scope="col">Contact #</th>
-																	<th scope="col">Email</th>
-																	<th scope="col">Location</th>
-
-																</tr>
-															</thead>
-															<tbody>
-																<tr>
-																	<td>1</td>
-																	<td>Juancoder IT Solutions</td>
-																	<td>0909009909</td>
-																	<td>info@juancoder</td>
-																	<td>IT Programmer</td>
-																</tr>
-																<tr>
-																	<td>1</td>
-																	<td>Juancoder IT Solutions</td>
-																	<td>0909009909</td>
-																	<td>info@juancoder</td>
-																	<td>IT Programmer</td>
-																</tr>
-																<tr>
-																	<td>1</td>
-																	<td>Juancoder IT Solutions</td>
-																	<td>0909009909</td>
-																	<td>info@juancoder</td>
-																	<td>IT Programmer</td>
-																</tr>
-																<tr>
-																	<td>1</td>
-																	<td>Juancoder IT Solutions</td>
-																	<td>0909009909</td>
-																	<td>info@juancoder</td>
-																	<td>IT Programmer</td>
-																</tr>
-																<tr>
-																	<td>1</td>
-																	<td>Juancoder IT Solutions</td>
-																	<td>0909009909</td>
-																	<td>info@juancoder</td>
-																	<td>IT Programmer</td>
-																</tr>
-																<tr>
-																	<td>1</td>
-																	<td>Juancoder IT Solutions</td>
-																	<td>0909009909</td>
-																	<td>info@juancoder</td>
-																	<td>IT Programmer</td>
-																</tr>
-															</tbody>
-														</table>
-														<div class="col-lg-12 col-md-12">
-															<p>Prepared by : Eduard Rino Carton <br> Date Generated :
-																01/02/2020</p>
-														</div>
-													</div>
+													<hr>
+													<div class="row" id="content_per_industry"></div>
 												</div>
 											</div>
 										</div>
@@ -246,5 +132,91 @@
 	}
 </style>
 <script>
+	function generate_all() {
+		btn_processor('btn_all', true, "<span class='fa fa-spin fa-spinner'></span> Generating");
+		$.post(base_controller + "generate_employer_all", {
+			
+		}, function(data, status) {
+			var res = JSON.parse(data);
+			skin_per_all(res);
+			btn_processor('btn_all', false, "<span class='fa fa-refresh'></span> Generate");
+		});
+	}
+
+	function skin_per_all(res) {
+		var header_skin = '<div class="col-lg-12 col-md-12 text-center"><img src="../assets/img/users/default_company.png" class="img-fluid circle" alt=""><h3>Employer Report</h3></div>';
+
+		var table_tr = "";
+		for (var cIndex = 0; cIndex < res.employers.length; cIndex++) {
+			const empRow = res.employers[cIndex];
+
+			table_tr += '<tr>' +
+				'<td>' + (cIndex + 1) + '</td>' +
+				'<td>' + empRow.employer_name+ '</td>' +
+				'<td>' + empRow.company_contact + '</td>' +
+				'<td>' + empRow.industry_id + '</td>' +
+				'<td>' + empRow.job_title + '</td>' +
+				'</tr>';
+			
+		}
+
+		var table = '<table class="table table-bordered table-striped">' +
+			'<thead class="thead-light">' +
+			'<tr>' +
+			'<th scope="col">#</th>' +
+			'<th scope="col">Company Name</th>' +
+			'<th scope="col">Contact #</th>' +
+			'<th scope="col">Industry</th>' +
+			'<th scope="col">Location</th>' +
+			'</tr>' +
+			'</thead>' +
+			'<tbody>' + table_tr + '</tbody>' +
+			'</table>';
+
+		$("#content_per_all").html(header_skin + table);
+	}
+
+	function generate_per_industry() {
+		btn_processor('btn_per_industry', true, "<span class='fa fa-spin fa-spinner'></span> Generating");
+		$.post(base_controller + "generate_employer_per_industry", {
+			industry_id:$("#industry_id").val()
+		}, function(data, status) {
+			var res = JSON.parse(data);
+			skin_per_industry(res);
+			btn_processor('btn_per_industry', false, "<span class='fa fa-refresh'></span> Generate");
+		});
+	}
+	function skin_per_industry(res) {
+		var header_skin = '<div class="col-lg-12 col-md-12 text-center"><img src="../assets/img/users/default_company.png" class="img-fluid circle" alt=""><h3>Employer Report</h3></div>';
+
+		var table_tr = "";
+		for (var cIndex = 0; cIndex < res.employers.length; cIndex++) {
+			const empRow = res.employers[cIndex];
+
+			table_tr += '<tr>' +
+				'<td>' + (cIndex + 1) + '</td>' +
+				'<td>' + empRow.employer_name+ '</td>' +
+				'<td>' + empRow.company_contact + '</td>' +
+				'<td>' + empRow.industry_id + '</td>' +
+				'<td>' + empRow.job_title + '</td>' +
+				'</tr>';
+			
+		}
+
+		var table = '<table class="table table-bordered table-striped">' +
+			'<thead class="thead-light">' +
+			'<tr>' +
+			'<th scope="col">#</th>' +
+			'<th scope="col">Company Name</th>' +
+			'<th scope="col">Contact #</th>' +
+			'<th scope="col">Industry</th>' +
+			'<th scope="col">Location</th>' +
+			'</tr>' +
+			'</thead>' +
+			'<tbody>' + table_tr + '</tbody>' +
+			'</table>';
+
+		$("#content_per_industry").html(header_skin + table);
+	}
 
 </script>

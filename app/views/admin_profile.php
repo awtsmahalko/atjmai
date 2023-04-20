@@ -60,76 +60,35 @@
 
 										<div class="col">
 											<div class="row">
-												<div class="col-xl-4 col-lg-4">
+												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
-														<label>First Name</label>
+														<label>Fullname</label>
 														<input type="text" class="form-control profile-value"
-															data-column='alumni_fname' name='alumni_fname'>
-													</div>
-												</div>
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>Middle Name</label>
-														<input type="text" class="form-control profile-value"
-															data-column='alumni_mname' name='alumni_mname'>
-													</div>
-												</div>
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>Last Name</label>
-														<input type="text" class="form-control profile-value"
-															data-column='alumni_lname' name='alumni_lname'>
+															data-column='user_fullname' name='user_fullname' value="<?=$_SESSION['user']['fullname']?>">
 													</div>
 												</div>
 												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
-														<label>Course</label>
-														<select class="form-control profile-value select2"
-															data-column='course_id' name='course_id'>
-															<?= Courses::options() ?>
-														</select>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Graduation Date</label>
-														<input type="date" class="form-control profile-value"
-															data-column='alumni_graduation' name='alumni_graduation'>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Gender</label>
-														<select class="form-control select2 profile-value"
-															data-column='alumni_gender' name='alumni_gender'>
-															<option value="Male">Male</option>
-															<option value="Female">Female</option>
-														</select>
-													</div>
-												</div>
-												<div class="col-xl-6 col-lg-6">
-													<div class="form-group">
-														<label>Contact #</label>
+														<label>Email Address</label>
 														<input type="text" class="form-control profile-value"
-															data-column='alumni_contact' name='alumni_contact'>
-													</div>
-												</div>
-												<div class="col-xl-12 col-lg-12">
-													<div class="form-group">
-														<label>Address</label>
-														<input type="text" class="form-control profile-value"
-															data-column='alumni_address' name='alumni_address' required>
+															data-column='user_email' name='user_email' value="<?=$_SESSION['user']['email']?>">
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
 											</div>
 										</div>
 									</div>
+									<hr>
+		                            <div class="row">
+		                              <div class="col-md-12">
+		                                <div class="form-group-btn pull-right">
+										<button type="submit" class="btn btn-save" id="btn_update_profile" style="border-radius: 50px;"><span
+									class="fa fa-edit"></span> Save Changes</button>
+		                                </div>
+		                              </div>
+		                            </div>
 								</div>
 							</div>
-							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update_profile"><span
-									class="fa fa-edit"></span> Save Changes</button>
 						</form>
 					</div>
 				</div>
@@ -139,54 +98,36 @@
 </section>
 
 <script>
-	fetchProfile();
-
-	function fetchProfile() {
-		$.post(base_controller + "alumni_profile", {}, function(data, status) {
-			var res = JSON.parse(data);
-			mapProfileValue(res);
-		});
-	}
-
-	function mapProfileValue(res) {
-		// Get all elements with the class name "profile-value"
-		const profileValueElements = document.querySelectorAll('.profile-value');
-
-		// Loop through each element and retrieve the value of the "data-column" attribute
-		profileValueElements.forEach(element => {
-			const dataColumnValue = element.getAttribute('data-column');
-			element.value = res[dataColumnValue];
-		});
-	}
 
 	$("#frmProfile").submit(function(e) {
 		e.preventDefault();
 
 		var formData = new FormData(this);
-
-
-		$("#btn_update_profile").prop('disabled', true);
-		$("#btn_update_profile").html('Updating...');
+		btn_processor('btn_update_profile');
 		// send AJAX request
 		$.ajax({
-			url: base_controller + "update_alumni_profile",
+			url: base_controller + "update_admin_profile",
 			type: 'POST',
 			data: formData,
 			processData: false,
 			contentType: false,
 			success: function(response) {
 				if (response == 1) {
-					// SUCCESS
-					$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
+					success_update();
 				} else if (response == -1) {
-					// EXPIRED CSRF TOKEN
-					$("#response-profile-update").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will reload in <span id="countdown">3</span> seconds!</div>');
-					countDown(3);
+					token_expired();
+					setTimeout(function(){
+						location.reload();
+					},2000);
+				} else if (response = 'IMG-SUCCESS') {
+					success_update('picture');
+					// setTimeout(function(){
+					// 	location.reload();
+					// },2000);
 				} else {
-					$("#response-profile-update").html('<div class="alert alert-danger" role="alert">' + response + '</div>');
+					error_response();
 				}
-				$("#btn_update_profile").prop('disabled', false);
-				$("#btn_update_profile").html('Save Changes');
+				btn_processor('btn_update_profile',false,'<span class="fa fa-edit"></span> Save Changes');
 				// handle successful response
 			},
 			error: function(xhr, status, error) {

@@ -60,6 +60,22 @@ class Employers extends Connection
         return json_encode($row);
     }
 
+    public function data()
+    {
+        $response['employers'] = array();
+        if($this->post('industry_id')){
+            $result = $this->select($this->table,'*',"industry_id = '".$this->post('industry_id')."'");
+        }else{
+            $result = $this->select($this->table);
+        }
+        $count = 1;
+        while ($row = $result->fetch_assoc()) {
+            $row['count'] = $count++;
+            array_push($response['employers'], $row);
+        }
+        return json_encode($response);
+    }
+
     public static function dataOf($primary_id, $field = '*')
     {
         $self = new self;

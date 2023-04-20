@@ -76,6 +76,18 @@ class Controller
         $class_name = 'AlumniReport';
         $method_name = 'per_college';
         break;
+      case 'generate_alumni_per_course':
+        $class_name = 'AlumniReport';
+        $method_name = 'per_course';
+        break;
+      case 'generate_employer_all':
+        $class_name = 'Employers';
+        $method_name = 'data';
+        break;
+      case 'generate_employer_per_industry':
+        $class_name = 'Employers';
+        $method_name = 'data';
+        break;
       case 'get_alumni_data':
         $class_name = 'AlumniEducations';
         $method_name = 'data';
@@ -111,6 +123,10 @@ class Controller
       case 'match_best_jobs':
         $class_name = 'AlumniJobs';
         $method_name = 'best_job';
+        break;
+      case 'update_admin_profile':
+        $class_name = 'Users';
+        $method_name = 'update_profile';
         break;
       case 'update_alumni_job_preferences':
         $class_name = 'AlumniJobPreferences';
