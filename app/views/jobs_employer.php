@@ -23,7 +23,7 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">
-                    <a href="#">Jobs</a>
+                    <a href="<?= HTACCESS_APP . "jobs" ?>">Jobs</a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">Manage Jobs</li>
                 </ol>
@@ -48,17 +48,14 @@
             <div class="pills_basic_tab">
               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation" style="width: 50%;">
-                  <a class="nav-link active" id="pills-preferences-tab" data-toggle="pill" href="#pills-preferences"
-                    role="tab" aria-controls="pills-preferences" aria-selected="true">Job Information</a>
+                  <a class="nav-link active" id="pills-preferences-tab" data-toggle="pill" href="#pills-preferences" role="tab" aria-controls="pills-preferences" aria-selected="true">Job Information</a>
                 </li>
                 <li class="nav-item" role="presentation" style="width: 50%;">
-                  <a class="nav-link" id="pills-matched-tab" data-toggle="pill" href="#pills-matched" role="tab"
-                    aria-controls="pills-matched" aria-selected="false">Candidates</a>
+                  <a class="nav-link" id="pills-matched-tab" data-toggle="pill" href="#pills-matched" role="tab" aria-controls="pills-matched" aria-selected="false">Candidates</a>
                 </li>
               </ul>
               <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-preferences" role="tabpanel"
-                  aria-labelledby="pills-preferences-tab">
+                <div class="tab-pane fade show active" id="pills-preferences" role="tabpanel" aria-labelledby="pills-preferences-tab">
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="_job_detail_box light" id="job-content"></div>
@@ -94,6 +91,7 @@
   $(".row-head").show();
   $(".row-detail").hide();
   get_jobs();
+
   function get_jobs() {
     $("#job_lists_top").html('');
     $.post(base_controller + "get_employer_jobs", {}, function(data, status) {
@@ -116,7 +114,7 @@
       // '</div>'+
       '<div class="jb_types contract">' + jobData.job_type_name + '</div>' +
       '<div class="jb_grid_01_thumb">' +
-      '<a href="javascript:void(0);"><img src="' + base_url + 'assets/img/users/default_company.png" class="img-fluid" alt=""></a>' +
+      '<a href="javascript:void(0);"><img src="' + base_url_img + jobData.user_img + '" class="img-fluid" alt=""></a>' +
       '</div>' +
       '<div class="jb_grid_01_caption">' +
       '<h4 class="_jb_title"><a href="javascript:void(0);">' + jobData.job_title + '</a></h4>' +
@@ -149,16 +147,16 @@
       '<div class="_dash_singl_captions col-md-6">' +
       '<h4 class="_jb_title"><a href="#">' + jobData.job_title + '</a></h4>' +
       '<ul class="_grouping_list">' +
-      '<li><span><i class="ti-location-pin"></i>Denever, USA</span></li>' +
+      '<li><span><i class="ti-location-pin"></i>' + jobData.employers.company_address + '</span></li>' +
       '<li><span><i class="ti-credit-card"></i>' + jobData.salary_detail + '</span></li>' +
       '</ul>' +
       '</div>' +
       '<div class="_dash_singl_thumbs col-md-6">' +
       '<ul class="_action_grouping_list pull-right">' +
       // '<li onclick="alert(1)"><a href="#" class="_aaplied_candidates">Best Candidate &nbsp; <i class="fa fa-graduation-cap"></i> </a></li>'+
-      '<li><a href="#" class="_aaplied_candidates">Applied<span>42</span></a></li>' +
-      '<li><a href="#" data-toggle="tooltip" data-placement="top" title="Edit job" class="_edit_list_point" data-tooltip-id="bfc3e871-78bc-eb6d-377d-a32d0893e50a"><i class="fa fa-edit"></i></a></li>' +
-      '<li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point" data-tooltip-id="420f3a00-4450-6b49-bfc5-0bb7e217dd1e"><i class="fa fa-trash"></i></a></li>' +
+      '<li><a href="#" class="_aaplied_candidates">Applied<span>' + jobData.candidates.length + '</span></a></li>' +
+      '<li><a href="' + base_url + 'app/edit-job/' + jobData.job_id + '" data-toggle="tooltip" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a></li>' +
+      '<li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point" onclick="deleteJob(' + jobData.job_id + ')"><i class="fa fa-trash"></i></a></li>' +
       '</ul>' +
       '</div>' +
       '</div>';
@@ -175,7 +173,7 @@
       '<div class="_jb_details01">' +
       '<div class="_jb_details01_flex">' +
       '<div class="_jb_details01_authors">' +
-      '<img src="' + base_url + 'assets/img/users/default_company.png" class="img-fluid" alt="">' +
+      '<img src="' + base_url_img + jobData.user_img + '" class="img-fluid" alt="">' +
       '</div>' +
       '<div class="_jb_details01_authors_caption">' +
       '<h4 class="jbs_title">' + jobData.job_title + '<img src="../assets/img/verify.svg" class="ml-1" width="12" alt=""></h4>' +
@@ -332,6 +330,31 @@
       '</div>' +
       '</div>';
     $("#candidate-detail").html(skin);
+  }
+
+  function deleteJob(job_id) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "Your data will lose!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.post(base_controller + "delete_job", {
+          job_id: job_id
+        }, function(data, status) {
+          get_jobs();
+          $(".row-head").show();
+          $(".row-detail").hide();
+          if (data == 1) {
+            success_delete();
+          }
+        });
+      }
+    })
   }
 </script>
 <style>
