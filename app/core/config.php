@@ -3,8 +3,8 @@ error_reporting(0);
 
 date_default_timezone_set("Asia/Manila");
 
-define('HTACCESS_APP', '/atjmai/app/');
-define('BASE_URL', 'http://localhost/atjmai/');
+define('HTACCESS_APP', 'https://alumnitracker.tech/app/');
+define('BASE_URL', 'https://alumnitracker.tech/');
 define("BASE_PATH", __DIR__ . "/../");
 
 define("HOST", "localhost");
