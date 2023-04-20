@@ -7,7 +7,7 @@ class JobSkills extends Connection
     public function add($job_id)
     {
         $skills = $this->post('skills');
-        foreach($skills as $skill_id){ 
+        foreach ($skills as $skill_id) {
             $this->insert($this->table, [
                 'job_id'    => $job_id,
                 'skill_id'  => $skill_id,

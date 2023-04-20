@@ -30,6 +30,8 @@ require 'routes/routes.php';
   <script src="<?=BASE_URL?>/assets/js/metisMenu.min.js"></script>
   <script src="<?=BASE_URL?>/assets/js/select2.min.js"></script>
   <script type="text/javascript">
+    var use_python = "<?= USE_PYTHON ?>";
+    var base_job_matcher = "<?=JOB_MATCHER?>";
     var base_url = "<?=BASE_URL?>";
     var base_controller = "controller/web.php?uri=";
     var base_url_img = base_url + "assets/img/users/";

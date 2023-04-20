@@ -1,5 +1,5 @@
 <?php
-//error_reporting(0);
+error_reporting(0);
 
 date_default_timezone_set("Asia/Manila");
 
@@ -13,6 +13,9 @@ define("PASSWORD", "");
 define("DBNAME", "almai_db");
 
 define("DEVELOPMENT", "true");
+
+define("USE_PYTHON", true);
+define('JOB_MATCHER', USE_PYTHON ? 'https://alumnitracker.pythonanywhere.com/' : 'controller/web.php?uri=match_best_jobs');
 
 session_start();
 

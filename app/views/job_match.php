@@ -184,9 +184,9 @@
     e.preventDefault();
     $("#btn_match").prop('disabled', true);
     $("#btn_match").html('<span class="fa fa-spin fa-spinner"></span> Matching Jobs...');
-    $.post(base_controller + "match_best_jobs", $("#frmJobMatch").serialize(),
+    $.post(base_job_matcher, $("#frmJobMatch").serialize(),
       function(data, status) {
-        var res = JSON.parse(data);
+        var res = JSON.parse(use_python ? JSON.stringify(data) : data);
         skin_matcher(res);
         $("#btn_match").prop('disabled', false);
         $("#btn_match").html('<span class="fa fa-check-circle"></span> Match Job');
