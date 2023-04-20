@@ -14,8 +14,8 @@ define("DBNAME", "almai_db");
 
 define("DEVELOPMENT", "true");
 
-define("USE_PYTHON", true);
-define('JOB_MATCHER', USE_PYTHON ? 'https://alumnitracker.pythonanywhere.com/' : 'controller/web.php?uri=match_best_jobs');
+define("USE_PYTHON", false);
+define('JOB_MATCHER', USE_PYTHON ? 'http://127.0.0.1:5000/job-match' : 'controller/web.php?uri=match_best_jobs');
 
 session_start();
 

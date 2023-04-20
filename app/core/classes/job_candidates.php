@@ -13,6 +13,9 @@ class JobCandidates extends Connection
         $Alumni = new Alumni();
         $alumni_id = $Alumni->id();
         $job_id = $this->post('job_id');
+        $result = $this->select($this->table, '*', "job_id = '$job_id' AND alumni_id = '$alumni_id'");
+        if ($result->num_rows > 0)
+            return 2;
         return $this->insert($this->table, [
             'job_id'        => $job_id,
             'employer_id'   => Jobs::dataOf($job_id, 'employer_id'),

@@ -54,6 +54,7 @@
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <form id="frmJobMatch">
+                        <input type="hidden" name="alumni_id" class="preference-value" data-column="alumni_id">
                         <!-- Single Wrap -->
                         <div class="_dashboard_content">
                           <div class="_dashboard_content_header">
@@ -159,6 +160,7 @@
 </section>
 <script>
   var global_job_data = [];
+  var global_job_types = ['', 'Fulltime', 'Part-time', 'Permanent', 'Fixed Term', 'Temporary', 'OJT (On the job training)'];
   fetchAlumniPreferences();
 
   function fetchAlumniPreferences() {
@@ -186,7 +188,11 @@
     $("#btn_match").html('<span class="fa fa-spin fa-spinner"></span> Matching Jobs...');
     $.post(base_job_matcher, $("#frmJobMatch").serialize(),
       function(data, status) {
-        var res = JSON.parse(use_python ? JSON.stringify(data) : data);
+        if (use_python == '1') {
+          var res = JSON.parse(use_python ? JSON.stringify(data) : data);
+        } else {
+          var res = JSON.parse(data);
+        }
         skin_matcher(res);
         $("#btn_match").prop('disabled', false);
         $("#btn_match").html('<span class="fa fa-check-circle"></span> Match Job');
@@ -208,18 +214,18 @@
   function skin_best_jobs(jobData, selectd) {
     var skin_job = '<div class="left_jobs _jb_list72 shadow_0 w3-animate-top ' + selectd + '" onclick="viewJobDetails(' + jobData.job_id + ')">' +
       '<div class="jobs-like bookmark">' +
-      '<label class="label bg-success">98 %</label>' +
+      '<label class="label bg-success">' + jobData.percentage + ' %</label>' +
       '</div>' +
       '<div class="_jb_list72_flex">' +
       '<div class="_jb_list72_first">' +
       '<div class="_jb_list72_yhumb">' +
-      '<img src="../assets/img/c-1.png" class="img-fluid" alt="">' +
+      '<img src="' + base_url_img + jobData.employers.users.user_img + '" class="img-fluid" alt="">' +
       '</div>' +
       '</div>' +
       '<div class="_jb_list72_last">' +
       '<h4 class="_jb_title"><a href="#">' + jobData.job_title + '</a></h4>' +
       '<div class="_times_jb">' + jobData.salary_details + '</div>' +
-      '<div class="_jb_types fulltime_lite">Full Time</div>' +
+      '<div class="_jb_types fulltime_lite">' + global_job_types[jobData.job_type_id] + '</div>' +
       '</div>' +
       '</div>' +
       '<div class="_jb_list72_foot">' +
@@ -249,7 +255,7 @@
       '<div class="_jb_details01">' +
       '<div class="_jb_details01_flex">' +
       '<div class="_jb_details01_authors">' +
-      '<img src="../assets/img/c-7.png" class="img-fluid" alt="">' +
+      '<img src="' + base_url_img + jobData.employers.users.user_img + '" class="img-fluid" alt="">' +
       '</div>' +
       '<div class="_jb_details01_authors_caption">' +
       '<h4 class="jbs_title">' + jobData.job_title + '<img src="../assets/img/verify.svg" class="ml-1" width="12" alt=""></h4>' +
@@ -260,20 +266,14 @@
       '</ul>' +
       '<ul class="jbx_info_list">' +
       '<li>' +
-      '<div class="jb_types fulltime">Full Time</div>' +
-      '</li>' +
-      '<li>' +
-      '<div class="jb_types urgent">Sponsored</div>' +
-      '</li>' +
-      '<li>' +
-      '<div class="jb_types remote">Remote</div>' +
+      '<div class="jb_types fulltime">' + global_job_types[jobData.job_type_id] + '</div>' +
       '</li>' +
       '</ul>' +
       '</div>' +
       '</div>' +
       '<div class="_jb_details01_last">' +
       '<ul class="_flex_btn">' +
-      '<li><a href="#" class="_saveed_jb"><i class="fa fa-heart"></i></a></li>' +
+      // '<li><a href="#" class="_saveed_jb"><i class="fa fa-heart"></i></a></li>' +
       '<li><a href="#" onclick="applyJob(' + jobData.job_id + ')" class="_applied_jb dark-btn">Apply Job</a></li>' +
       '</ul>' +
       '</div>' +
@@ -284,22 +284,22 @@
       '<h4>Job Summary</h4>' +
       '<p>' + jobData.job_description + '</p>' +
       '</div>' +
-      '<div class="_job_detail_single">' +
-      '<h4>Job Duties:</h4>' +
-      '<p>Were looking for someone with the creative spark, eye for illustration and design, passionfor graphics and ability to produce high quality design collaterals end-to-end.</p>' +
-      '<ul>' +
-      '<li>Draft mockups of website designs, brochures, iconography, and any other marketing</li>' +
-      '<li>Collaborate with marketing teams and management to discuss which mockups are effective</li>' +
-      '<li>Revise the work of previous designers to create a unified aesthetic for our brand</li>' +
-      '<li>Work on multiple projects at once, and consistently meet draft deadlines</li>' +
-      '<li>Communicate frequently with clients to update them on the progress of the project and to</li>' +
-      '<li>Work on multiple projects at once, and consistently meet draft deadlines</li>' +
-      '<li>can start the part time job/internship between 4th Mar21 and 8th Apr21</li>' +
-      '<li>have already graduated or are currently in any year of study</li>' +
-      '<li>Revise the work of previous designers to create a unified aesthetic for our brandmaterials</li>' +
-      '<li>Other duties as requested</li>' +
-      '</ul>' +
-      '</div>' +
+      // '<div class="_job_detail_single">' +
+      // '<h4>Job Duties:</h4>' +
+      // '<p>Were looking for someone with the creative spark, eye for illustration and design, passionfor graphics and ability to produce high quality design collaterals end-to-end.</p>' +
+      // '<ul>' +
+      // '<li>Draft mockups of website designs, brochures, iconography, and any other marketing</li>' +
+      // '<li>Collaborate with marketing teams and management to discuss which mockups are effective</li>' +
+      // '<li>Revise the work of previous designers to create a unified aesthetic for our brand</li>' +
+      // '<li>Work on multiple projects at once, and consistently meet draft deadlines</li>' +
+      // '<li>Communicate frequently with clients to update them on the progress of the project and to</li>' +
+      // '<li>Work on multiple projects at once, and consistently meet draft deadlines</li>' +
+      // '<li>can start the part time job/internship between 4th Mar21 and 8th Apr21</li>' +
+      // '<li>have already graduated or are currently in any year of study</li>' +
+      // '<li>Revise the work of previous designers to create a unified aesthetic for our brandmaterials</li>' +
+      // '<li>Other duties as requested</li>' +
+      // '</ul>' +
+      // '</div>' +
       '<div class="_job_detail_single">' +
       '<h4>Skill &amp; Experience</h4>' +
       '<ul>' + skill_data + '</ul>' +
@@ -311,8 +311,8 @@
 
       '<div class="_exlio_buttons">' +
       '<ul class="bottoms_applies">' +
-      '<li><a href="#" class="_saveed_jb">Save Job</a></li>' +
-      '<li><a href="#" class="_applied_jb">Apply Job</a></li>' +
+      // '<li><a href="#" class="_saveed_jb">Save Job</a></li>' +
+      '<li><a href="#" class="_applied_jb" onclick="applyJob(' + jobData.job_id + ')">Apply Job</a></li>' +
       '</ul>' +
       '</div>' +
       '</div>' +
@@ -337,6 +337,12 @@
         }, function(response, status) {
           if (response == 1) {
             success_add();
+          } else if (response == 2) {
+            Swal.fire(
+              'Oops!',
+              'You already applied to this job.',
+              'warning'
+            )
           } else {
             error_response();
           }

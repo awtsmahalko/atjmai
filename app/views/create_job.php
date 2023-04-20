@@ -99,7 +99,8 @@
 											<div class="form-group">
 												<label class="">Job Summary</label>
 												<grammarly-editor-plugin>
-													<textarea id="job-text" class="form-control"></textarea>
+													<textarea id="job-text" class="form-control"
+														name="job_description"></textarea>
 												</grammarly-editor-plugin>
 											</div>
 										</div>

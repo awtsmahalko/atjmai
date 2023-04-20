@@ -64,6 +64,7 @@ class AlumniJobPreferences extends Connection
             ]);
 
         $row = $result->fetch_assoc();
+        $row['alumni_id'] = $alumni_id;
         return json_encode($row);
     }
 

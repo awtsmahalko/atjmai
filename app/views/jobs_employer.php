@@ -198,13 +198,13 @@
       '<h4>Job Summary</h4>' +
       '<p>' + jobData.job_description + '</p>' +
       '</div>' +
-      '<div class="_job_detail_single">' +
-      '<h4>Job Duties:</h4>' +
-      '<p>Were looking for someone with the creative spark, eye for illustration and design, passionfor graphics and ability to produce high quality design collaterals end-to-end.</p>' +
-      '<ul>' +
-      '<li>Draft mockups of website designs, brochures, iconography, and any other marketing</li>' +
-      '</ul>' +
-      '</div>' +
+      // '<div class="_job_detail_single">' +
+      // '<h4>Job Duties:</h4>' +
+      // '<p>Were looking for someone with the creative spark, eye for illustration and design, passionfor graphics and ability to produce high quality design collaterals end-to-end.</p>' +
+      // '<ul>' +
+      // '<li>Draft mockups of website designs, brochures, iconography, and any other marketing</li>' +
+      // '</ul>' +
+      // '</div>' +
       '<div class="_job_detail_single">' +
       '<h4>Skill &amp; Experience</h4>' +
       '<ul>' + skill_data + '</ul>' +
@@ -221,35 +221,38 @@
   function skin_candidates(candidateData) {
     var skin = '';
     $("#candidate-content").html('');
-    for (var cIndex = 0; cIndex < candidateData.length; cIndex++) {
-      const cRow = candidateData[cIndex];
-      skin = '<div class="_list_jobs_wraps candidates_list shadow_0">' +
-        '<div class="_list_jobs_f1ex" style="width: 70%;flex: 0 0 70%;">' +
-        '<div class="_list_110">' +
-        '<div class="_list_110_thumb col-md-4">' +
-        '<a href="#">' +
-        '<img src="' + base_url_img + cRow.user_img + '" class="img-fluid circle" alt="">' +
-        '</a>' +
-        '</div>' +
-        '<div class="_list_110_caption col-md-8">' +
-        '<h4 class="_jb_title">' +
-        '<a href="candidate-detail.html">' + cRow.name + '<img src="assets/img/verify.svg" class="ml-1" width="12" alt="">' +
-        '</a>' +
-        '</h4>' +
-        '<div class="_emp_jb">' + cRow.job_title + '</div>' +
-        '</div>' +
-        '</div>' +
-        '</div>' +
-        '<div class="_list_jobs_f1ex col-md-4" style="width: 30%;flex: 0 0 30%;">' +
-        '<a href="javascript:void(0);" class="_jb_apply" onclick="fetchCandidateProfile(' + cRow.alumni_id + ')">View</a>' +
-        '</div>' +
-        '</div>';
-      $("#candidate-content").append(skin);
+    if (candidateData.length > 0) {
+      for (var cIndex = 0; cIndex < candidateData.length; cIndex++) {
+        const cRow = candidateData[cIndex];
+        skin = '<div class="_list_jobs_wraps candidates_list shadow_0">' +
+          '<div class="_list_jobs_f1ex" style="width: 70%;flex: 0 0 70%;">' +
+          '<div class="_list_110">' +
+          '<div class="_list_110_thumb col-md-4">' +
+          '<a href="#">' +
+          '<img src="' + base_url_img + cRow.user_img + '" class="img-fluid circle" alt="">' +
+          '</a>' +
+          '</div>' +
+          '<div class="_list_110_caption col-md-8">' +
+          '<h4 class="_jb_title">' +
+          '<a href="candidate-detail.html">' + cRow.name + '<img src="assets/img/verify.svg" class="ml-1" width="12" alt="">' +
+          '</a>' +
+          '</h4>' +
+          '<div class="_emp_jb">' + cRow.job_title + '</div>' +
+          '</div>' +
+          '</div>' +
+          '</div>' +
+          '<div class="_list_jobs_f1ex col-md-4" style="width: 30%;flex: 0 0 30%;">' +
+          '<a href="javascript:void(0);" class="_jb_apply" onclick="fetchCandidateProfile(' + cRow.alumni_id + ')">View</a>' +
+          '</div>' +
+          '</div>';
+        $("#candidate-content").append(skin);
+      }
+      skin_candidate_details(candidateData[0].alumni_id);
     }
-    skin_candidate_details(candidateData[0].alumni_id);
   }
 
   function fetchCandidateProfile(id) {
+    $
     skin_candidate_details();
   }
 
