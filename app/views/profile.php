@@ -127,11 +127,17 @@
 											</div>
 										</div>
 									</div>
+									<hr>
+		                            <div class="row">
+		                              <div class="col-md-12">
+		                                <div class="form-group-btn pull-right">
+										<button type="submit" class="btn btn-save" id="btn_update_profile" style="border-radius: 50px;"><span
+									class="fa fa-edit"></span> Save Changes</button>
+		                                </div>
+		                              </div>
+		                            </div>
 								</div>
 							</div>
-							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update_profile"><span
-									class="fa fa-edit"></span> Save Changes</button>
 						</form>
 					</div>
 				</div>
@@ -159,16 +165,15 @@
 			const dataColumnValue = element.getAttribute('data-column');
 			element.value = res[dataColumnValue];
 		});
+
+		$(".select2").select2().trigger('change');
 	}
 
 	$("#frmProfile").submit(function(e) {
 		e.preventDefault();
 
 		var formData = new FormData(this);
-
-
-		$("#btn_update_profile").prop('disabled', true);
-		$("#btn_update_profile").html('Updating...');
+		btn_processor('btn_update_profile');
 		// send AJAX request
 		$.ajax({
 			url: base_controller + "update_alumni_profile",
@@ -178,17 +183,21 @@
 			contentType: false,
 			success: function(response) {
 				if (response == 1) {
-					// SUCCESS
-					$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
+					success_update();
 				} else if (response == -1) {
-					// EXPIRED CSRF TOKEN
-					$("#response-profile-update").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will reload in <span id="countdown">3</span> seconds!</div>');
-					countDown(3);
+					token_expired();
+					setTimeout(function(){
+						location.reload();
+					},2000);
+				} else if (response = 'IMG-SUCCESS') {
+					success_update('picture');
+					setTimeout(function(){
+						location.reload();
+					},2000);
 				} else {
-					$("#response-profile-update").html('<div class="alert alert-danger" role="alert">' + response + '</div>');
+					error_response();
 				}
-				$("#btn_update_profile").prop('disabled', false);
-				$("#btn_update_profile").html('Save Changes');
+				btn_processor('btn_update_profile',false,'<span class="fa fa-edit"></span> Save Changes');
 				// handle successful response
 			},
 			error: function(xhr, status, error) {

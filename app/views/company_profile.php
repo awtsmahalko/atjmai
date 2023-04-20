@@ -111,34 +111,6 @@
 	</div>
 </section>
 
-<!-- Log In Modal -->
-<div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="registermodal" aria-hidden="true">
-	<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
-		<div class="modal-content" id="registermodal">
-			<div class="modal-header">
-				<h4>Sign Out</h4>
-				<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true"><i
-							class="ti-close"></i></span></button>
-			</div>
-			<div class="modal-body">
-
-
-				<div class="form-group text-center">
-					<span>Are you sure you want to sign out?</span>
-				</div>
-
-				<div class="social_logs mb-4">
-					<ul class="shares_jobs text-center">
-						<li><a href="auth/logout.php" class="share fb">Sign out</a></li>
-						<li><a href="#" class="share gp">Cancel</a></li>
-					</ul>
-				</div>
-			</div>
-		</div>
-	</div>
-</div>
-<!-- End Modal -->
-
 <script>
 	fetchProfile();
 

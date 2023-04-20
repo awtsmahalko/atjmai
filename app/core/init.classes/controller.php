@@ -60,6 +60,10 @@ class Controller
         $class_name = 'Courses';
         $method_name = 'destroy';
         break;
+      case 'delete_job':
+        $class_name = 'Jobs';
+        $method_name = 'destroy';
+        break;
       case 'employer_profile':
         $class_name = 'Employers';
         $method_name = 'profile';

@@ -56,6 +56,7 @@
                 $Menus->sidebar_parent('Report', 'fa fa-print', array(
                     array("Alumni Report", "report-alumni"),
                     array("Employer Report", "report-employer"),
+                    array("Employment Rate Report", "report-employment"),
                     array("Job Posting Report", "report-job-post"),
                 ));
             }

@@ -27,6 +27,10 @@ class JobSkills extends Connection
         return json_encode($response);
     }
 
+    public function destroyByJob($job_id){
+        $this->delete($this->table, "job_id = '$job_id'");
+    }
+
     public static function dataOf($primary_id, $field = '*')
     {
         $self = new self;

@@ -242,10 +242,10 @@ require 'routes/routes.php';
       )
     }
 
-    function success_update() {
+    function success_update(data = 'data') {
       Swal.fire(
         'Success!',
-        'Your data has been updated.',
+        'Your '+data+' has been updated.',
         'success'
       )
     }

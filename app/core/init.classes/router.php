@@ -42,6 +42,13 @@ class Router
       case 'education':
         $route = ['header' => 'header-light', 'file' => 'education.php'];
         break;
+      case 'edit-job':
+        if (count($param) > 1 && $param[1] > 0) {
+          $route = ['header' => 'header-light', 'file' => 'edit_job.php', 'id' => $param[1]];
+        } else {
+          $route = ['header' => 'header-light', 'file' => '404.php'];
+        }
+        break;
       case 'job-detail':
         if (count($param) > 1 && $param[1] > 0) {
           $route = ['header' => 'header-light', 'file' => 'job_detail.php', 'id' => $param[1]];

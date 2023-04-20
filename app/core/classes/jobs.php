@@ -48,9 +48,10 @@ class Jobs extends Connection
         $id = $Employer->id();
         $response['jobs'] = array();
         $result = $this->select($this->table, "*", "employer_id = '$id'");
-        while ($row = $result->fetch_assoc()) {
+        while ($row = $result->fetch_assoc()){
             $row['job_type_name'] = JobTypes::name($row['job_type_id']);
             $row['employers'] = Employers::dataOf($row['employer_id']);
+            $row['user_img'] = Users::img($row['employers']['user_id']);
             $row['skills'] = json_decode($JobSkills->data($row['job_id']))->skills;
             $row['candidates'] = json_decode($JobCandidates->data($row['job_id']))->candidates;
             array_push($response['jobs'], $row);
@@ -93,5 +94,15 @@ class Jobs extends Connection
         $result = $self->select($self->table, $field, "$self->pk = '$primary_id'");
         $row = $result->fetch_assoc();
         return $field == '*' ? $row : $row[$field];
+    }
+
+    public function destroy()
+    {
+        $id = $this->post($this->pk);
+
+        $JobSkillls = new JobSkills();
+        $JobSkillls->destroyByJob($id);
+
+        return $this->delete($this->table, "$this->pk = '$id'");
     }
 }
