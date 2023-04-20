@@ -36,14 +36,14 @@ class Connection
         $this->mysqli->rollback();
     }
 
-    public function post($key , $clean = true, $ret = '')
+    public function post($key, $clean = true, $ret = '')
     {
-        return !isset($_POST[$key]) ? $ret : ($clean ? $this->clean($_POST[$key]) :$_POST[$key]);
+        return $_POST[$key]; //!isset($_POST[$key]) ? $ret : ($clean ? $this->clean($_POST[$key]) :$_POST[$key]);
     }
 
-    public function files($key , $ret = '')
+    public function files($key, $ret = '')
     {
-        return !isset($_FILES[$key]) ? $ret :$_FILES[$key];
+        return !isset($_FILES[$key]) ? $ret : $_FILES[$key];
     }
 
     public function insert($table, $para = array(), $last_id = 'N')
@@ -59,11 +59,11 @@ class Connection
 
         // return $result ? $ret_ : 0;
 
-        if($this->mysqli->query($sql) === TRUE){
+        if ($this->mysqli->query($sql) === TRUE) {
             $lastId = $this->mysqli->insert_id;
             $ret_ = ($last_id == 'Y') ? $lastId : 1;
             return $ret_;
-        }else{
+        } else {
             return $this->mysqli->error;
         }
     }
