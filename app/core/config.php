@@ -8,9 +8,9 @@ define('BASE_URL', 'https://alumnitracker.tech/');
 define("BASE_PATH", __DIR__ . "/../");
 
 define("HOST", "localhost");
-define("USER", "root");
-define("PASSWORD", "");
-define("DBNAME", "almai_db");
+define("USER", "u981310152_almai_root");
+define("PASSWORD", "Almai2023!");
+define("DBNAME", "u981310152_almai_db");
 
 define("DEVELOPMENT", "true");
 
