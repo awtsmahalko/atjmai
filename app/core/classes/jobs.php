@@ -10,19 +10,24 @@ class Jobs extends Connection
             return -1;
 
         $Employer = new Employers();
+        $employer_id = $Employer->id();
 
         try {
             $this->check();
             $this->begin_transaction();
 
             $job_id = $this->insert($this->table, [
-                'employer_id'       => $Employer->id(),
+                'employer_id'       => $employer_id,
                 'job_title'         => $this->post('job_title'),
                 'job_description'   => $this->post('job_description'),
                 'job_type_id'       => $this->post('job_type_id'),
                 'job_sched_id'      => $this->post('job_sched_id'),
                 'hire_needed'       => $this->post('hire_needed'),
-                'salary_details'    => $this->post('salary_details'),
+                'salary_min'        => $this->post('salary_min'),
+                'salary_max'        => $this->post('salary_max'),
+                'salary_details'    => $this->post('salary_min') . " - " . $this->post('salary_max'),
+                'courses'           => implode(",",$this->post('courses')),
+                'industry_id'       => Employers::dataOf($employer_id,'industry_id'),
             ], 'Y');
 
             if ($job_id < 1)
@@ -64,17 +69,31 @@ class Jobs extends Connection
         $JobSkills = new JobSkills;
         $Alumni = new Alumni();
         $JobCandidates = new JobCandidates();
-        $id = $Alumni->id();
+        $alumni_id = $Alumni->id();
         $response['jobs'] = array();
-        $result = $this->select($this->table, "*", "alumni = '$id'");
+        $result = $this->select('tbl_job_candidates AS c,tbl_jobs AS j', "*", "c.job_id = j.job_id AND c.alumni_id = '$alumni_id'");
         while ($row = $result->fetch_assoc()) {
-            // $row['job_type_name'] = JobTypes::name($row['job_type_id']);
-            // $row['employers'] = Employers::dataOf($row['employer_id']);
-            // $row['skills'] = json_decode($JobSkills->data($row['job_id']))->skills;
-            // $row['candidates'] = json_decode($JobCandidates->data($row['job_id']))->candidates;
+            $row['job_type_name'] = JobTypes::name($row['job_type_id']);
+            $row['employers'] = Employers::dataOf($row['employer_id']);
+            $row['user_img'] = Users::img($row['employers']['user_id']);
+            $row['skills'] = json_decode($JobSkills->data($row['job_id']))->skills;
+            $row['job_status'] = $JobCandidates->view_status($row['job_id'], $alumni_id);
+            $row['qualifications'] = $this->qualifications($row['courses']);
             array_push($response['jobs'], $row);
         }
         return json_encode($response);
+    }
+
+    public function qualifications($courses){
+        $courses = explode(",",$courses);
+        $course = [];
+        foreach($courses as $course_id){
+            $course[] = array(
+                'course_id' => $course_id,
+                'qualification_name' => Courses::name($course_id),
+            );
+        }
+        return $course;
     }
 
     public static function countPosted($employer_id = 0)

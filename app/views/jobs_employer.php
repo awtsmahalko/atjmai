@@ -23,7 +23,7 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">
-                    <a href="<?= HTACCESS_APP . " jobs" ?>">Jobs</a>
+                    <a href="<?= HTACCESS_APP . "jobs" ?>">Jobs</a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">Manage Jobs</li>
                 </ol>
@@ -110,7 +110,7 @@
   }
 
   function skin_job_top(jobData) {
-    var skin = '<div class="col-lg-4 col-md-4 col-sm-4">' +
+    var skin = '<div class="col-lg-4 col-md-4 col-sm-4 w3-animate-left">' +
       '<div class="job_grid_02 shadow_0">' +
       // '<div class="jobs-like">'+
       // 	'<label class="toggler toggler-danger"><input type="checkbox"><i class="fa fa-heart"></i></label>'+
@@ -144,7 +144,10 @@
       }
     }
   }
-
+  function backToMain(){
+  $(".row-head").show();
+  $(".row-detail").hide();
+  }
   function skin_job_header(jobData) {
     var skin = '<div class="_dash_singl_box w3-animate-top">' +
       '<div class="_dash_singl_captions col-md-6">' +
@@ -158,6 +161,7 @@
       '<ul class="_action_grouping_list pull-right">' +
       // '<li onclick="alert(1)"><a href="#" class="_aaplied_candidates">Best Candidate &nbsp; <i class="fa fa-graduation-cap"></i> </a></li>'+
       '<li><a href="#" class="_aaplied_candidates">Applied<span>' + jobData.candidates.length + '</span></a></li>' +
+      '<li><a href="#" class="_back_list_point" onclick="backToMain()"><i class="fa fa-undo"></i></a></li>' +
       '<li><a href="' + base_url + 'app/edit-job/' + jobData.job_id + '" data-toggle="tooltip" data-placement="top" title="Edit job" class="_edit_list_point"><i class="fa fa-edit"></i></a></li>' +
       '<li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point" onclick="deleteJob(' + jobData.job_id + ')"><i class="fa fa-trash"></i></a></li>' +
       '</ul>' +
@@ -459,4 +463,10 @@
     color: #fff;
     background: #16b739;
   }
+  
+  ul._action_grouping_list li a._back_list_point {
+      background: #0b8200;
+      color: #ffffff;
+  }
+
 </style>

@@ -58,12 +58,17 @@
 											</div>
 										</div>
 
-										<div class="col-xl-6 col-lg-6">
+										<div class="col-xl-3 col-lg-3">
 											<div class="form-group">
-												<label class="">Wage/Salary</label>
-												<input type="text" class="form-control"
-													placeholder="Indicate currency (e.g. Php 20,000/mo)"
-													name="salary_details">
+												<label class="">Salary Minimum</label>
+												<input type="number" class="form-control" name="salary_min">
+											</div>
+										</div>
+
+										<div class="col-xl-3 col-lg-3">
+											<div class="form-group">
+												<label class="">Salary Maximum</label>
+												<input type="number" class="form-control" name="salary_max">
 											</div>
 										</div>
 
@@ -104,9 +109,15 @@
 												</grammarly-editor-plugin>
 											</div>
 										</div>
-									</div>
-									<hr>
-									<div class="row">
+										<div class="col-xl-12 col-lg-12">
+											<div class="form-group">
+												<label>Qualifications</label>
+												<select class="form-control select2" id="courses" multiple="true"
+													style="width: 100%;" name="courses[]" required>
+													<?= Courses::options() ?>
+												</select>
+											</div>
+										</div>
 										<div class="col-xl-12 col-lg-12">
 											<div class="form-group">
 												<label>Skills</label>
@@ -118,10 +129,17 @@
 										</div>
 									</div>
 								</div>
+									<hr>
+		                            <div class="row">
+		                              <div class="col-md-12">
+		                                <div class="form-group-btn">
+										<button type="submit" class="btn btn-save" id="btn-post" style="border-radius: 50px;"><span
+									class="fa fa-edit"></span> Save Changes</button>
+		                                </div>
+		                              </div>
+		                            </div>
+		                            <br>
 							</div>
-							<!-- Single Wrap End -->
-
-							<button type="submit" id="btn-post" class="btn btn-save">Submit Job</button>
 						</form>
 					</div>
 				</div>

@@ -74,11 +74,17 @@
                                 </div>
                               </div>
 
-                              <div class="col-xl-6 col-lg-6">
+                              <div class="col-xl-3 col-lg-3">
                                 <div class="form-group">
-                                  <label class="">Wage/Salary</label>
-                                  <input type="text" class="form-control preference-value" data-column="salary_details"
-                                    placeholder="Indicate currency (e.g. Php 20,000/mo)" name="salary_details">
+                                  <label class="">Minimu Salary</label>
+                                  <input type="text" class="form-control preference-value" data-column="salary_min" name="salary_min">
+                                </div>
+                              </div>
+
+                              <div class="col-xl-3 col-lg-3">
+                                <div class="form-group">
+                                  <label class="">Maximun Salary</label>
+                                  <input type="text" class="form-control preference-value" data-column="salary_max" name="salary_max">
                                 </div>
                               </div>
 
@@ -97,7 +103,7 @@
                                 <div class="form-group">
                                   <label>Schedule</label>
                                   <select style="width: 100%;" class="form-control select2 preference-value"
-                                    data-column="job_sched_id" id="job_sched_id" required>
+                                    data-column="job_sched_id" id="job_sched_id" name="job_sched_id" required>
                                     <option value="0">Any</option>
                                     <?= JobSchedules::options() ?>
                                   </select>
@@ -212,7 +218,7 @@
   }
 
   function skin_best_jobs(jobData, selectd) {
-    var skin_job = '<div class="left_jobs _jb_list72 shadow_0 w3-animate-top ' + selectd + '" onclick="viewJobDetails(' + jobData.job_id + ')">' +
+    var skin_job = '<div class="job_recommended job_recommended_' + jobData.job_id + ' left_jobs _jb_list72 shadow_0 w3-animate-top ' + selectd + '" onclick="viewJobDetails(' + jobData.job_id + ')" style="cursor:pointer">' +
       '<div class="jobs-like bookmark">' +
       '<label class="label bg-success">' + jobData.percentage + ' %</label>' +
       '</div>' +
@@ -236,6 +242,8 @@
   }
 
   function viewJobDetails(job_id) {
+    $(".job_recommended").removeClass('selectd');
+    $(".job_recommended_"+job_id).addClass('selectd');
     for (var jobIndex = 0; jobIndex < global_job_data.length; jobIndex++) {
       const jobData = global_job_data[jobIndex];
       if (jobData.job_id == job_id) {
@@ -250,6 +258,23 @@
     for (var skillIndex = 0; skillIndex < jobData.skills.length; skillIndex++) {
       const skillRow = jobData.skills[skillIndex];
       skill_data += '<li>' + skillRow.skill_name + '</li>';
+    }
+    var qualifications_data = '';
+    for (var qIndex = 0; qIndex < jobData.qualifications.length; qIndex++) {
+      const qRow = jobData.qualifications[qIndex];
+      qualifications_data += '<li>' + qRow.qualification_name + '</li>';
+    }
+
+    var btn_hire = "";
+    if (jobData.job_status == '-1') {
+      btn_hire = '<div class="hired">Applied</div>';
+    }else if (jobData.job_status == '1') {
+      btn_hire = '<div class="hired">Hired</div>';
+    }else{
+      btn_hire = '<ul class="_flex_btn">' +
+      // '<li><a href="#" class="_saveed_jb"><i class="fa fa-heart"></i></a></li>' +
+      '<li><a href="#" onclick="applyJob(' + jobData.job_id + ')" class="_applied_jb dark-btn">Apply Job</a></li>' +
+      '</ul>';
     }
     var skin_job_content = '<div class="_job_details_single w3-animate-left ">' +
       '<div class="_jb_details01">' +
@@ -271,11 +296,7 @@
       '</ul>' +
       '</div>' +
       '</div>' +
-      '<div class="_jb_details01_last">' +
-      '<ul class="_flex_btn">' +
-      // '<li><a href="#" class="_saveed_jb"><i class="fa fa-heart"></i></a></li>' +
-      '<li><a href="#" onclick="applyJob(' + jobData.job_id + ')" class="_applied_jb dark-btn">Apply Job</a></li>' +
-      '</ul>' +
+      '<div class="_jb_details01_last">' +btn_hire +
       '</div>' +
       '</div>' +
       '</div>' +
@@ -305,15 +326,13 @@
       '<ul>' + skill_data + '</ul>' +
       '</div>' +
 
-      '<div class="_job_detail_single flexeo">' +
-      '<div class="_job_detail_single_flex">' +
+      '<div class="_job_detail_single">' +
+      '<h4>Qualification</h4>' +
+      '<ul>' + qualifications_data + '</ul>' +
       '</div>' +
 
-      '<div class="_exlio_buttons">' +
-      '<ul class="bottoms_applies">' +
-      // '<li><a href="#" class="_saveed_jb">Save Job</a></li>' +
-      '<li><a href="#" class="_applied_jb" onclick="applyJob(' + jobData.job_id + ')">Apply Job</a></li>' +
-      '</ul>' +
+      '<div class="_job_detail_single flexeo">' +
+      '<div class="_job_detail_single_flex">' +
       '</div>' +
       '</div>' +
       '</div>';
@@ -398,5 +417,17 @@
       top: 0;
       opacity: 1
     }
+  }
+
+  .hired {
+    height: 25px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border-radius: 50px;
+    color: #fff;
+    background: #16b739;
   }
 </style>

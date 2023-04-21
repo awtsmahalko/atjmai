@@ -51,10 +51,6 @@
                   <a class="nav-link active" id="pills-preferences-tab" data-toggle="pill" href="#pills-preferences"
                     role="tab" aria-controls="pills-preferences" aria-selected="true">Job Information</a>
                 </li>
-                <li class="nav-item" role="presentation" style="width: 50%;">
-                  <a class="nav-link" id="pills-matched-tab" data-toggle="pill" href="#pills-matched" role="tab"
-                    aria-controls="pills-matched" aria-selected="false">Candidates</a>
-                </li>
               </ul>
               <div class="tab-content" id="pills-tabContent">
                 <div class="tab-pane fade show active" id="pills-preferences" role="tabpanel"
@@ -62,22 +58,6 @@
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="_job_detail_box light" id="job-content"></div>
-                    </div>
-                  </div>
-                </div>
-                <div class="tab-pane fade" id="pills-matched" role="tabpanel" aria-labelledby="pills-matched-tab">
-                  <div class="row">
-                    <div class="col-lg-12 col-md-12 col-sm-12">
-                      <div class="_job_detail_box">
-                        <div class="row">
-                          <div class="col-lg-5 col-md-12 col-sm-12">
-                            <div class="row">
-                              <div class="col-lg-12 col-md-12 col-sm-12" id="candidate-content"></div>
-                            </div>
-                          </div>
-                          <div class="col-lg-7 col-md-12 col-sm-12" id="candidate-detail"></div>
-                        </div>
-                      </div>
                     </div>
                   </div>
                 </div>
@@ -98,6 +78,7 @@
     $("#job_lists_top").html('');
     $.post(base_controller + "get_alumni_jobs", {}, function(data, status) {
       var res = JSON.parse(data);
+      console.log(res);
       global_job_data = res.jobs;
       if (res.jobs.length > 0) {
         for (var JobIndex = 0; JobIndex < res.jobs.length; JobIndex++) {
@@ -109,7 +90,7 @@
   }
 
   function skin_job_top(jobData) {
-    var skin = '<div class="col-lg-4 col-md-4 col-sm-4">' +
+    var skin = '<div class="col-lg-4 col-md-4 col-sm-4 w3-animate-left">' +
       '<div class="job_grid_02 shadow_0">' +
       // '<div class="jobs-like">'+
       // 	'<label class="toggler toggler-danger"><input type="checkbox"><i class="fa fa-heart"></i></label>'+
@@ -136,7 +117,7 @@
       if (jobData.job_id == job_id) {
         skin_job_header(jobData);
         skin_job_content(jobData);
-        skin_candidates(jobData.candidates);
+        // skin_candidates(jobData.candidates);
         $(".row-head").hide();
         $(".row-detail").show();
         break;
@@ -144,21 +125,30 @@
     }
   }
 
+  function backToMain(){
+  $(".row-head").show();
+  $(".row-detail").hide();
+  }
+
   function skin_job_header(jobData) {
+    if(jobData.job_status == -1){
+      var status_label = '<li><a href="#" class="_aaplied_candidates">Applied</a></li>';
+    }else if(jobData.job_status == 1){
+      var status_label = '<li><a href="#" class="_hired_candidates">Hired</a></li>';
+    }else{
+      var status_label = '<li><a href="#" class="_hired_candidates">Declined</a></li>';
+    }
     var skin = '<div class="_dash_singl_box w3-animate-top">' +
       '<div class="_dash_singl_captions col-md-6">' +
       '<h4 class="_jb_title"><a href="#">' + jobData.job_title + '</a></h4>' +
       '<ul class="_grouping_list">' +
-      '<li><span><i class="ti-location-pin"></i>Denever, USA</span></li>' +
-      '<li><span><i class="ti-credit-card"></i>' + jobData.salary_detail + '</span></li>' +
+      '<li><span><i class="ti-location-pin"></i>' + jobData.employers.company_address + '</span></li>' +
+      '<li><span><i class="ti-credit-card"></i>' + jobData.salary_details + '</span></li>' +
       '</ul>' +
       '</div>' +
       '<div class="_dash_singl_thumbs col-md-6">' +
-      '<ul class="_action_grouping_list pull-right">' +
-      // '<li onclick="alert(1)"><a href="#" class="_aaplied_candidates">Best Candidate &nbsp; <i class="fa fa-graduation-cap"></i> </a></li>'+
-      '<li><a href="#" class="_aaplied_candidates">Applied<span>42</span></a></li>' +
-      '<li><a href="#" data-toggle="tooltip" data-placement="top" title="Edit job" class="_edit_list_point" data-tooltip-id="bfc3e871-78bc-eb6d-377d-a32d0893e50a"><i class="fa fa-edit"></i></a></li>' +
-      '<li><a href="#" data-toggle="tooltip" data-placement="top" title="Delete Job" class="_delete_point" data-tooltip-id="420f3a00-4450-6b49-bfc5-0bb7e217dd1e"><i class="fa fa-trash"></i></a></li>' +
+      '<ul class="_action_grouping_list pull-right">' + status_label+
+      '<li><a href="#" class="_back_list_point" onclick="backToMain()"><i class="fa fa-undo"></i></a></li>' +
       '</ul>' +
       '</div>' +
       '</div>';
@@ -171,11 +161,16 @@
       const skillRow = jobData.skills[skillIndex];
       skill_data += '<li>' + skillRow.skill_name + '</li>';
     }
+    var qualifications_data = '';
+    for (var qIndex = 0; qIndex < jobData.qualifications.length; qIndex++) {
+      const qRow = jobData.qualifications[qIndex];
+      qualifications_data += '<li>' + qRow.qualification_name + '</li>';
+    }
     var skin_job_content = '<div class="_job_details_single w3-animate-left ">' +
       '<div class="_jb_details01">' +
       '<div class="_jb_details01_flex">' +
       '<div class="_jb_details01_authors">' +
-      '<img src="' + base_url + 'assets/img/users/default_company.png" class="img-fluid" alt="">' +
+      '<img src="' + base_url_img+jobData.user_img+'" class="img-fluid" alt="">' +
       '</div>' +
       '<div class="_jb_details01_authors_caption">' +
       '<h4 class="jbs_title">' + jobData.job_title + '<img src="../assets/img/verify.svg" class="ml-1" width="12" alt=""></h4>' +
@@ -199,15 +194,12 @@
       '<p>' + jobData.job_description + '</p>' +
       '</div>' +
       '<div class="_job_detail_single">' +
-      '<h4>Job Duties:</h4>' +
-      '<p>Were looking for someone with the creative spark, eye for illustration and design, passionfor graphics and ability to produce high quality design collaterals end-to-end.</p>' +
-      '<ul>' +
-      '<li>Draft mockups of website designs, brochures, iconography, and any other marketing</li>' +
-      '</ul>' +
-      '</div>' +
-      '<div class="_job_detail_single">' +
       '<h4>Skill &amp; Experience</h4>' +
       '<ul>' + skill_data + '</ul>' +
+      '</div>' +
+      '<div class="_job_detail_single">' +
+      '<h4>Qualification</h4>' +
+      '<ul>' + qualifications_data + '</ul>' +
       '</div>' +
       '<div class="_job_detail_single flexeo">' +
       '<div class="_job_detail_single_flex">' +
@@ -379,4 +371,17 @@
       opacity: 1
     }
   }
+  ul._action_grouping_list li a._declined_candidates {
+      color: #ffffff;
+      background: rgb(232 53 53);
+  }
+  ul._action_grouping_list li a._hired_list_point {
+      background: rgb(41 68 192);
+      color: #ffffff;
+  }
+  ul._action_grouping_list li a._back_list_point {
+      background: #0b8200;
+      color: #ffffff;
+  }
+
 </style>
