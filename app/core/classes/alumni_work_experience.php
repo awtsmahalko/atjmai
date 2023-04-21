@@ -25,7 +25,7 @@ class AlumniWorkExperiences extends Connection
                 'date_hired' => $date_hired,
                 'date_resigned' => $date_resigned,
                 'currently_worked' => $currently_worked,
-            ],'Y');
+            ], 'Y');
             if ($work_exp_id < 1)
                 throw new Exception($work_exp_id);
 
@@ -72,7 +72,7 @@ class AlumniWorkExperiences extends Connection
                 'date_hired' => $date_hired,
                 'date_resigned' => $date_resigned,
                 'currently_worked' => $currently_worked,
-            ],"work_exp_id = '$work_exp_id'");
+            ], "work_exp_id = '$work_exp_id'");
             if ($ret != 1)
                 throw new Exception($ret);
 
@@ -92,28 +92,29 @@ class AlumniWorkExperiences extends Connection
         $AlumniWorkAchievements = new AlumniWorkAchievements;
         $AlumniWorkAchievements->destroy_by_work($id);
 
-        return $this->delete($this->table,"$this->pk = '$id'");
+        return $this->delete($this->table, "$this->pk = '$id'");
     }
 
-    public function data()
+    public function data($alumni_id_ = 0)
     {
         $AlumniWorkAchievements = new AlumniWorkAchievements;
 
         $Alumni = new Alumni();
-        $alumni_id = $Alumni->id();
+        $alumni_id = $alumni_id_ > 0 ? $alumni_id_ : $Alumni->id();
 
         $count = 1;
         $response['alumni'] = array();
         $result = $this->select($this->table, "*", "alumni_id = '$alumni_id' ORDER BY date_hired ASC");
         while ($row = $result->fetch_assoc()) {
-            $year_end = $row['currently_worked'] == 1 ? "Current" : date("M Y",strtotime($row['date_resigned']));
-            $row['year_span'] = date("M Y",strtotime($row['date_hired'])) . " - " . $year_end;
+            $year_end = $row['currently_worked'] == 1 ? "Current" : date("M Y", strtotime($row['date_resigned']));
+            $row['year_span'] = date("M Y", strtotime($row['date_hired'])) . " - " . $year_end;
             $row['achievements'] = $AlumniWorkAchievements->data_by_work($row['work_exp_id']);
             $row['count'] = $count++;
             array_push($response['alumni'], $row);
         }
         return json_encode($response);
     }
+
 
     public static function dataOf($primary_id, $field = '*')
     {

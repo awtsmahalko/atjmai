@@ -113,33 +113,6 @@ class Authentication extends Connection
         }
     }
 
-    public function emailSender($user_email, $user_otp)
-    {
-        $to = $user_email;
-        $subject = "CPSU TUTOR FINDER: Reset Password";
-
-        $message = "
-                <html>
-                <head>
-                <title>CPSU TUTOR FINDER: Reset Password</title>
-                </head>
-                <body>
-                <p>Your OTP is : <b>$user_otp</b></p>
-                </body>
-                </html>
-                ";
-
-        // Always set content-type when sending HTML email
-        $headers = "MIME-Version: 1.0" . "\r\n";
-        $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-
-        // More headers
-        // $headers .= 'From: <webmaster@example.com>' . "\r\n";
-        // $headers .= 'Cc: myboss@example.com' . "\r\n";
-
-        mail($to, $subject, $message, $headers);
-    }
-
     public function logout()
     {
         session_destroy();

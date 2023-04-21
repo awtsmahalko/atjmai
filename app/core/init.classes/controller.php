@@ -8,6 +8,10 @@ class Controller
   public function dispatch($uri)
   {
     switch ($uri) {
+      case 'accept_job_apply':
+        $class_name = 'JobCandidates';
+        $method_name = 'hire';
+        break;
       case 'add_alumni_education':
         $class_name = 'AlumniEducations';
         $method_name = 'add';
@@ -111,6 +115,10 @@ class Controller
       case 'get_alumni_jobs':
         $class_name = 'Jobs';
         $method_name = 'data_alumni';
+        break;
+      case 'get_alumni_pds_data':
+        $class_name = 'Alumni';
+        $method_name = 'pds';
         break;
       case 'get_colleges_data':
         $class_name = 'Colleges';

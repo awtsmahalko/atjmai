@@ -121,14 +121,23 @@ class Alumni extends Connection
 
     public function pds()
     {
-        $alumni_id = $this->post('alumni_id');
-        // if (!isset($_SESSION['user']['id']))
-        //     return json_encode(['user_id' => 0]);
+        $AlumniWorkExperiences = new AlumniWorkExperiences();
+        $AlumniEducations = new AlumniEducations();
+        $JobCandidates = new JobCandidates();
 
-        // $user_id = $_SESSION['user']['id'];
-        // $result = $this->select($this->table, "*", "user_id = '$user_id'");
-        // $row = $result->fetch_assoc();
-        // return json_encode($row);
+        $alumni_id = $this->post('alumni_id');
+        $job_id = $this->post('job_id');
+
+        $result = $this->select($this->table, "*", "alumni_id = '$alumni_id'");
+        $row = $result->fetch_assoc();
+        $row['preferences'] = AlumniJobPreferences::dataOfByAlumniId($alumni_id);
+        $row['skills'] = AlumniSkills::alumni_data($alumni_id);
+        $row['works'] = json_decode($AlumniWorkExperiences->data($alumni_id))->alumni;
+        $row['users'] = Users::dataOf($row['user_id']);
+        $row['educations'] = json_decode($AlumniEducations->data($alumni_id))->alumni;
+        $row['job_status'] = $JobCandidates->view_status($job_id, $alumni_id);
+        $row['job_id'] = $job_id;
+        return json_encode($row);
     }
 
     public function id($id = 0)

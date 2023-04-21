@@ -23,7 +23,7 @@
               <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                   <li class="breadcrumb-item">
-                    <a href="<?= HTACCESS_APP . "jobs" ?>">Jobs</a>
+                    <a href="<?= HTACCESS_APP . " jobs" ?>">Jobs</a>
                   </li>
                   <li class="breadcrumb-item active" aria-current="page">Manage Jobs</li>
                 </ol>
@@ -48,14 +48,17 @@
             <div class="pills_basic_tab">
               <ul class="nav nav-pills mb-3" id="pills-tab" role="tablist">
                 <li class="nav-item" role="presentation" style="width: 50%;">
-                  <a class="nav-link active" id="pills-preferences-tab" data-toggle="pill" href="#pills-preferences" role="tab" aria-controls="pills-preferences" aria-selected="true">Job Information</a>
+                  <a class="nav-link active" id="pills-preferences-tab" data-toggle="pill" href="#pills-preferences"
+                    role="tab" aria-controls="pills-preferences" aria-selected="true">Job Information</a>
                 </li>
                 <li class="nav-item" role="presentation" style="width: 50%;">
-                  <a class="nav-link" id="pills-matched-tab" data-toggle="pill" href="#pills-matched" role="tab" aria-controls="pills-matched" aria-selected="false">Candidates</a>
+                  <a class="nav-link" id="pills-matched-tab" data-toggle="pill" href="#pills-matched" role="tab"
+                    aria-controls="pills-matched" aria-selected="false">Candidates</a>
                 </li>
               </ul>
               <div class="tab-content" id="pills-tabContent">
-                <div class="tab-pane fade show active" id="pills-preferences" role="tabpanel" aria-labelledby="pills-preferences-tab">
+                <div class="tab-pane fade show active" id="pills-preferences" role="tabpanel"
+                  aria-labelledby="pills-preferences-tab">
                   <div class="row">
                     <div class="col-lg-12 col-md-12 col-sm-12">
                       <div class="_job_detail_box light" id="job-content"></div>
@@ -134,7 +137,7 @@
       if (jobData.job_id == job_id) {
         skin_job_header(jobData);
         skin_job_content(jobData);
-        skin_candidates(jobData.candidates);
+        skin_candidates(jobData.candidates, job_id);
         $(".row-head").hide();
         $(".row-detail").show();
         break;
@@ -216,7 +219,7 @@
     $("#job-content").html(skin_job_content);
   }
 
-  function skin_candidates(candidateData) {
+  function skin_candidates(candidateData, job_id) {
     var skin = '';
     $("#candidate-content").html('');
     if (candidateData.length > 0) {
@@ -240,92 +243,107 @@
           '</div>' +
           '</div>' +
           '<div class="_list_jobs_f1ex col-md-4" style="width: 30%;flex: 0 0 30%;">' +
-          '<a href="javascript:void(0);" class="_jb_apply" onclick="fetchCandidateProfile(' + cRow.alumni_id + ')">View</a>' +
+          '<a href="javascript:void(0);" class="_jb_apply" onclick="fetchCandidateProfile(' + cRow.alumni_id + ',' + job_id + ')">View</a>' +
           '</div>' +
           '</div>';
         $("#candidate-content").append(skin);
       }
-      skin_candidate_details(candidateData[0].alumni_id);
+      fetchCandidateProfile(candidateData[0].alumni_id, job_id);
     }
   }
 
-  function fetchCandidateProfile(id) {
-    $
-    skin_candidate_details();
+  function fetchCandidateProfile(id, job_id) {
+    $.post(base_controller + "get_alumni_pds_data", {
+      alumni_id: id,
+      job_id: job_id
+    }, function(data, status) {
+      var res = JSON.parse(data);
+      console.log(res);
+      skin_candidate_details(res);
+    });
   }
 
-  function skin_candidate_details() {
+  function skin_candidate_details(res) {
+    var skills = "";
+    for (var sIndex = 0; sIndex < res.skills.length; sIndex++) {
+      const skillRow = res.skills[sIndex];
+      skills += '<li>' +
+        '<a href="javascript:void(0);">' + skillRow.skill_name + '</a>' +
+        '</li>';
+    }
+
+    var experiences = '';
+    for (var workIndex = 0; workIndex < res.works.length; workIndex++) {
+      const workRow = res.works[workIndex];
+      var achievements = '';
+      for (var aIndex = 0; aIndex < workRow.achievements.length; aIndex++) {
+        const aRow = workRow.achievements[aIndex];
+        achievements += '<p><img src="../assets/img/verify.svg" class="ml-1" width="12" alt=""> ' + aRow.achievement_name + '</p>';
+      }
+      experiences += '<li>' +
+        '<div class="qa-skill-box">' +
+        '<h4 class="qa-skill-title">' + workRow.job_title + ' <span class="qa-time">' + workRow.year_span + '</span></h4>' +
+        '<h5 class="qa-subtitle">' + workRow.company_name + '</h5>' +
+        '<div class="qa-content">' + achievements + '</div>' +
+        '</div>' +
+        '</li>';
+    }
+
+    var educations = '';
+    for (var educIndex = 0; educIndex < res.educations.length; educIndex++) {
+      const educRow = res.educations[educIndex];
+      educations += '<li>' +
+        '<div class="qa-skill-box">' +
+        '<h4 class="qa-skill-title">' + educRow.educ_degree + ' <span class="qa-time">' + educRow.year_enrolled + ' - ' + educRow.year_graduated + '</span></h4>' +
+        '<h5 class="qa-subtitle">' + educRow.honor_received + '</h5>' +
+        '<div class="qa-content">' +
+        '<p>' + educRow.educ_school + '</p>' +
+        '</div>' +
+        '</div>' +
+        '</li>';
+    }
+
+    var btn_hire = "";
+    if (res.job_status == '-1') {
+      btn_hire = '<a href="#" class="btn flw_btn" onclick="hireCandidate(' + res.job_id + ',' + res.alumni_id + ')">Hire Now</a>';
+    }
+    if (res.job_status == '1') {
+      btn_hire = '<div class="hired">Hired</div>';
+    }
     var skin = '<div class="_jb_summary light_box w3-animate-left">' +
       '<div class="_jb_summary_largethumb"><span></span><br></div>' +
       '<div class="_jb_summary_thumb" style="margin-top: unset;">' +
-      '<img src="http://localhost/atjmai/assets/img/users/6436d50fd04309.35459911.jpg" class="img-fluid circle" alt = "" >' +
+      '<img src="' + base_url_img + res.users.user_img + '" class="img-fluid circle" alt = "" >' +
       '</div>' +
       '<div class="_jb_summary_caption">' +
-      '<h4>Eduard Rino Carton</h4>' +
-      '<span>IT Programmer</span>' +
+      '<h4>' + res.alumni_fname + ' ' + res.alumni_mname + '' + res.alumni_lname + '</h4>' +
+      '<span>' + res.preferences.job_title + '</span>' +
       '</div>' +
       '<div class="_jb_summary_body">' +
-      '<div class="_view_dis_908">' +
-      '<a href="#" class="btn flw_btn">Hire Now</a>' +
-      '<a href="#" class="btn msg_btn">Message</a>' +
-      '</div>' +
+      '<div class="_view_dis_908">' + btn_hire + '</div>' +
       '</div>' +
       '</div>' +
       '<div class="_job_detail_box w3-animate-left">' +
       '<div class="_wrap_box_slice">' +
       '<div class="_job_detail_single">' +
       '<h4>About Candidate</h4>' +
-      '<p>We are one of the leading manufacturers and exporters of finished leather goodsfrom Calcutta, India for the last 20 years. We are a 100% EOU and manufactureleather goods for global brands worldwide. We maintain strict quality parameters andensure total employee retention and satisfaction.</p>' +
+      '<p>' + res.preferences.job_description + '</p>' +
       '</div>' +
       '<div class="_job_detail_single">' +
       '<h4>Skill &amp; Experience</h4>' +
-      '<ul class="skilss">' +
-      '<li>' +
-      '<a href="javascript:void(0);">IOS Developer</a>' +
-      '</li>' +
-      '</ul>' +
+      '<ul class="skilss">' + skills + '</ul>' +
       '</div>' +
       '</div>' +
       '<div class="_wrap_box_slice w3-animate-left">' +
       '<div class="_job_detail_single">' +
       '<h4>Work Experience</h4>' +
-      '<ul class="qa-skill-list">' +
-      '<li>' +
-      '<div class="qa-skill-box">' +
-      '<h4 class="qa-skill-title">Team Leader <span class="qa-time">2017 - 2019</span></h4>' +
-      '<h5 class="qa-subtitle">Mingoo Infotech</h5>' +
-      '<div class="qa-content">' +
-      '<p>sa</p>' +
-      '</div>' +
-      '</div>' +
-      '</li>' +
-      '</ul>' +
+      '<ul class="qa-skill-list">' + experiences + '</ul>' +
       '</div>' +
       '</div>' +
       '<div class="_wrap_box_slice w3-animate-left">' +
       '<div class="_job_detail_single">' +
       '<h4>Education &amp; Qualification</h4>' +
-      '<ul class="qa-skill-list">' +
-      '<li>' +
-      '<div class="qa-skill-box">' +
-      '<h4 class="qa-skill-title">Master in Information Technology <span class="qa-time">2013 - 2016</span></h4>' +
-      '<h5 class="qa-subtitle">Cumlaude</h5>' +
-      '<div class="qa-content">' +
-      '<p>NONESCOST</p>' +
-      '</div>' +
-      '</div>' +
-      '</li>' +
-      '<li>' +
-      '<div class="qa-skill-box">' +
-      '<h4 class="qa-skill-title">Master in Information Technology <span class="qa-time">2013 - 2016</span>' +
-      '</h4>' +
-      '<h5 class="qa-subtitle">Cumlaude</h5>' +
-      '<div class="qa-content">' +
-      '<p>NONESCOST</p>' +
-      '</div>' +
-      '</div>' +
-      '</li>' +
-      '</ul>' +
+      '<ul class="qa-skill-list">' + educations + '</ul>' +
       '</div>' +
       '</div>' +
       '</div>';
@@ -351,6 +369,30 @@
           $(".row-detail").hide();
           if (data == 1) {
             success_delete();
+          }
+        });
+      }
+    })
+  }
+
+  function hireCandidate(job_id, alumni_id) {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "The candidate will be hired!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, hire now!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        $.post(base_controller + "accept_job_apply", {
+          job_id: job_id,
+          alumni_id: alumni_id
+        }, function(data, status) {
+          fetchCandidateProfile(alumni_id, job_id);
+          if (data == 1) {
+            success_update();
           }
         });
       }
@@ -404,5 +446,17 @@
       top: 0;
       opacity: 1
     }
+  }
+
+  .hired {
+    height: 25px;
+    padding: 0 12px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 600;
+    border-radius: 50px;
+    color: #fff;
+    background: #16b739;
   }
 </style>

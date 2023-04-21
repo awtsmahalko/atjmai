@@ -7,6 +7,7 @@ $init_classes = array(
     'Controller'    => $pre_class . 'controller.php',
     'Menus'         => $pre_class . 'menu.php',
     'Router'        => $pre_class . 'router.php',
+    'Seeders'       => $pre_class . 'seeders.php',
 );
 
 $core_classes = array_merge($classes, $init_classes);

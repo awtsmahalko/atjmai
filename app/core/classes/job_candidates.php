@@ -7,6 +7,7 @@ class JobCandidates extends Connection
 
     // ----- STATUS ----
     // -1 = Apply
+    // 1  = Accepted
 
     public function apply()
     {
@@ -24,6 +25,25 @@ class JobCandidates extends Connection
         ]);
     }
 
+    public function hire()
+    {
+        $job_id = $this->post('job_id');
+        $alumni_id = $this->post('alumni_id');
+
+        return $this->update($this->table, [
+            'candidate_status' => 1,
+        ], "job_id = '$job_id' AND alumni_id = '$alumni_id'");
+    }
+
+    public function view_status($job_id, $alumni_id)
+    {
+        $result = $this->select($this->table, 'candidate_status', "job_id = '$job_id' AND alumni_id = '$alumni_id'");
+        if ($result->num_rows < 1)
+            return 0;
+
+        $row = $result->fetch_assoc();
+        return (int) $row['candidate_status'];
+    }
     public function data($job_id)
     {
         $response['candidates'] = array();

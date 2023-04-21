@@ -43,7 +43,7 @@ class AlumniEducations extends Connection
     {
         $educ_degree = Courses::name($this->post('course_id'));
         $educ_school = "Northern Negros State College of Science and Technology";
-        $year_graduated = date("Y",strtotime($this->post('alumni_graduation')));
+        $year_graduated = date("Y", strtotime($this->post('alumni_graduation')));
         $year_enrolled = $year_graduated - 4;
         $honor_received = "";
 
@@ -78,7 +78,7 @@ class AlumniEducations extends Connection
                 'year_enrolled' => $year_enrolled,
                 'year_graduated' => $year_graduated,
                 'honor_received' => $honor_received,
-            ],"educ_id = '$educ_id'");
+            ], "educ_id = '$educ_id'");
             if ($ret != 1)
                 throw new Exception($ret);
             $this->commit();
@@ -91,13 +91,13 @@ class AlumniEducations extends Connection
     public function destroy()
     {
         $educ_id = $this->post('educ_id');
-        return $this->delete($this->table,"educ_id = '$educ_id'");
+        return $this->delete($this->table, "educ_id = '$educ_id'");
     }
 
-    public function data()
+    public function data($alumni_id_ = 0)
     {
         $Alumni = new Alumni();
-        $alumni_id = $Alumni->id();
+        $alumni_id = $alumni_id_ > 0 ? $alumni_id_ : $Alumni->id();
 
         $count = 1;
         $response['alumni'] = array();

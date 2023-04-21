@@ -83,6 +83,14 @@ class AlumniJobPreferences extends Connection
         return $row['job_title'];
     }
 
+    public static function dataOfByAlumniId($alumni_id, $field = '*')
+    {
+        $self = new self;
+        $result = $self->select($self->table, $field, "alumni_id = '$alumni_id'");
+        $row = $result->fetch_assoc();
+        return $field == '*' ? $row : $row[$field];
+    }
+
     public static function dataOf($primary_id, $field = '*')
     {
         $self = new self;
