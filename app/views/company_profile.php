@@ -35,7 +35,7 @@
 
 				<div class="row">
 					<div class="col-lg-12 col-md-12 col-sm-12">
-						<form id="frmProfile">
+						<form id="frmProfile" enctype="multipart/form-data">
 							<?= Components::csrf(); ?>
 							<!-- Single Wrap -->
 							<div class="_dashboard_content">
@@ -49,60 +49,60 @@
 									<div class="row">
 										<div class="col-auto">
 											<div class="custom-file avater_uploads">
-												<input type="file" class="custom-file-input" id="customFile">
-												<label class="custom-file-label" for="customFile"><i
-														class="fa fa-user"></i></label>
+												<input type="file" name="file" class="custom-file-input" id="customFile"
+													onchange="previewImage(this)">
+												<label class="custom-file-label" for="customFile"><img
+														src="../assets/img/users/<?=$_SESSION['user']['img']?>"
+														id="preview" class="img-fluid rounded" alt=""></label>
 											</div>
 										</div>
-
 										<div class="col">
 											<div class="row">
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>Company Name</label>
-														<input type="text" class="form-control with-light profile-value"
+														<input type="text" class="form-control profile-value"
 															data-column='employer_name' name='employer_name'>
 													</div>
 												</div>
-												<div class="col-xl-4 col-lg-4">
+												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Industry</label>
-														<input type="text" class="form-control with-light profile-value"
-															data-column='employer_industry' name='employer_industry'>
+														<select class="form-control profile-value select2"
+															data-column='industry_id' name='industry_id'>
+															<?= Industries::options() ?>
+														</select>
 													</div>
 												</div>
-												<div class="col-xl-4 col-lg-4">
-													<div class="form-group">
-														<label>Foundation Date</label>
-														<input type="date" class="form-control with-light profile-value"
-															data-column='employer_foundation'
-															name='employer_foundation'>
-													</div>
-												</div>
-												<div class="col-xl-4 col-lg-4">
+												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Contact #</label>
-														<input type="text" class="form-control with-light profile-value"
-															data-column='employer_contact' name='employer_contact'>
+														<input type="text" class="form-control  profile-value"
+															data-column='company_contact' name='company_contact'>
 													</div>
 												</div>
 												<div class="col-xl-12 col-lg-12">
 													<div class="form-group">
 														<label>Address</label>
-														<input type="text" class="form-control with-light profile-value"
-															data-column='employer_address' name='employer_address'
+														<input type="text" class="form-control  profile-value"
+															data-column='company_address' name='company_address'
 															required>
 													</div>
 												</div>
-												<div class="col-xl-12 col-lg-12" id="response-profile-update"></div>
 											</div>
 										</div>
 									</div>
+									<hr>
+		                            <div class="row">
+		                              <div class="col-md-12">
+		                                <div class="form-group-btn pull-right">
+										<button type="submit" class="btn btn-save" id="btn_update_profile" style="border-radius: 50px;"><span
+									class="fa fa-edit"></span> Save Changes</button>
+		                                </div>
+		                              </div>
+		                            </div>
 								</div>
 							</div>
-							<!-- Single Wrap End -->
-							<button type="submit" class="btn btn-save" id="btn_update_profile"><span
-									class="fa fa-edit"></span> Save Changes</button>
 						</form>
 					</div>
 				</div>
@@ -130,28 +130,45 @@
 			const dataColumnValue = element.getAttribute('data-column');
 			element.value = res[dataColumnValue];
 		});
+		$(".select2").select2().trigger('change');
 	}
 
 	$("#frmProfile").submit(function(e) {
 		e.preventDefault();
-		$("#btn_update_profile").prop('disabled', true);
-		$("#btn_update_profile").html('Updating...');
-		$.post(base_controller + "update_employer_profile", $("#frmProfile").serialize(), function(data, status) {
-			if (data == 1) {
-				// SUCCESS
-				$("#response-profile-update").html('<div class="alert alert-primary" role="alert">Profile successfully updated!</div>');
-			} else if (data == -1) {
-				// EXPIRED CSRF TOKEN
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will reload in <span id="countdown">3</span> seconds!</div>');
-				countDown(3);
-			} else {
-				$("#response-profile-update").html('<div class="alert alert-danger" role="alert">' + data + '</div>');
+
+		var formData = new FormData(this);
+		btn_processor('btn_update_profile');
+		// send AJAX request
+		$.ajax({
+			url: base_controller + "update_employer_profile",
+			type: 'POST',
+			data: formData,
+			processData: false,
+			contentType: false,
+			success: function(response) {
+				if (response == 1) {
+					success_update();
+				} else if (response == -1) {
+					token_expired();
+					setTimeout(function(){
+						location.reload();
+					},2000);
+				} else if (response = 'IMG-SUCCESS') {
+					success_update('picture');
+					setTimeout(function(){
+						location.reload();
+					},2000);
+				} else {
+					error_response();
+				}
+				btn_processor('btn_update_profile',false,'<span class="fa fa-edit"></span> Save Changes');
+				// handle successful response
+			},
+			error: function(xhr, status, error) {
+				// handle error
 			}
-			$("#btn_update_profile").prop('disabled', false);
-			$("#btn_update_profile").html('Save Changes');
 		});
 	});
-
 	function countDown(sec = 5) {
 		var countdownSeconds = sec;
 		var countdownLabel = document.getElementById('countdown');
@@ -161,5 +178,14 @@
 				location.reload();
 			}
 		}, 1000);
+	}
+	function previewImage(input) {
+		if (input.files && input.files[0]) {
+			var reader = new FileReader();
+			reader.onload = function(e) {
+				document.getElementById("preview").src = e.target.result;
+			}
+			reader.readAsDataURL(input.files[0]);
+		}
 	}
 </script>

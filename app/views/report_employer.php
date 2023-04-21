@@ -147,7 +147,7 @@
 	}
 
 	function skin_per_all(res) {
-		var header_skin = '<div class="col-lg-12 col-md-12 text-center"><img src="../assets/img/nonescost_logo.png" class="img-fluid circle" alt="" style="width:100px"><h3>Employer Report</h3><h4>' + res.course_name + '</h4></div>';
+		var header_skin = '<div class="col-lg-12 col-md-12 text-center"><img src="../assets/img/nonescost_logo.png" class="img-fluid circle" alt="" style="width:100px"><h3>Employer Report</h3></div>';
 
 		var table_tr = "";
 		for (var cIndex = 0; cIndex < res.employers.length; cIndex++) {

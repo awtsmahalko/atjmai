@@ -510,6 +510,8 @@ class Seeders extends Connection
         "Fish and Game Warden"
     );
 
+    public $salaries = array(10000,15000,20000,25000);
+
     public function seeder_male()
     {
 
@@ -519,15 +521,18 @@ class Seeders extends Connection
         $count_company_names = count($this->company_names) - 1;
         $count_nonescost_grad_jobs = count($this->nonescost_grad_jobs) - 1;
 
-        for ($i = 0; $i < 200; $i++) {
-            $course_id = rand(1, 40);
-            $job_title = $this->nonescost_grad_jobs[rand(0, $count_nonescost_grad_jobs)];
+        for ($i = 0; $i < 1000; $i++) {
+            $course_id = rand(1, 29);
             $company_name = $this->company_names[rand(0, $count_company_names)];
             $alumni_fname = $this->boys_names[rand(0, $count_boys)];
             $alumni_mname = $this->surnames[rand(0, $count_surnames)];
             $alumni_lname = $this->filipino_surnames[rand(0, $count_filipino_surnames)];
             $user_fullname = $alumni_fname . " " . $alumni_mname . " " . $alumni_lname;
             $user_email = strtolower($alumni_lname . "." . $alumni_fname) . "@gmail.com";
+
+            $jobs = $this->job_generator();
+            $job_title = $jobs[0];
+            $job_description = $jobs[1];
 
             $fetch = $this->select('tbl_users', "user_id", "user_email = '$user_email'");
             if ($fetch->num_rows < 1) {
@@ -566,18 +571,28 @@ class Seeders extends Connection
 
                 $this->insert('tbl_work_experiences', [
                     'alumni_id' => $alumni_id,
-                    'company_name' => $company_name,
-                    'job_title' => $job_title,
+                    'company_name' => $this->clean($company_name),
+                    'job_title' => $this->clean($job_title),
                     'date_hired' => rand(2000, 2023) . "-" . rand(1, 12) . "-01",
                     'currently_worked' => 1,
                 ]);
 
+                $salary_min = $this->salaries[rand(0,3)];
+                $salary_max = $salary_min + 10000;
+
                 $this->insert('tbl_alumni_job_preferences', [
                     'alumni_id' => $alumni_id,
-                    'job_title' => $job_title,
+                    'job_title' => $this->clean($job_title),
+                    'job_description' => $this->clean($job_description),
+                    'job_type_id' => 0,
+                    'job_sched_id' => 0,
+                    'salary_min' => $salary_min,
+                    'salary_max' => $salary_max,
+                    'salary_details' => $salary_min." - ".$salary_max,
                 ]);
             }
         }
+        echo "done";
     }
 
     public function seeder_female()
@@ -589,9 +604,8 @@ class Seeders extends Connection
         $count_company_names = count($this->company_names) - 1;
         $count_nonescost_grad_jobs = count($this->nonescost_grad_jobs) - 1;
 
-        for ($i = 0; $i < 200; $i++) {
-            $course_id = rand(1, 40);
-            $job_title = $this->nonescost_grad_jobs[rand(0, $count_nonescost_grad_jobs)];
+        for ($i = 0; $i < 1000; $i++) {
+            $course_id = rand(1, 29);
             $company_name = $this->company_names[rand(0, $count_company_names)];
             $alumni_fname = $this->girls_names[rand(0, $count_girls)];
             $alumni_mname = $this->surnames[rand(0, $count_surnames)];
@@ -599,13 +613,17 @@ class Seeders extends Connection
             $user_fullname = $alumni_fname . " " . $alumni_mname . " " . $alumni_lname;
             $user_email = strtolower($alumni_lname . "." . $alumni_fname) . "@gmail.com";
 
+            $jobs = $this->job_generator();
+            $job_title = $jobs[0];
+            $job_description = $jobs[1];
+
             $fetch = $this->select('tbl_users', "user_id", "user_email = '$user_email'");
             if ($fetch->num_rows < 1) {
                 $user_id =  $this->insert('tbl_users', [
                     'user_fullname' => $user_fullname,
                     'user_password' => md5('a'),
                     'user_email'    => $user_email,
-                    'user_category' => 'F',
+                    'user_category' => 'S',
                     'user_img'      => 'default_female.png',
                     'user_status'   => 1
                 ], 'Y');
@@ -617,7 +635,7 @@ class Seeders extends Connection
                     'alumni_fname'      => $alumni_fname,
                     'alumni_mname'      => $alumni_mname,
                     'alumni_lname'      => $alumni_lname,
-                    'alumni_gender'     => 'Male',
+                    'alumni_gender'     => 'Female',
                     'alumni_contact'    => '0909',
                     'alumni_address'    => $this->address_generator(),
                     'course_id'         => $course_id,
@@ -636,57 +654,51 @@ class Seeders extends Connection
 
                 $this->insert('tbl_work_experiences', [
                     'alumni_id' => $alumni_id,
-                    'company_name' => $company_name,
-                    'job_title' => $job_title,
+                    'company_name' => $this->clean($company_name),
+                    'job_title' => $this->clean($job_title),
                     'date_hired' => rand(2000, 2023) . "-" . rand(1, 12) . "-01",
                     'currently_worked' => 1,
                 ]);
 
+                $salary_min = $this->salaries[rand(0,3)];
+                $salary_max = $salary_min + 10000;
+
                 $this->insert('tbl_alumni_job_preferences', [
                     'alumni_id' => $alumni_id,
-                    'job_title' => $job_title,
+                    'job_title' => $this->clean($job_title),
+                    'job_description' => $this->clean($job_description),
+                    'job_type_id' => 0,
+                    'job_sched_id' => 0,
+                    'salary_min' => $salary_min,
+                    'salary_max' => $salary_max,
+                    'salary_details' => $salary_min." - ".$salary_max,
                 ]);
             }
         }
+        echo "done";
     }
 
     public function seeder_company()
     {
-        $count_girls = count($this->girls_names) - 1;
-        $count_filipino_surnames = count($this->filipino_surnames) - 1;
-        $count_surnames = count($this->surnames) - 1;
-        $count_company_names = count($this->company_names) - 1;
-        $count_nonescost_grad_jobs = count($this->nonescost_grad_jobs) - 1;
+        $count = 1;
+        foreach($this->company_names as $company_name){
+            $user_email = "company".($count++)."@gmail.com";
+            $user_id =  $this->insert('tbl_users', [
+                'user_fullname' => $company_name,
+                'user_password' => md5('a'),
+                'user_email'    => $user_email,
+                'user_category' => 'E',
+                'user_img'      => 'default_company.png',
+                'user_status'   => 1
+            ], 'Y');
 
-        for ($i = 0; $i < 200; $i++) {
-            $course_id = rand(1, 40);
-            $job_title = $this->nonescost_grad_jobs[rand(0, $count_nonescost_grad_jobs)];
-            $company_name = $this->company_names[rand(0, $count_company_names)];
-            $alumni_fname = $this->girls_names[rand(0, $count_girls)];
-            $alumni_mname = $this->surnames[rand(0, $count_surnames)];
-            $alumni_lname = $this->filipino_surnames[rand(0, $count_filipino_surnames)];
-            $user_fullname = $alumni_fname . " " . $alumni_mname . " " . $alumni_lname;
-            $user_email = strtolower($alumni_lname . "." . $alumni_fname) . "@gmail.com";
-
-            $fetch = $this->select('tbl_users', "user_id", "user_email = '$user_email'");
-            if ($fetch->num_rows < 1) {
-                $user_id =  $this->insert('tbl_users', [
-                    'user_fullname' => $user_fullname,
-                    'user_password' => md5('a'),
-                    'user_email'    => $user_email,
-                    'user_category' => 'E',
-                    'user_img'      => 'default_company.png',
-                    'user_status'   => 1
-                ], 'Y');
-
-                $this->insert('tbl_employers', [
-                    'user_id'           => $user_id,
-                    'employer_name'     => $company_name,
-                    'company_contact'   => '0909',
-                    'company_address'   => $this->address_generator(),
-                    'industry_id'       => rand(1, 25),
-                ]);
-            }
+            $this->insert('tbl_employers', [
+                'user_id'           => $user_id,
+                'employer_name'     => $company_name,
+                'company_contact'   => '0909',
+                'company_address'   => $this->address_generator(),
+                'industry_id'       => rand(1, 25),
+            ]);
         }
     }
 

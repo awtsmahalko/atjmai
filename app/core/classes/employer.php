@@ -32,23 +32,62 @@ class Employers extends Connection
 
             $update_success = $this->update($this->table, [
                 'employer_name'         => $this->post('employer_name'),
-                'employer_foundation'   => $this->post('employer_foundation'),
-                'employer_address'      => $this->post('employer_address'),
-                'employer_contact'      => $this->post('employer_contact'),
-                'employer_address'      => $this->post('employer_address'),
+                'company_address'      => $this->post('company_address'),
+                'company_contact'      => $this->post('company_contact'),
+                'company_address'      => $this->post('company_address'),
             ], "user_id = '" . $_SESSION['user']['id'] . "'");
 
             if ($update_success != 1)
                 throw new Exception($update_success);
-
+            $res = $this->update_profile_picture();
             $this->commit();
-            return 1;
+            return $res;
         } catch (Exception $e) {
             $this->rollback();
             return $e->getMessage();
         }
     }
+    public function update_profile_picture()
+    {
 
+        $file = $this->files('file');
+
+        // Get file properties
+        $fileName = $file['name'];
+        $fileTempName = $file['tmp_name'];
+        $fileSize = $file['size'];
+        $fileError = $file['error'];
+        $fileType = $file['type'];
+
+        if ($fileName == '')
+            return 1;
+
+        // Get the file extension
+        $fileExtension = strtolower(end(explode('.', $fileName)));
+
+        // Allowed file extensions
+        $allowedExtensions = array("jpeg", "jpg", "png");
+
+        if (!in_array($fileExtension, $allowedExtensions))
+            return 'NO-FILE-EXTENSION';
+
+        if ($fileError != 0)
+            return 'FILE-UPLOAD-ERROR';
+
+        if ($fileSize >= 1000000)
+            return 'FILE-TOO-BIG';
+
+        $newFileName = uniqid('', true) . "." . $fileExtension;
+        $fileDestination = __DIR__ . "../../../../assets/img/users/" . $newFileName;
+
+        // Move the file to the destination
+        move_uploaded_file($fileTempName, $fileDestination);
+
+        $this->update("tbl_users", ['user_img' => $newFileName], "user_id = '" . $_SESSION['user']['id'] . "'");
+        $_SESSION['user']['img'] = $newFileName;
+
+        return "IMG-SUCCESS";
+    }
     public function profile()
     {
         if (!isset($_SESSION['user']['id']))
