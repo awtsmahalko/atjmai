@@ -80,6 +80,14 @@ class Controller
         $class_name = 'AlumniReport';
         $method_name = 'per_course';
         break;
+      case 'generate_job_post_per_year':
+        $class_name = 'JobPostReport';
+        $method_name = 'per_year';
+        break;
+      case 'generate_job_post_per_month':
+        $class_name = 'JobPostReport';
+        $method_name = 'per_month';
+        break;
       case 'generate_employer_all':
         $class_name = 'Employers';
         $method_name = 'data';

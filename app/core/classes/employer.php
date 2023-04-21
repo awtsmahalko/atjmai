@@ -63,9 +63,10 @@ class Employers extends Connection
     public function data()
     {
         $response['employers'] = array();
-        if($this->post('industry_id')){
-            $result = $this->select($this->table,'*',"industry_id = '".$this->post('industry_id')."'");
-        }else{
+        if ($this->post('industry_id') > 0) {
+            $response['industry_name'] = Industries::dataOf($this->post('industry_id'), 'industry_name');
+            $result = $this->select($this->table, '*', "industry_id = '" . $this->post('industry_id') . "'");
+        } else {
             $result = $this->select($this->table);
         }
         $count = 1;

@@ -48,16 +48,16 @@
             if ($_SESSION['user']['category'] == 'A') {
                 // Admin
                 $Menus->sidebar_parent('Master Data', 'fa fa-file-o', array(
-                    array("Colleges", "colleges","fa fa-building"),
+                    array("Colleges", "colleges", "fa fa-building"),
                     array("Programs", "programs", 'fa fa-file'),
                     array("Industries", "industries", 'fa fa-file'),
                     array("Skills", "skills", 'fa fa-gears'),
                 ));
                 $Menus->sidebar_parent('Report', 'fa fa-print', array(
-                    array("Alumni Report", "report-alumni" , 'fa fa-graduation-cap'),
+                    array("Alumni Report", "report-alumni", 'fa fa-graduation-cap'),
                     array("Employer Report", "report-employer", 'fa fa-briefcase'),
-                    array("Employment Rate Report", "report-employment",'fa fa-chart'),
-                    array("Job Posting Report", "report-job-post",'ti-handshake'),
+                    array("Employment Rate Report", "report-employment", 'fa fa-area-chart'),
+                    array("Job Posting Report", "report-job-post", 'fa fa-file'),
                 ));
             }
             // ALL USERS

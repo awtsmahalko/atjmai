@@ -60,8 +60,7 @@
 															<div class="form-group-btn pull-right">
 																<button class="btn btn-success"
 																	style="padding: 5px !important;"
-																	onclick="generate_all()"
-																	id="btn_all"><span
+																	onclick="generate_all()" id="btn_all"><span
 																		class="fa fa-refresh"></span> Generate</button>
 																<button class="btn btn-primary"
 																	style="padding: 5px !important;"><span
@@ -93,7 +92,7 @@
 														<div class="col-md-6">
 															<div class="form-group-btn pull-right">
 																<button id="btn_per_industry" class="btn btn-success"
-																onclick="generate_per_industry()"
+																	onclick="generate_per_industry()"
 																	style="padding: 5px !important;"><span
 																		class="fa fa-refresh"></span> Generate</button>
 																<button class="btn btn-primary"
@@ -132,10 +131,14 @@
 	}
 </style>
 <script>
+	$(document).ready(function() {
+		generate_all();
+		generate_per_industry();
+	});
 	function generate_all() {
 		btn_processor('btn_all', true, "<span class='fa fa-spin fa-spinner'></span> Generating");
 		$.post(base_controller + "generate_employer_all", {
-			
+
 		}, function(data, status) {
 			var res = JSON.parse(data);
 			skin_per_all(res);
@@ -144,7 +147,7 @@
 	}
 
 	function skin_per_all(res) {
-		var header_skin = '<div class="col-lg-12 col-md-12 text-center"><img src="../assets/img/users/default_company.png" class="img-fluid circle" alt=""><h3>Employer Report</h3></div>';
+		var header_skin = '<div class="col-lg-12 col-md-12 text-center"><img src="../assets/img/nonescost_logo.png" class="img-fluid circle" alt="" style="width:100px"><h3>Employer Report</h3><h4>' + res.course_name + '</h4></div>';
 
 		var table_tr = "";
 		for (var cIndex = 0; cIndex < res.employers.length; cIndex++) {
@@ -152,12 +155,12 @@
 
 			table_tr += '<tr>' +
 				'<td>' + (cIndex + 1) + '</td>' +
-				'<td>' + empRow.employer_name+ '</td>' +
+				'<td>' + empRow.employer_name + '</td>' +
 				'<td>' + empRow.company_contact + '</td>' +
 				'<td>' + empRow.industry_id + '</td>' +
 				'<td>' + empRow.job_title + '</td>' +
 				'</tr>';
-			
+
 		}
 
 		var table = '<table class="table table-bordered table-striped">' +
@@ -179,7 +182,7 @@
 	function generate_per_industry() {
 		btn_processor('btn_per_industry', true, "<span class='fa fa-spin fa-spinner'></span> Generating");
 		$.post(base_controller + "generate_employer_per_industry", {
-			industry_id:$("#industry_id").val()
+			industry_id: $("#industry_id").val()
 		}, function(data, status) {
 			var res = JSON.parse(data);
 			skin_per_industry(res);
@@ -187,7 +190,7 @@
 		});
 	}
 	function skin_per_industry(res) {
-		var header_skin = '<div class="col-lg-12 col-md-12 text-center"><img src="../assets/img/users/default_company.png" class="img-fluid circle" alt=""><h3>Employer Report</h3></div>';
+		var header_skin = '<div class="col-lg-12 col-md-12 text-center"><img src="../assets/img/nonescost_logo.png" class="img-fluid circle" alt="" style="width:100px"><h3>Employer Report</h3><h4>' + res.industry_name + '</h4></div>';
 
 		var table_tr = "";
 		for (var cIndex = 0; cIndex < res.employers.length; cIndex++) {
@@ -195,12 +198,12 @@
 
 			table_tr += '<tr>' +
 				'<td>' + (cIndex + 1) + '</td>' +
-				'<td>' + empRow.employer_name+ '</td>' +
+				'<td>' + empRow.employer_name + '</td>' +
 				'<td>' + empRow.company_contact + '</td>' +
 				'<td>' + empRow.industry_id + '</td>' +
 				'<td>' + empRow.job_title + '</td>' +
 				'</tr>';
-			
+
 		}
 
 		var table = '<table class="table table-bordered table-striped">' +

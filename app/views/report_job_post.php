@@ -30,7 +30,7 @@
 							<nav aria-label="breadcrumb">
 								<ol class="breadcrumb">
 									<li class="breadcrumb-item"><a href="#">Report</a></li>
-									<li class="breadcrumb-item active" aria-current="page">JJob Posting</li>
+									<li class="breadcrumb-item active" aria-current="page">Job Posting</li>
 								</ol>
 							</nav>
 						</div>
@@ -57,6 +57,29 @@
 									<div class="tab-pane fade active show" id="home" role="tabpanel"
 										aria-labelledby="home-tab">
 										<div class="_dashboard_content_body">
+											<div class="row">
+												<div class="col-md-3">
+													<div class="form-group">
+														<input id="year_from" type="number" class="form-control" name=""
+															value="<?=date('Y')-5?>">
+													</div>
+												</div>
+												<div class="col-md-3">
+													<div class="form-group">
+														<input id="year_to" type="number" class="form-control" name=""
+															value="<?=date('Y')?>">
+													</div>
+												</div>
+												<div class="col-md-6">
+													<div class="form-group-btn pull-right">
+														<button class="btn btn-outline-primary"
+															style="padding: 5px !important;"
+															onclick="generate_per_year()" id="btn_per_year"><span
+																class="fa fa-refresh"></span> Generate</button>
+													</div>
+												</div>
+											</div>
+											<hr>
 											<div class="row" id="job_per_year">
 											</div>
 										</div>
@@ -68,8 +91,8 @@
 											<div class="row">
 												<div class="col-md-6">
 													<div class="form-group">
-														<select class="form-control profile-value select2"
-															id='batch_year' style="width: 100%;">
+														<select class="form-control profile-value select2" id='year'
+															style="width: 100%;">
 															<?= Components::option_years('') ?>
 														</select>
 													</div>
@@ -77,7 +100,7 @@
 												<div class="col-md-6">
 													<div class="form-group-btn pull-right">
 														<button class="btn btn-success" style="padding: 5px !important;"
-															onclick="generate_per_batch()" id="btn_per_year"><span
+															onclick="generate_per_month()" id="btn_per_month"><span
 																class="fa fa-refresh"></span> Generate</button>
 													</div>
 												</div>
@@ -109,116 +132,96 @@
 	.select2-container--default .select2-selection--single {
 		height: 37px;
 	}
+
+	.form-control {
+		height: 37px;
+	}
 </style>
 <script>
-	generate_per_year();
-	generate_per_month();
-	function generate_per_month() {
-		// Data retrieved https://en.wikipedia.org/wiki/List_of_cities_by_average_temperature
-		Highcharts.chart('job_per_month', {
-			chart: {
-				type: 'line'
-			},
-			title: {
-				text: 'Job Posting per month'
-			},
-			subtitle: {
-				text: '2023'
-			},
-			xAxis: {
-				categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
-			},
-			yAxis: {
-				title: {
-					text: 'Number of Posts'
-				}
-			},
-			plotOptions: {
-				line: {
-					dataLabels: {
-						enabled: true
-					},
-					enableMouseTracking: false
-				}
-			},
-			series: [{
-				name: 'Aerospace & Defense',
-				data: [49, 71, 106, 129, 49, 71, 106, 129, 49, 71, 106, 129]
+	$(document).ready(function() {
+		generate_per_year();
+		generate_per_month();
+	});
 
-			}, {
-				name: 'Agriculture',
-				data: [83, 78, 10, 129, 49, 71, 98, 93, 106, 3, 6, 11]
-
-			}, {
-				name: 'Information Technology',
-				data: [48, 38, 3, 106, 129, 49, 71, 41, 47, 4, 6, 23]
-
-			}, {
-				name: 'Education',
-				data: [42, 106, 129, 48, 71, 33, 34, 39, 52, 106, 129, 48]
-
-			}]
-		});
-
-	}
 	function generate_per_year() {
-		Highcharts.chart('job_per_year', {
-			chart: {
-				type: 'column'
-			},
-			title: {
-				text: 'Job Posting Per Year'
-			},
-			subtitle: {
-				text: '2019 - 2023'
-			},
-			xAxis: {
-				categories: [
-					'2019',
-					'2020',
-					'2021',
-					'2022',
-					'2023'
-				],
-				crosshair: true
-			},
-			yAxis: {
-				min: 0,
+		var year_from = $("#year_from").val();
+		var year_to = $("#year_to").val();
+		btn_processor('btn_per_year', true, "<span class='fa fa-spin fa-spinner'></span> Generating");
+		$.post(base_controller + "generate_job_post_per_year", {
+			year_from: year_from,
+			year_to: year_to
+		}, function(data, status) {
+			var res = JSON.parse(data);
+			Highcharts.chart('job_per_year', {
+				chart: {
+					type: 'column'
+				},
 				title: {
-					text: 'Number of Post'
-				}
-			},
-			tooltip: {
-				headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
-				pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
-					'<td style="padding:0"><b>{point.y:.1f} mm</b></td></tr>',
-				footerFormat: '</table>',
-				shared: true,
-				useHTML: true
-			},
-			plotOptions: {
-				column: {
-					pointPadding: 0.2,
-					borderWidth: 0
-				}
-			},
-			series: [{
-				name: 'Aerospace & Defense',
-				data: [49.9, 71.5, 106.4, 129.2]
+					text: 'Job Posting Per Year'
+				},
+				subtitle: res.subtitle,
+				xAxis: res.xAxis,
+				yAxis: {
+					min: 0,
+					title: {
+						text: 'Number of Post'
+					}
+				},
+				tooltip: {
+					headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+					pointFormat: '<tr><td style="color:{series.color};padding:0">{series.name}: </td>' +
+						'<td style="padding:0"><b>{point.y} posts</b></td></tr>',
+					footerFormat: '</table>',
+					shared: true,
+					useHTML: true
+				},
+				plotOptions: {
+					column: {
+						pointPadding: 0.2,
+						borderWidth: 0
+					}
+				},
+				series: res.series,
+			});
 
-			}, {
-				name: 'Agriculture',
-				data: [83.6, 78.8, 98.5, 93.4, 106.0]
-
-			}, {
-				name: 'Information Technology',
-				data: [48.9, 38.8, 39.3, 41.4, 47.0]
-
-			}, {
-				name: 'Education',
-				data: [42.4, 33.2, 34.5, 39.7, 52.6]
-
-			}]
+			btn_processor('btn_per_year', false, "<span class='fa fa-refresh'></span> Generate");
 		});
 	}
+
+	function generate_per_month() {
+		var year = $("#year").val();
+		$.post(base_controller + "generate_job_post_per_month", {
+			year: year,
+		}, function(data, status) {
+			var res = JSON.parse(data);
+			Highcharts.chart('job_per_month', {
+				chart: {
+					type: 'line'
+				},
+				title: {
+					text: 'Job Posting per month'
+				},
+				subtitle: res.subtitle,
+				xAxis: {
+					categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+				},
+				yAxis: {
+					title: {
+						text: 'Number of Posts'
+					}
+				},
+				plotOptions: {
+					line: {
+						dataLabels: {
+							enabled: true
+						},
+						enableMouseTracking: false
+					}
+				},
+				series: res.series,
+			});
+
+		});
+	}
+
 </script>
