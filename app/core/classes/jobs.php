@@ -107,6 +107,18 @@ class Jobs extends Connection
         return $row['count'];
     }
 
+    public function recent_jobs(){
+        $result = $this->select($this->table, "*", "job_id > 0 ORDER BY created_at DESC LIMIT 10");
+        $jobs = [];
+        while ($row = $result->fetch_assoc()) {
+            $employer_data = Employers::dataOf($row['employer_id']);
+            $employer_data['users'] = Users::dataOf($employer_data['user_id']);
+            $row['employers'] = $employer_data;
+            array_push($jobs, $row);
+        }
+        return $jobs;
+    }
+
     public static function dataOf($primary_id, $field = '*')
     {
         $self = new self;

@@ -58,13 +58,20 @@
 											</div>
 										</div>
 
-										<div class="col-xl-6 col-lg-6">
+										<div class="col-xl-3 col-lg-3">
 											<div class="form-group">
-												<label class="">Wage/Salary</label>
-												<input type="text" class="form-control preference-value"
-													data-column="salary_details"
-													placeholder="Indicate currency (e.g. Php 20,000/mo)"
-													name="salary_details">
+												<label class="">Minimum Salary</label>
+												<input type="number" class="form-control preference-value"
+													data-column="salary_min"
+													name="salary_min">
+											</div>
+										</div>
+										<div class="col-xl-3 col-lg-3">
+											<div class="form-group">
+												<label class="">Maximum Salary</label>
+												<input type="number" class="form-control preference-value"
+													data-column="salary_max"
+													name="salary_max">
 											</div>
 										</div>
 

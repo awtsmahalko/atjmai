@@ -542,7 +542,7 @@ $csrf = Components::csrf();
 				// var res = JSON.parse(data);
 				if (data == 1) {
 					// SUCCESS
-					$("#response_register").html('<div class="alert alert-primary" role="alert">Successfully registered! <br> <b> Page will redirect in <span id="countdown">5</span> seconds!</div>');
+					$("#response_register").html('<div class="alert alert-primary" role="alert">Successfully registered! <br> <b> Page will redirect in <span id="countdown">3</span> seconds!</div>');
 					countDown();
 				} else if (data == 2) {
 					// EMAIL ALREADY TAKEN
@@ -590,7 +590,7 @@ $csrf = Components::csrf();
 		});
 
 		function countDown() {
-			var countdownSeconds = 5;
+			var countdownSeconds = 3;
 			var countdownLabel = document.getElementById('countdown');
 			var countdownInterval = setInterval(function() {
 				countdownLabel.innerHTML = countdownSeconds--;

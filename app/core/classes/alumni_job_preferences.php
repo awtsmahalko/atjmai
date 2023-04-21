@@ -30,7 +30,9 @@ class AlumniJobPreferences extends Connection
                 'job_description'   => $this->post('job_description'),
                 'job_type_id'       => $this->post('job_type_id'),
                 'job_sched_id'      => $this->post('job_sched_id'),
-                'salary_details'    => $this->post('salary_details'),
+                'salary_min'        => $this->post('salary_min'),
+                'salary_max'        => $this->post('salary_max'),
+                'salary_details'    => $this->post('salary_min') . " - " . $this->post('salary_max'),
             ];
 
             $preference_id = $this->id($alumni_id);

@@ -60,6 +60,10 @@ class JobCandidates extends Connection
         return json_encode($response);
     }
 
+    public function active_candidates(){
+        
+    }
+
     public static function dataOf($primary_id, $field = '*')
     {
         $self = new self;

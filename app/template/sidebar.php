@@ -62,8 +62,8 @@
             }
             // ALL USERS
             $Menus->sidebar('Posts', 'posts', 'ti-announcement', $router->route['path']);
-            $Menus->sidebar('Messages', 'messages', 'ti-email', $router->route['path']);
-            $Menus->sidebar('Notifications', 'notification', 'ti-bell', $router->route['path']);
+            // $Menus->sidebar('Messages', 'messages', 'ti-email', $router->route['path']);
+            // $Menus->sidebar('Notifications', 'notification', 'ti-bell', $router->route['path']);
             ?>
             <li onclick="log_out()"><a href="#"><i class="ti-power-off"></i>Log Out</a></li>
         </ul>

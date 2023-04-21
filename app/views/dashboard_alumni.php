@@ -63,46 +63,37 @@
             <div class="_dashboard_content">
               <div class="_dashboard_content_header">
                 <div class="_dashboard__header_flex">
-                  <h4><i class="ti-briefcase mr-1"></i>Best Employers</h4>
+                  <h4><i class="ti-briefcase mr-1"></i>Recent Job Posts</h4>
                 </div>
               </div>
               <div class="_dashboard_content_body p-0">
                 <div class="_searches_lists_jobs">
                   <!-- Single Job -->
+
+                  <?php
+                  $Jobs = new Jobs();
+                  $recent_jobs = $Jobs->recent_jobs();
+                  foreach($recent_jobs as $job_data){
+                    $users_data = $job_data['employers']['users'];
+                  ?>
                   <div class="_jb_list72 shadow_0 _dash_singl_box">
                     <div class="_jb_list72_flex">
                       <div class="_jb_list72_first">
                         <div class="_jb_list72_yhumb">
-                          <img src="../assets/img/users/default_company.png" class="img-fluid" alt="">
+                          <img src="../assets/img/users/<?=$users_data['user_img']?>" class="img-fluid" alt="">
                         </div>
                       </div>
                       <div class="_jb_list72_last">
-                        <h4 class="_jb_title"><a href="job-detail.html">Bacolod Four Leaf Clover</a></h4>
-                        <div class="_times_jb">70k - 80k</div>
-                        <div class="_jb_types fulltime_lite">Full Time</div>
+                        <h4 class="_jb_title"><a href="#"><?=$job_data['job_title']?></a></h4>
+                        <div class="_times_jb"><?=$job_data['salary_details']?></div>
+                        <div class="_jb_types fulltime_lite"><?=$job_data['employers']['employer_name'];?></div>
                       </div>
                     </div>
                     <div class="_jb_list72_foot">
-                      <div class="_times_jb">Just now</div>
+                      <div class="_times_jb"><?=$Jobs->time_ago($job_data['created_at'])?></div>
                     </div>
                   </div>
-                  <div class="_jb_list72 shadow_0 _dash_singl_box">
-                    <div class="_jb_list72_flex">
-                      <div class="_jb_list72_first">
-                        <div class="_jb_list72_yhumb">
-                          <img src="../assets/img/users/default_company.png" class="img-fluid" alt="">
-                        </div>
-                      </div>
-                      <div class="_jb_list72_last">
-                        <h4 class="_jb_title"><a href="job-detail.html">Bacolod Prosperity</a></h4>
-                        <div class="_times_jb">70k - 80k</div>
-                        <div class="_jb_types fulltime_lite">Full Time</div>
-                      </div>
-                    </div>
-                    <div class="_jb_list72_foot">
-                      <div class="_times_jb">Just now</div>
-                    </div>
-                  </div>
+                <?php } ?>
                 </div>
               </div>
             </div>

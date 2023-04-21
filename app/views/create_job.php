@@ -76,7 +76,7 @@
 											<div class="form-group">
 												<label>Type of Employment</label>
 												<select class="form-control select2" name="job_type_id" required>
-													<option value="">Select</option>
+													<option value="0">Any</option>
 													<?= JobTypes::options() ?>
 												</select>
 											</div>

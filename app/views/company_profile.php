@@ -68,7 +68,7 @@
 												<div class="col-xl-6 col-lg-6">
 													<div class="form-group">
 														<label>Industry</label>
-														<select class="form-control profile-value select2"
+														<select style="width: 100%;" class="form-control profile-value select2"
 															data-column='industry_id' name='industry_id'>
 															<?= Industries::options() ?>
 														</select>
@@ -117,6 +117,7 @@
 	function fetchProfile() {
 		$.post(base_controller + "employer_profile", {}, function(data, status) {
 			var res = JSON.parse(data);
+			console.log(res);
 			mapProfileValue(res);
 		});
 	}

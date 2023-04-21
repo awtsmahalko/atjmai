@@ -31,10 +31,11 @@ class Employers extends Connection
             $this->begin_transaction();
 
             $update_success = $this->update($this->table, [
+                'industry_id'           => $this->post('industry_id'),
                 'employer_name'         => $this->post('employer_name'),
-                'company_address'      => $this->post('company_address'),
-                'company_contact'      => $this->post('company_contact'),
-                'company_address'      => $this->post('company_address'),
+                'company_address'       => $this->post('company_address'),
+                'company_contact'       => $this->post('company_contact'),
+                'company_address'       => $this->post('company_address'),
             ], "user_id = '" . $_SESSION['user']['id'] . "'");
 
             if ($update_success != 1)

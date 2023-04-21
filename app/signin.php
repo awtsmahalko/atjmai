@@ -264,13 +264,13 @@ $csrf = Components::csrf();
         // var res = JSON.parse(data);
         if (data == 1) {
           // SUCCESS
-          $("#response_login").html('<div class="alert alert-primary" role="alert">Successfully login! <br> <b> Page will redirect in <span id="countdown">5</span> seconds!</div>');
+          $("#response_login").html('<div class="alert alert-primary" role="alert">Successfully login! <br> <b> Page will redirect in <span id="countdown">3</span> seconds!</div>');
           countDown();
         } else if (data == 2) {
           $("#response_login").html('<div class="alert alert-danger" role="alert">Credentials does not match to our records.</div>');
         } else if (data == -1) {
           // EXPIRED CSRF TOKEN
-          $("#response_login").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will redirect in <span id="countdown">5</span> seconds!</div>');
+          $("#response_login").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will redirect in <span id="countdown">3</span> seconds!</div>');
           countDown();
         } else {
           $("#response_login").html('<div class="alert alert-danger" role="alert">' + data + '</div>');
@@ -281,7 +281,7 @@ $csrf = Components::csrf();
     });
 
     function countDown() {
-      var countdownSeconds = 5;
+      var countdownSeconds = 3;
       var countdownLabel = document.getElementById('countdown');
       var countdownInterval = setInterval(function() {
         countdownLabel.innerHTML = countdownSeconds--;

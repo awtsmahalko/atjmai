@@ -199,10 +199,19 @@
         } else {
           var res = JSON.parse(data);
         }
-        skin_matcher(res);
+        if(res.jobs.length > 0){
+          skin_matcher(res);
+          $("#pills-matched-tab").click();
+        }else{
+          Swal.fire(
+            'Sorry!',
+            'No personalized jobs match your preferences',
+            'warning'
+          );
+        }
         $("#btn_match").prop('disabled', false);
         $("#btn_match").html('<span class="fa fa-check-circle"></span> Match Job');
-        $("#pills-matched-tab").click();
+        
       });
   });
 
