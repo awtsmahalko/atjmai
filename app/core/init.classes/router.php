@@ -110,6 +110,9 @@ class Router
       case 'report-employer':
         $route = ['header' => 'header-light', 'file' => 'report_employer.php'];
         break;
+      case 'report-employment':
+        $route = ['header' => 'header-light', 'file' => 'report_employment.php'];
+        break;
       case 'report-job-post':
         $route = ['header' => 'header-light', 'file' => 'report_job_post.php'];
         break;

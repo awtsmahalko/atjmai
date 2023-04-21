@@ -96,6 +96,10 @@ class Controller
         $class_name = 'Employers';
         $method_name = 'data';
         break;
+      case 'generate_employment_rate':
+        $class_name = 'EmploymentRateReport';
+        $method_name = 'report';
+        break;
       case 'get_alumni_data':
         $class_name = 'AlumniEducations';
         $method_name = 'data';

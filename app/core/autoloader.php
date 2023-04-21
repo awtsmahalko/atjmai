@@ -14,6 +14,7 @@ $classes = array(
     'Colleges'                  => $pre_class . 'colleges.php',
     'Courses'                   => $pre_class . 'courses.php',
     'Employers'                 => $pre_class . 'employer.php',
+    'EmploymentRateReport'      => $pre_class . 'employment_rate_report.php',
     'Industries'                => $pre_class . 'industries.php',
     'Jobs'                      => $pre_class . 'jobs.php',
     'JobCandidates'             => $pre_class . 'job_candidates.php',
