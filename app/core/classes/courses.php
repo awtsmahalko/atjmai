@@ -29,10 +29,10 @@ class Courses extends Connection
         return $this->update($this->table, [$this->name  => $this->post($this->name), 'college_id' => $this->post('college_id')], "$this->pk = '" . $this->post($this->pk) . "'");
     }
 
-    public function data()
+    public function data($inject = "")
     {
         $response['courses'] = array();
-        $result = $this->select($this->table);
+        $result = $this->select($this->table, "*", $inject);
         $count = 1;
         while ($row = $result->fetch_assoc()) {
             $row['count'] = $count++;

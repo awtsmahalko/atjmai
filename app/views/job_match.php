@@ -439,4 +439,8 @@
     color: #fff;
     background: #16b739;
   }
+  #match-jobs{
+      max-height: 500px;
+      overflow: auto;
+  }
 </style>

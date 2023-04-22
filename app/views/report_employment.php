@@ -45,20 +45,17 @@
 								<div class="row">
 									<div class="col-md-3">
 										<div class="form-group">
-											<input id="year_from" type="number" class="form-control" name=""
-												value="<?=date('Y')-2?>">
+											<input id="year_from" type="number" class="form-control" name="" value="<?= date('Y') - 2 ?>">
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
-											<input id="year_to" type="number" class="form-control" name=""
-												value="<?=date('Y')?>">
+											<input id="year_to" type="number" class="form-control" name="" value="<?= date('Y') ?>" max="<?= date('Y') ?>">
 										</div>
 									</div>
 									<div class="col-md-3">
 										<div class="form-group">
-											<select class="form-control profile-value select2" id='group'
-												style="width: 100%;">
+											<select class="form-control profile-value select2" id='group' style="width: 100%;">
 												<option value="per-batch">By Batch</option>
 												<option value="per-college">By Colleges</option>
 												<option value="per-program">By Programs</option>
@@ -67,9 +64,7 @@
 									</div>
 									<div class="col-md-3">
 										<div class="form-group-btn pull-right">
-											<button class="btn btn-outline-primary" style="padding: 5px !important;"
-												onclick="generate_report()" id="btn_per_year"><span
-													class="fa fa-refresh"></span> Generate</button>
+											<button class="btn btn-outline-primary" style="padding: 5px !important;" onclick="generate_report()" id="btn_per_year"><span class="fa fa-refresh"></span> Generate</button>
 										</div>
 									</div>
 								</div>

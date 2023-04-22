@@ -40,31 +40,23 @@
 							<div class="_dashboard_content">
 								<ul class="nav nav-tabs" id="myTab" role="tablist">
 									<li class="nav-item" style="width: 50%;" role="presentation">
-										<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home"
-											role="tab" aria-controls="home" aria-selected="true">All</a>
+										<a class="nav-link active" id="home-tab" data-toggle="tab" href="#home" role="tab" aria-controls="home" aria-selected="true">All</a>
 									</li>
 									<li class="nav-item" style="width: 50%;" role="presentation">
-										<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
-											role="tab" aria-controls="contact" aria-selected="false">Per Industry</a>
+										<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Per Industry</a>
 									</li>
 								</ul>
 
 								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade active show" id="home" role="tabpanel"
-										aria-labelledby="home-tab">
+									<div class="tab-pane fade active show" id="home" role="tabpanel" aria-labelledby="home-tab">
 										<div class="_dashboard_content_body">
 											<div class="row">
 												<div class="col">
 													<div class="row">
 														<div class="col-md-12">
 															<div class="form-group-btn pull-right">
-																<button class="btn btn-success"
-																	style="padding: 5px !important;"
-																	onclick="generate_all()" id="btn_all"><span
-																		class="fa fa-refresh"></span> Generate</button>
-																<button class="btn btn-primary"
-																	style="padding: 5px !important;"><span
-																		class="fa fa-print"></span> Print</button>
+																<button class="btn btn-success" style="padding: 5px !important;" onclick="generate_all()" id="btn_all"><span class="fa fa-refresh"></span> Generate</button>
+																<button onclick="PrintDiv('content_per_all')" class="btn btn-primary" style="padding: 5px !important;"><span class="fa fa-print"></span> Print</button>
 															</div>
 														</div>
 													</div>
@@ -75,29 +67,22 @@
 										</div>
 									</div>
 
-									<div class="tab-pane fade" id="contact" role="tabpanel"
-										aria-labelledby="contact-tab">
+									<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 										<div class="_dashboard_content_body">
 											<div class="row">
 												<div class="col">
 													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
-																<select class="form-control profile-value select2"
-																	id='industry_id' style="width: 100%;">
+																<select class="form-control profile-value select2" id='industry_id' style="width: 100%;">
 																	<?= Industries::options() ?>
 																</select>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group-btn pull-right">
-																<button id="btn_per_industry" class="btn btn-success"
-																	onclick="generate_per_industry()"
-																	style="padding: 5px !important;"><span
-																		class="fa fa-refresh"></span> Generate</button>
-																<button class="btn btn-primary"
-																	style="padding: 5px !important;"><span
-																		class="fa fa-print"></span> Print</button>
+																<button id="btn_per_industry" class="btn btn-success" onclick="generate_per_industry()" style="padding: 5px !important;"><span class="fa fa-refresh"></span> Generate</button>
+																<button onclick="PrintDiv('content_per_industry')" class="btn btn-primary" style="padding: 5px !important;"><span class="fa fa-print"></span> Print</button>
 															</div>
 														</div>
 													</div>
@@ -135,6 +120,7 @@
 		generate_all();
 		generate_per_industry();
 	});
+
 	function generate_all() {
 		btn_processor('btn_all', true, "<span class='fa fa-spin fa-spinner'></span> Generating");
 		$.post(base_controller + "generate_employer_all", {
@@ -189,6 +175,7 @@
 			btn_processor('btn_per_industry', false, "<span class='fa fa-refresh'></span> Generate");
 		});
 	}
+
 	function skin_per_industry(res) {
 		var header_skin = '<div class="col-lg-12 col-md-12 text-center"><img src="../assets/img/nonescost_logo.png" class="img-fluid circle" alt="" style="width:100px"><h3>Employer Report</h3><h4>' + res.industry_name + '</h4></div>';
 
@@ -221,5 +208,4 @@
 
 		$("#content_per_industry").html(header_skin + table);
 	}
-
 </script>

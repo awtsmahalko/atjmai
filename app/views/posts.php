@@ -32,78 +32,73 @@
 						</div>
 					</div>
 				</div>
-
-				<div class="row">
-					<div class="col-lg-12 col-md-12 col-sm-12">
-						<form id="frmPosts">
-							<!-- Single Wrap -->
-							<div class="_dashboard_content">
-								<div class="_dashboard_content_header">
-									<div class="_dashboard__header_flex">
-										<h4><i class="fa fa-briefcase mr-1"></i>New Post</h4>
-									</div>
-								</div>
-
-								<div class="_dashboard_content_body">
-									<div class="row">
-										<div class="col-xl-12 col-lg-12">
-											<div class="form-group">
-												<label class="">Message</label>
-												<grammarly-editor-plugin>
-													<textarea id="post_message" class="form-control preference-value"
-														data-column="post_message" name="post_message"></textarea>
-												</grammarly-editor-plugin>
-											</div>
-										</div>
-
-										<div class="col-xl-6 col-lg-6">
-											<div class="form-group">
-												<label class="">Post Type</label>
-												<select class="form-control select2 preference-value" name="post_type"
-													data-column="post_type" required>
-													<option value="Announcement">Announcement</option>
-													<option value="News">News</option>
-													<option value="Events">Events</option>
-												</select>
-											</div>
-										</div>
-										<div class="col-xl-6 col-lg-6">
-											<div class="form-group">
-												<label>Show to Employer</label>
-												<select class="form-control select2 preference-value"
-													name="show_to_employer" data-column="show_to_employer" required>
-													<option value="0">No</option>
-													<option value="1">Yes</option>
-												</select>
-											</div>
+				<?php if ($_SESSION['user']['category'] == 'A') { ?>
+					<div class="row">
+						<div class="col-lg-12 col-md-12 col-sm-12">
+							<form id="frmPosts">
+								<!-- Single Wrap -->
+								<div class="_dashboard_content">
+									<div class="_dashboard_content_header">
+										<div class="_dashboard__header_flex">
+											<h4><i class="fa fa-briefcase mr-1"></i>New Post</h4>
 										</div>
 									</div>
-									<div class="row">
-										<div class="col-xl-12 col-lg-12">
-											<div class="form-group">
-												<label>College</label>
-												<select class="form-control select2 preference-value" name="college_id"
-													data-column="college_id" style="width: 100%;" required>
-													<?= Colleges::options() ?>
-												</select>
+
+									<div class="_dashboard_content_body">
+										<div class="row">
+											<div class="col-xl-12 col-lg-12">
+												<div class="form-group">
+													<label class="">Message</label>
+													<grammarly-editor-plugin>
+														<textarea id="post_message" class="form-control preference-value" data-column="post_message" name="post_message"></textarea>
+													</grammarly-editor-plugin>
+												</div>
+											</div>
+
+											<div class="col-xl-6 col-lg-6">
+												<div class="form-group">
+													<label class="">Post Type</label>
+													<select class="form-control select2 preference-value" name="post_type" data-column="post_type" required>
+														<option value="Announcement">Announcement</option>
+														<option value="News">News</option>
+														<option value="Events">Events</option>
+													</select>
+												</div>
+											</div>
+											<div class="col-xl-6 col-lg-6">
+												<div class="form-group">
+													<label>Show to Employer</label>
+													<select class="form-control select2 preference-value" name="show_to_employer" data-column="show_to_employer" required>
+														<option value="0">No</option>
+														<option value="1">Yes</option>
+													</select>
+												</div>
 											</div>
 										</div>
-									</div>
-									<hr>
-									<div class="row">
-										<div class="col-md-12">
-											<div class="form-group-btn pull-right">
-												<button style="border-radius: 50px;" type="submit"
-													class="btn btn-md btn-save" id="btn_post"><span
-														class="fa fa-check-circle"></span> Create Post</button>
+										<div class="row">
+											<div class="col-xl-12 col-lg-12">
+												<div class="form-group">
+													<label>College</label>
+													<select class="form-control select2 preference-value" name="college_id" data-column="college_id" style="width: 100%;" required>
+														<?= Colleges::options() ?>
+													</select>
+												</div>
+											</div>
+										</div>
+										<hr>
+										<div class="row">
+											<div class="col-md-12">
+												<div class="form-group-btn pull-right">
+													<button style="border-radius: 50px;" type="submit" class="btn btn-md btn-save" id="btn_post"><span class="fa fa-check-circle"></span> Create Post</button>
+												</div>
 											</div>
 										</div>
 									</div>
 								</div>
-							</div>
-						</form>
+							</form>
+						</div>
 					</div>
-				</div>
+				<?php } ?>
 				<div class="row" id="post-content">
 				</div>
 			</div>
@@ -127,8 +122,7 @@
 
 	function get_posts() {
 		$("#post-content").html('');
-		$.post(base_controller + "get_posts_timeline", {
-		}, function(data, status) {
+		$.post(base_controller + "get_posts_timeline", {}, function(data, status) {
 			var res = JSON.parse(data);
 			if (res.posts.length > 0) {
 				for (var pIndex = 0; pIndex < res.posts.length; pIndex++) {

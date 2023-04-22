@@ -26,8 +26,8 @@ class Jobs extends Connection
                 'salary_min'        => $this->post('salary_min'),
                 'salary_max'        => $this->post('salary_max'),
                 'salary_details'    => $this->post('salary_min') . " - " . $this->post('salary_max'),
-                'courses'           => implode(",",$this->post('courses')),
-                'industry_id'       => Employers::dataOf($employer_id,'industry_id'),
+                'courses'           => implode(",", $this->post('courses')),
+                'industry_id'       => Employers::dataOf($employer_id, 'industry_id'),
             ], 'Y');
 
             if ($job_id < 1)
@@ -35,6 +35,10 @@ class Jobs extends Connection
 
             $JobSkillls = new JobSkills();
             $res = $JobSkillls->add($job_id);
+
+            $Notifications = new Notifications();
+            $Notifications->add_from_post_job($employer_id);
+
             if ($job_id < 1)
                 throw new Exception($res);
             $this->commit();
@@ -53,7 +57,7 @@ class Jobs extends Connection
         $id = $Employer->id();
         $response['jobs'] = array();
         $result = $this->select($this->table, "*", "employer_id = '$id'");
-        while ($row = $result->fetch_assoc()){
+        while ($row = $result->fetch_assoc()) {
             $row['job_type_name'] = JobTypes::name($row['job_type_id']);
             $row['employers'] = Employers::dataOf($row['employer_id']);
             $row['user_img'] = Users::img($row['employers']['user_id']);
@@ -84,10 +88,11 @@ class Jobs extends Connection
         return json_encode($response);
     }
 
-    public function qualifications($courses){
-        $courses = explode(",",$courses);
+    public function qualifications($courses)
+    {
+        $courses = explode(",", $courses);
         $course = [];
-        foreach($courses as $course_id){
+        foreach ($courses as $course_id) {
             $course[] = array(
                 'course_id' => $course_id,
                 'qualification_name' => Courses::name($course_id),
@@ -107,7 +112,8 @@ class Jobs extends Connection
         return $row['count'];
     }
 
-    public function recent_jobs(){
+    public function recent_jobs()
+    {
         $result = $this->select($this->table, "*", "job_id > 0 ORDER BY created_at DESC LIMIT 10");
         $jobs = [];
         while ($row = $result->fetch_assoc()) {

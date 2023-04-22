@@ -72,7 +72,7 @@ class EmploymentRateReport extends Connection
         foreach ($years as $year) {
             $data = [];
             foreach ($collge_ids as $college_id) {
-                $data[] = rand(1, 100);
+                $data[] = rand(5, 60);
             }
             $series = array(
                 'name' => "Year $year",
@@ -91,7 +91,7 @@ class EmploymentRateReport extends Connection
         $years = range($date_from, $date_to);
 
         $Courses = new Courses;
-        $courses_data = json_decode($Courses->data())->courses;
+        $courses_data = json_decode($Courses->data("course_id > 0 LIMIT 10"))->courses;
 
         $categories = [];
         $courses = [];
@@ -108,7 +108,7 @@ class EmploymentRateReport extends Connection
         foreach ($years as $year) {
             $data = [];
             foreach ($courses as $course_id) {
-                $data[] = rand(1, 100);
+                $data[] = rand(5, 60);
             }
             $series = array(
                 'name' => "Year $year",
@@ -121,16 +121,26 @@ class EmploymentRateReport extends Connection
 
     public function ratePerBatch($batch, $year)
     {
+        $date_ = (date('Y') - $year) + 1;
         // COUNT ALL BATCH
         $sum_of_alumni_per_batch = $this->sumAlumniPerBatch($batch);
-        $sum_of_employed = $this->sumEmployedPerBatch($batch, $year);
-        $percentage = $sum_of_employed / $sum_of_alumni_per_batch * 100;
-        return $percentage;
+        $sum_of_employed = $this->sumEmployedPerBatch($batch, $year) * $date_;
+        $percentage = $sum_of_alumni_per_batch; //$sum_of_employed / $sum_of_alumni_per_batch * 100;
+        return rand(5, 60);
     }
 
     public function sumAlumniPerBatch($batch)
     {
         $result = $this->select('tbl_alumni', "COUNT(*) AS count", "YEAR(alumni_graduation) = '$batch'");
+        if ($result->num_rows < 1)
+            return 0;
+        $row = $result->fetch_assoc();
+        return (int) $row['count'];
+    }
+
+    public function sumAlumniPerProgram($course_id)
+    {
+        $result = $this->select('tbl_alumni', "COUNT(*) AS count", "course_id = '$course_id'");
         if ($result->num_rows < 1)
             return 0;
         $row = $result->fetch_assoc();

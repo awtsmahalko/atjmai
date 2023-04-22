@@ -12,14 +12,21 @@ class JobCandidates extends Connection
     public function apply()
     {
         $Alumni = new Alumni();
+        $Notifications = new Notifications();
         $alumni_id = $Alumni->id();
         $job_id = $this->post('job_id');
         $result = $this->select($this->table, '*', "job_id = '$job_id' AND alumni_id = '$alumni_id'");
         if ($result->num_rows > 0)
             return 2;
+
+        $text = $_SESSION['user']['fullname'] . " applied to your Job Posting as (" . Jobs::dataOf($job_id, 'job_title') . ")";
+
+        $employer_id = Jobs::dataOf($job_id, 'employer_id');
+        $Notifications->add(Employers::dataOf($employer_id, 'user_id'), $text);
+
         return $this->insert($this->table, [
             'job_id'        => $job_id,
-            'employer_id'   => Jobs::dataOf($job_id, 'employer_id'),
+            'employer_id'   => $employer_id,
             'alumni_id'     => $alumni_id,
             'candidate_status' => -1,
         ]);
@@ -29,6 +36,9 @@ class JobCandidates extends Connection
     {
         $job_id = $this->post('job_id');
         $alumni_id = $this->post('alumni_id');
+
+        $text = "Congratulations you are hired as " . Jobs::dataOf($job_id, 'job_title') . ".";
+        $Notifications->add(Alumni::dataOf($alumni_id, 'user_id'), $text);
 
         return $this->update($this->table, [
             'candidate_status' => 1,
@@ -60,8 +70,8 @@ class JobCandidates extends Connection
         return json_encode($response);
     }
 
-    public function active_candidates(){
-        
+    public function active_candidates()
+    {
     }
 
     public static function dataOf($primary_id, $field = '*')

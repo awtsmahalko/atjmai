@@ -240,6 +240,8 @@ $csrf = Components::csrf();
   <script src="../assets/js/counterup.min.js"></script>
   <script src="../assets/js/materialize.min.js"></script>
   <script src="../assets/js/metisMenu.min.js"></script>
+  <script src="../assets/dist/sweetalert2/sweetalert2.all.min.js"></script>
+  <link rel="stylesheet" href="../assets/dist/sweetalert2/sweetalert2.min.css">
   <script>
     //Loader  
     $(window).on('load', function() {
@@ -263,17 +265,32 @@ $csrf = Components::csrf();
       $.post("controller/web.php?uri=login", $("#frmLogin").serialize(), function(data, status) {
         // var res = JSON.parse(data);
         if (data == 1) {
+          Swal.fire(
+            'Success!',
+            'Successfully login.',
+            'success'
+          );
+          setTimeout(function() {
+            location.reload();
+          }, 1500);
           // SUCCESS
-          $("#response_login").html('<div class="alert alert-primary" role="alert">Successfully login! <br> <b> Page will redirect in <span id="countdown">3</span> seconds!</div>');
-          countDown();
+          // $("#response_login").html('<div class="alert alert-primary" role="alert">Successfully login! <br> <b> Page will redirect in <span id="countdown">3</span> seconds!</div>');
+          // countDown();
         } else if (data == 2) {
-          $("#response_login").html('<div class="alert alert-danger" role="alert">Credentials does not match to our records.</div>');
+          Swal.fire(
+            'Sorry!',
+            'Credentials does not match to our records.',
+            'warning'
+          );
+          // $("#response_login").html('<div class="alert alert-danger" role="alert">Credentials does not match to our records.</div>');
         } else if (data == -1) {
           // EXPIRED CSRF TOKEN
-          $("#response_login").html('<div class="alert alert-danger" role="alert">Token already expired!<br> <b> Page will redirect in <span id="countdown">3</span> seconds!</div>');
-          countDown();
+          token_expired();
+          setTimeout(function() {
+            location.reload();
+          }, 1500);
         } else {
-          $("#response_login").html('<div class="alert alert-danger" role="alert">' + data + '</div>');
+          error_response();
         }
         $("#btn_login").prop('disabled', false);
         $("#btn_login").html('Sign In');

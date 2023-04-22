@@ -40,45 +40,34 @@
 							<div class="_dashboard_content">
 								<ul class="nav nav-tabs" id="myTab" role="tablist">
 									<li class="nav-item" style="width: 33.3333%;" role="presentation">
-										<a class="nav-link active" id="batch-tab" data-toggle="tab" href="#batch"
-											role="tab" aria-controls="batch" aria-selected="true">Per Batch</a>
+										<a class="nav-link active" id="batch-tab" data-toggle="tab" href="#batch" role="tab" aria-controls="batch" aria-selected="true">Per Batch</a>
 									</li>
 									<li class="nav-item" style="width: 33.3333%;" role="presentation">
-										<a class="nav-link" id="per-college-tab" data-toggle="tab" href="#per-college"
-											role="tab" aria-controls="per-college" aria-selected="false">Per
+										<a class="nav-link" id="per-college-tab" data-toggle="tab" href="#per-college" role="tab" aria-controls="per-college" aria-selected="false">Per
 											Colleges</a>
 									</li>
 									<li class="nav-item" style="width: 33.3333%;" role="presentation">
-										<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact"
-											role="tab" aria-controls="contact" aria-selected="false">Per Courses</a>
+										<a class="nav-link" id="contact-tab" data-toggle="tab" href="#contact" role="tab" aria-controls="contact" aria-selected="false">Per Courses</a>
 									</li>
 								</ul>
 
 								<div class="tab-content" id="myTabContent">
-									<div class="tab-pane fade active show" id="batch" role="tabpanel"
-										aria-labelledby="batch-tab">
+									<div class="tab-pane fade active show" id="batch" role="tabpanel" aria-labelledby="batch-tab">
 										<div class="_dashboard_content_body">
 											<div class="row">
 												<div class="col">
 													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
-																<select class="form-control profile-value select2"
-																	id='batch_year' style="width: 100%;">
+																<select class="form-control profile-value select2" id='batch_year' style="width: 100%;">
 																	<?= Components::option_years() ?>
 																</select>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group-btn pull-right">
-																<button class="btn btn-outline-primary"
-																	style="padding: 5px !important;"
-																	onclick="generate_per_batch()"
-																	id="btn_per_year"><span
-																		class="fa fa-refresh"></span> Generate</button>
-																<button class="btn btn-outline-secondary"
-																	style="padding: 5px !important;"><span
-																		class="fa fa-print"></span> Print</button>
+																<button class="btn btn-outline-primary" style="padding: 5px !important;" onclick="generate_per_batch()" id="btn_per_year"><span class="fa fa-refresh"></span> Generate</button>
+																<button class="btn btn-outline-secondary" style="padding: 5px !important;" onclick="PrintDiv('content_per_batch')"><span class="fa fa-print"></span> Print</button>
 															</div>
 														</div>
 													</div>
@@ -89,31 +78,22 @@
 										</div>
 									</div>
 
-									<div class="tab-pane fade" id="per-college" role="tabpanel"
-										aria-labelledby="per-college-tab">
+									<div class="tab-pane fade" id="per-college" role="tabpanel" aria-labelledby="per-college-tab">
 										<div class="_dashboard_content_body">
 											<div class="row">
 												<div class="col">
 													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
-																<select class="form-control profile-value select2"
-																	name='course_id' style="width: 100%;"
-																	id="college_id">
+																<select class="form-control profile-value select2" name='course_id' style="width: 100%;" id="college_id">
 																	<?= Colleges::options() ?>
 																</select>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group-btn pull-right">
-																<button class="btn btn-outline-primary"
-																	style="padding: 5px !important;"
-																	onclick="generate_per_colleges()"
-																	id="btn_per_college"><span
-																		class="fa fa-refresh"></span> Generate</button>
-																<button class="btn btn-outline-secondary"
-																	style="padding: 5px !important;"><span
-																		class="fa fa-print"></span> Print</button>
+																<button class="btn btn-outline-primary" style="padding: 5px !important;" onclick="generate_per_colleges()" id="btn_per_college"><span class="fa fa-refresh"></span> Generate</button>
+																<button onclick="PrintDiv('content_per_college')" class="btn btn-outline-secondary" style="padding: 5px !important;"><span class="fa fa-print"></span> Print</button>
 															</div>
 														</div>
 													</div>
@@ -124,31 +104,22 @@
 										</div>
 									</div>
 
-									<div class="tab-pane fade" id="contact" role="tabpanel"
-										aria-labelledby="contact-tab">
+									<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
 										<div class="_dashboard_content_body">
 											<div class="row">
 												<div class="col">
 													<div class="row">
 														<div class="col-md-6">
 															<div class="form-group">
-																<select class="form-control profile-value select2"
-																	name='course_id' id='course_id'
-																	style="width: 100%;">
+																<select class="form-control profile-value select2" name='course_id' id='course_id' style="width: 100%;">
 																	<?= Courses::options() ?>
 																</select>
 															</div>
 														</div>
 														<div class="col-md-6">
 															<div class="form-group-btn pull-right">
-																<button class="btn btn-outline-primary"
-																	style="padding: 5px !important;"
-																	onclick="generate_per_courses()"
-																	id="btn_per_course"><span
-																		class="fa fa-refresh"></span> Generate</button>
-																<button class="btn btn-outline-success"
-																	style="padding: 5px !important;"><span
-																		class="fa fa-print"></span> Print</button>
+																<button class="btn btn-outline-primary" style="padding: 5px !important;" onclick="generate_per_courses()" id="btn_per_course"><span class="fa fa-refresh"></span> Generate</button>
+																<button onclick="PrintDiv('content_per_course')" class="btn btn-outline-success" style="padding: 5px !important;"><span class="fa fa-print"></span> Print</button>
 															</div>
 														</div>
 													</div>
@@ -186,6 +157,7 @@
 		generate_per_colleges();
 		generate_per_courses();
 	});
+
 	function generate_per_batch() {
 		var batch_year = $("#batch_year").val();
 		btn_processor('btn_per_year', true, "<span class='fa fa-spin fa-spinner'></span> Generating");
@@ -248,6 +220,7 @@
 			btn_processor('btn_per_college', false, "<span class='fa fa-refresh'></span> Generate");
 		});
 	}
+
 	function skin_per_college(res) {
 		var header_skin = '<div class="col-lg-12 col-md-12 text-center"><img src="../assets/img/nonescost_logo.png" class="img-fluid circle" alt="" style="width:100px"><h3>Alumni Report</h3><h4>' + res.college_name + '</h4></div>';
 

@@ -80,6 +80,9 @@ class Router
       case 'messages':
         $route = ['header' => 'header-light', 'file' => 'messages.php'];
         break;
+      case 'notifications':
+        $route = ['header' => 'header-light', 'file' => 'notifications.php'];
+        break;
       case 'posts':
         $route = ['header' => 'header-light', 'file' => 'posts.php'];
         break;
