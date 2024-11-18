@@ -44,10 +44,7 @@
 
 								</div>
 								<div class="col-md-6">
-									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile"
-										style="float: right !important;" data-toggle="modal"
-										data-target="#modalAddWorkExperience" onclick="resetFields()"><span
-											class="fa fa-plus"></span> Add Work Experience</button>
+									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile" style="float: right !important;" data-toggle="modal" data-target="#modalAddWorkExperience" onclick="resetFields()"><span class="fa fa-plus"></span> Add Work Experience</button>
 
 								</div>
 							</div>
@@ -85,53 +82,44 @@
 
 <form id="frmWorkExperience">
 	<!-- Log In Modal -->
-	<div class="modal fade" id="modalAddWorkExperience" tabindex="-1" role="dialog"
-		aria-labelledby="modalworkexperience" aria-hidden="true">
-		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document"
-			style="max-width: 60% !important;">
+	<div class="modal fade" id="modalAddWorkExperience" tabindex="-1" role="dialog" aria-labelledby="modalworkexperience" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document" style="max-width: 60% !important;">
 			<div class="modal-content" id="modalworkexperience">
 				<div class="modal-header">
 					<h4>Add Work Experience</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
-						id="closeAddWorkExpModal"><span aria-hidden="true"><i class="ti-close"></i></span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddWorkExpModal"><span aria-hidden="true"><i class="ti-close"></i></span></button>
 				</div>
 				<div class="modal-body">
-					<input type="hidden" class="work-exp-value" id="work_exp_id" name="work_exp_id"
-						data-column="work_exp_id">
+					<input type="hidden" class="work-exp-value" id="work_exp_id" name="work_exp_id" data-column="work_exp_id">
 					<div class="row">
 						<div class="col-xl-6 col-lg-12">
 							<div class="form-group">
 								<label>Company Name</label>
-								<input type="text" class="form-control work-exp-value" data-column="company_name"
-									name='company_name' placeholder="Meta" required>
+								<input type="text" class="form-control work-exp-value" data-column="company_name" name='company_name' placeholder="Meta" required>
 							</div>
 						</div>
 						<div class="col-xl-6 col-lg-12">
 							<div class="form-group">
 								<label>Job Title</label>
-								<input type="text" class="form-control work-exp-value" data-column="job_title"
-									name='job_title' placeholder="Web Developer" required>
+								<input type="text" class="form-control work-exp-value" data-column="job_title" name='job_title' placeholder="Web Developer" required>
 							</div>
 						</div>
 						<div class="col-lg-12 col-md-12">
 							<div class="form-group mb-1">
-								<input id="check_work" class="checkbox-custom" name="currently_worked" type="checkbox"
-									onchange="currentlyWorked(this)">
+								<input id="check_work" class="checkbox-custom" name="currently_worked" type="checkbox" onchange="currentlyWorked(this)">
 								<label for="check_work" class="checkbox-custom-label">I currently worked here</label>
 							</div>
 						</div>
 						<div class="col-xl-6 col-lg-6 year-start">
 							<div class="form-group">
 								<label>Year Started</label>
-								<input type="month" class="form-control work-exp-value" data-column="date_hired"
-									name='date_hired' required>
+								<input type="date" class="form-control work-exp-value" data-column="date_hired" name='date_hired' required>
 							</div>
 						</div>
 						<div class="col-xl-6 col-lg-6 year-end">
 							<div class="form-group">
 								<label>Year Ended</label>
-								<input type="month" class="form-control work-exp-value" data-column="date_resigned"
-									name='date_resigned'>
+								<input type="date" class="form-control work-exp-value" data-column="date_resigned" name='date_resigned'>
 							</div>
 						</div>
 						<div class="col-lg-12 col-md-12">
@@ -139,8 +127,7 @@
 								<label>Achievements<span></span></label>
 								<div class="tg_grouping">
 									<grammarly-editor-plugin>
-										<input type="text" id="lg-input" class="form-control with-light"
-											placeholder="e.g. job title, career">
+										<input type="text" id="lg-input" class="form-control with-light" placeholder="e.g. job title, career">
 									</grammarly-editor-plugin>
 									<a id="cmd-ChipsAjout" class="btn_groupin_tag"><i class="fa fa-plus"></i></a>
 								</div>
@@ -151,8 +138,7 @@
 				</div>
 				<div class="modal-footer">
 					<div class="form-group">
-						<button type="submit" class="btn dark-2 btn-md full-width pop-login"
-							id="btn_update_work">Submit</button>
+						<button type="submit" class="btn dark-2 btn-md full-width pop-login" id="btn_update_work">Submit</button>
 					</div>
 				</div>
 			</div>
@@ -187,8 +173,12 @@
 		fDisplayChips();
 		return 1;
 	};
+
 	function appendAchievements(lChipName, id = 0) {
-		chipsAchievements.push({ "tag": lChipName, "id": id });
+		chipsAchievements.push({
+			"tag": lChipName,
+			"id": id
+		});
 	}
 	$(function() {
 		// delete chip command
@@ -337,6 +327,7 @@
 			$(".year-end").show();
 		}
 	}
+
 	function resetFields() {
 		$("#check_work").attr("selected", false);
 		const profileValueElements = document.querySelectorAll('.work-exp-value');
@@ -362,7 +353,9 @@
 			confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
 			if (result.isConfirmed) {
-				$.post(base_controller + "delete_alumni_work", { work_exp_id: work_exp_id }, function(data, status) {
+				$.post(base_controller + "delete_alumni_work", {
+					work_exp_id: work_exp_id
+				}, function(data, status) {
 					get_work_experiences();
 					Swal.fire(
 						'Deleted!',

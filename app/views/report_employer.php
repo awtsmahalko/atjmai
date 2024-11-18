@@ -143,8 +143,8 @@
 				'<td>' + (cIndex + 1) + '</td>' +
 				'<td>' + empRow.employer_name + '</td>' +
 				'<td>' + empRow.company_contact + '</td>' +
-				'<td>' + empRow.industry_id + '</td>' +
-				'<td>' + empRow.job_title + '</td>' +
+				'<td>' + empRow.industry_name + '</td>' +
+				'<td>' + empRow.company_address + '</td>' +
 				'</tr>';
 
 		}
@@ -187,8 +187,8 @@
 				'<td>' + (cIndex + 1) + '</td>' +
 				'<td>' + empRow.employer_name + '</td>' +
 				'<td>' + empRow.company_contact + '</td>' +
-				'<td>' + empRow.industry_id + '</td>' +
-				'<td>' + empRow.job_title + '</td>' +
+				'<td>' + empRow.industry_name + '</td>' +
+				'<td>' + empRow.company_address + '</td>' +
 				'</tr>';
 
 		}

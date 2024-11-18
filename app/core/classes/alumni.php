@@ -148,6 +148,14 @@ class Alumni extends Connection
         return $row['alumni_id'];
     }
 
+    public static function count()
+    {
+        $self = new self;
+        $result = $self->select($self->table, "COUNT(alumni_id) AS count");
+        $row = $result->fetch_assoc();
+        return (int) $row['count'];
+    }
+
     public static function dataOf($primary_id, $field = '*')
     {
         $self = new self;

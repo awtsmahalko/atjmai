@@ -112,6 +112,7 @@ class Employers extends Connection
         $count = 1;
         while ($row = $result->fetch_assoc()) {
             $row['count'] = $count++;
+            $row['industry_name'] = Industries::dataOf($row['industry_id'], 'industry_name');
             array_push($response['employers'], $row);
         }
         return json_encode($response);

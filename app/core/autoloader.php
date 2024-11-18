@@ -23,6 +23,7 @@ $classes = array(
     'JobSkills'                 => $pre_class . 'job_skills.php',
     'JobTypes'                  => $pre_class . 'job_type.php',
     'Posts'                     => $pre_class . 'posts.php',
+    'Notifications'             => $pre_class . 'notifications.php',
     'Skills'                    => $pre_class . 'skills.php',
     'Users'                     => $pre_class . 'user.php',
 );

@@ -17,6 +17,16 @@ AUTO_INCREMENT=3
  -->
 <script src="../assets/dist/sweetalert2/sweetalert2.all.min.js"></script>
 <link rel="stylesheet" href="../assets/dist/sweetalert2/sweetalert2.min.css">
+
+<link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<style>
+	#tbl_colleges_wrapper {
+		width: 100% !important;
+	}
+</style>
+
 <!-- ============================ Page Title Start================================== -->
 <div class="page-title bg-cover" style="background:url(../assets/img/front_bg.webp)no-repeat;" data-overlay="5">
 	<div class="container">
@@ -62,10 +72,7 @@ AUTO_INCREMENT=3
 
 								</div>
 								<div class="col-md-6">
-									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile"
-										style="float: right !important;" data-toggle="modal"
-										data-target="#modalAddCollege" onclick="resetFields()"><span
-											class="fa fa-plus"></span> Add Colleges</button>
+									<button type="button" class="btn btn-sm btn-primary" id="btn_update_profile" style="float: right !important;" data-toggle="modal" data-target="#modalAddCollege" onclick="resetFields()"><span class="fa fa-plus"></span> Add Colleges</button>
 
 								</div>
 							</div>
@@ -99,32 +106,27 @@ AUTO_INCREMENT=3
 
 <form id="frmColleges">
 	<!-- Log In Modal -->
-	<div class="modal fade" id="modalAddCollege" tabindex="-1" role="dialog" aria-labelledby="modaladdcollege"
-		aria-hidden="true">
+	<div class="modal fade" id="modalAddCollege" tabindex="-1" role="dialog" aria-labelledby="modaladdcollege" aria-hidden="true">
 		<div class="modal-dialog modal-dialog-centered login-pop-form" role="document">
 			<div class="modal-content" id="modaladdcollege">
 				<div class="modal-header">
 					<h4>Add College</h4>
-					<button type="button" class="close" data-dismiss="modal" aria-label="Close"
-						id="closeAddEducModal"><span aria-hidden="true"><i class="ti-close"></i></span></button>
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close" id="closeAddEducModal"><span aria-hidden="true"><i class="ti-close"></i></span></button>
 				</div>
 				<div class="modal-body">
-					<input type="hidden" class="college-value" id="college_id" name="college_id"
-						data-column="college_id">
+					<input type="hidden" class="college-value" id="college_id" name="college_id" data-column="college_id">
 					<div class="row">
 						<div class="col-xl-12 col-lg-12">
 							<div class="form-group">
 								<label>College Name</label>
-								<input type="text" class="form-control college-value" data-column="college_name"
-									name='college_name' placeholder="College of Computer Studies" required>
+								<input type="text" class="form-control college-value" data-column="college_name" name='college_name' placeholder="College of Computer Studies" required>
 							</div>
 						</div>
 					</div>
 				</div>
 				<div class="modal-footer">
 					<div class="form-group">
-						<button type="submit" class="btn dark-2 btn-md full-width pop-login"
-							id="btn_update_college">Submit</button>
+						<button type="submit" class="btn dark-2 btn-md full-width pop-login" id="btn_update_college">Submit</button>
 					</div>
 				</div>
 			</div>
@@ -175,6 +177,9 @@ AUTO_INCREMENT=3
 							"</td>" +
 							"</tr>");
 					});
+					$("#tbl_colleges").DataTable({
+						"autoWidth": true // Automatically adjust column widths
+					});
 				} else {
 					$("#tbl_colleges tbody").append("<tr>" +
 						"<td colspan='3' align='center'>No records found</td>" +
@@ -205,7 +210,9 @@ AUTO_INCREMENT=3
 			confirmButtonText: 'Yes, delete it!'
 		}).then((result) => {
 			if (result.isConfirmed) {
-				$.post(base_controller + "delete_college", { college_id: college_id }, function(data, status) {
+				$.post(base_controller + "delete_college", {
+					college_id: college_id
+				}, function(data, status) {
 					get_colleges();
 					Swal.fire(
 						'Deleted!',

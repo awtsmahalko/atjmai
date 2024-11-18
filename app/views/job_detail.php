@@ -8,12 +8,10 @@
 
 					<div class="_jb_details01_flex">
 						<div class="_jb_details01_authors">
-							<img src="<?=BASE_URL?>assets/img/users/default_company.png" class="img-fluid" alt=""
-								style="width: 100px;height: 100px;object-fit: cover;" />
+							<img src="<?= BASE_URL ?>assets/img/users/default_company.png" class="img-fluid" alt="" style="width: 100px;height: 100px;object-fit: cover;" />
 						</div>
 						<div class="_jb_details01_authors_caption">
-							<h4 class="jbs_title">Full-Stack Web Designer<img src="<?=BASE_URL?>assets/img/verify.svg"
-									class="ml-1" width="12" alt=""></h4>
+							<h4 class="jbs_title">Full-Stack Web Designer<img src="<?= BASE_URL ?>assets/img/verify.svg" class="ml-1" width="12" alt=""></h4>
 							<ul class="jbx_info_list">
 								<li><span><i class="ti-briefcase"></i>InVision</span></li>
 								<li><span><i class="ti-location-pin"></i>Canada, USA</span></li>
@@ -115,8 +113,7 @@
 									<div class="_list_jobs_f1ex first">
 										<div class="_list_110">
 											<div class="_list_110_thumb">
-												<a href="employer-detail.html"><img src="assets/img/c-1.png"
-														class="img-fluid" alt=""></a>
+												<a href="employer-detail.html"><img src="assets/img/c-1.png" class="img-fluid" alt=""></a>
 											</div>
 											<div class="_list_110_caption">
 												<h4 class="_jb_title"><a href="job-detail.html">Application
@@ -148,8 +145,7 @@
 									<div class="_list_jobs_f1ex first">
 										<div class="_list_110">
 											<div class="_list_110_thumb">
-												<a href="employer-detail.html"><img src="assets/img/c-2.png"
-														class="img-fluid" alt=""></a>
+												<a href="employer-detail.html"><img src="assets/img/c-2.png" class="img-fluid" alt=""></a>
 											</div>
 											<div class="_list_110_caption">
 												<h4 class="_jb_title"><a href="job-detail.html">Drupal Designer</a></h4>
@@ -179,8 +175,7 @@
 									<div class="_list_jobs_f1ex first">
 										<div class="_list_110">
 											<div class="_list_110_thumb">
-												<a href="employer-detail.html"><img src="assets/img/c-3.png"
-														class="img-fluid" alt=""></a>
+												<a href="employer-detail.html"><img src="assets/img/c-3.png" class="img-fluid" alt=""></a>
 											</div>
 											<div class="_list_110_caption">
 												<h4 class="_jb_title"><a href="job-detail.html">Magento Developer</a>
@@ -217,7 +212,7 @@
 
 				<div class="_jb_summary">
 					<div class="_jb_summary_thumb">
-						<img src="<?=BASE_URL?>assets/img/users/default_company.png" class="img-fluid" alt="" />
+						<img src="<?= BASE_URL ?>assets/img/users/default_company.png" class="img-fluid" alt="" />
 					</div>
 					<div class="_jb_summary_caption">
 						<h4>InVision App Limited</h4>

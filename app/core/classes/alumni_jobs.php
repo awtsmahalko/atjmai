@@ -22,9 +22,10 @@ class AlumniJobs extends Connection
         while ($row = $result->fetch_assoc()) {
             $qualifications = $this->qualifications($row['courses']);
             $skills = json_decode($JobSkills->data($row['job_id']))->skills;
-            $job_preference = $this->job_preference($row,$qualifications,$skills);
+            $job_preference = $this->job_preference($row, $qualifications, $skills);
 
-            $score = similar_text( strtolower($job_preference), strtolower($alumni_preference), $percent);
+            $alumni_preference2 = $alumni_preference . $this->preference2($skills);
+            $score = similar_text(strtolower($job_preference), strtolower($alumni_preference2), $percent);
             // $job_scores[$row['job_id']] =  round($percent, 2);
 
             $employer_data = Employers::dataOf($row['employer_id']);
@@ -35,29 +36,35 @@ class AlumniJobs extends Connection
             $row['qualifications'] = $qualifications;
             $row['percentage'] = round($percent, 2);
             $row['job_status'] = $JobCandidates->view_status($row['job_id'], $alumni_id);
+            $row['matcher'] = $job_preference . " - " . $alumni_preference2;
             array_push($response['jobs'], $row);
         }
 
-        usort($response['jobs'], function($a, $b) {
-            return $b['percentage'] - $a['percentage'];
-        });
+        $percentage = array_column($response['jobs'], 'percentage');
+        array_multisort($percentage, SORT_DESC, $response['jobs']);
+        // usort($response['jobs'], function ($a, $b) {
+        //     return $b['percentage'] - $a['percentage'];
+        // });
         return json_encode($response);
     }
 
-    public function filter(){
+    public function filter()
+    {
         $alumni_id = $this->post('alumni_id');
-        $course_id = Alumni::dataOf($alumni_id,'course_id');
+        $course_id = Alumni::dataOf($alumni_id, 'course_id');
         $salary_min = $this->post('salary_min');
         $job_type_id = $this->post('job_type_id');
         $job_sched_id = $this->post('job_sched_id');
 
         return "FIND_IN_SET($course_id,courses) AND (salary_min >= $salary_min OR job_type_id IN(0,$job_type_id) OR job_sched_id IN(0,$job_sched_id))";
+        return "FIND_IN_SET($course_id,courses) AND (salary_min >= $salary_min OR job_type_id IN(0,$job_type_id) OR job_sched_id IN(0,$job_sched_id))";
     }
 
-    public function qualifications($courses){
-        $courses = explode(",",$courses);
+    public function qualifications($courses)
+    {
+        $courses = explode(",", $courses);
         $course = [];
-        foreach($courses as $course_id){
+        foreach ($courses as $course_id) {
             $course[] = array(
                 'course_id' => $course_id,
                 'qualification_name' => Courses::name($course_id),
@@ -68,26 +75,45 @@ class AlumniJobs extends Connection
 
     public function preference()
     {
-        $course_id = Alumni::dataOf($this->post('alumni_id'),'course_id');
+        $course_id = Alumni::dataOf($this->post('alumni_id'), 'course_id');
         $job_title = $this->post('job_title');
         $job_description = $this->post('job_description');
         $skills = $this->post('skills');
 
-        $alumni_preference = "Job Title: ". $job_title ."\n";
-        $alumni_preference .= "Job Summary: ". $job_description ."\n";
-        $alumni_preference .= "Skills: ";
+        $alumni_preference = "Job Title: " . $job_title . "\n";
+        $alumni_preference .= "Job Summary: " . $job_description . "\n";
+        // $alumni_preference .= "Skills: ";
+        // foreach ($skills as $skill_id) {
+        //     $alumni_preference .= Skills::name($skill_id) . ",";
+        // }
+        // $alumni_preference .= "\n";
+        // $alumni_preference .= "Qualifications: " . Courses::name($course_id);
+        return $alumni_preference;
+    }
+
+    public function preference2($job_skills)
+    {
+        $jobSkills = [];
+        foreach ($job_skills as $skill) {
+            $jobSkills[] = $skill->skill_name;
+        }
+        $skills = $this->post('skills');
+        $alumni_preference = "Skills: ";
+
         foreach ($skills as $skill_id) {
-            $alumni_preference .= Skills::name($skill_id) . ",";
+            if (in_array(Skills::name($skill_id), $jobSkills)) {
+                $alumni_preference .= Skills::name($skill_id) . ",";
+            }
         }
         $alumni_preference .= "\n";
         // $alumni_preference .= "Qualifications: " . Courses::name($course_id);
         return $alumni_preference;
     }
 
-    public function job_preference($row,$qualifications,$skills)
+    public function job_preference($row, $qualifications, $skills)
     {
-        $alumni_preference = "Job Title: ". $row['job_title'] ."\n";
-        $alumni_preference .= "Job Summary: ". $row['job_description'] ."\n";
+        $alumni_preference = "Job Title: " . $row['job_title'] . "\n";
+        $alumni_preference .= "Job Summary: " . $row['job_description'] . "\n";
         $alumni_preference .= "Skills: ";
         foreach ($skills as $skill) {
             $alumni_preference .= $skill->skill_name . ",";

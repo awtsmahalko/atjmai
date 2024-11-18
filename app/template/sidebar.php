@@ -50,8 +50,8 @@
                 $Menus->sidebar_parent('Master Data', 'fa fa-file-o', array(
                     array("Colleges", "colleges", "fa fa-building"),
                     array("Programs", "programs", 'fa fa-file'),
-                    array("Industries", "industries", 'fa fa-file'),
-                    array("Skills", "skills", 'fa fa-gears'),
+                    // array("Industries", "industries", 'fa fa-file'),
+                    // array("Skills", "skills", 'fa fa-gears'),
                 ));
                 $Menus->sidebar_parent('Report', 'fa fa-print', array(
                     array("Alumni Report", "report-alumni", 'fa fa-graduation-cap'),
